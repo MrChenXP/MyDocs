@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        size：返回 Map 结构的成员总数。
+//        set(key, value)：设置键名key对应的键值为value，然后返回整个 		Map 结构。如果key已经有值，则键值会被更新，否则就新生成该键。
+//        get(key)：读取key对应的键值，如果找不到key，返回undefined。
+//        has(key)：返回一个布尔值，表示某个键是否在当前 Map 对象之中。
+//        delete(key)：删除某个键，返回true。如果删除失败，返回false。
+//        clear()：清除所有成员，没有返回值。
+
+        let oMap = new Map();
+        let sb = Symbol();
+        function show(){}
+        oMap.set("a", 11);
+        oMap.set(12, 12);
+        oMap.set(undefined, 13);
+        oMap.set(null, 14);
+        oMap.set(true, 15);
+        oMap.set(NaN, 16);      //NaN 是等于NaN
+        oMap.set(NaN, 26);
+        oMap.set(Symbol(), 17);
+        oMap.set(Symbol.for("sb"), 18);
+        oMap.set({}, 19);       //对象是不等于对象
+        oMap.set({}, 20);
+        oMap.set(show, 21);
+        oMap.set(sb, 22);
+
+
+        alert(oMap.get(12));        //12
+//        alert(oMap.get(sb));        //22
+//        alert(oMap.get(Symbol.for("sb")));        //18
+//        alert(oMap.has(Symbol.for("sb")));        //true
+//        alert(oMap.delete(Symbol.for("sb")));        //true
+//        oMap.clear();
+
+//        console.log(oMap.size);     //12
+//------------------------------------------------------------------
+//        遍历方法（用于遍历成员）
+//        keys()：返回键名的遍历器。
+//        values()：返回键值的遍历器。
+//        entries()：返回所有成员的遍历器。
+//        forEach()：遍历 Map 的所有成员。
+//        for(let key of oMap.keys()){
+//            document.writeln(`key = ${String(key)}<br>`);
+//        }
+
+//        for(let val of oMap.values()){
+//            document.writeln(`val = ${val}<br>`);
+//        }
+
+//        for(let [key,val] of oMap.entries()){
+//            document.writeln(`key = ${String(key)} val = ${val}<br>`);
+//        }
+
+//        oMap.forEach(function(val, key){
+//            document.writeln(`key = ${String(key)} val = ${val}<br>`);
+//        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

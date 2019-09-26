@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        1、已知数组 a = [6, 9, 4, 10, 6], b = [4, 8, 9, 3, 6],请在不影响原数组的情况下，合并b到a并去除重置元素
+//        let a = [6, 9, 4, 10, 6], b = [4, 8, 9, 3, 6];
+//        let oSet = new Set([...a,...b]);
+//        let aNew = [...oSet];
+//        console.log(aNew);
+
+//        let arr = [12,12,45,12,23,45];
+//        function removeRepeat(arr){       //去除数组重复的元素
+//            let oSet = new Set([...arr]);
+//            return [...oSet];
+//        }
+//        alert(removeRepeat(arr));
+//        2、数组 a = [2,5,3,7,8], b = [4,6,5,3,8],求出两数组共同的元素
+
+        let a = [2,5,3,7,8], b = [4,6,5,3,8];
+
+        let oSet = new Set([...a]);
+        let aNew = b.filter(val => oSet.has(val));
+        console.log(aNew);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

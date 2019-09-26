@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+//            alert(jQuery instanceof Function);      //true
+//            alert(typeof jQuery);      //function
+
+            //$.extend() 扩展方法或者属性到JQuery构造器上
+//            const obj1 = {
+//                user: "jj",
+//                sex: "male",
+//                birth:{
+//                    place1: "广东",
+//                    place2: "深圳" ,
+//                    place3: "龙华"
+//                }
+//            };
+//            const obj2 = {
+//                user: "jj",
+//                age: 23,
+//                birth:{
+//                    place1: "广东",
+//                    place2: "广州"
+//                }
+//            };
+//            let obj = jQuery.extend(obj1, obj2);          //合并对象   类似于JS里 Object.assign() 影响obj1
+//            let obj = jQuery.extend({}, obj1, obj2);          //不影响obj1     返回值就是合并后的对象  值是引用类型，赋值引用（浅拷贝）
+//            let obj = jQuery.extend(true, {}, obj1, obj2);     //不影响obj1     返回值就是合并后的对象  值是引用类型，赋值对象内容（深拷贝）
+
+//            obj2.a = 12;
+
+
+//            console.table(obj1);
+//            console.table(obj);
+//--------------------------------------------------------------------------------------------
+//            alert();            //JS的方法
+
+            $.extend({                  //往jqurey构造器上扩展属性和方法（静态方法）
+                alert(para = "no parameter"){
+                    window.alert(para);
+                },
+                max(arr){
+                    return Math.max(...arr);
+                }
+            });
+
+//            alert();
+//            $.alert("this is a jq");
+            let arr = [12,23,45,78,98,45];
+
+            $.alert($.max(arr));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS基本样式属性</title>
+<style type="text/css">
+  /** 字体重置 解决font-weight在不同浏览器表现不一样 **/
+  body {
+    font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  }
+  /*  pt: 1/72英寸(point) 
+  */
+  /* 这是color属性 设置文本颜色*/
+  .p1 {
+    color: black;
+    color: #f00;
+    color: #ffffff;
+    color: rgb(225, 225, 0);
+    color: rgba(0, 0, 225, 0.3);
+  }
+
+  /* 这是font-family属性 设置元素的字体系列*/
+  .p1 {
+    font-family: "华文行楷";
+    /* 新罗马字体*/
+    font-family: "Times New Roman";
+    /* 格鲁吉亚*/
+    font-family: Georgia;
+    /* 微软雅黑 unicode编码格式*/
+    font-family: "\5FAE\8F6F\96C5\9ED1";
+  }
+
+  /*引用自定义字体*/
+  @font-face {
+    font-family: "aa";
+    src: url('imgers/华文彩云.ttf'), /*chrom ff*/ url('imgers/华文彩云.eot');     /* 兼容IE9 实际文件夹中没eot文件*/
+  }
+
+  .p1 {
+    font-family: aa;
+  }
+
+  /* font-size属性 规定字体尺寸（16默认）*/
+  .p1 {
+    font-size: 14px;
+  }
+
+  /* font-style属性 设置不同的字体样式 normal:默认
+      italic:斜体  oblique:倾斜 inherit:继承父元素*/
+  .p1 {
+    font-style: italic;
+    font-style: inherit;
+    font-style: normal;
+    font-style: oblique;
+  }
+
+  /* font-weight属性 设置文本的粗细 normal:默认(400) inherit:继承父元素
+      bold：粗体(700) bolder：更粗(700) lighter：更细 100-900 */
+  .p1 {
+    font-weight: normal;
+    font-weight: bold;
+    font-weight: 900;
+  }
+
+  /* line-height属性 设置行高(行间距里) 行高等于高可让文字垂直居中*/
+  .p1 {
+    line-height: 20px;
+  }
+
+  /* text-align属性 规定文本在块元素中的水平对齐方式
+      justify:两端对齐(会控制词间距),单词不会被截断(另起一行)*/
+  .div1 p {
+    text-align: inherit;
+    text-align: left;
+    text-align: right;
+    text-align: center;
+    text-align: justify;
+  }
+
+  /* text-decoration 设置文本修饰
+      overline:上划线 line-through:删除线 underline:下划线*/
+  .div1 p {
+    text-decoration: none;
+    text-decoration: overline;
+    text-decoration: line-through;
+    text-decoration: underline;
+  }
+
+  /* text-indent 设置文本块首行文本的缩进*/
+  .div1 p {
+    text-indent: 24px;
+    text-indent: -24px;
+    text-indent: 2em;
+  }
+
+  /* letter-spacing 字符(每个字符)间距*/
+  .div1 p {
+    letter-spacing: -0.5em;
+    letter-spacing: 6px;
+  }
+
+  /* word-spaing 单词间距(空格与空格之间就是单词)*/
+  .div1 p {
+    word-spacing: 30px;
+  }
+
+  /* direction 文本流方向(rtl:从边框右边开始排列，语义排列依然从左开始)*/
+  .div1 p:first-child {
+    direction: ltr;
+    direction: rtl;
+  }
+
+  /* vertical-align 行内元素的基线相对于该元素所在行的基线的垂直对齐，默认是基线(baseline)对其
+      数值是以基线为基准，负数向上走，正数向下走*/
+  .div1 img {
+    vertical-align: top;
+    vertical-align: bottom;
+    vertical-align: middle;
+    vertical-align: baseline;
+    vertical-align: -50px;
+  }
+
+  /* white-space 对象内空格的处理方式  normal:默认,忽略空白  nowrap:文本不换行
+      pre:保留空白(类似pre标签，空白不换行) pre-wrap:保留空白,正常换行 pre-line 合并空白，保留换行 */
+  .div1 p:nth-child(2) {
+    white-space: pre;
+    white-space: pre-line;
+    white-space: pre-wrap;
+    white-space: nowrap;
+  }
+
+  /* overflow 溢出处理 visible:默认,不修剪  hidden：被修剪，内容不可见
+      scroll：被修剪，浏览器一定出现滚动条 auto：如果被修剪则出现滚动条
+      overflow-x:设置水平方向的溢出   overflow-y:设置垂直方向的溢出*/
+  .div1 p:nth-child(2) {
+    overflow: visible;
+    overflow: scroll;
+    overflow: auto;
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+
+  /* text-overflow 是否使用省略标记(...)标识对象文本的溢出
+      需配合overflow:hidden,white-space:nowrap才能看到效果
+      cilp：默认，无省略号 ellipsis：文本溢出时有省略*/
+  .div1 p:nth-child(2) {
+    text-overflow: clip;
+    text-overflow: ellipsis;
+  }
+
+  /* text-shadow 设置文本阴影
+      横向偏移10px 纵向偏移8px 模糊距离(灰度)3px 阴影颜色:蓝色*/
+  .div1 p:nth-child(2) {
+    text-shadow: 10px 8px 3px blue;
+  }
+
+  /* text-transform 文字的大小写 none：默认，无转换
+      capitalize:首字母换大写 uppercase：换成大写 lowercase：换成小写*/
+  .div1 p:nth-child(2) {
+    text-transform: none;
+    text-transform: capitalize;
+    text-transform: lowercase;
+    text-transform: uppercase;
+  }
+
+  /* word-wrap 当前行超过指定容器的边界时是否断开转行
+      normal：默认，允许内容顶开或溢出指定的容器边界
+      break-word：不允许内容顶开或溢出指定的容器边界（单词首行不会被中断）*/
+  .div1 p:nth-child(2) {
+    word-wrap: normal;
+    word-wrap: break-word;
+  }
+
+  /* word-break规定自动换行的处理方法 normal：默认
+      break-all：可以强项截断英文单词，达到词内换行的效果 keep-all:不允许字断开*/
+  .div1 p:nth-child(1) {
+    word-break: normal;
+    word-break: break-all;
+    word-break: keep-all;
+  }
+
+  /* background
+    background-color: gray;     背景颜色
+     background-imgers: url; 背景图像:位置及称全称
+     background-size: x y[x% y%] 背景尺寸  cover(全覆盖,哪个边后覆盖到，剩下的边溢出就截掉)
+          ,contain(覆盖一个方向，哪个边先覆盖到，剩下的就用新图重新覆盖)
+     background-repeat:repeat 覆盖方式（水平和垂直方向重复铺满，默认）no-repeat:无铺满
+          repeat-x：铺满水平方向 repeat-y:铺满垂直方向
+     background-attachment:scroll(默认，不会随着页面滚动而滚动)
+              fixed(会随着页面滚动而滚动，但只在父元素内滚动)
+     background-position:[top center bottom] [left center right](两两组合); 背景位置 像素 百分比 单词，当只有一个单词时增加一个center
+          */
+  .div2 {
+    background-color: gray;
+    background-image: url(../../DaiMa/imgers/timg.jpg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+  }
+
+  /* background-origin：border-box(从border区域开始显示背景)
+          padding-box(从padding区域开始显示背景) content-box(从content内容区域开始显示背景)
+      background-clip:border-box,padding-box,content-box 从设置的地方显示背景，其余被裁剪掉  */
+  .div3 {
+    background-color: rgba(255, 0, 0, 0.5);
+    /*解决ie8背景透明 先把a(0.5)/255=127.5 再转为16进制放在1.2位 剩下的rgb转为16禁止放在后面*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#2D96B9DC, endColorstr=#2D96B9DC);
+    background-image: url(../../DaiMa/imgers/timg.jpg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    border: 30px dotted black;
+    padding: 50px;
+    background-origin: content-box;
+    background-clip: content-box;
+  }
+
+  /* list-style-type:none[无符号],disc[实体的小圆点],circle[空心的小圆点],square[实心的小方块],decimal [1,2,3...]
+          lower-roman [i,ii,iii...] upper-roman [I,II,III...] lower-alpha [a,b,c,...] upper-alpha [A,B,C,...]
+     list-style-position: inside[列表项目在文字行内],outside[ 列表项目在文字行外（正常显示）]
+     list-style-imgers:URL用图片当修饰符,none 不会显示任何图象*/
+  ul li {
+    list-style-type: circle;
+    list-style-position: inside;
+    /*list-style-imgers: url("imgers/timg.jpg");*/
+  }
+
+  /* cursor 鼠标属性 move：鼠标拖动图标 default:默认图标  pointer: 超链接的指针（手） wait: 程序正在忙
+              help：可用的帮助 text：指示文本 crosshair：十字状 rul: 自定义图标()*/
+  ul li:first-child {
+    cursor: move;
+  }
+
+  /* 精灵图片 一张图片放入一系列图片，通过背景位置的不同，引入同张图的不同地方*/
+  .div5 div:first-child {
+    width: 100px;
+    height: 50px;
+    background-image: url("../../DaiMa/imgers/timg.jpg");
+    background-position: center center;
+  }
+
+  .div5 div:last-child {
+    width: 100px;
+    height: 50px;
+    background: url("../../DaiMa/imgers/timg.jpg");
+    border: 1px solid green;
+    background-position: 200px 450px;
+  }
+</style>
+</head>
+<body>
+<p class="p1">这是color、font-family、font-size、font-style、font-weight、line-height属性</p>
+<div style="width: 500px; height: 200px; background-color: gray;" class="div1">
+  <p>
+    <span>
+      这是word-break、text-align、text-decoration、text-indent letter-spacing word-spacing、direction属性
+    </span>
+  <p><br>
+    <img src="../../DaiMa/imgers/timg.jpg" width="100" height="80">
+    这里是vertical-align、white-space、overflow、text-overflow、text-transform、
+    word-wrap、text-shadow、属性
+  </p>
+</div>
+<div class="div2" style="width:500px; height:500px; "></div>
+<div class="div3" style="width:500px; height:200px; ">这里是content-box</div>
+<ul>
+  <li>1</li>
+  <li>3</li>
+  <li>2</li>
+</ul>
+<div class="div5">
+  <div>这里是精灵图片1</div>
+  <div>这里是精灵图片2</div>
+</div>
+</body>
+</html>

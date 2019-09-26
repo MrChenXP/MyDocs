@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 200px;
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $("#div1").click(function(){
+           jQuery(this).css({backgroundColor: "blue", width: 200});        // $ === jQuery
+            // $(this).css("backgroundColor", "blue").css("width", "200");        // 链式操作（方法执行结束返回当前对象）
+        });
+//        document.querySelector("#div1").onclick = function(){
+//
+//        };
+    </script>
+</body>
+</html>

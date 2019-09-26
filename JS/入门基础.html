@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>入门基础</title>
+    <meta charset="utf-8">
+	<noscript>浏览器不支持js时，执行此标签的内容</noscript>
+    <script type="text/javascript">
+        /*
+                特性：弱类型（动态类型）、采用事件驱动、基于对象、直译式、跨平台性
+                组成
+                    语法、变量、关键字、保留字、运算符、值、原始类型、类型转换、引用类型
+                位置
+                    进行页面显示初始化的js必须放在head里面，初始化要求提前进行（如给页面body设置css等）
+                    而如果是通过事件调用执行的function那么对位置没什么要求的。
+                命名规范
+                    第一个字符必须是字母、下划线（_）或美元符号（$）
+                    余下的字符可以是下划线、美元符号或任何字母或数字字符
+                    变量名不能是关键字或保留字。
+                    变量名区分大小写。
+                    变量名中不能有空格、回车符或其他标点字符。
+                    变量命名长度应该尽可能的短，并抓住要点，尽量在变量名中体现出值的类型
+                    尽量避免使用没有意义的命名
+                    变量名命名方法常见的有匈牙利命名法、驼峰命名法和帕斯卡命名法
+                命名法
+                    匈牙利命名法（变量和参数）：变量类型 + 变量描述（sUser）
+                    i(integer)
+                    f(float)
+                    s(string)
+                    b(boolean)
+                    a(array)
+                    fn(function)
+                    o(object)
+                    驼峰法（函数名）：首单词是小写的，接下来单词的首字符大写
+                    帕斯卡命名法（构造函数）：所有单词的首字符大写
+                数据类型
+                    原始（基本）类型：Undefined，Null，Boolean，Number，String
+                    引用类型：object，function()[不是数据类型但是可以用typeof()]
+                        本地对象：Object,Function,Array,String,Boolean,Number,Date,RegExp,Error|EvalError|RangeError|ReferenceError|SyntaxError|TypeError|URIError
+                        内置对象：Global，Math
+                        宿主对象：由 ECMAScript 实现的宿主环境提供的对象。所有 BOM 和 DOM 对象都是宿主对象。
+        */
+        window.onload = function () {     // window.onload等文档加载完才执行
+            var oBtn = document.getElementById("btn1");      //通过id获取文档的元素
+            oBtn.onclick = function () {        //给oBtn绑定点击事件
+                alert("被点击");
+                document.writeln("a");     //在doucmen文档中添加内容,通过调用document.weite会在新文档中显示
+            }
+        }
+        /*声明变量*/
+
+//                        var n = 3, m = 4;     //声明多个变量
+//                        n = 5;                //给变量赋值
+//                        document.writeln(c);        //报错    变量应先声明再使用
+//                        n = 3;
+//                        alert(n);       //虽不会报错，但不建议没声明直接使用
+
+        /*数据类型*/
+                 //typeof 运算符有一个参数，即要检查的变量或值,返回对应数据类型的字符串值
+					alert(typeof (null));	//object
+					alert(typeof (undefined));	//undefined
+					alert(typeof (true));	//boolean
+					alert(typeof (3));	//number
+					alert(typeof ('a'));	//string
+					alert(typeof (window));	//object
+					alert(typeof (function(){}));	//function
+//                  Undefined 类型只有一个值，即 undefined。当声明的变量未初始化时，该变量的默认值是 undefined。
+//                      var m;
+//                      document.writeln(typeof m);         //undefined 未定义类型   没有声明变量、声明了变量但没有赋值、函数无返回值
+//                  null 则用于表示尚未存在的对象。如果函数或方法要返回的是对象，那么找不到该对象时，返回的通常是 null。
+//                      alert(null == undefined);  //输出 "true"
+//                      alert(null === undefined);  //输出 "false" ===全等，数据类型也要相等
+//                  Boolean 类型有两个值 true 和 false（true和false是严格区分大小写的）
+//                      数据类型	转换为true	    转换为false
+//                      布尔型	true	        false
+//                      字符串	任何非空字符串	“”（空字符串）
+//                      数值  	任何非零数字值	0和NaN
+//                      对象  	任何对象	null    null
+//                      n = false;
+//                      document.writeln(typeof n);         //boolean   布尔类型(true、false)
+//                  Number类型
+//                     浮点数,要定义浮点值，必须包括小数点和小数点后的一位数字
+//                     科学计数法 对于非常大或非常小的数,可以用科学计数法表示浮点数,可以把一个数表示为数字(包括十进制数字)加e(或E),后面加乘以10的倍数。
+//                     Infinity无穷大 a=Number.POSITIVE_INFINITY  -Infinity无穷小 b=Number.NEGATIVE_INFINITY
+//                     NaN，即非数值 NaN 不能用于算术计算(与任何数计算都为NaN),它与自身不相等，false:数字、null、纯数字字符串、布尔值
+//						     isNaN()在调用函数的过程中，先调用valueof()方法，确认返回值是否能转变为数值，如不能在基于此返回值调用toString()方法，在测返回值
+//        					 var a = Number.MAX_VALUE,b=Number.MIN_VALUE;	//浮点数最大值和最小值，属于Infinity无穷大和-Infinity无穷小
+//        					 alert(isFinite(a));		//true	判断是否超过范围，超过true，没有false
+//        					 alert(Number.NaN);		//得到NaN值
+//        					 alert(isNaN(a);		//判断是否是NaN，超过true，没有false
+//                           var n = 2, a = .1, b=1.1, fNum = 5.618e7;      //075 八进制(61)  0xAB 16进制(171)
+//                           document.writeln(typeof n);         //number    数字类型
+//                  String类型 字符串型是JavaScript中用来表示文本的数据类型，是由Unicode字符、数字和标点符号组成的一个字符串序列
+//                      变量与字符串、变量与变量要使用+来连接
+//                      n = "22";
+//                      document.writeln(typeof n);         //string    字符串类型
+//				    Object
+//						在ECMAScript中其实就是一组数据和功能的集合
+//						var  m = new Object();
+//                  	document.writeln(typeof m);         //object    对象类型(若m=null，返回的也是object)
+//                      m = function(){};
+//                      document.writeln(typeof m);         //function  函数类型
+//                  本地对象中的Array（即数组)
+//                     数组是由名称相同的多个值构成的一个集合，集合中的每个值都是这个数组的元素。
+//                     数组使用关键字Array来声明。
+//                             var score=new Array(2); // 两个元素
+//                             score[0]=98;        //访问数组并为数组赋值
+//                             score[1]=65;
+//                             var myColor=new Array( );
+//                                 var map=new Array(“china”,”USA”,”Britain”);
+//                             var map=[“China”,”USA”,”Britain”] ;  // 字面量
+
+    </script>
+</head>
+<body>
+<input type="text">
+<!-- onclick: 给标签绑定点击事件，鼠标点击发生响应
+   document.querySelector：返回文档中匹配指定的选择器组的第一个元素 -->
+<button onclick="document.querySelector('input').style.backgroundColor='red'">变红</button>
+<button id="btn1">点击</button>
+</body>
+</html>

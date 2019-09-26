@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li>11111</li>
+        <li>22222</li>
+        <li>33333</li>
+        <li>44444</li>
+        <li>55555</li>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+//        $("ul li:nth-child(odd)").css("backgroundColor", "blue");
+        $("ul li").click(function(){
+            $(this).css("backgroundColor", "red");
+        })
+    </script>
+</body>
+</html>

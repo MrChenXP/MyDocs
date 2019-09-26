@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>条件渲染</title>
+  <style>
+    [v-cloak]{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+<!--
+  v-if 条件为true渲染节点(v-else v-else-if), 不是使用hidden,代码中没有其他代码
+  v-show 如v-if，方法为display=none
+  v-cloak 指令保持在元素上直到关联实例结束编译 配合display可以在vue没被加载前使与vue相关的代码隐藏
+-->
+  <div v-if="flag">v-if="flag" 为false时document不会显示代码</div>
+  <div v-else>否则显示这段话，</div>
+  <div v-show="flag">v-show="flag" 为false时document会显示代码 display:none</div>
+  <div v-cloak>v-cloak</div>
+<!--
+  v-for 循环 绑定数组的数据来渲染一个项目列表 浅拷贝,没有双向绑定
+    数组 a:元素  b:索引      	对象 a:属性值   b:键名   c:索引
+    key值用来区分渲染的每个元素 必须不一样
+-->
+  <!-- <li v-for="(a,b[,c]') in list"> -->
+  <table>
+    <tr  v-for="y in list" v-bind:key = "y.age">
+      <td>{{y.name}}</td>
+      <td>{{y.age}}</td>
+    </tr>
+  </table>
+  <ul>
+    <li v-for="(n,s) in 3">会把1-3遍历出来{{n}} {{s}}</li>
+    <li v-for="(n,s) in 'chen'">会把chen遍历split出来 {{n}} {{s}}</li>
+  </ul>
+  <button v-on:click="change">change</button>
+
+  <input type="password" v-model="msg" v-on:keyup.enter="s">
+
+  <template>
+    <p v-if="len>8"> >8 </p>
+    <p v-else-if="len<=8||len>0"> {{len}} </p>
+    <p v-else="">  null </p>
+  </template>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+  new Vue({
+    el: '#app',
+    data:{
+      msg:null,
+      len:0,
+      list: [
+        {name: "chen", age: 21},
+        {name: "chen", age: 22},
+        {name: "chen", age: 23},
+      ],
+      flag: true,
+    },
+    methods:{
+      change:function () {
+        //响应式新增与修改数据 (要更改的数据源(可以是对象或者数组),要更改的具体数据,重新赋的值)
+        Vue.set(this.list,0,{name:'li',age: 30});
+        //.push放进行了重写，可以动态添加
+        this.list.push({
+          name:'wnag',
+          age:33
+        })
+      },
+      s:function () {
+        let len = this.msg.split('').length;
+
+        console.log(len)
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+<!--pages/editor/editor.wxml-->
+<editor placeholder="这是提示信息"></editor>

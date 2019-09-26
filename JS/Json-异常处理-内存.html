@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json.异常处理,内存</title>
+    <meta charset="utf-8">
+</head>
+<script type="text/javascript">
+// JSON 指的是JavaScript对象表示法(JavaScript Object Notation)是轻量级的文本数据交换格式,独立于语言,JSON解析器和JSON库支持许多不同的编程语言。
+//     JSON 是用于存储和传输数据的格式,通常用于服务端向网页传递数据
+//     Json字符串就是字符串,只不过字符串的内容格式是json格式的,json对象是json格式的js对象
+//     JSON和JS对象不同点
+//            键名：JSON：必须是加双引号  对象: 单双想加就加
+//            键值：JSON：数值（10进制）、字符串（双引号）、布尔值、Null、数组和符合JSON要求的对象（不能是函数，NaN，undefined、infinity、-infinity）
+//                  对象：不限制
+//            逗号问题：JSON：最后一个属性后面不能出现逗号   对象：可以
+//            数值：JSON: 前导0不能用，小数点后必须要有数字   对象：不限制
+
+//     json对象的语法规则
+//            Demo1:{"name":"Alice","age":8,"sex":"man"}  大多数情况下等价于 {name:"Alice",age:8,sex:"man"}
+//                var ajson = {
+//                    "name": "张三",       //键名：键值 （键值对）
+//                    "age": 12,
+//                    'male': true,
+//                    0: 13,
+//                    undefined: 14,
+//                    NaN: 15,
+//                    defined: undefined,
+//                    tt: 3.
+//                };
+//                document.writeln(ajson["name"]);     //张三   ajson["键名"] 字符串键名必须加引号
+//                document.writeln(ajson.age);         //12    ajson.键名  用点的方式不能加引号
+//                document.writeln(ajson[0]);         //13   数组方式    数字键名引号随便
+//                document.writeln(ajson.0);         //语法错误
+//                ajson[6] = "已婚";       // json的赋值 字符串得用引号，数字随便
+//                alert(ajson.length);      //undefined json无length属性
+//            json对象键名遍历
+//                    for(var key  in ajson){       //for……in 方式用于遍历对象的键名
+//                        document.writeln("key = " + key + " value = " + ajson[key] + "<br>");
+//                    }
+//     json对像方法
+//         在IE7显示JSON未定义
+//         兼容IE的方法：  引入json2.js
+//            var json = '{"a": 12, "age": 16, "11": "89"}';        //JSON的字符串
+//               var json = '{\"y\":\"0\",\"M\":\"0\",\"d\":\"0\"}'
+//            JSON.parse()   序列化，将JSON的字符串转换成JS对象 (用来解析服务器向客户端传递JSON数据)
+//               json = JSON.parse(json);
+//               for(var key in json){
+//                  document.writeln("key:" + key + " value:" + json[key] +"<br>");
+//              }
+//            var ajson = {
+//                "name": "张三",       //键名：键值 （键值对）
+//                "age": 12,
+//                'male': true,
+//                0: 13,
+//                undefined: 14,
+//                NaN: 15,
+//                defined: undefined,
+//                tt: 3.
+//            };
+//         JSON.stringify();  序列化，将JS对象转换成JSON的字符串，自动去除和修改不合法的键值对(用来解析客户端向服务器传递JSON数据)
+//            ajson = JSON.stringify(ajson);
+//                        //{"0":13,"name":"张三","age":12,"male":true,"undefined":14,"NaN":15,"tt":3}
+//            console.log(ajson);
+//         eval()函数
+//              eval() 函数可计算某个字符串，并执行其中的的 JavaScript 代码
+//              该方法只接受原始字符串作为参数，如果 string 参数不是原始字符串，那么该方法将不作任何改变地返回
+//              如果参数中没有合法的表达式和语句，则抛出 SyntaxError 异常。
+//              如果非法调用 eval()，则抛出 EvalError 异常。
+//              如果传递给 eval() 的 Javascript 代码生成了一个异常，eval() 将把该异常传递给调用者。
+//                var str = "var a = 12; document.writeln(a);";      //把字符串里的内容当作JS代码来执行
+//                eval(str);      //12
+//                var ajson = '{"a":12, "b": 3, c: 13, d: function(){document.writeln("aaa")}}'; //json字符串
+//                bjson = eval( "(" + bjson + ")" );        //转换为JSON对象，ajson是json对象。必须用“（+ +）”扩住
+//                document.writeln(bjson.c);      //调用属性
+//                bjson.d();          //调用方法
+
+// 异常处理
+//          document.writeln(num);      //报错    JS代码执行到这里就终止，以致下方的代码不能被执行
+//          document.writeln("我是输出在错误的下方");
+//          try{        //try里放可能会有异常的代码
+//              var num = 12;
+//              document.writeln(num);      //后面代码不被执行，try抛出错误信息
+//                throw "变量没有被定义";       //自定义抛出错误信息，throw后的代码就不会被执行（类似于break）
+//                document.writeln("我是throw后的内容");        //不被执行
+//          }catch(err){        //当try里出现报错时，就会执行catch语句 然这个报错的信息传递给catch的参数的
+//              console.log(err);
+//          }finally {      //无论try是否有异常，都要执行的代码
+//              document.writeln('无论try是否有异常，都要执行的代码');
+//          }
+//          document.writeln("我是输出在错误的下方");
+
+// 内存管理
+//     内存
+//         在硬件层面,计算机内存是由大量的触发器)组成的.每一个触发器都包含有一些晶体管,能够存储1比特.
+//           单个触发器可通过一个唯一标识符来寻址,这样我们就可以读和写了.
+//           因此从概念上讲,我们可以把计算机内存看作是一个巨大的比特数组,我们可以对它进行读和写。
+//         当你编译你的代码时,编译器可以检查原始的数据类型并且提前计算出将会需要多少内存.
+//           然后把所需的(内存)容量分配给调用栈空间中的程序.这些变量因为函数被调用而分配到的空间被称为堆栈空间,
+//           它们的内存增加在现存的内存上面(累加).如它们不再被需要就会按照LIFO(后进,先出)的顺序被移除。
+//     JavaScript 在定义变量时就完成了内存分配
+//     基本上在JavaScript中使用分配的内存,就是对它进行读和写操作。
+//     生命周期
+//         内存分配（Allocate memory ）：当我们申明变量、函数、对象的时候，系统会自动为他们分配内存
+//         内存使用（Use memory ）：即读写内存，也就是使用变量、函数等
+//         内存释放（Release memory ）：使用完毕，由垃圾回收机制自动回收不再使用的内存
+//     内存回收
+//         不再需要使用的变量也就是生命周期结束的变量，是局部变量，局部变量只在函数的执行过程中存在，
+//           当函数运行结束，没有其他引用(闭包)，那么该变量会被标记回收
+//         全局变量的生命周期直至浏览器卸载页面才会结束，也就是说全局变量不会被当成垃圾回收。
+//     内存回收
+//         引用:一个对象如果有访问另一个对象的权限（隐式或者显式），叫做一个对象引用另一个对象
+//             “对象”的概念不仅特指 JavaScript 对象，还包括函数作用域（或者全局词法作用域）
+//         引用计数垃圾收集:看一个对象是否有指向它的引用.若没有其他对象指向它,说明该对象已不再需
+//             问题:解决不了循环引用,因为循环引用,即使对象不再使用,但永远有对象指向他
+//         标记清除算法:将“不再使用的对象”定义为“无法达到的对象”,从根部(在JS是全局对象)
+//             出发定时扫描内存中的对象.凡是能从根部到达的对象,都是还需要使用的.
+//             那些无法由根部出发触及到的对象被标记为不再使用,稍后进行回收。
+//             工作流程:1垃圾收集器会在运行的时候会给存储在内存中的所有变量都加上标记。
+//                 2.从根部出发将能触及到的对象的标记清除。
+//                 3.那些还存在标记的变量被视为准备删除的变量。
+//                 4.最后垃圾收集器会执行最后一步内存清除的工作,销毁那些带标记的值并回收它们所占用的内存空间
+//     内存泄露
+//         内存泄漏就是由于疏忽或错误造成程序未能释放那些已经不再使用的内存，造成内存的浪费
+//         常见的JS内存泄露:1.意外的全局变量 2.没有释放的计时器或者回调函数 3.脱离DOM的引用 4.闭包
+//     避免内存泄露
+//         1.减少不必要的全局变量，使用严格模式避免意外创建全局变量。
+//         2.在你使用完数据后，及时解除引用（闭包中的变量，dom引用，定时器清除）。
+//         3.组织好你的逻辑，避免死循环等造成浏览器卡顿，崩溃的问题。
+</script>
+<body>
+
+</body>
+</html>

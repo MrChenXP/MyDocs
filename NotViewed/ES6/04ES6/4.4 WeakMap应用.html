@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 200px;height: 200px;background-color: darkgray; color: darkred; font-size: 30px;"></div>
+    <script>
+//        let oDiv = document.querySelector("div");
+//        let count = 0;
+//        oDiv.addEventListener("click", function(){
+//            this.innerText = ++count;
+//            if(count === 5){
+//                document.body.removeChild(oDiv);
+//            }
+//        }, false);
+
+        let oDiv = document.querySelector("div");
+        let oMap = new WeakMap();
+        oMap.set(oDiv, {count: 1});
+
+        oDiv.addEventListener("click", function(){
+            let count = ++oMap.get(oDiv).count;
+            this.innerText = count;
+            if(count === 5){
+                document.body.removeChild(oDiv);
+            }
+        }, false);
+
+    </script>
+</body>
+</html>

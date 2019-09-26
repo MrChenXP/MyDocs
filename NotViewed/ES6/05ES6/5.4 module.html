@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="md1.js"></script>-->
+    <!--<script>-->
+        <!--alert(a);       //12-->
+    <!--</script>-->
+</head>
+<body>
+<script type="text/javascript">
+console.log(this)
+</script>
+    <script type="module">
+//        import {a, show, b} from "./md1.js";
+//        alert(a);
+//        alert(show());
+//        alert(b);
+
+//        import {a, s, b} from "./md1.js";       //import 导入的变量要对应文件导出的键名
+//        alert(s());
+
+//        let str = "./md1.js";
+//        import * as obj from str;       //报错、
+
+        import * as obj from "./md1.js";        // * 代表 导入所有 对应文件 导出的键名
+        alert(obj.s());
+        alert(obj.a);
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="text">
+    <ul>
+        <li><span>111111</span> <a href="#">替 换</a> | <a href="#">删 除</a></li>
+        <li><span>222222</span> <a href="#">替 换</a> | <a href="#">删 除</a></li>
+        <li><span>333333</span> <a href="#">替 换</a> | <a href="#">删 除</a></li>
+        <li><span>444444</span> <a href="#">替 换</a> | <a href="#">删 除</a></li>
+        <li><span>555555</span> <a href="#">替 换</a> | <a href="#">删 除</a></li>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            $("ul li a:even").click(function(){
+                if($(":text").val() !== ""){
+//                    $("ul li > span").eq($(this).index("ul li a:even")).text($(":text").val());
+//                    $(this).prev().replaceWith(`<span>${$(":text").val()}</span>`);           //替换节点
+                    $(`<span>${$(":text").val()}</span>`).replaceAll($(this).prev());
+                }
+            });
+
+            $("ul li a:odd").click(function(){
+                $(this).parent().remove();
+            });
+        });
+    </script>
+</body>
+</html>

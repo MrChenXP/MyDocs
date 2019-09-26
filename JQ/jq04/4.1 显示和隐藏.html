@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>显示</button>
+    <button>隐藏</button>
+    <button>toggle</button>
+    <div style="width: 200px;background-color: darkcyan;height: 200px; display: none; padding: 10px; margin: 10px;"></div>
+
+    <p>1111111111111</p>
+    <p>222222222222</p>
+    <p>3333333333333</p>
+    <p style="display: none;">444444444444444</p>
+    <p style="display: none;">555555555555555</p>
+    <p style="display: none;">6666666666666666666</p>
+    <button>显示全部</button>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            var aBtn = $(":button");
+            aBtn.eq(0).on("click", function(){      //show(过渡时间，过渡曲线,回调函数)
+//                $("div").show(10000);           // 过渡的样式：width height opacity  padding margin
+                $("div").show("normal","swing");           // slow normal fast
+            });
+            aBtn.eq(1).on("click", function(){
+                $("div").hide("slow", "linear", function(){         //过渡曲线（swing(默认), linear）
+                    alert("过渡结束");              // 回调函数，表示过渡结束执行的函数
+                });
+            });
+
+            aBtn.eq(2).on("click", function(){
+                $("div").toggle(1000);
+            });
+
+            aBtn.eq(3).on("click", function(){
+                $("p").toggle(false);           //toggle(布尔值)   toggle(true)相当于设置display: "block"
+            });
+        });
+    </script>
+</body>
+</html>

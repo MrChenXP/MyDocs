@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .div1{
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+            position: relative;
+        }
+        .div2{
+            width: 100px;
+            height: 100px;
+            background-color: darkred;
+            padding: 20px;
+            margin: 50px;
+            border: 4px solid red;
+            position: absolute;
+            left: 35px;
+            top: 25px;
+
+        }
+    </style>
+</head>
+<body style="height: 3000px;">
+    <div class="div1">
+        <div class="div2"></div>
+    </div>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            var oDiv2 = $(".div2");
+
+//            alert($(".div2").height());     //100           数字类型 返回height的值
+//            alert($(".div2").css("height"));     //100px    字符串类型
+            console.log(oDiv2.width());           //100
+            console.log(oDiv2.innerWidth());        //innerWidth = width + padding
+            console.log(oDiv2.outerWidth());        //outerWidth = width + padding + border (类似于JS里offsetWidth)
+            console.log(oDiv2.outerWidth(true));        //outerWidth = width + padding + border + margin
+
+            console.log(oDiv2.css("left"));         //35px
+            console.log(oDiv2.offset());            //{top: 84, left: 94}  35 + 50 +8 + 1  计算元素离文档的左上边距
+            console.log(oDiv2.position());            //{top: 25, left: 35} 当前元素的left和top值(不包含margin)
+
+//            $(window).scroll(function(){
+////                var scrollTop = document.documentElement.scrollTop;       //JS
+//                console.log($(":root").scrollTop());            //滚动条的上边距
+//
+//            });
+            $(window).resize(function(){
+//                console.log(document.documentElement.clientWidth);      //js
+                console.log($(":root").width());            //可视区域的宽度
+            });
+        });
+    </script>
+</body>
+</html>

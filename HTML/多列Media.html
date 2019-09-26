@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多列</title>
+    <style type="text/css">
+        .duo{
+            width: 500px;
+            height: 500px;
+            column-count: 3;    /*控制显示的列数(宽度高度不够的情况下会变)*/
+            column-gap: 5px;    /* 控制列之间的间距 */
+            column-rule: 1px solid gray;    /* 控制列之间的修饰符 */
+            columt-width:50px;       /*  控制列的宽度 */
+            columns: 50px 4;                /* 设置 column-width 和 column-count 的简写属性*/
+            column-fill: auto;  /*规定如何对列进行填充
+                        balance	对列进行协调。浏览器应对列长度的差异进行最小化处理。
+                        auto	按顺序对列进行填充，列长度会各有不同。*/
+        }
+        h2{
+            column-span:all;    /* column-span 属性规定元素应横跨所有列 */
+        }
+        /*  @media 多媒体查询由多种媒体组成，可以包含一个或多个表达式，表达式根据条件是否成立返回 true 或 false
+            @media not|only|all mediaType and (表达式) {
+                CSS-Code;
+            }
+            你也可以针对不同的媒体使用不同 stylesheets :
+            <link rel="stylesheet" media="mediaType and|not|only (media feature)" href="text.css">
+            not: not是用来排除掉某些特定的设备的，比如 @media not print（非打印设备）
+            only: 用来定某种特别的媒体类型          all: 所有设备
+            print 用于打印机  screen	用于电脑屏幕，平板，智能手机等。  speech	用于屏幕阅读器
+            aspect-ratio	定义输出设备中的页面可见区域宽度与高度的比率
+            媒体功能
+                device-height	定义输出设备的屏幕可见高度。
+                device-width	定义输出设备的屏幕可见宽度。
+                width	定义输出设备中的页面可见区域宽度
+                height	定义输出设备中的页面可见区域高度。
+                max-height	定义输出设备中的页面最大可见区域高度。
+                max-width	定义输出设备中的页面最大可见区域宽度。
+                max-monochrome	定义在一个单色框架缓冲区中每像素包含的最大单色原件个数。
+                max-resolution	定义设备的最大分辨率。
+                min-aspect-ratio	定义输出设备中的页面可见区域宽度与高度的最小比率。
+                min-color	定义输出设备每一组彩色原件的最小个数。
+                min-color-index	定义在输出设备的彩色查询表中的最小条目数。
+                min-device-aspect-ratio	定义输出设备的屏幕可见宽度与高度的最小比率。
+                min-device-width	定义输出设备的屏幕最小可见宽度。
+                min-device-height	定义输出设备的屏幕的最小可见高度。
+                min-height	定义输出设备中的页面最小可见区域高度。
+                min-monochrome	定义在一个单色框架缓冲区中每像素包含的最小单色原件个数
+                min-resolution	定义设备的最小分辨率。
+                min-width	定义输出设备中的页面最小可见区域宽度。
+                monochrome	定义在一个单色框架缓冲区中每像素包含的单色原件个数。如果不是单色设备，则值等于0
+                orientation	定义输出设备中的页面可见区域高度是否大于或等于宽度。
+                resolution	定义设备的分辨率。如：96dpi, 300dpi, 118dpcm
+                scan	定义电视类设备的扫描工序。
+                color	定义输出设备每一组彩色原件的个数。如果不是彩色设备，则值等于0
+                max-color	定义输出设备每一组彩色原件的最大个数。
+                max-color-index	定义在输出设备的彩色查询表中的最大条目数。
+                device-aspect-ratio	定义输出设备的屏幕可见宽度与高度的比率。
+                max-aspect-ratio	定义输出设备的屏幕可见宽度与高度的最大比率。
+                max-device-aspect-ratio	定义输出设备的屏幕可见宽度与高度的最大比率。
+                max-device-height	定义输出设备的屏幕可见的最大高度。
+                max-device-width	定义输出设备的屏幕最大可见宽度。
+                color-index	定义在输出设备的彩色查询表中的条目数。如果没有使用彩色查询表，则值等于0
+                grid	用来查询输出设备是否使用栅格或点阵。
+        */
+        @media only screen and (min-width: 480px) {  /* 当在电脑平板手机上 480px以上宽时应用以下样式*/
+            body {
+                background-color: lightgreen;
+            }
+        }
+        /*多个尺寸的公用样式需要写在前面          */
+        @media (max-width: 768px){  /* 0-768px宽时应用以下样式*/
+            .duo{
+                background-color: red;
+            }
+        }
+        @media (min-width: 769px) and (max-width: 992px){ /* 769-992px宽时应用以下样式*/
+            .duo{
+                background-color: yellow;
+            }
+        }
+        @media (min-width: 1201px) and (max-width: 1600px){   /* 1201-1600px宽时应用以下样式 */
+            .duo{
+                background-color: pink;
+            }
+        }
+        @media (min-width: 993px) and (max-width: 1200px){ /* 993-1200px宽时应用以下样式 这个样式会覆盖上面的样式*/
+            .duo{
+                background-color: blue;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="duo">
+    <h2>加拿大应学台当局如何“防范大陆”？台艺人:找死</h2>
+    <p>
+        　海外网1月4日电 加拿大一媒体2日刊发文章，呼吁加拿大与台湾地区学习如何防范大陆。对此，台湾艺人讽道，
+        跑去跟眼前这个“台独”当局学习，是去找死！
+        　　据《中时电子报》报道，《加拿大环球邮报》（The Globe and Mail）2日刊发一篇名为《
+        民主国家怎样对抗中国日益增长的影响力》的文章，作者J。 Michael Cole是加拿大安全智库的前分析师。
+        　　文章称，加拿大面对中国日渐强大的影响力已无法置身事外，呼吁加拿大向台湾地区学习如何与中国大陆交往，
+    </p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滤镜渐变</title>
+    <style type="text/css">
+        .div1 img{
+            width: 100px;
+            height: 100px;
+        }
+        /* 滤镜filter*/
+        /* 设置滤镜的灰度 0%-100%*/
+        .div1 img:nth-child(1){
+            filter: grayscale(80%);
+        }
+        /* 设置滤镜的褐色度 0% - 100%*/
+        .div1 img:nth-child(2){
+            filter: sepia(100%);
+        }
+        /* 设置滤镜的饱和度(颜色鲜艳度) 0%-无限 */
+        .div1 img:nth-child(3){
+            filter: saturate(300%);
+        }
+        /*  设置滤镜的色相旋转 0deg +    */
+        .div1 img:nth-child(4){
+            filter: hue-rotate(120deg);
+        }
+        /*  设置滤镜的反色 (0 - 100%)    */
+        .div1 img:nth-child(5){
+            filter: invert(70%);
+        }
+        /*  设置滤镜的透明度 (0 - 1)    */
+        .div1 img:nth-child(6){
+            filter: opacity(.5);
+        }
+        /*  设置滤镜的亮度 (0 + )    */
+        .div1 img:nth-child(7){
+            filter: brightness(150%);
+        }
+        /*  设置滤镜的对比度 (0 + )    */
+        .div1 img:nth-child(8){
+            filter: contrast(150%);
+        }
+        /*  设置滤镜的模糊度 (0 + )    */
+        .div1 img:nth-child(9){
+            filter: blur(2px);
+        }
+        /*  设置滤镜的阴影 [x y 模糊大小 颜色]    */
+        .div1 img:nth-child(10){
+            filter: drop-shadow(5px 5px 7px #ccc);
+        }
+        /*  设置滤镜的组合     */
+        .div1 img:nth-child(11){
+            filter: drop-shadow(5px 5px 5px #ccc) invert(100%) contrast(150%) hue-rotate(120deg);
+        }
+        /* 线性渐变 linear-gradient*/
+        .div2 div,.div3 div{
+            width: 200px;
+            height: 200px;
+            float: left;
+            margin-left: 20px;
+        }
+        /* 边框渐变色设置到border-imgers
+            linear-gradient[起点(去向)(to top默认),颜色值 盒子尺寸占用尺寸,这里写更多的颜色]*/
+        .div2-1{
+            border: 40px solid;
+            border-image: linear-gradient(to right top, red 50%, blue, yellow) 40;
+        }
+        /* 边框渐变色设置到background
+            linear-gradient[角度(deg)(逆时针0-360),颜色值 盒子尺寸占用百分比,这里写更多的颜色]*/
+        .div2-2{
+            background: linear-gradient(0deg, red 40px, green, black)
+        }
+        /* 线性渐变重复平铺*/
+        .div2-3{
+            background: repeating-linear-gradient(to bottom, blue 5%, white 10%, gray 15%)
+        }
+        /* 径向渐变 radial-gradient*/
+        /*radial-gradient[半径(水平半径、垂直半径)| 形状(circle(正圆)、ellipse(椭圆))
+        大小（具体数值或百分比，也可以是关键字（closest-side(最近端), closest-corner(最近角), farthest-side(最远端), farthest-corner(最远角), contain(包含) ,cover(覆盖)））
+            颜色值 颜色值的半径，]*/
+        .div3-1{
+            /*background: radial-gradient(100px 100px,blue 30%, red 60%,yellow 80%);*/
+            background: radial-gradient(circle farthest-side, red, yellow, green, blue);
+            /*background: radial-gradient(ellipse farthest-corner, red 50%, yellow 60%, green, blue);*/
+        }
+        /* 径向渐变重复平铺*/
+        .div3-2{
+            background: repeating-radial-gradient(black, black 5px, white 5px, white 10px);
+        }
+    </style>
+    <meta charset="utf-8">
+</head>
+<body>
+<!-- 滤镜-->
+<div class="div1">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+    <img src="../../DaiMa/imgers/border.png">
+</div>
+<!-- 线向渐变-->
+<div class="div2">
+    <div class="div2-1"></div>
+    <div class="div2-2"></div>
+    <div class="div2-3"></div>
+</div>
+<!-- 径向渐变-->
+<div class="div3">
+    <div class="div3-1"></div>
+    <div class="div3-2"></div>
+</div>
+
+
+	
+<div style="
+	position: fixed;
+	bottom:0;
+	width: 100px;
+	height: 100px;
+	background: -moz-linear-gradient(top, #24609C 10%, #2E5D95 70%, #fff 100%); 
+	background: -webkit-gradient(linear,top,bottom, color-stop(0%,#24609C 10%), color-stop(100%,#fff)); 
+	background: -webkit-linear-gradient(top, #24609C 0%,#fff 100%); 
+	background: -o-linear-gradient(top, #24609C 10%, #2E5D95 70%, #fff 100%); 
+	background: -ms-linear-gradient(top, #24609C 10%, #2E5D95 70%, #fff 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#24609C', endColorstr='#ffffff',GradientType=0 ); 
+	background: linear-gradient(#24609C 10%, #2E5D95 70%, #fff 100%)
+
+	
+	">
+	
+</div>
+<div style="
+	position: fixed;
+	bottom:150px;
+	width: 100px;
+	height: 100px;
+	background: -moz-linear-gradient(top, #376898 10%, #2c76ce 100%); 
+	background: -webkit-gradient(linear,top,bottom, color-stop(0%,#376898 10%), color-stop(100%,#2c76ce)); 
+	background: -webkit-linear-gradient(top, #376898 0%,#2c76ce 100%); 
+	background: -o-linear-gradient(top, #376898 10%, #2c76ce 100%); 
+	background: -ms-linear-gradient(top, #376898 10%, #2c76ce 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#376898', endColorstr='#2c76ce',GradientType=0 ); 
+	background: linear-gradient(#376898 10%, #2c76ce 100%);
+
+	
+	">
+</body>
+</html>

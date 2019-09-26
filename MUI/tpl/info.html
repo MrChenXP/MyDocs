@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<button id="but" style="position: fixed;z-index: 100;right:0;">测试mui.openWindow</button>
+		<button id="m-bcak" style="position: fixed;z-index: 100;left:0;">返回</button>
+		<div class="mui-content">
+			<!--列表-->
+		    <ul class="mui-table-view ul" id="newInfo">
+		        <script id="listInfo" type="text/html"></script>
+		    </ul>
+		</div>
+		
+		
+		<script src="../js/template-web.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true,//启用右滑关闭功能
+				keyEventBind: {
+					backbutton: false  //关闭back按键监听
+				},
+				beforeback:function(){//返回true或无返回值,则会执行mui.back()方法
+					//获得列表界面的webview
+					var list = plus.webview.getWebviewById('list');
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					mui.fire(list,'refresh');
+					//返回true，继续页面关闭逻辑
+					return true;
+				}
+			});
+			
+			//添加自定义监听事件  (事件名，回调函数(接受的数据))
+			window.addEventListener('gg',function(event){
+				//获取事件参数
+				var id = event.detail.id;
+					//根据id向服务器请求新闻详情
+				mui.plusReady(function(){
+					mui.ajax('https://news-at.zhihu.com/api/4/news/'+id,{
+						data:{
+							
+						},
+						dataType:'json',
+						type:'GET',
+						timeout:10000,
+						headers:{'Content-Type':'application/json'},
+						success:function(data){
+							var html = template('listInfo',data);
+							document.getElementById("newInfo").innerHTML=data.body;
+						},
+						error:function(xhr,type,errorThrown){
+							alert(errorThrown);
+						}
+					});
+				})
+			})
+			mui.plusReady(function(){
+				document.getElementById('m-bcak').addEventListener('tap',function(e){
+					mui.back();
+				});
+			})
+		
+			//获取按钮对象添加点击跳转事件
+			document.getElementById('but').addEventListener('tap',function(e){
+				
+				
+				
+				
+				mui.openWindow({ //打开新页面 宽高默认100% 
+					//多次打开已存在的同样id的webview时，是不会重复触发plusReady事件的
+					url:'event.html',
+					id:'event',
+					styles:{	//窗口参数
+						titleNView: {                       // 窗口的标题栏控件
+				      titleText:"info=>evnet",                // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+				      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+				      titleSize:"17px",                 // 字体大小,默认17px
+				      backgroundColor:"#00bfff",        // 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+				      progress:{                        // 标题栏控件的进度条样式
+				        color:"#00FF00",                // 进度条颜色,默认值为"#00FF00"  
+				        height:"2px"                    // 进度条高度,默认值为"2px"         
+				      },
+				      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+				        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+				        height:"1px"                    // 分割线高度,默认值为"2px"
+				      }
+				    }
+//						top:'44px',//新页面顶部位置
+//						bottom:'0px',//新页面底部位置
+					},
+					extras:{},//扩展参数，可处理页面传值 扩展参数仅在打开新窗口时有效，预加载页面无效
+					createNew:false,//是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					show:{//窗口显示控制参数
+			      autoShow:true,//页面loaded事件发生后自动显示，默认为true 设为false体验更好
+			      aniShow:'slide-in-right',//页面显示动画，默认为”slide-in-right“从右滑入
+			      duration:'100ms'//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+			    },
+			    waiting:{//系统等待框参数 若为预加载页面则直接跳过等待框直接显示目标页面
+			    	//mui框架在打开新页面时等待框的处理逻辑为：
+			    		//显示等待框->创建目标页面webview->目标页面loaded事件发生->关闭等待框
+			    	//关闭等待框 plus.nativeUI.closeWaiting();	
+			    	//显示当前页面	currentWebview.show();
+			      autoShow:true,//自动显示等待框，默认为true
+			      title:'正在加载...',//等待对话框上显示的提示内容
+			      options:{//等待框样式
+//			        width:waiting-dialog-widht,//等待框背景区域宽度，默认根据内容自动计算合适宽度
+//			        height:waiting-dialog-height,//等待框背景区域高度，默认根据内容自动计算合适高度
+			      }
+			    }
+				})
+			})
+			
+
+		</script>
+	</body>
+
+</html>

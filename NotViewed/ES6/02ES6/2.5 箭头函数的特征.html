@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象
+//        不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。
+//        不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用Rest参数（稍后介绍）代替
+
+//        var id = 10;
+//        function show(){        //new Function的函数是调用时决定this的指向
+//            console.log(this.id);      //20
+//            setTimeout(function(){
+//                console.log(this.id);    //10
+//            }, 30);
+//        }
+
+//        function show(){
+//            console.log(this.id);      //20
+//            setTimeout(function(){
+//                console.log(this.id);    //20
+//            }.bind(this), 30);
+//        }
+
+//        function show(){
+//            console.log(this.id);      //20
+//            var _self = this;
+//            setTimeout(function(){
+//                console.log(_self.id);    //20
+//            }, 30);
+//        }
+//----------------------------------------------------------------------
+//        var id = 10;
+//        let show = () => {
+//            console.log(this.id);      //10
+//            setTimeout(function(){
+//                console.log(this.id);    //10
+//            }, 30);
+//        };
+//        let show = () => {
+//            console.log(this.id);      //10
+//            setTimeout(()=>{console.log(this.id)}, 30);     //10
+//        };
+//        let show = function() {
+//            console.log(this.id);      //20
+//            setTimeout(()=>{console.log(this.id)}, 30);     //20
+//        };
+//        show.call({id: 20});
+//---------------------------------------------------------------------
+//        let show = function(){};    //function  函数对象有prototype属性
+//        let show = () => "aaa";     //function  函数对象没有prototype属性和constructor属性，故不能用做构造函数和new操作符
+
+//        alert(typeof show);
+//        console.log(new show());        //不是一个构造器，所以不能用new
+//        console.log(show.prototype);
+
+//        ----------------------------------------------------------
+//        let show = function(){          //普通函数是有arguments对象
+//            console.log(arguments);
+//        };
+//        let show = () => {console.log(arguments)};      //报错，没有arguments对象
+//        show();
+
+
+//        let sum = function(){
+//            var result = 0;
+//            for(var i in arguments){
+//                result += arguments[i];
+//            }
+//            return result;
+//        };
+
+//        let sum = (...rest) => {        //用rest运算符来代替箭头函数没有arguments对象的问题
+//            let result = 0;
+//            for(let i in rest){
+//                result += rest[i];
+//            }
+//            return result;
+//        };
+//        alert(sum(2,3,4,5));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

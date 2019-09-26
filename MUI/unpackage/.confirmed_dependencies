@@ -1,0 +1,50 @@
+{
+  "tpl/index.html": {
+    "resources": [
+      "tpl/header.html",
+      "tpl/tab.html",
+      "tpl/list.html"
+    ],
+    "refer": [
+      "tpl/header.html",
+      "tpl/tab.html",
+      "tpl/info.html",
+      "tpl/nav.html"
+    ]
+  },
+  "tpl/header.html": {
+    "resources": [
+      "tpl/index.html"
+    ],
+    "refer": [
+      "tpl/index.html"
+    ]
+  },
+  "tpl/list.html": {
+    "refer": [
+      "tpl/info.html"
+    ],
+    "resources": []
+  },
+  "tpl/list2.html": {
+    "refer": [
+      "tpl/info.html"
+    ],
+    "resources": []
+  },
+  "tpl/info.html": {
+    "refer": [
+      "tpl/webview.html",
+      "tpl/event.html"
+    ],
+    "resources": []
+  },
+  "tpl/webview.html": {
+    "resources": [
+      "tpl/list.html"
+    ],
+    "refer": [
+      "tpl/list.html"
+    ]
+  }
+}

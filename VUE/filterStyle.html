@@ -1,0 +1,103 @@
+ <!DOCTYPE html>
+ <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Filter过滤器以及样式变换</title>
+  <style>
+    .sha{
+      height: 150px;
+      width: 150px;
+    }
+    .c{
+      background: red;
+    }
+    .d{
+      background: green;
+    }
+    .f{
+      font-size: 18px;
+    }
+    .w{
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- msg 传入 upperCase运算后 再返回 可用多个筛选器 -->
+  <p>{{ msg | upperCase(true) }}</p>
+  <p>{{ msg | upperCase | upperCase(true) }}</p>
+
+  <!-- 绑定内联样式样式 style和v-bind:style样式会融合在一起 -->
+  <div style="height: 200px;width: 200px;" :style="{background:'red',height:'250px'}"></div>
+  <p :style="{color:col}" v-on:click="onchange">动态绑定属性,点击改变</p>
+  <p :style="oStyle">绑定属性对象</p>
+  <p :style="style2">使用计算属性，可以一个点击事件 改多个元素样式。点击事件激活后col值改变，被监听了，此元素也会动态改变样式</p>
+  <p :style="[style2,style3,{background:'red'}]">绑定两个计算属性和其他属性</p>
+
+  <!-- 绑定class -->
+  <div v-for="i in changeClass" class="sha"
+       :class="{c:i.ifRound,d:!i.ifRound}">
+    通过隐藏或显示某些类来改变
+  </div>
+  <div v-for="i in chaClass" class="sha"
+       :class="[ i.ifRound, i.font?i.font : i.width,{w:i.width}]">
+    通过改变类的值来实现
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el:'#app',
+    data:{
+      msg: 'I love you!',
+      col:"blue",
+      oStyle:{
+        color:'pink',
+        fontWeight :"bolder"
+      },
+      changeClass:[
+        {ifRound:true},
+        {ifRound:false}
+      ],
+      chaClass:[
+        {ifRound:'c',font:'f'},
+        {ifRound:'d',font:'f',width:'w'}
+      ]
+    },
+    filters:{ //筛选数据 first调用时传入的参数从第二个开始
+      upperCase:function (val,ifFirst) {//val默认传进来的值
+        val = val.toString();
+        if(ifFirst){  //如果有传参数 截取第一个字符大写 + 截取第一个字符后面的所有字符
+          return val.charAt(0).toUpperCase() + val.slice(1);
+        }else{
+          return val.toUpperCase();
+        }
+      }
+    },
+    methods:{
+      onchange:function () {
+        if(this.col === 'blue')
+          this.col = 'yellow';
+        else
+          this.col = 'blue';
+      }
+    },
+    computed:{
+      style2: function () {
+        return {
+          color : this.col
+        }
+      },
+      style3:function () {
+        return{
+          textAlign: 'center'
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

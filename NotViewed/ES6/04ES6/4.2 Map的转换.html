@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        Map转换成数组
+//        let oMap = new Map();
+//        oMap.set("a", 12);
+//        oMap.set(null, 13);
+//
+//        console.log([...oMap]);     //[["a", 12], [null, 13]]
+
+//        数组转换成Map
+//        let arr = [["a", 12], [null, 13]];
+//        let oMap = new Map(arr);
+//        console.log(oMap);
+
+//        Map转换成对象
+//        let oMap = new Map();
+//        oMap.set("a", 12);
+//        oMap.set(null, 13);
+//        oMap.set(NaN, 26);
+//        oMap.set(Symbol(), 17);
+//        oMap.set(Symbol.for("sb"), 18);
+
+//        function mapToObject(oMap){
+//            const obj = new Object;
+//            oMap.forEach((val, key) => {
+//                obj[key] = val;
+//            });
+//            return obj;
+//        }
+//
+//        console.log(mapToObject(oMap));
+
+//        对象转换成Map
+        const obj1 = {};
+        function show(){}
+        const obj = {
+            1: 12,
+            "a" : 13,
+            null: 14,
+            undefined: 15,
+            NaN: 16,
+            [Symbol()]: 17,
+            [Symbol.for("sb")]: 18,
+            true: 19,
+            [obj1]: 20,
+            [show]: 21
+        };
+        Object.defineProperty(obj, "sex",{
+            value: "male"
+        });
+        function objectToMap(obj){
+            const oMap = new Map;
+            for(let key of Reflect.ownKeys(obj)){       //key是字符串
+                oMap.set(key, obj[key]);
+            }
+            return oMap;
+        }
+        console.log(objectToMap(obj));
+        let oM = objectToMap(obj);
+        alert(oM.get("1"));     //  12
+    </script>
+</head>
+<body>
+
+</body>
+</html>

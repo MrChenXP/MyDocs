@@ -1,0 +1,17 @@
+.header{
+	background-color: deepskyblue;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.header h1{
+	color: white;
+}
+.mui-bar-nav~.mui-content{
+	padding:0px;;
+}
+.banner{
+	line-height: 64%;
+}
+.mui-content>.ul:first-child{
+	margin-top: 0px ;
+}

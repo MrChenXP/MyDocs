@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM节点</title>
+</head>
+<body>
+<ul>
+    <li>1111111111 <a href="#">隐藏</a></li>
+    <li>2222222222 <a href="#">隐藏</a></li>
+    <li>3333333333 <a href="#">隐藏</a></li>
+    <li>4444444444 <a href="#">隐藏</a></li>
+    <li>5555555555 <a href="#">隐藏</a></li>
+    <li>6666666666 <a href="#">隐藏</a></li>
+    <!--测试childNodes和children-->
+</ul>
+<button>移动</button><button>前增加</button><button>后增加</button><button>替换</button>
+<ol></ol>
+<div  style="width: 300px; height: 200px; background-color: darkcyan;" id="div1">
+    <input type="text">
+    <ul>
+        <li><span>1111111111</span> <a href="#">删除</a> | <a href="#">替换</a></li>
+        <li><span>2222222222</span> <a href="#">删除</a> | <a href="#">替换</a></li>
+        <li><span>3333333333</span> <a href="#">删除</a> | <a href="#">替换</a></li>
+        <li><span>4444444444</span> <a href="#">删除</a> | <a href="#">替换</a></li>
+        <li><span onclick="alert('cloneNode')">5555555555</span> <a href="#">删除</a> | <a href="#">替换</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+/*子节点*/
+//    childNodes 获取子节点集合    高级浏览器中文本节点和元素节点都算。IE8以下只算元素节点
+//    noteType    检测节点类型并返回数字值 元素节点返回1 属性节点返回2 文本节点是3。
+//    children  返回元素子节点集合 在IE9以下中，children包含注释节点
+//    hasChildNodes()   判断是否存在子节点的方法,有true 无false
+//        var oUl = document.querySelector("ul");
+//        console.log(oUl.childNodes.length);         //15 </li>后面的换行是文本节点 ie8-7
+//        for(var i = 0; i < oUl.childNodes.length; i++){
+//            if(oUl.childNodes[i].nodeType === 1){oUl.childNodes[i].style.backgroundColor = "red";} }
+//        console.log(oUl.children.length);         //6 </li>后面的换行是文本节点 ie9- 7
+//        for(var i = 0, len = oUl.children.length; i < len; i++){oUl.children[i].style.backgroundColor = "blue";}
+/*父节点*/
+//    parentNode  返回节点的父节点，最顶端的节点是document
+//        var aA = document.querySelectorAll("ul li a");  //取出a元素节点集合
+//        for(var i = 0, len = aA.length; i < len; i++){
+//            aA[i].onclick = function(){this.parentNode.style.display = "none";};}  //把函数赋值给谁，this就指向谁
+/*同胞节点*/
+//    nextSibling               下一个兄弟节点（相同节点树层中的下一个节点，元素、文本、注释节点）IE9以下(元素节点)
+//    nextElementSibling        返回元素节点之后的兄弟元素节点（不包括文本节点、注释节点）IE9以下undefined
+//    previousSibling           获取元素的上一个兄弟节点；（既包含元素节点、文本节点、注释节点）IE9以下(元素节点)
+//    previousElementSibling    获取上一个兄弟元素节点；（只包含元素节点）IE9以下undefined
+//	  firstChild				获取第一个子节点（既包含元素节点、文本节点、注释节点）IE9以下(元素节点)
+//	  firstElementChild			获取第一个子元素节点；（只包含元素节点）IE9以下undefined
+//    lastChild                 获取最后一个子节点（既包含元素节点、文本节点、注释节点）IE9以下(元素节点)
+//	  lastElementChild			获取最后一个兄弟元素节点；（只包含元素节点）IE9以下undefined
+//        alert(oUl.children[0].nextSibling.nodeType);    //3  ie9-:1
+//        oUl.children[1].nextSibling.style.background = "red";       //报错    ie9-:可用
+//        alert(oUl.children[1].nextElementSibling);      //[object HTMLLIElement]    ie9-:undefined
+//        oUl.children[1].nextElementSibling.style.background = "red";       //IE9以下报错
+//        alert(oUl.children[1].previousSibling); //[object Text] ie9-:[object HTMLLIElement]
+//        alert(oUl.children[1].previousElementSibling);  //[object HTMLLIElement] ie9-:undefined
+//		  alert(oUl.firstChild);	//[object Text] ie9-:[object HTMLLIElement]
+//        alert(oUl.firstElementChild);	//[object HTMLLIElement] ie9-:undefined
+//        alert(oUl.lastChild);	//[object Text] ie9-:[object HTMLLIElement]
+//        alert(oUl.lastElementChild);    //object HTMLLIElement] ie9-:undefined
+//    兼容获取下一个兄弟元素节点(如果没有nxetElementSibling就是ie9一下就用下一条)
+//        var nSibling = oUl.children[1].nextElementSibling || oUl.children[1].nextSibling;
+//        nSibling.style.background = "red";
+//    兼容获取上一个兄弟元素节点(如果没有previousElementSibling就是ie9一下就用下一条)
+//        var pSibling = oUl.children[1].previousElementSibling || oUl.children[1].previousSibling;
+//        pSibling.style.background = "blue";
+//    兼容获取第一个元素节点(如果没有firstElementChild就是ie9一下就用下一条)
+//        var firstChild = oUl.firstElementChild || oUl.firstChild;       // 第一个子节点
+//        firstChild.style.background="red";
+//    兼容获取最后一个元素节点(如果没有lastElementChild就是ie9一下就用下一条)
+//        var lastChild = oUl.lastElementChild || oUl.lastChild;          // 最后一个子节点
+//        lastChild.style.background = "red";
+/*增加、删除、创建、替换节点*/
+//    removeChild()   删除节点 一定要应用父节点在能删除节点
+//          (可用parentNode找父节点oUl.parentNode.removeChild(oUl.children[0]))
+//    appendChild()   增加节点(增加到最后)
+//    document.createElement()    创建元素
+//    document.createTextNode("这里填文本")     创建文本节点
+//    insertBefore(新子节点, 指定子节点)    新增子节点，将其插入指定子节点之前
+//    replaceChild(新子节点, 指定子节点)   用新节点替换指定某个子节点。
+//        var oUl = document.querySelector("ul");
+//        var oOl = document.querySelector("ol");
+//        var aBtn = document.querySelectorAll("button"), count = 1;
+//        aBtn[0].onclick = function(){
+//            oUl.removeChild(oUl.chil6dren[0]); //删除节点
+//            oUl.appendChild(oUl.children[0]);       // 会将获取的元素先从原父节点移除，再增加到新父节点最后
+//        };
+//        aBtn[1].onclick = function(){   //前增加
+//            var oLi = document.createElement("li"); //创建一个元素节点
+//            oLi.style.backgroundColor = "pink"; //设置元素节点style属性
+//            var oTxt = document.createTextNode(count++);
+//            oLi.appendChild(oTxt);    //给li元素添加文本节点
+//            if(oOl.children.length === 0){oOl.appendChild(oLi);}      //用于处理IE8-没有子节点往前面插入子节点报错的问题
+//              else{oOl.insertBefore(oLi, oOl.children[0]);}     //把新oLl节点放到第一个子节点前面
+//        };
+//        aBtn[2].onclick = function(){   //后增加
+//            var oLi = document.createElement("li");
+//            oLi.style.backgroundColor = "green";
+//            var oTxt = document.createTextNode(count++);
+//            oLi.appendChild(oTxt);
+//            oOl.appendChild(oLi);       //父节点.appendChild(子节点)  把新节点追加到最后节点
+//        };
+//        aBtn[3].onclick = function () {   //替换
+//            var oLi = document.createElement("li"); //创建一个元素节点b
+//            var oTxt = document.createTextNode(count++);
+//            oLi.appendChild(oTxt);    //给li元素添加文本节点
+//            oUl.replaceChild(oLi,oUl.lastChild);    //会将获取的元素先从原父节点移除，再增加到指定节点最后
+//        }
+//        var aA = document.querySelectorAll("div ul li a");  //10个
+//        var oIpt = document.querySelector(" div input");
+//        for(var i = 0, len = aA.length; i < len; i++){  //遍历出li下面每一个a标签
+//            if(i % 2){  //如果模2后不等于0(真)即为奇数下标(替换)
+//                aA[i].onclick = function(){ //给符合条件的元素添加点击事件
+//                    this.parentNode.children[0].innerText = oIpt.value;};//当前元素aA[i].父元素(li).第一个子元素(span).文本内容
+//            }else{
+//                aA[i].onclick = function(){
+//                    this.parentNode.parentNode.removeChild(this.parentNode);};}     // 当前元素aA[i].父元素(li).父节点.删除元素(当前元素aA[i].父元素(li))
+//        }
+/* 克隆、节点属性*/
+//    element.cloneNode(true|false)   克隆元素
+//          false或无参 克隆节点本身（包含节点属性）true 克隆节点本身（包含节点属性）和后代节点，但不复制节点绑定的事件(非属性方式)
+//        var oSpan = document.querySelector("button:nth-of-type(1)");
+//        var oSpan1 = oSpan.cloneNode(true);
+//        var oSpan1 = oSpan.cloneNode();
+//        document.body.appendChild(oSpan1);
+//    节点属性
+//    element.attributes	    返回元素属性的 NamedNodeMap（属性集合）
+//    element.hasAttribute()	如果元素拥有指定属性，则返回true，否则返回 false。
+//    element.hasAttributes()	如果元素拥有属性，则返回 true，否则返回 false。
+//    element.hasChildNodes()	如果元素拥有子节点，则返回 true，否则 false。
+//    element.nodeName	        返回元素的名称。
+//    element.nodeType	        返回元素的节点类型。
+//    element.nodeValue	        设置或返回元素值。      用于操作元素里的子节点 若想返回元素的文本，记住文本通常是插入到文本节点中，所以返回的是文本节点的节点值
+//    element.tagName	        返回元素的标签名。   (只用于元素节点)
+//    element.textContent       设置或返回节点及其后代的文本内容。
+//            var oDiv = document.querySelector("#div1");
+//            var oSpan = document.querySelector("span");
+//            console.log(oDiv.attributes);//[style, id]
+//            alert(oDiv.hasAttribute("height"));
+//            alert(oDiv.hasAttributes());          //true
+//            alert(oDiv.hasChildNodes());            //false
+//            alert(oDiv.nodeName);                  //DIV
+//            alert(oDiv.nodeType);     //1
+//            oSpan.childNodes[0].nodeValue = "df";
+//            alert(oDiv.tagName);                        //DIV
+//            console.log(oDiv.textContent);              //  1111111111 删除 | 替换    ....等
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        函数默认值
+//        function show(x, y){
+////            y = y || "javascript";
+//            if(typeof y === "undefined"){
+//                y = "javascript";
+//            }
+//            document.writeln(`${x} ${y}<br>`);
+//        }
+//        show("hello");
+//        show("hello", "js");
+//        show("hello", null);
+//        show("hello", undefined);
+
+//        function show(x, y = "javascript"){     //  当不传参数的值或者是undefined时会使用默认值
+//            document.writeln(`${x} ${y}<br>`);
+//        }
+//        show("hello");              //hello javascript
+//        show("hello", "js");        //hello js
+//        show("hello", null);        //hello null
+//        show("hello", undefined);   //hello javascript
+
+//        ----------------------------------------------------------
+
+          function show(x, y = "js", z){      //使用参数默认值时建议把有默认的参数放到参数列表的后面
+              document.writeln(`${x} ${y} ${z}<br>`);
+          }
+
+//        show("hello", "JS", "!!!");       //hello JS !!!
+//        show("hello", , "!!!");             //报错
+          show("hello", undefined, "!!!");    //hello js !!! 不能传null，会将null当成‘null输出’
+
+//        ----------------------------------------------------------
+//        let num = 12;
+//        function show(x = num){     //参数默认值是调用时取值（惰性求值）
+//            document.writeln(`${x}`);
+//        }
+//        show();     //12
+//        show(10);     //10
+//        num = 15;
+//        show();     //15
+    </script>
+</head>
+<body>
+
+</body>
+</html>

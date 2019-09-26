@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>trigger</button>
+    <button>triggerHandler</button>
+    <input type="text">
+    <input type="text">
+    <input type="text">
+    <input type="text">
+    <input type="text">
+    <div style="width: 100px;height: 100px;background-color: darkcyan;" id="div1"></div>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+//            $("#div1").on("click", function(){
+//                console.log("div");
+//            });
+//            $(document.body).on("click", function(){
+//                console.log("body");
+//            });
+//
+//            $("button").eq(0).on("click", function(event){
+//                $("#div1").trigger("click");            //不能阻止事件冒泡
+//                event.stopPropagation();
+//            });
+//            $("button").eq(1).on("click", function(event){
+//                $("#div1").triggerHandler("click");             //阻止事件冒泡
+//                event.stopPropagation();
+//            });
+//-----------------------------------------------------------------------
+//            $("input").on("focus", function(){
+//                $(this).val("aaa");
+//            });
+//
+//            $("button").eq(0).on("click", function(){
+//                $("input").trigger("focus");            //没有阻止默认行为
+//            });
+//            $("button").eq(1).on("click", function(){
+//                $("input").triggerHandler("focus");             //阻止默认行为
+//            });
+//-------------------------------------------------------------------------
+//            triggerHandler只触发jQuery对象集合中第一个元素的事件处理函数
+//            $("input").on("focus", function(){
+//                $(this).val("aaa");
+//            });
+//
+//            $("button").eq(0).on("click", function(){
+//                $("input").trigger("focus");            //没有阻止默认行为
+//            });
+//            $("button").eq(1).on("click", function(){
+//                $("input").triggerHandler("focus");             //阻止默认行为
+//            });
+//            -------------------------------------------------------------
+//            自定义事件名
+
+//            $("#div1").on("myClick", function(){
+//                alert("myClick");
+//            }).trigger("myClick");
+
+//            $("#div1").on("myClick", function(){
+//                alert("myClick");
+//            });
+//
+//            $("button").eq(0).on("click", function(){
+//                $("#div1").trigger("myClick");
+//            });
+        });
+    </script>
+</body>
+</html>

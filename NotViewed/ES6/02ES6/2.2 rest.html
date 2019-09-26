@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        1、对解构的使用
+//        let [a, b, ...rest] = [1,2,3,4,5,6];
+//        let [a, ...rest, b] = [1,2,3,4,5,6];        //报错      rest运算符必须放到最后
+//        console.log(`a = ${a} b = ${b}`);       //a = 1 b = 2
+//        console.log(rest);                  //[3,4,5,6]
+
+//        2、对函数参数的使用
+//        function show(x, y, ...rest){       //rest运算符必须放到最后
+//            document.writeln(`${x} ${y}<br>`);
+//            console.log(rest);
+//        }
+//
+//        show(1,2,3,4,5);
+//        show(1,2);
+
+//        3、代替arguments对象
+
+//        function sum(){
+//            var result = 0;
+//            for(var i = 0; i < arguments.length; i++){      //arguments 是伪数组
+//                result += arguments[i];
+//            }
+//            document.writeln(result);
+//        }
+
+        function sum(...rest){
+//            alert(rest instanceof Array);       //true
+//            alert(arguments instanceof Array);       //false
+            var result = 0;
+            for(var i = 0; i < rest.length; i++){      //rest 是数组
+                result += rest[i];
+            }
+            document.writeln(result);
+        }
+        sum(1,2,3,4);       //10
+        sum(1,2,3,4,5,6);   //21
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

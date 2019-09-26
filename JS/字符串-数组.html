@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zn-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串.数组</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript">
+    /*字符串
+    *   用于存储和处理文本,字符串就是用一对两引号或单引号包裹的字符*/
+    //          字符串的索引从 0 开始，这意味着第一个字符索引值为 [0],第二个为 [1], 以此类推。
+    //          ECMAScript中字符串时不可变的，改变某个变量保存的字符串，首先要销毁原来的字符串，然后在用一个包含新值的字符串填充变量
+    //                var str = "ab";     //自面量方式，不能加属性和方法
+    //                var str1 = new String("abcd");      //对象方式，可以给变量加属性和方法
+    //                str.aa = "123";
+    //                str1.aa = "123";
+    //                document.writeln(str.aa);       //undefined     str是变量不是对象，不能增加属性和方法
+    //                document.writeln(str1.aa);      //123
+    //          特殊字符（转义字符）用与js代码中
+    //                \' 单引号     \" 双引号     \\	反斜杠     \n 换行  \r 回车  \t tab(制表符)    \b 	退格符     \f 换页符
+    //                  document.writeln('"这是一个字符串"');      //输出双引号可以用单引号包裹
+    //                  document.writeln("\"这是一个\\字符串\"");    //可用反斜杠转义引号问题
+    //          原始值字符串，如 "John", 没有属性和方法(因为他们不是对象)。
+    //          原始值可以使用 JavaScript 的属性和方法，因为 JavaScript 在执行方法和属性时可以把原始值当作对象。
+    //          只要引用了字符串的属性，Javascript就会将字符串通过调用new String(s)的方式转换成对象，这个对象继承了字符串的方法，
+    //              并被用来处理属性的引用。一旦属性引用结束，这个新建的对象就会销毁。
+    //          属性	            注意
+    //          constructor	    返回创建字符串属性的函数
+    //          length	        返回字符串的长度
+    //          prototype	        允许您向对象添加属性和方法
+    //                document.writeln(str.constructor);      //function String() { [native code] }
+    //                document.writeln(str.length);      //2
+    //                function employee(name)     //创建一个构造函数
+    //                {                    this.name=name;                }
+    //                var bill=new employee("Bill Gates");        //定义一个名为bill的employee对像
+    //                employee.prototype.salary=null;         //给employee添加一个属性初始化为null
+    //                bill.salary=20000;          //给属性赋值
+    //                document.write(bill.salary);        //应用属性
+    //          方法
+    //          charAt(index)	                    返回在指定位置的字符。index从0开始
+    //          substr(起始位置, 截取长度)	        从起始索引号提取字符串中指定数目的字符
+    //          substring(起始位置，结束位置)	    提取字符串中两个指定的索引号之间的字符(包括起始位置，不包括结束位置)初始值不可以为负值
+    //          slice(起始位置，结束位置)	        提取字符串的片断，并在新的字符串中返回被提取的部分,初始值可以为负值。
+    //          concat(子字符串,……)	                连接字符串。类似于用加号
+    //          indexOf(子字符串，起始位置)	        检索字符串。如果存在，返回首字符的位置，否则返回-1
+    //          lastIndexOf(子字符串,起始位置)	    从后向前搜索字符串。
+    //          replace(替换的子字符串，新字符串)	    替换与正则表达式匹配的子串。默认只替换一次
+    //          split(分割符)	                    把字符串分割为字符串数组。不存在分割符就返回原字符串
+    //          toLowerCase()	                    把字符串转换为小写。
+    //          toUpperCase()	                    把字符串转换为大写。
+    //          trim()                              返回去除字符串首尾空格后的字符串
+    //          trimLeft()                          去除字符串首空格
+    //          trimRight                           去除字符串尾空格
+    //          charCodeAt(下标)	                返回指定索引位置字符的 ASCII码
+    //          fromCharCode()	                    将ASCII码转换为字符串
+    //			match()					            找到一个或多个正则表达式的匹配 返回指定的值，而不是字符串的位置
+    //          search()	                        检索与正则表达式相匹配的值,返回第一个与其相匹配的子串的起始位置,否则返回-1，大小写敏感
+    //				var str = "This Is a String type ", str1 = "15:25:30";
+    //				document.writeln(str.length);       //22
+    //                document.writeln(str.charAt(2));        //i
+    //                document.writeln(str[2]);        //i
+    //                document.writeln(str.substr(1,3));        //his
+    //                document.writeln(str.substring(2,6));        //is i
+    //                document.writeln(str.slice(0,2));        //th
+    //                document.writeln(str.slice(10));        //string type     当没有结束位置时，自动截取到最后一个字符
+    //                document.writeln(str.slice(-4));        //type     负数位置从右往左数（从-1开始）
+    //                document.writeln(str.concat("字符串",str1));        //参数可以放多个，变量|字符串
+    //                document.writeln(str.indexOf("a"));        //8
+    //                document.writeln(str.indexOf("a", 9));         //-1
+    //                document.writeln(str.lastIndexOf("type"));         //17
+    //                document.writeln(str.lastIndexOf("type",9));         //-1
+    //                document.writeln(str.replace("type",str1));         //this is a string 15:25:30
+    //                document.writeln(str1.split(":"));         //[15,25,30]
+    //                document.writeln(str.toUpperCase());           //THIS IS A STRING TYPE
+    //                document.writeln(str.toLowerCase());           //this is a string type
+    //                document.writeln(str.trim().length);           //this is a string type 21
+    //                document.writeln('df'.charCodeAt(1));           //f的ascii码为102
+    //                document.writeln(String.fromCharCode(47,56,102));           //this is a string type
+    //                document.writeln(str.match("Stri"));           //Stri
+    //                document.writeln(str.search("String"));           //10
+
+    /*数组
+    *   使用单独的变量名来存储一系列的值*/
+    //数组的声明
+//        var arr = [12, 33, 55, 32, 1];     // 字面量方式
+//        var arr1 = new Array(33, 33, 1, 36, 8);    //对象方式
+//        var arr2 = new Array(3); // [ , , ]     当参数只有一个且是Number类型数字，声明的是数组的长度，否则是往数组存入此值
+//      数组的引用
+//        document.writeln(arr[0]);    //12    通过下标来访问数组元素，下标从0开始
+//        document.writeln(arr[arr.length - 1]);  //最后第几个    arr[arr.length - n]
+//      数组的赋值
+//        arr[3] = 7;
+//        document.writeln(arr);  //[12,33,55,7,1]    原来的会被替换
+//      数组的遍历（枚举）
+//        var arr3 = [
+//            2, 'a', NaN, null, undefined, true,Date.now(),
+//            function(){alert(arr1)},
+//            arr];       //数组里可以存放任意类型的值，包含对象元素、函数、数组,但是建议放同一类型的值
+//        for (var i = 0, len = arr3.length; i < len; i++) {
+//            document.writeln('<br>' + "第" + (i + 1) + "个的值是：" + arr3[i]);
+//        }
+//       数组的复制
+//            浅拷贝 复制的是数组的引用(栈内存)，不是数组里的元素，使新数组指向同一块内存地址，一个改变另一个也变
+//            深拷贝，复制的是数组里的元素，互不影响
+//                  var arr = [2,3,4,6,8], arrA = [];
+//                  arrA = arr;         // 浅拷贝
+//                  for(var i = 0, len = arr.length; i < len; i++){     //深拷贝
+//                    arrA[i] = arr[i];
+//                  }
+//                  arrA = arrA.concat(arr);        //深拷贝
+//       二维数组（多维数组）
+//                var arr = [[1,2,3,4], [5,6,7,8], [9,10,11,12]];     //二维数组
+//                document.writeln(arr[1][2]);        // 7    数组的调用
+//                arr[1][2] = 0;  //赋值
+//                for(var i = 0, outLen = arr.length; i < outLen; i++) {       //二维数组的遍历
+//                    for (var j = 0, inLen = arr[i].length; j < inLen; j++) {
+//                        document.writeln(arr[i][j]);
+//                    }
+//                    document.writeln("<br>");
+//                }
+//       属性
+//            var arr = [12,23,45,87,94,48], arr1 = ["a", "b", "c"];
+//            document.writeln(arr.length);       //6
+//            arr.length = 3;           //设置或返回数组中元素的数目,改变原数组
+//            document.writeln(arr);      //[12,23,45]        清除数组length后的元素
+//       方法
+//            改变原数组
+//                push()	    向数组的末尾添加一个或更多元素，并返回新的长度
+//                pop()	        删除并返回数组的最后一个元素
+//                unshift()	    向数组的开头添加一个或更多元素，并返回新的长度。
+//                shift()	    删除并返回数组的第一个元素
+//                reverse()	    颠倒数组中元素的顺序。
+//                splice(起始位置, 删除元素长度，增加元素……)	删除元素，并向数组添加新元素。
+//                  document.writeln(arr.push(10) + ' ' +arr.push(arr1));      //7 15
+//                  document.writeln(arr.pop());      //a,b,c 之前把arr1添加进去了
+//                  document.writeln(arr.unshift(arr1));      //8
+//                  document.writeln(arr.shift());      //a,b,c 之前把arr1添加进去了
+//                  document.writeln(arr.reverse());    //[10, 48, 94, 87, 45, 23, 12]
+//                  document.writeln(arr.splice(1,1));     //[10, 94, 87, 45, 23, 12]   删除元素
+//                  document.writeln(arr.splice(1,1,5));     //[10, 5, 87, 45, 23, 12]   替换元素（之前把94删了）
+//                  document.writeln(arr.splice(1,0,94));     //[10, 94,5, 87, 45, 23, 12]   增加元素
+//            不改变原数组
+//                concat()	                连接两个或更多的数组，并返回结果。
+//                join()	                把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。
+//                slice(起始位置，结束位置)	从某个已有的数组返回选定的元素
+//                indexOf()	                搜索数组中的元素，并返回它所在的位置。
+//                lastIndexOf()         	返回一个指定的字符串值最后出现的位置，在一个字符串中的指定位置从后向前搜索。
+//                  document.writeln('<br>'+arr.concat(arr1),'b');  //10,94,5,87,45,23,12,a,b,cb
+//                  document.writeln(typeof (arr + arr1));       //把数组拼接转换成字符串，不能合并数组
+//                  document.writeln(arr.join(":"));       //10:94:5:87:45:23:12
+//                  document.writeln(arr.slice(2,3));       //5
+//                  document.writeln(arr.indexOf(12));       //6
+//                  document.writeln(arr.lastIndexOf(10,7));       //6
+//        构建方法
+//          创建了新的数组方法用于将数组小写字符转为大写字符。
+//                Array.prototype.ucase=function() {
+//                    for (i=0;i<this.length;i++) {
+//                        this[i]=this[i].toUpperCase();
+//                    }
+//                };
+    /*数组的排序*/
+//        var arr = [22,22,1, 22, 56,0,-2,'3',22];
+//        arr.sort(function (m,n) {
+//            return m - n;       //升序排序(小的在前）-2,0,1,3,22,22,22,22,56
+//            return n - m;       //降序排序（大的在前）56,22,22,22,22,3,1,0,-2
+//        });
+//        document.writeln(arr);
+//      sort() == 如下方法 字符串的比较不能用sort(),只能用如下方法
+//        var arr = ["a", "b", "ac", "AV", "3", "27" , "30"];        //小写 》大写 》数字
+//        arr.sort(function (m,n) {   //降序排序，升序return返回值与此相反
+//            if(m > n){
+//                return 1;   //正数，把较大值放在后面
+//            }else if(m < n){
+//                return -1;  //负数，把较小值放在前面
+//            }else{
+//                return 0;
+//            }
+//        });
+//        document.writeln(arr);
+//        冒泡法
+//            var arr = [22,22,1, 22, 56,0,-2,'3',22], temp = 0,len = arr.length;
+//            for(var i=0; i<len-1;i++){     //遍历数组元素
+//                for(var j=0;j<len-1-i;j++){     //遍历出没有排的元素
+//                    if (arr[j]>arr[j+1]){       //降序排序，升序比较与此相反 小在前大在后
+//                        temp = arr[j];
+//                        arr[j] = arr[j+1];
+//                        arr[j+1] = temp;
+//                    }
+//                }
+//            }
+//            document.writeln(arr)
+    /*数组去重*/
+//        第一种方式  arr与aNew比较，aNew全是被遍历出来的与其之前的元素不相等
+//            var arr = [12,32,45,12,45,12,32,41,32], aNew = [arr[0]], bTemp = true;
+//            for(var i = 1, len = arr.length; i < len; i++){     //遍历出数组元素
+//                bTemp = true;       //先等于真，如果没被改变，下面就进入新循环
+//                for(var j = 0; j < aNew.length; j++){       //与新书组每个元素比较
+//                    if(arr[i] === aNew[j]){     //判断是否相等,第一轮是arr[i]与arr[i-1]判断，之前aNew=a[0]
+//                        bTemp = false;      //相等bTemp=false
+//                        break;      //并跳出循环
+//                    }
+//                }
+//                if(bTemp){      //如果没有相等的就进入此循环，相等的不进，3个12中，最后一个12没有相等的，所以最后一个进入
+//                    aNew.push(arr[i]);      //向新数组最后添加元素
+//                }
+//            }
+//            document.writeln(aNew);
+//        第二种方式     arr的每个元素与其之后的元素比较，没有相等的就添加进新数组
+//                var arr = [12,32,45,12,45,12,32,41,32,2,32], aNew = [], bTemp = true;
+//                for(var i = 0, len = arr.length; i < len; i++){     //遍历出数组元素
+//                    bTemp = true;      //先等于真，如果没被改变，下面就进入新循环
+//                    for(var j = i + 1; j < len; j++){       //一开始j永远比i大于1，i与其之后的元素比较
+//                        if(arr[i] === arr[j]){       //判断是否相等,第一轮是arr[i]与arr[j]判断，
+//                            bTemp = false;      //相等bTemp=false
+//                            break;      //并跳出循环
+//                        }
+//                    }
+//                    if(bTemp){      //如果没有相等的就进入此循环，相等的不进，3个12中，最后一个12没有相等的，所以最后一个进入
+//                        aNew.push(arr[i]);      //向新数组最后添加元素
+//                    }
+//                }
+//                document.writeln(aNew);
+//        第三种方式     先排序，让相同的在一起，在比较相邻的，一样就删掉
+//            var arr = [12,32,45,12,45,12,32,41,32];
+//            arr.sort(function(m, n){    //升序排序 一样的排在了一起
+//                return m - n;
+//            });
+//            for(var i = 0; i < arr.length - 1; i++){     //遍历出数组元素
+//                if(arr[i] === arr[i + 1]){      //每个元素与其后面一个的元素比较
+//                    arr.splice(i, 1);       //相等就删除前面那个
+//                    i--;        //然后i倒退一个，好让没被删除的继续比较
+//                }
+//            }
+//            document.writeln(arr);
+
+    let arr = [2,-54,66,232,54,65,-4324,234,54,67,78];
+    function mp(arr) {
+        for(let i = 0 ; i < arr.length -1 ; i++){
+            for(let j = 0;j < arr.length -1- i; j++){
+                if (arr[j] < arr[j+1]){
+                    let t = 0;
+                    t = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = t;
+                }
+            }
+        }
+        return arr;
+    }
+    function xz(arr){
+        let len = arr.length, min, temp;
+        for (i=0; i < len-1; i++){//便利出数组
+            // 将当前位置设为最小值 假设当前最小
+            min = i;
+            // 检查数组其余部分是否更小 保证min是最小值的下标
+            for (j=i+1; j < len; j++){  //遍历出i后面的数组
+                if (arr[j] < arr[min]){ //若果后面小于当前
+                    min = j;    //互换
+                }
+            }
+            // 如果当前位置不是最小值，将其换为最小值
+            if (i != min){
+                temp = arr[i];
+                arr[i] = arr[min];
+                arr[min] = temp;
+            }
+        }
+        return arr;
+    }
+    document.writeln(xz(arr));
+
+</script>
+</body>
+</html>

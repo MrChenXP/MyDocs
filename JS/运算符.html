@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运算符</title>
+    <meta charset="utf-8">
+</head>
+<script type="text/javascript">
+    //运算符
+    /*    //运算符：完成操作的一系列符号，也称为操作符
+    //    运算符用于将一个或多个值进行运算并返回结果。
+    //    使用运算符的值称为操作数。
+    //    运算符和操作数的组合称为表达式
+            var  a= 3 +5;   //3和5是操作数，+是操作符（运算符），a=3+5是表达式*/
+
+    /*一元运算符,
+     一元运算符只有一个参数 运算必须是同一类型，否则会自动发生类型转换(Number(转换的值) + - * / % ++ -- += -= *= /= %=*/
+    // 	 +（加法）
+    //      加法运算符 + (加法运算符比较特殊，用于计算或连接字符串)
+    //      只要有一个运算数是 NaN，那么结果为 NaN。
+    //      只要“+”一边的操作数为字符串型数据，则不再执行加法运算，而执行连接运算
+    //          a = -Infinity + -Infinity   // -Infinity。
+    //          a = Infinity + -Infinity    // NaN。
+    //        alert(a = 3 + 'a');       // 3a 字符串类型
+    //        document.writeln( 0.1 + 0.2 );    //0.30000000000000004     小数运算建议先把小数转换成整数运算再除
+    //        document.writeln( 3 + false);        //3
+    //        document.writeln( 3 + undefined);        //NaN
+    //        document.writeln( 3 + null);        //3
+    //        document.writeln( 3 + NaN);        //NaN       NaN与任意数字类型运算都返回NaN
+    //    -（减法）
+    //      只要有一个运算数是 NaN，那么结果为 NaN。
+    //          Infinity - Infinity   // NaN。
+    //          -Infinity - -Infinity     // NaN。
+    //          Infinity - -Infinity      // Infinity。
+    //          -Infinity - Infinity      // -Infinity。
+    //          a = 3 - 'a';        //NaN
+    //    * 乘法运算符
+    //      如果结果太大或太小，那么生成的结果是 Infinity 或 -Infinity。
+    //      如果某个运算数是 NaN，结果为 NaN。
+    //      Infinity 乘以 0，结果为 NaN。乘以 0 以外的任何数字，结果为 Infinity 或 -Infinity。
+    //      Infinity 乘以 Infinity，结果为 Infinity
+    //      a = 3 * NaN;        //NaN
+    //      document.writeln(0.07 * 100);       //7.000000000000001
+    //   / 除法运算符
+    //        如果结果太大或太小，那么生成的结果是 Infinity 或 -Infinity。
+    //        如果某个运算数是 NaN，结果为 NaN。
+    //        Infinity 被 Infinity 除，结果为 NaN。
+    //        Infinity 被任何数字除，结果为 Infinity。
+    //        0 除一个任何非无穷大的数字，结果为 NaN。
+    //        Infinity 被 0 以外的任何数字除，结果为 Infinity 或 -Infinity。
+    //    % 取模运算符  (执行常规的算术除法运算，返回除法运算得到的余数
+    //        如果被除数是 Infinity，或除数是 0，结果为 NaN。
+    //        Infinity 被 Infinity 除，结果为 NaN。
+    //        如果除数是无穷大的数，结果为被除数。
+    //        如果被除数为 0，结果为 0。
+    //        document.writeln(9.9 % 4);      // 1.9000000000000004
+    //    ++ 自增   -- 自减
+    //        var a = 2, b = 5, c, d;
+    //                c = a++;          //c = 2  a=3 d = 8       先赋值再自增1
+    //                c = ++a;            //c = 4 a=4       先自增1再赋值
+    //                d = a + b;        //  4+5=9
+    //        document.writeln("c = " + c + " d = " + d);     //4  9
+
+    /* 关系运算符
+        (涉及大小运算前会进行类型转换，相等不会)
+        关系运算符执行的是比较运算。每个关系运算符都返回一个布尔值*/
+    //    字符串与字符串比较的是字母的ASCII值（从左到右，直到遇见不一样的字符，然后比较ASCII值）
+    //        alert("a"<"A");     //false
+    //        alert("11">"7");    //false
+    //    比较数字和字符串，ECMAScript 都会把字符串转换成数字，然后按照数字顺序比较它们。
+    //        alert("a" > 3);       //不能比较  Number("a") == NaN
+    //        alert("11">7);      //true 11转为数字
+    //	  空对象与空对象比较的时引用地址
+    //    等号和非等号  ==    !=
+    //       双等号（==）表示，当且仅当两个运算数相等时，它返回 true
+    //       非等号（!=）表示，当且仅当两个运算数不相等时，它返回true
+    //        Boolean 值，在检查相等性之前，把它转换成数字值。false 转换成 0，true 为 1。
+    //        字符串，数字，在检查相等性之前，要尝试把字符串转换成数字。
+    //        对象，字符串，在检查相等性之前，要尝试把对象转换成字符串。
+    //        对象，数字，在检查相等性之前，要尝试把对象转换成数字
+    //    全等号和非全等号  ===   !==(值和类型)
+    //          全等号由三个等号表示（===），只有在无需类型转换运算数就相等的情况下，才返回 true
+    //            alert("6" == 6);    //输出 "true"
+    //            alert("6" === 6);    //输出 "false"
+    //        document.writeln( NaN == NaN);       //false        NaN 不能比较运算
+    //        document.writeln( 9 > null);       //true     大小运算会将null转为0
+    //        document.writeln( 0 == null);       //false     相等运算不会将null转为0
+    //        document.writeln( 9 > undefined);       //false   不能比较
+    //        document.writeln( null == undefined);       //true
+    //        document.writeln( null === undefined);       //false
+
+    /*  逻辑运算*/
+    //    NOT运算符（非） ！
+    //        如果运算数为0、空字符串、null、undefined、NaN，返回true,其余都为false
+    //        document.writeln(!3);   //false 非0即真
+    //        document.writeln(!0);   //true
+    //        document.writeln(!!null);   // false  !null为true
+    //    AND运算符（与） &&
+    //        只有运算符前后的运算数都为true(非boolean值的话,不能是0,空字符串,null,undefined,NaN(有可能结果也为NaN))结果才为true
+    //        逻辑短路：只要左边表达式的值为假，不去计算右边表达式
+    //          document.writeln(6 && 0);       //0
+    //          document.writeln(0 && 6);       //0
+    //          document.writeln(1 && 6);       //6
+    //          document.writeln(null && 0);   //null
+//        OR 运算符(或) ||
+//            只要运算符前后的运算数有一个为true，结果就为true,运算数中有NaN，有可能结果也为NaN
+//            逻辑短路：只要左边表达式的值为假，不去计算右边表达式
+//                var bTrue = true;
+//               var bResult = (bTrue || bUnknown);
+//                alert(bResult);            //输出 "true"
+//               var bFalse = false;
+//                var bResult = (bFalse || bUnknown);    //发生错误
+//                alert(bResult);            //不会执行这一行
+
+    //        var a = 2, b = 5, c;
+    //        c = ++a > 3 && b++;     //a=3,b=5(短路，不执行右边) false
+    //        document.writeln("a = " + a + " b = " + b + " c = " + c); //a = 3 b = 5 c = false
+    //    OR 运算符(或) ||
+    //        只要运算符前后的运算数有一个为true，结果就为true,运算数中有NaN，有可能结果也为NaN
+    //        逻辑短路：只要左边表达式的值为真，不去计算右边表达式
+    //        var bTrue = true;
+    //        var bResult = (bTrue || bUnknown);
+    //        alert(bResult);            //输出 "true"
+    //        document.writeln(6 || 0);       //6
+    //        document.writeln(0 || 6);       //6
+    //        document.writeln(1 || 6);       //1
+    //        document.writeln(NaN || 0);   //0
+    //  	  document.writeln(String||1)   //返回对象
+    /*赋值运算*/
+    //        简单的赋值运算符由等号（=）实现，只是把等号右边的值赋予等号左边的变量
+    //        复合赋值运算是由乘性(*=./=.%=)运算符、加性(+=.-=)运算符或位移(<<=.>>=.>>>=)运算符加等号（=）实现的
+    //        var iNum = 10;iNum = iNum + 10;
+    //        var iNum = 10;iNum += 10;     //两条语句一样
+    /*逗号运算符*/
+    //        用逗号运算符可以在一条语句中执行多个运算。
+    //        逗号运算符常用变量声明中。
+    //        var iNum1 = 1, iNum = 2, iNum3 = 3;
+    /*条件运算符*/
+    //        variable = boolean ? value1 : value2;
+    //        根据 boolean的计算结果有条件地为变量赋值,如果Boolean为true,就把value1赋给变量 如果它是false,就把value2赋给变量
+    //        var nA = 3 >2 ? 1 : 2;  //nA = 1
+    //        alert(nA)
+    /*位运算符  先转换为2进制，在进行操作*/
+    //    位运算 NOT ~   位运算 AND &   位运算 OR |   位运算 XOR ^   左移运算 <<   有符号右移运算 >>   无符号右移运算(第32位表示符号，0正1负) >>>
+    //        document.writeln(6 >> 2);      // 110 右移两位变为001，抹去0变为1， 在转为10进制
+    //        document.writeln(16 << 2);      // 64
+    //        document.writeln(10 & 7);       //2 两个数二进制比较，都为真返回1，不是返回0然后排列下来，在转化为10进制
+    //        document.writeln(10 | 7);       //15 两个数二进制比较，有一个为真返回1，都不是真返回0然后排列下来，在转化为10进制
+    // 		  document.writeln(10 ^ 7);       //13 两个数二进制比较，有且只有一个为真返回1，否则返回0然后排列下来，在转化为10进制
+    //            document.writeln(8.000001 | 0);     //8     去除小数点
+    //            document.writeln(8.999999 | 0);     //8
+    //            document.writeln(-8.000001 | 0);     //-8
+    //            document.writeln(-8.999999 | 0);     //-8
+    //            document.writeln(0.000000007 | 0);    //0
+    /*delete运算符*/
+    //        delete 删除对以前定义的对象属性或方法的引用(键名),不能删除开发者未定义的属性和方法、变量、函数. 某个属性不能被删除的话,返回false.
+    //        属性都有一个DontDelete标记，用于表明该属性是否能被delete。
+    //        变量和函数的声明创建的属性都会带有DontDelete标记.函数内建的arguments对象作为该函数活动对象的默认属性,创建时总会带有DontDelete标记。
+    //        对还不存在的变量或属性的直接赋值产生的对象不会带有任何标记,包括DontDelete. 在eval代码块中声明的变量和方法都不带有DontDelete标记
+    //           var o = {name:'tz',age:12};
+    //           delete o.name;
+    //           alert(o.name);    //输出 "undefined"
+    //           var x = 1;
+    //           delete x;     // false  删除失败
+    //           x;    // 1
+    //           function t(){alert(2);}
+    //           delete t; //false
+    //           typeof t; //"function"
+    //           delete o.toString;  //原始方法，非开发者定义方法，此代码无效报错
+//                var arr = [12,23,undefined,45,,6];
+//                delete arr[1];
+//                alert(arr.length);      //6     删除了堆内存的值，键还在，for..in..读不出被delete的键
+//                for(var key in arr){            //key 就是数组的下标，也就是数组也是一个键值对（键名是系统自动生成，不可人为更改）
+//                    document.writeln("key = " + key + " value = " + arr[key] + "<br>"); //不能读取数组值为空的元素
+//                }
+//
+//                for(var i = 0,len = arr.length; i < len; i++){      //建议使用这个方式
+//                    document.writeln("key = " + i + " value = " + arr[i] + "<br>");
+//                }
+
+    /*void运算符*/
+    //        void 运算符对任何值返回 undefined。该运算符通常用于避免输出不应该输出的值
+    //        void有如下作用：
+    //        通过采用void 0取undefined比采用字面上的undefined更靠谱更安全，应该优先采用void 0这种方式。
+    //        填充<a>的href确保点击时不会产生页面跳转; 填充<img>的src，确保不会向服务器发出垃圾请求。
+    document.writeln(void 89);          //undefined
+    /*运算符优先级  从高到低*/
+    /*      运算符	                                描述
+            . [] ()	                                字段访问、数组下标、函数调用以及表达式分组
+            ++ -- - ~ ! delete new typeof void	    一元运算符、返回数据类型、对象创建、未定义值
+            * / %	                                乘法、除法、取模
+            + - +	                                加法、减法、字符串连接
+            << >> >>>	                            移位
+            < <= > >= instanceof	                小于、小于等于、大于、大于等于、instanceof
+            == != === !==	                        等于、不等于、严格相等、非严格相等
+            &	                                    按位与
+            ^		                                按位异或
+            |		                                按位或
+            &&		                                逻辑与
+            ||	                                    逻辑或
+            ?:		                                条件
+            = X=	                                赋值、运算赋值
+            ,		                                多重求值
+    */
+</script>
+<body>
+<a href="javascript:void(0)">点击a标签不发生跳转</a>
+<img src="javascript:void(0)" alt="">
+</body>
+</html>

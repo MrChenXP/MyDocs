@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>对象</title>
+</head>
+<body>
+<script>
+/*对象的定义和创建*/
+//  全局函数和全局变量都会成为window的方法和属性  键名不能出现重复
+//  属性使用方式类似变量，方法使用方式类似函数，属性和方法由赋的值来决定，值为函数时称为方法，否则称为属性
+//  alert(num);           //未声明直接使用全局变量 会报错
+//  console.log(window.num);      //undefined  num是属性，会提示没有该属性但不会报错 不能用var来声明对象的属性
+//    var show = 12;      //变量   不属于任何对象
+//    delete window.show;        //不能用delete删除var声明的变量和function声明的函数
+//    console.log("window.show=" + window.show);      //12
+//    window.show = 22;
+//    console.log("show=" + show);             //22
+//    function show() {    return 32;  }   //函数
+//    console.log("show=" + show);         //22 属性（值是非函数）
+//    console.log("show()=" + show());     //报错 没有show这个方法 show已经被定义成变量  类型错误
+//对象的创建
+//  字面量方式
+//    var obj = {     //  声明且初始化
+//      a: 12,
+//      showA: function () {
+//        return this.a;      //this指向obj
+//      }
+//    };
+//    var obj1 = { };//声明
+//    obj1.b = 13; //增加属性
+//    obj1.c = function () {return this.b} //增加方法
+//    console.log("obj.a=" + obj.showA());  //12 //使用属性和方法时必须清楚是哪个对象的
+//    console.log("obj1.b=" + obj1.b + "obj1.c=" + obj1.c()); //13 13
+//  对象的方法(new)
+//    new操作符(只能用于函数对象)
+//      1、创建一个空对象
+//      2、把this绑定到空对象上
+//      3、把空对象__proto__属性指向到构造器的原型上
+//      4、返回空对象
+//    var obj = new Object();
+//    obj.a = 12;         //增加属性
+//    obj.showA = function(){     //增加方法
+//        return this.a;
+//    };
+//    console.log(obj.a);
+//    console.log(obj.showA());
+//    function show(){ console.log(this); }
+//    var obj = new show();       // 在函数调用时使用new会使得 函数里的this 指向到实例对象(函数的返回值)上
+//    console.log(obj);       //obj就称为实例对象
+//  Object.create()
+//    create obj指向的时括号里的构造(参数)，如create(Object.prototype) create(function.prototype) crate(null)
+//      var obj = Object.create(null);    //Object.create({});  //空对象
+//      obj.a = 122;         //增加属性
+//      obj.showA = function(){     //增加方法
+//          return this.a;
+//      };
+//      console.log(obj.a);
+//      console.log(obj.showA());
+//    Object.create(对象原型链上使用键值对，对象本身使用键值对)
+//      var obj1 = Object.create(obj,{          //obj1.__proto__指向到obj上
+//        b:{
+//          value: 13,
+//          writable: true
+//        }
+//      });
+
+/*设置对象键名的权限*/
+//所有键名
+//  Object.preventExtensions(对象)  阻止往对象扩展新的属性和方法 可以修改、删除
+//  Object.seal(对象)     阻止往对象扩展新的属性和方法，且不能删除对象的键名（属性和方法）但可以被修改  对象封印(密封)
+//  Object.freeze(对象)   阻止往对象扩展新的属性和方法，且不能删除和修改对象的键名（属性和方法）    对象冻结（只读）
+//  Object.isExtensible(对象)   判断一个对象是否可扩展，即是否可以给它添加新属性
+//  Object.isSealed(对象)     判断一个对象是否封印(密封)
+//  Object.isFrozen(对象)     判断一个对象是否冻结（只读）
+//  Object.keys(对象)         //返回对象本身可被枚举的键名
+//  Object.values(对象)       //返回对象本身可被枚举的键值
+//  Object.entries(对象)      //返回对象本身可被枚举的键值对
+//  Object.getOwnPropertyNames(对象)     //返回对象本身的键名
+//  Object.hasOwnProperty(键名)     //判断对象本身是否拥有该键名
+//  "键名" in 对象             //判断对象是否可以使用该键名
+//  对象.propertyIsEnumerable("键名")            //用来判断某键名是否可被枚举
+//    Object.preventExtensions(obj)
+//    obj.a =11 //修改
+//    obj.pe = 33;  //添加
+//    delete obj1.b  //删除
+//    console.log('obj.pe='+obj.pe+' obj.a='+obj.a+' obj1.b='+obj1.b) //undefined 11 undefined
+//    Object.seal(obj);
+//    delete obj.a;  //删除
+//    obj.a = 33; //修改
+//    console.log(obj.a) //33
+//    Object.freeze(obj)
+//    obj.a = 33  //修改
+//    console.log(obj.a)  //12
+//单个键名 Object.defineProperty(对象,键名,{键名的描述符}) ie8只能再dom对象上用，原生上用会报错
+//  查看对象键名的权限设置情况 Object.getOwnPropertyDescriptor(obj, "new") 返回个对象,可用变量接收
+//  数据属性(数据描述)
+//    Value   键值 读取属性值的时候,从这个位置读/写入属性值的时候,把新值保存在这个位置。、
+//              这个特性的默认值为 undefined。此方法保存的值不会被for..in枚举
+//    Writable    表示能否修改(重写)属性的值。包括用defineProperty修改
+//    Configurable  表示能否通过 删除属性或修改键值从而重新定义属性，或者能否把属性修改为访问器属性。
+//    Enumerable  表示能否通过(for...in或Object.keys())循环返回属性。
+//      Object.defineProperty(obj,"new",{
+//        value: 'this is obj.new', //若键名之前就有 就用之前的值。若新键名就用此值，没写就是undefined
+//        writable: false,          //修改
+//        configurable: false,      //删除
+//        enumerable: false         //枚举
+//      })
+//      obj.new = 33;  //没用 不能被修改 writable configurable
+//      delete obj.new;  //没用 不能被删除 configurable
+//      for( var attr in obj ){
+//        console.log( attr );  //a showA 没有new
+//      }
+//      console.log("obj.new="+obj.new);
+//      console.log(Object.getOwnPropertyDescriptor(obj, "new"));
+//  访问器属性(存储器)
+//    Configurable  表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为数据属性。
+//    Enumerable  表示能否通过(for...in或Object.keys())循环返回属性。
+//    Get   在读取属性时调用的函数。默认值undefined。 当使用了get或set方法，不允许使用writable和value这两个属性
+//    Set   在写入属性时调用的函数。默认值undefined。当使用了get或set方法，不允许使用writable和value这两个属性
+//      Object.defineProperty(obj,'a',{
+//        get:function (){
+//          //当获取值的时候触发的函数
+//          console.log('正在获取值')
+//        },
+//        set:function (value){
+//          //当设置值的时候触发的函数,设置的新值通过参数value拿到
+//          console.log('正在设置值')
+//        }
+//      })
+//      console.log(obj.a)  //正在获取值  undefined 没有返回值，之前设置的替代了
+//      obj.a = 22  //正在设置值
+//      console.log(obj.a)  //正在获取值  undefined 没有返回值，之前设置的替代了
+//多个键名 Object.defineProperties(对象,{键名:{修饰符},...)
+//  Configurable  Enumerable  Writable  Value  Get  Set 同上
+//    Object.defineProperties(obj,{
+//      a: {
+//        get: function () { return this.b }
+//      },
+//      b: {
+//        value: 33,
+//        writable: false
+//      }
+//    })
+//    obj.b = '我要更改'
+//    console.log(obj.a + ' obj.b='+obj.b)   //33 33
+
+/*原型*/
+//  普通对象 属性__proto__ 只要是对象就有  new Object()
+//  函数对象 function也是对象,有一个原型对象(prototype),__proto__ 属性  new Function()
+//  键名出现的位置
+//      1、普通对象    键名增加到对象本身上
+//      2、函数对象
+//        2.1、键名可增加到构造器上（由构造器使用）
+//        2.2、键名可增加到构造函数里this对象上（由实例对象使用）
+//        2.3、键名可增加到构造函数的原型上（由实例对象使用）
+//    var s = 'lo'
+//    String.prototype.sun = function () {  //在函数对象的原型上加方法
+//      return this + 've'; //this 代表实例对象
+//    }
+//    console.log(s.sun())  //string
+//面向对象的方式
+//  工厂方式
+//    方法和属性不共用，没有new操作符
+//    工厂模式两个缺点 1.不适合创建对象(new Object)的方式 2.方法是每个对象本身拥有的，浪费系统资源
+//    function createInfor(name){   //// 构造函数（构造器）模具
+//      var obj = new Object();     //创建对象      原料
+//      obj.name = name;            //增加属性
+//      obj.showName = function(){      //增加方法  加工
+//        return this.name;
+//      };
+//      return obj;                 //返回对象      出厂
+//    }
+//    var obj = createInfor("张三");  //使用工厂方式创建对象 obj（实例对象）产品
+//    var obj1 = createInfor("李四");
+//    console.log('obj.name='+obj.name+' obj.name='+obj1.name);//obj.name=张三 obj.name=李四
+//    console.log(obj.showName === obj1.showName);      //false
+//  构造函数原型混合方式（用构造函数来写属性，用原型来写方法）
+//    function CreateInfor(name, score) {  //构造函数
+//      this.name = name;       //构造函数里的键名是在实例对象上的 由实例对象使用
+//    }
+//    CreateInfor.prototype.showName = function () {        //构造器上的键名不是在实例对象上的 由实例对象使用
+//      return this.name;
+//    };
+//    var obj = new CreateInfor("张三");
+//    var obj1 = new CreateInfor("李四");
+//    console.log('obj.name='+obj.name+' obj1.name='+obj1.name);
+//    console.log(obj.showName === obj1.showName);      //true
+
+/*原型链*/
+// 实例对象的原型（__proto__）指向到构造器的原型(prototype)
+// new 构造器会生成一个实例对象,有一个属性[[prototype]](不可操作)默认指向__proto__，
+//  从而使得实例对象的__prototype指向到构造器的原型（prototype）上
+//    function Parent(name, score){
+//      this.name = name;
+//      this.score = score;
+//    }
+//    Parent.prototype.showName = function(){
+//      return this.name;
+//    };
+//    Parent.prototype.showScore = function(){
+//      return this.score;
+//    };
+//    var p1 = new Parent("父亲", 25);
+//    console.log(p1.__proto__ === Parent.prototype);                     //true
+//    console.log(Parent.prototype.__proto__ === Object.prototype);       //true
+//    console.log(Object.prototype.__proto__ === null);                   //true
+//    console.log(Parent.__proto__ === Function.prototype);
+//    console.log(Function.prototype.__proto__ === Object.prototype);
+//    console.log(Function.__proto__ === Function.prototype);
+//    console.log(Object.__proto__ === Function.prototype);
+//
+//    //        实例对象的构造器指向Parent构造器上
+//    console.log(p1.constructor === Parent.prototype.constructor);
+//    console.log(Parent.prototype.constructor === Parent);
+//
+//    //        alert(p1.hasOwnProperty("score"));
+//
+//    //        var show = new Function("alert(12)");
+//    //        function show(){
+//    //            alert(12);
+//    //        }
+//  //        show();
+
+/*合并、拷贝对象*/
+// Object.assign(目标对象,源对象……) 将所有可枚举属性的值从一个或多个源对象复制到目标对象,返回目标对象 浅拷贝
+//   如果目标对象不是对象,会在内部转换成对象,如果碰到了null或者undefined这种不能转换成对象的值的话,assign会报错
+//   如果源对象的参数位置，接收到了无法转换为对象的参数的话，会忽略这个源对象参数,assign不会合并不可枚举的属性
+// JSON.stringify(obj1) 深拷贝
+//  var obj1 = {a: 12};
+//  var obj2 = {b: 13};
+//  var obj3 = {c: 14};
+//  var a = Object.assign(obj1, obj2, obj3);      //obj1会被改变
+//  var b = Object.assign([],obj1, obj2, obj3);      //不会改变obj1
+//  console.log(a, b, obj1);
+//  var obj1 = {a: 12};    //后面覆盖前面的键值对,源对象的属性值是一个指向对象的引用,它也只拷贝那个引用值
+//  var obj2 = {b: 13, a:{a1: 25, a2: 20}};
+//  var obj3 = {c: 14, a:{a1: 10}};
+//  var obj = Object.assign({},obj1, obj2, obj3);
+//  obj.c = 243;
+//  console.log(obj, obj3.c);       //obj.a.a1=24 obj3.c=14 obj等于最后改变的时候 浅拷贝
+//  obj3.a.a1 = 100;
+//  console.log(obj.a, obj3.a);       //100 100  拷贝的是引用，所以obj3改改变的时候，obj也会改变
+//  var obj=JSON.parse(JSON.stringify(obj1)); //深拷贝
+//  obj1.a = 10;
+//  console.log(obj1, obj); // 10 12 深拷贝，obj1改变的时候，obj并不会改变
+//  var obj = Object.create(  //继承属性和不可枚举属性是不能拷贝的
+//    {a: 13},  // 继承
+//    {
+//      b: {
+//        value: 14  // 不可枚举属性
+//      },
+//      c: {
+//        value: 15,
+//        enumerable: true
+//      }}
+//  );
+//  var obj1 = Object.assign({}, obj);
+//  console.log(obj1);      //{c: 15}  继承属性和不可枚举属性是不能拷贝的
+
+/*继承*/
+// obj.apply(thisObj,argArray) 调用一个对象的一个方法,用另一个对象替换当前对象 只能有两个参数
+//    参数都写进argArray数组,如argArray不是有效的数组或arguments对象,将导致一个TypeError.
+//    如没提供argArray和thisObj任何一个参数,Global对象将用作thisObj,并无法被传递任何参数
+// obj.call(thisObj,一串参数) 调用一个对象的一个方法，用另一个对象替换当前对象 可传多个参数
+//    这个方法主要用在js对象各方法相互调用的时候,使当前this实例指针保持一致,
+//    或者在特殊情况下需要改变this指针.如果没有提供thisObj参数.Global对象被用作thisObj
+// instanceof 用来在运行时指出对象是否是特定类的一个实例 return ture/false
+// getPrototypeOf 返回给定对象的原型。如果没有继承属性返回null
+// isPrototypeOf 检测一个对象是否是另一个对象的原型
+  function Parent(name,age) { this.name = name;this.age = age; }
+  Parent.prototype.showName = function () { return this.name }
+  Parent.prototype.showAge = function () { return this.age }
+  function Child(name,age,sex) { //继承属性
+//    Parent.apply(this,[name])
+//    Parent.apply(this,arguments) //将所有参数都放进来
+//    Parent.call(this,name,age)
+//    this.sex = sex //子类增加新属性
+  }
+//  Child.prototype = Parent.prototype;//浅拷贝父类的原型(不建议使用) 不再原型上不会被拷贝
+//    for(var key in Parent.prototype){           //深拷贝父类的原型 不再原型上不会被拷贝
+//      Child.prototype[key] = Parent.prototype[key];
+//    }
+//    Child.prototype = Object.create(Parent.prototype);  //IE9+  通过原型链来继承父类的原型
+    Child.prototype = new Parent();
+    Child.prototype.constructor = Child; //让子类原型上的constructor指回到子类上
+    var obj = new Child('小陈',33,'boy')
+    console.log(obj instanceof Child); //true 实例对象的构造器
+    console.log(Object.getPrototypeOf(obj) === Child.prototype);//true 获取一个对象的原型
+    console.log(Child.prototype.isPrototypeOf(obj)); //true 判断一个对象的原型
+    console.log(c1.constructor);
+
+
+//    深拷贝函数 只拷贝第一层是没用的。子对象也是地址，改了a，b还是会联动被改动。所以要子对象一起深拷贝
+function deepClone(obj){
+  let objClone = Array.isArray(obj)?[]:{};
+  if(obj && typeof obj==="object"){
+    for(key in obj){
+      if(obj.hasOwnProperty(key)){
+        //判断ojb子元素是否为对象，如果是，递归复制
+        if(obj[key]&&typeof obj[key] ==="object"){
+          objClone[key] = deepClone(obj[key]);
+        }else{
+          //如果不是，简单复制
+          objClone[key] = obj[key];
+        }
+      }
+    }
+  }
+  return objClone;
+}
+</script>
+
+</body>
+</html>

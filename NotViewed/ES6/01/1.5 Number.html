@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        Number.isInteger(新增，判断是否为整数)
+//        Number.EPSILON(新增，判断是否可忽略的误差)
+//        Number.MAX_SAFE_INTEGER(新增，可以在js中安全且精确地表示的最大整数)
+//        Number.MIN_SAFE_INTEGER(新增，可以在js中安全且精确地表示的最小整数)
+//        Number.isSafeInteger(新增，表示在js中安全整数范围内，即是在-(2^53 - 1) 到 (2^53 - 1)之间)
+//        Number.isNaN(全局方法isNaN移植到Number下)
+//        Number.isFinite(全局方法isFinite移植到Number下，检测一个数是否有限数，可以不在js安全整数范围）
+//        Number.parseInt(全局方法parseInt移植到Number下)
+//        Number.parseFloat(全局方法parseFloat移植到Number下)
+//-----------------------------------------------------------------
+//        document.writeln(parseInt("32px"));     //32
+//        document.writeln(Number.parseInt("32px"));     //32
+//        document.writeln(Number.parseInt === window.parseInt);     //true
+//        ----------------------------------------------------
+//        document.writeln(Number.isInteger(8));        //true
+//        document.writeln(Number.isInteger(8.3));        //false
+//        document.writeln(Number.isInteger("8"));        //false
+//        document.writeln(Number.isInteger(8.0000000000));        //true     8.0 识别成整数
+//        -----------------------------------------------------
+//        document.writeln(Number.MAX_SAFE_INTEGER);      //9007199254740991
+//        document.writeln(Number.MIN_SAFE_INTEGER);      //-9007199254740991
+//        document.writeln(9007199254740991 + 2);         //9007199254740992
+//        document.writeln(Math.pow(2, 53) - 1);            //9007199254740991
+//        document.writeln(-Math.pow(2, 53) + 1);            //-9007199254740991
+//        document.writeln(Number.isSafeInteger(5));       //true
+//        document.writeln(Number.isSafeInteger(5.3));      //false
+//        document.writeln(Number.isSafeInteger(Number.MAX_SAFE_INTEGER));      //true
+//        document.writeln(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1));      //false
+//        ------------------------------------------------------------------
+//        isNaN（先做类型转换再判断）跟Number.isNaN（不做类型转换） 是有区别的
+//        document.writeln(isNaN(3));             //false
+//        document.writeln(isNaN("a"));           //true
+//        document.writeln(isNaN(undefined));     //true
+//        document.writeln(isNaN(null));          //false
+//        document.writeln(isNaN(true));          //false
+//        document.writeln(isNaN(NaN));            //true
+        //判断一个值是不是NaN
+//        document.writeln(Number.isNaN(3));             //false
+//        document.writeln(Number.isNaN("a"));           //false
+//        document.writeln(Number.isNaN(undefined));     //false
+//        document.writeln(Number.isNaN(null));          //false
+//        document.writeln(Number.isNaN(true));          //false
+//        document.writeln(Number.isNaN(NaN));          //true
+//        document.writeln(Number.isNaN("NaN"));          //false
+//        ------------------------------------------------------------------
+//        document.writeln(0.1 + 0.2 === 0.3);        //false
+//        document.writeln(Number.EPSILON);           //2.220446049250313e-16  两个值的差小于极小的常量，就认为这两个值是相等的
+
+        function isEqual(num1, num2){
+            if(Math.abs(num1 - num2) < Number.EPSILON){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        alert(isEqual(0.1 + 0.2, 0.3));         //true
+    </script>
+</head>
+<body>
+
+</body>
+</html>

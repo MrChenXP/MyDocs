@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .radius{
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <ul>
+        <li>1111</li>
+        <li class="jj">2222</li>
+        <li>3333</li>
+        <li>4444</li>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $("div").css("width", 200).css({height: "200", backgroundColor: "red"});      //css设置标签的行间样式  长度单位：200px 200 "200"
+//        $("div").addClass("jj").addClass("kk").removeClass("jj");       //操作class
+
+//        $("ul li").addClass(function(index, aClass){
+////            console.log(index, aClass, this);
+//            return "li" + (index + 1);
+//        });
+
+        //用addClass、removeClass、hasClass实现toggleClass的功能
+
+        $("div").click(function(){
+//            $(this).toggleClass("radius");      //有则删除， 没有则增加
+
+            if($(this).hasClass("radius")){
+                $(this).removeClass("radius");
+            }else{
+                $(this).addClass("radius");
+            }
+        });
+    </script>
+</body>
+</html>

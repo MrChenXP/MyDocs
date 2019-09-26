@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>cookie</title>
+	</head>
+	<body>
+<script type="text/javascript">
+// HTTP Cookie 是服务器发送到浏览器并保存在本地的一块数据,它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上    
+//   特征 1、有同源策略（同一协议、同一域名、同一端口）的限制 2、有大小限制（4k左右、20-50条 3、有过期时间限制</p>
+//   创建Cookie document.cookie
+//      当服务器收到HTTP请求时,服务器可以在响应头里面添加一个Set-Cookie选项.浏览器收到响应后通常会保存下Cookie,
+//      之后对该服务器每一次请求中都通过Cookie请求头部将Cookie信息发送给服务器.另外,Cookie的过期时间|域|路径|有效期|适用站点都可以根据需要来指定。
+//   创建一个cookie 键值对的形式 ==> 会话期Cookie浏览器关闭之后它会被自动删除
+//      document.cookie = "username=John Doe"; 
+//   添加一个过期时间(以UTC或GMT时间) ==> 持久性Cookie 过期日期Expires 有效期秒数Max-Age(ie8不支持)
+//      document.cookie = "username=John Doe; expires=Thu, 18 Dec 2043 12:00:00 GMT" 
+//      document.cookie = "username=John Doe; Max-Age=100000000"
+//   Secure 标记为Secure的Cookie只应通过被HTTPS协议加密过的请求发送给服务端 从Chrome52和Firefox52开始,不安全的站点(http:)无法使用Cookie的Secure标记。
+//   HttpOnly 为避免跨域脚本(XSS)攻击,通过JS的Document.cookie API无法访问带有HttpOnly标记的Cookie,它们只应该发送给服务端
+//   Domain 标识指定了哪些主机可以接受Cookie。如果不指定，默认为当前文档的主机（不包含子域名）。如果指定了Domain，则一般包含子域名。
+//   Path 标识指定了主机下的哪些路径可以接受Cookie(该URL路径必须存在于请求URL) 以字符%x2F("/")作为路径分隔符,子路径也会被匹配 默认cookie属于当前页面
+//      document.cookie="username=John Doe; Max-Age=100000000; path=/";
+//   读取Cookie document.cookie
+//      console.log(document.cookie)
+//   修改Cookie  修改 cookie 类似于创建 cookie
+//      document.cookie="username=John Doe; expires=Thu, 18 Dec 2023 12:00:00 GMT;"; // 旧的 cookie 将被覆盖。
+//   删除Cookie  设置 expires 参数为以前的时间
+//      document.cookie="username=John Doe; expires=Thu, 18 Dec 2000 12:00:00 GMT;"; // 旧的 cookie 将被覆盖。
+
+// Web存储
+//	优势
+//    1、拓展了cookie的4K限制
+//    2、可以将第一次请求的数据直接存储到本地，这个相当于一个5M大小的针对于前端页面的数据库，相比于cookie可以节约带宽，但是这个却是只有在高版本的浏览器中才支持的
+//  局限
+//    1、浏览器的大小不统一，并且在IE8以上的IE版本才支持Storage这个属性
+//    2、目前所有的浏览器中都会把Storage的值类型限定为string类型，这个在对我们日常比较常见的JSON对象类型需要一些转换
+//    3、Storage在浏览器的隐私模式下面是不可读取的
+//    4、Storage本质上是对字符串的读取，如果存储内容多的话会消耗内存空间，会导致页面变卡 所有的浏览器中都会把Storage的值类型限定为string类型
+//    5、Storage不能被爬虫抓取到
+//  检查浏览器是否支持Stroage
+// 		if(typeof(Storage)!=="undefined")
+// 		{
+// 			console.log(Storage)
+// 			console.log(localStorage)
+// 			console.log(sessionStorage)
+// 		}
+//	localStorage:存储的数据没有时间限制  sessionStorage:针对一个session的数据存储
+// 		localStorage/sessionStorage.setItem(key,value)	保存数据
+// 		localStorage/sessionStorage.getItem(key)	读取数据
+// 		localStorage/sessionStorage.removeItem(key)	删除单个数据
+// 		localStorage/sessionStorage.clear()	删除所有数据
+// 		localStorage/sessionStorage.key(index)	得到某个索引的key值 localStorage存储跟写入的顺序无关
+// 		localStorage/sessionStorage.length	localStorage的数目
+// 			localStorage.aa="创建一个key=aa的localStorage键/值对";
+// 			localStorage.setItem("user", "cxp"); // 设置localStorage key/value
+// 			localStorage.user = "jj"; // 设置一个已经存在的localStorage
+// 			console.log(localStorage.aa)	// 获取key=aa的localStorage值
+// 			console.log(localStorage.getItem('aa')) // 获取key=aa的localStorage值
+// 			console.log(localStorage['user']) // 获取key=user的localStorage值
+// 			localStorage.removeItem('aa')	// 删除key=aa的localStorage值
+// 			delete localStorage["user"]; // 删除key=user的localStorage值
+// 			for(var key in localStorage){     //不合适 会把自己设置key罗列出来，也会把原有的对象方法罗列出来
+// 				console.log("key =" + key);
+// 			}
+// 			for(var i = 0, len = localStorage.length; i < len; i++){ // 推荐
+// 				console.log("key =" + localStorage.key(i) + " value = " + localStorage.getItem(localStorage.key(i)));
+// 			}
+</script>
+	</body>
+</html>

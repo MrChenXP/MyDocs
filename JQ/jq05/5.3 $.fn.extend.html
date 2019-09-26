@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li>11111</li>
+        <li>22222</li>
+        <li>33333</li>
+        <li>44444</li>
+        <li>55555</li>
+        <li>66666</li>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+//            alert(jQuery.fn === jQuery.prototype);      //true  方法扩展到jQuery构造器的原型上
+
+            jQuery.fn.extend({
+                bgColor(color1 = "skyblue", color2 = "pink", color3){
+//                    console.log(this);          //插件方法里的this是指向JQuery对象
+                    let sColor = "";
+                    this.each(function(index){
+                        if(index % 2){
+                            $(this).css({backgroundColor: color2});
+                        }else{
+                            $(this).css({backgroundColor: color1});
+                        }
+
+//                        if(typeof color3 !== "undefined"){
+//                            $(this).hover(function(){
+//                                $(this).css({backgroundColor: color3});
+//                            }, function(){
+//                                if(index % 2){
+//                                    $(this).css({backgroundColor: color2});
+//                                }else{
+//                                    $(this).css({backgroundColor: color1});
+//                                }
+//                            });
+//                        }
+                    });
+
+                    if(typeof color3 !== "undefined"){
+                        this.parent().on("mouseover","li", function(){
+                            sColor = $(this).css("backgroundColor");
+                            $(this).css({backgroundColor: color3});
+                        }).on("mouseout", "li", function(){
+                            $(this).css({backgroundColor: sColor});
+                        });
+                    }
+
+                    return this;        //为了可以使用链式操作，方法调用结束一定要返回当前的对象
+                }
+            });
+
+//            $("ul li").bgColor("red", "blue").css({color: "white"});     // 背景使用指定的颜色
+//            $("ul li").bgColor().css({color: "white"});                // 背景使用默认的颜色
+            $("ul li").bgColor("red", "blue", "gold").css({color: "white"});                // 背景使用默认的颜色
+        });
+
+
+    </script>
+</body>
+</html>

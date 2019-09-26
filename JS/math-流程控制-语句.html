@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断循环和表达式</title>
+    <script type="text/javascript">
+        /*JavaScript语句是发给浏览器的命令。这些命令的作用是告诉浏览器要做的事情*/
+        /*条件语句
+            可以使程序按照预先指定的条件进行判断*/
+//         if 条件语句
+//             if (表达式) {为真时执行的语句} else if(表达式) {为真时执行的语句} else{都不符合时执行的语句}
+//                 var num = prompt("请输入一个数字：");		//弹出一个输入框
+//                 if(num >= 0 && num <= 9){
+//                 document.writeln("一位数");
+//                 }else if(num <= 99){
+//                 document.writeln("两位数");
+//                 }else if(num <= 999){
+//                 document.writeln("三位数");
+//                 }else{
+//                 document.writeln("四位数以上");
+//                 }
+//         switch 条件语句
+//         关键字 break 会使代码跳出 switch 语句。如果没有关键字 break，代码执行就会继续进入下一个 case。
+//             关键字 default 说明了表达式的结果不等于任何一种情况时的操作（事实上，它相当于 else 从句）。
+//             switch (表达式) {
+//            case "常量1"：表达式结果等于常量1执行的语句;break;
+//            case "常量1"：表达式结果等于常量1执行的语句;break;
+//            case "常量1"：表达式结果等于常量1执行的语句;break;
+//             default: 都不等于时执行的语句;break;
+//             }
+//                 var sWeek = parseInt(prompt("请输入星期"));
+//                 switch(sWeek){
+//                 case 0: document.writeln("星期天");break;
+//                 case 1: document.writeln("星期一");break;
+//                 case 2: document.writeln("星期二");break;
+//                 case 3: document.writeln("星期三");break;
+//                 case 4: document.writeln("星期四");break;
+//                 case 5: document.writeln("星期五");break;
+//                 case 6: document.writeln("星期六");break;
+//                 default: document.writeln("输入有误");break;
+//                 }
+
+        /*循环语句
+            循环语句，声明一组要反复执行的命令，直到满足某些条件为止。循环通常用于迭代数组的值，或者执行重复的算术任务*/
+//          while语句
+//              while 循环会在指定条件为真时循环执行代码块。这意味着退出条件是在执行循环内部的代码之前计算的。因此，循环主体可能根本不被执行。
+//              while (条件) { 需要执行的代码}
+//                    var i = 0;
+//                    while(i < 10){            //先判断条件再执行循环体，循环体至少执行0次
+//                        document.writeln(i);
+//                        i++;
+//                    }
+//            do-while 语句
+//                do-while 语句是是 while 循环的变体，。该循环会在检查条件是否为真之前执行一次代码块，然后如果条件为真的话，就会重复这个循环。
+//                do {需要执行的代码}while (条件);
+//                    do{
+//                        document.writeln(i);        //先执行循环体再判断条件，循环体至少执行1次
+//                        i++;
+//                    }while(i < 10);
+//            for 语句
+//                for 语句是前测试循环，而且在进入循环之前，能够初始化变量，并定义循环后要执行的代码
+//                for (初始化变量; 条件; 循环执行一次后执行的语句){被执行的代码块}
+//                    for(var i = 1, sum = 0; i <= 99; i += 2){       //100以内的奇数之和
+//                        sum += i;
+//                    }
+//                    document.writeln(sum);
+//                设置循环变量的那部分是一个父作用域
+//                     var a = [];
+//                     for (var i = 0; i < 10; i++) {  // var声明的i全局范围内都有效，所以全局只有一个变量i
+//                         a[i] = function () {
+//                             console.log(i);   // 每一次循环，变量i的值都会发生改变 所有数组a的成员里面的i，指向的都是同一个i
+//                         };
+//                     }
+//                     a[6](); // 10、
+//                     for (let i = 0; i < 3; i++) { // 这里的i和下面的i不是同一个i 这是父作用域，下面的循环体是单独子作用域
+//                         let i = 'abc';
+//                         console.log(i); // abc abc abc
+//                     }
+        /* break continue*/
+//                for(var i = 0, sum =0; i < 100; i++){
+//                    if( i === 8){
+//                        break;      //跳出整个循环，后面的代码不再被执行，终止循环 ， 可用于循环和switch（if不识别）
+//                    }
+//                    if(i === 4){
+//                        continue;   //跳出当次循环，循环继续执行 , 用于循环
+//                    }
+//                    sum +=i;
+//                    document.writeln(sum);
+//                }
+        /* for-in*/
+//            for/in 迭代语句，循环枚举(遍历)对象的属性名
+//            for (数组变量 in 对象){输出对象属性}
+//                var mycars = new Array();
+//                mycars[0] = "Audi";
+//                mycars[1] = "Volvo";
+//                mycars[2] = "BMW";
+//                for (x in mycars) {
+//                    document.write(mycars[x] + "<br />");
+//                }
+        /*标签语句
+           给语句加标签，使用break语句和continue引用*/
+//            bb:do {
+//                alert("之后执行标签语句");
+//                break bb;
+//            }while (true)
+        /* Math对象*/
+//          PI	返回圆周率（约等于3.14159）。
+//          abs(x)	返回数的绝对值。
+//          ceil(x)   向上取整(负数中值数字越小越大)
+//          floor(x)  向下取整
+//          round(x)	四舍五入(负数中值数字越小越大)
+//          pow(x,y)	返回 x 的 y 次幂。
+//          sqrt(x)	返回数的平方根。
+//          max(x,y)	返回 x 和 y 中的最高值。
+//          min(x,y)	返回 x 和 y 中的最低值。
+//          random()    返回0-1的随机数
+//                for(var i = 0; i < 100; i++){      //随机100次
+//                    document.writeln(Math.ceil(Math.random() * 49));          //[1,49]
+//                    document.writeln(Math.ceil(Math.random() * 23) + 10);       //[11,33]
+//                }
+//            document.writeln(Math.PI);          //3.141592653589793
+//            document.writeln(Math.ceil(-8.0000001));     //-8
+//            document.writeln(Math.floor(-8.0000001));     //-9
+//            document.writeln(Math.round(-8.5));     //-8
+//            document.writeln(Math.max(3,89,45,-8,12,2));     //89
+//            document.writeln(Math.min(3,89,"45","-8",12,2));     //-8      先自动类型转换成数字类型再求值
+//            document.writeln(Math.min(3,89,"45","a",12,2));     //NaN
+
+        /*输入输出语句*/
+//                window.alert("aaa");             //弹出一个输出框
+//                document.write("aaa");          //往文档body写入内
+//                prompt("请输入内容");        //弹出一个输入框   点确定返回输入的内容，否则返回Null
+//                confirm("你是否要删除此内容");        //弹出一个询问框 ，确定返回true，否则返回false
+//                console.log(window);        //把内容输出到控制台，常用于调试
+//                抛出信息    一般信息console.info()A 、除错信息console.debug()、警告提示console.warn()、错误提示console.error()。
+//                分组显示，用到的方法是console.group()和console.groupEnd()
+//                console.dir()可以显示一个对象所有的属性和方法。
+//                console.dirxml()用来显示网页的某个节点（node）所包含的html/xml代码。
+//                console.assert()用来判断一个表达式或变量是否为真。如果结果为否，则在控制台输出一条相应信息，并且抛出一个异常。
+//                console.trace()用来追踪函数的调用轨迹。
+//                console.time()和console.timeEnd()，用来显示代码的运行时间。
+//                性能分析（Profiler）就是分析程序各个部分的运行时间，找出瓶颈所在，使用的方法是console.profile()。
+
+    </script>
+</head>
+<body>
+<p id="Ptext">这里是即将要改变的文本</p>
+<input type="color" id="Inpalter">
+<script type="text/javascript">
+    var oP = document.getElementById("Ptext"),
+        oI = document.getElementById("Inpalter");
+    oI.onchange = function () {
+        var sColor = confirm("你是否要更改字体颜色");
+        if(sColor){
+            oP.style.color = oI.value;
+            console.log("字体颜色已改");
+        }
+    }
+</script>
+</body>
+</html>

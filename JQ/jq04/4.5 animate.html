@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>点击</button>
+    <div style="width: 200px;background-color: rgb(100,100,110);height: 200px; position: absolute;left: 0;"></div>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){           //animate(变化样式，过渡时间，过渡曲线，回调函数)
+//             $("div").animate({width: 400, height: 300, opacity: 0.3}, 2000, "linear");     //样式同时发生变化
+//            $("div").animate({width: 400}).animate({height: 350}).animate({opacity: 0.3});      //链式变化
+
+//            $("div").animate({width: "+=500px"});       // 类似于js里 += 或 可用 -=
+
+            $("button").on('click', function(){
+                $("div").animate({height: "toggle"}, 3000);     //toggle 切换（0 - 目标值）
+            });
+        });
+    </script>
+</body>
+</html>

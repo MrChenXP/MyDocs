@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        set(key, value)：设置键名key对应的键值为value，然后返回整个 		Map 结构。如果key已经有值，则键值会被更新，否则就新生成该键。
+//        get(key)：读取key对应的键值，如果找不到key，返回undefined。
+//        has(key)：返回一个布尔值，表示某个键是否在当前 Map 对象之中。
+//        delete(key)：删除某个键，返回true。如果删除失败，返回false。
+        let oWMap = new WeakMap();
+
+//        oWMap.set(12, 12);      //不能把基本类型当作键名
+        oWMap.set(window, 13);      //只能是引用类型当作键名
+        oWMap.set({}, 13);
+        console.log(oWMap);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

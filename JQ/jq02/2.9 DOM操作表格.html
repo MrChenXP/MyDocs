@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .control{
+            width: 800px;
+            margin: 20px auto;
+        }
+        td{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="control">
+        姓名：<input type="text" >
+        手机：<input type="text" >
+        年龄：<input type="text" >
+        <button> 增 加 </button>
+    </div>
+    <table border="1" width="600" align="center">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>手机</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody style="text-align: center">
+            <tr>
+                <td>1</td>
+                <td>马云</td>
+                <td>13245678945</td>
+                <td>52</td>
+                <td><a href="#">删 除</a> | <a href="#">替 换 </a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>马化腾</td>
+                <td>13647894245</td>
+                <td>66</td>
+                <td><a href="#">删 除</a> | <a href="#">替 换 </a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>许家印</td>
+                <td>13589454456</td>
+                <td>36</td>
+                <td><a href="#">删 除</a> | <a href="#">替 换 </a></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>王卫</td>
+                <td>13248965231</td>
+                <td>59</td>
+                <td><a href="#">删 除</a> | <a href="#">替 换 </a></td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            var sColor = "";
+            $("table thead tr").css("backgroundColor", "pink");
+            $("table tbody tr").each(function(index){
+                index % 2 ?  $(this).css("backgroundColor", "green") : $(this).css("backgroundColor", "skyblue");
+            }).hover(function(){
+                sColor = $(this).css("backgroundColor");
+                $(this).css("backgroundColor", "orange");
+            },function(){
+                $(this).css({backgroundColor: sColor});
+            });
+        });
+    </script>
+</body>
+</html>

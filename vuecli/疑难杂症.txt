@@ -1,0 +1,56 @@
+vue-cli同局域网访问项目-----------------------------------
+	config/index.js 修改 module.exports 下的host为0.0.0.0
+vue-cli配置接口地址代理----------------------------------------------
+	config/index.js 修改 	module.exports 下的
+	dev: {
+    // 静态资源文件夹
+    assetsSubDirectory: 'static',
+    // 发布路径
+    assetsPublicPath: '/',
+    // 代理配置表，在这里可以配置特定的请求代理到对应的API接口
+    // 'http://yulin.qgjydd.cn/index/df'这种接口写的时候写成'/api/index/df',后台会自动把'/api'变成''
+    // 'http://yulin.qgjydd.cn/api/index/df' 这种接口不要配置pathRewrite 写的时候写成'/api/index/df'
+    proxyTable: {
+      // '/api': {
+      //   target: 'http://yulin.qgjydd.cn', // 接口的域名
+      //   secure: false,  // 如果是https接口，需要配置这个参数
+      //   changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
+      //   pathRewrite: {	//如果本身的接口地址就有 '/api' 这种通用前缀，就可以把 pathRewrite 删掉。
+      //    '^/api': ''	
+      //   }
+      // }
+    },
+vue-cli上访问本地json最为数据----------------------------------------------
+	先安装express(原理就是用它搭服务器) build/webpack.dev.conf.js 
+	1.在const portfinder = require('portfinder')后面加
+		//配置 可以访问本地json 第一步
+		const express = require('express')
+		const app = express()
+		let appDate = require('../data.json')//加载本地数据文件
+		let seller = appDate.seller //获取对应的本地数据(appDate)的某个属性(seller)
+		let goods = appDate.goods
+		let ratings= appDate.ratings
+		let apiRoutes= express.Router()
+		app.use('/api',apiRoutes)
+	2.在const devWebpackConfig 里面的 devServer	里面加
+		/配置 可以访问本地json 第2步
+	    before(app){
+	      app.get('/api/seller',(req,res)=>{	//配的路由
+	        res.json({
+	          errno:0,
+	          data:seller
+	        })//接口返回的json数据，上面配置的数据seller就赋值给data请求后调用
+	      }),
+	      app.get('/api/goods',(req,res)=>{
+	        res.json({
+	          errno:0,
+	          data:goods
+	        })
+	      }),
+	      app.get('/api/ratings',(req,res)=>{
+	        res.json({
+	          errno:0,
+	          data:ratings
+	        })
+	      })
+	    }

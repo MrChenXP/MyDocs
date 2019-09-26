@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        1、合并数组
+//        let arr = [1,2,3], arr1 = [4,5,6];
+//        document.writeln(arr.concat(arr1));
+//        document.writeln([...arr, 7, ...arr1]);   //[1,2,3,7,4,5,6]
+//----------------------------------------------------------------------
+//        2、拷贝数组
+//            let arr = [1,2,3];
+//            let arr1 = arr;     //浅拷贝
+
+//            let arr1 = [];        //深拷贝
+//            for(var i = 0; i < arr.length; i++){
+//                arr1[i] = arr[i];
+//            }
+
+//        let arr1 = [...arr];    //深拷贝
+//        let arr1 = [].concat(arr);
+//        arr1.push(4);
+//        document.writeln(arr);      //[1,2,3]
+//        document.writeln(arr1);      //[1,2,3,4]
+//        --------------------------------------------------------------
+//        3、将字符串转换成数组的元素
+//        let str = "abcd";
+//        console.log(str.split(""));
+//        console.log([...str]);
+//        -----------------------------------------------------------------
+//        4、求数组里的最大(小)值
+//        let arr = [2,35,8,94,34,19];
+
+//        alert(Math.max(...arr));        //94      ES6
+//        alert(Math.min(...arr));        //2
+
+//        alert(Math.max.apply(null, arr));   //94   ES5
+//        --------------------------------------------------------------------
+//        5、将伪数组转换成数组
+//        function show(){
+//            var result = 0;
+////            arguments.push(5);        //伪数组不能调用数组的方法
+//            for(var i in arguments){
+//                result += arguments[i];
+//            }
+//            return result;
+//        }
+
+        function show(){
+            let result = 0;
+            let args = [...arguments];             //ES6
+
+//            let args = [].slice.apply(arguments);   //ES5
+//            let args = Array.prototype.slice.apply(arguments);
+            alert(args instanceof Array);       //true
+            args.push(5);
+            for(var i in args){
+                result += args[i];
+            }
+            return result;
+        }
+        alert(show(2,3,4));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

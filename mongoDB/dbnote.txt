@@ -1,0 +1,106 @@
+﻿1.安装 （需要配置环境变量）
+	将mongoDB的bin目录添加到环境变量的path中(配置全局变量)
+2.检查
+	(未配置全局变量前可在bin目录前进入cmd输入mongo命令)
+	在命令行中输入mongo ; 出现版本号则安装成功
+3.建立存放数据的文件夹
+	如：E:\data
+4.运行启动 MongoDB数据库
+	mongod --dbpath E:\data
+(启动后当前cmd已不能操作，但不能关，否则数据库会关闭，请另开一个cmd)	
+5.登陆数据库
+	mongo 127.0.0.1:27017
+	127.0.0.1就是ip 27017就是端口
+mongod --logpath E:\logs\mongod.log --logappend --dbpath E:\data --directoryperdb --serviceName MongoDB --install
+
+6.将 mongodb启动 作为服务启动
+    1.logs文件夹，里面有一个mongod.log的文件
+    2.以管理的身份运行cmd ，执行如下命令
+        mongod --logpath F:\logs\mongod.log --logappend --dbpath F:\Data --directoryperdb --serviceName MongoDB --install
+        --logpath ：mongod.log文件的绝对路径 --dbpath  ：保存数据库的文件夹
+    删除服务
+        sc delete MongoDB
+
+    如果启动服务时候弹出一个窗口报错，在data的文件夹中删除一下文件：
+    mongod.lock
+    storage.bson
+    再一次执行步骤2
+
+数据的操作：
+--查看所有数据库：
+	show dbs
+--选择数据库
+	use <数据库>
+--查看数据库里面的集合
+	show collections
+--创建数据库
+	use <数据库>   此时不会创建，因为是空的，需要插入一条数据库才会创建
+-- 插入数据
+	db.<集合>.insert({})
+        db.box.insert({name:"young1",age:"20"})
+        db.box.insert({name:"young2",age:"21"})
+        db.box.insert({name:"young2",age:"22"})
+        db.box.insert({name:"young4",age:"23"})
+        db.box.insert({name:"young5",age:"24"})
+        db.box.insert({name:"young6",age:"25"})
+-- 创建集合
+	db.createCollection("<集合>")
+	    db.createCollection("box")
+-- 删除集合
+	db.<集合>.drop()
+	    db.box.drop()
+-- 查询数据
+	db.<集合>.find()
+	db.users.find().pretty()    有格式的输出
+-- 按条件查询
+	db.<集合>.find({<查找条件>})
+	    db.test.find({name:'young2',age:"21"})
+-- 更新数据
+	覆盖数据  db.<集合>.update({<查找条件>},{<更新的数据>})
+	    db.test.update({name:'young1'},{name:'young2'}
+	增加某一个字段: db.test.update({name:'young'},{$set:{age:'18'}})
+	    test.update({name:'young'},{$set:{age:'20'}})
+-- 删除数据
+	db.<集合>.remove({<查找条件>)
+	     test.remove({age:'18'})
+	删除所有： db.test.remove({})
+-- 限制数量的查询
+	db.test.find().limit(4)
+-- 跳过几条数据
+	db.test.find().skip(4)
+-- 分页  (一页两条数据)
+	db.test.find().skip(4).limit(2)
+	第n页的数据 (n-1)*2
+	db.test.find().skip(<(n-1)*2>).limit(2)
+--高级查询:
+	$or　　　　或关系
+　　$nor　　　 或关系取反
+　　$gt　　　　大于
+　　$gte　　　 大于等于
+　　$lt　　　　小于
+　　$lte　　　 小于等于
+　　$ne        不等于
+　　$in        在多个值范围内
+　　$nin       不在多个值范围内
+　　$all       匹配数组中多个值
+　　$regex　　 正则，用于模糊查询
+　　$size　　　匹配数组大小
+　　$maxDistance　　范围查询，距离（基于LBS）
+　　$mod　　   取模运算
+　　$near　　　邻域查询，查询附近的位置（基于LBS）
+　　$exists　　字段是否存在
+　　$elemMatch　　匹配内数组内的元素
+　　$within　　范围查询（基于LBS）
+　　$box　　　 范围查询，矩形范围（基于LBS）
+　　$center    范围醒询，圆形范围（基于LBS）
+　　$centerSphere　　范围查询，球形范围（基于LBS）
+　　$slice　　　查询字段集合中的元素（比如从第几个之后，第N到第M个元素）
+       db.test.find({age:{$gt:'25'}})
+       db.text.find({$or[{age:{$gt:'22'},{age:{$lt:'20'}]})
+--按照字段里面的字段来查找 添加
+    db.test.insert({name:'young',age:18,stu:{stuname:"zhang"}})
+    db.test.find({name:'young'})
+	根据 stuname  字段来查找
+	db.test.find({'stu.stuname':'zhang'})
+	添加
+	db.box.update({name:"young"},{$set:{"stu.stuage":"55"}})

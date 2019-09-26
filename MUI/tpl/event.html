@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<ul class="ui ">
+			<li><button class="a">addEventListener</button></li>
+			<li><button class="on">on</button></li>
+			<li><button class="shou">手势</button></li>
+		</ul>
+		
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				gestureConfig:{//手势配置
+					doubletap:true,
+					longtap:true,
+					hold:true,
+					release:true,
+					drag:true,//dragstart、drag、dragend共用drag开关，
+					swipe:true//swipeleft、swiperight、swipeup、swipedown共用swipe开关
+				},
+				swipeBack:true,//侧滑关闭
+				keyEventBind: {//监听Android手机的back、menu按键
+					backbutton: true,  //Boolean(默认true)关闭back按键监听
+					menubutton: true   //Boolean(默认true)关闭menu按键监听
+				},
+				beforeback: function() {//处理窗口关闭前的业务
+					//... //窗口关闭前处理其他业务详情点击 ↑ "关闭页面"链接查看
+				}
+			});
+			
+			function fAlert(a){
+				console.log(3+a); //alert会引起长按和点击失效
+			}
+			
+			
+			var oA = mui('li');//选取的事mui对象，不是dom对象
+			//addEventListener()方法监听某个特定元素
+			oA[0].addEventListener('tap',fAlert,false)//mui的一些方法与原生绑定不匹配
+			//对象.on('event',选择器,执行函数)
+			oA.on('tap','.on',fAlert);
+			//off(event,selector,handle) 取消对应选择器上特定事件所执行的特定回调
+			//mui('li').off('tap','.on'.fAlert);	
+			//off(event,selector) 取消对应选择器上特定事件的所有回调
+			//mui('li').off('tap','.on')
+			//off(event) 取消当前元素上绑定的特定事件的所有回调
+			//mui('li').off('tap');
+			//off() 取消当前元素上绑定的所有事件回调
+			mui('li').off();
+			//mui.trigger(element,event,data) 动态触发特定DOM元素上的事件
+			//mui.trigger(oA[0],'tap','dfd')
+		
+			//手势事件 要事先在init中配置gestureConfig,用哪个就把哪个设为true
+				//点击		tap单击屏幕		doubletap双击屏幕
+				//长按		longtap长按屏幕	hold按住屏幕	release	离开屏幕
+				//滑动		swipeleft向左滑动	swiperight向右滑动	swipeup向上滑动	swipedown向下滑动
+				//拖动		dragstart开始拖动	drag拖动中	dragend	拖动结束
+				oA[2].addEventListener('longtap',fAlert,false);
+			//遍历数组或json对象 若为对象，仅遍历对象根节点下的key key=下标 item=匹配元素
+				mui.each(oA,function(key,item){
+					item.innerText +=key;
+				})
+			//为每个匹配元素执行的回调函数  key=下标 item=匹配元素(可用this代替)
+				mui('li').each(function(key,item){
+					item.innerText +=key;
+				})
+			//将两个对象合并成一个对象 extend( target , object1 [, objectN] )
+				var a={b:3,c:{e:1}},b={a:4,c:{d:0}}
+				mui.extend(a,b);//b.c.d 把 a.c.e 覆盖了
+			//深度合并 .extend( deep , target , object1 [, objectN] )
+				mui.extend(b,a,true);
+				//console.log(a.c.e);//undefied
+				//console.log(b.c.e);//undefied //深度合并有bug
+			//later(函数，延迟时间[,上下文])	 延迟定时器
+			mui.later(function(){
+				//alert('1');
+			},3000,{a:3});
+			//scrollTo(y坐标，滚动时间，回调函数) 屏幕纵向滚动
+			mui.scrollTo(0,1000,function(){
+				//alert('2');
+			});
+			//os 判断运行环境
+				//plus plus返回是否在 5+App(包括流应用)运行 .stream返回是否为流应用
+				//android .android返回是否为安卓手机 	.version安卓版本号 	.isBadAndroidandroid非Chrome环境
+				//ios .ios返回是否为苹果设备  .version返回手机版本号  .iphone返回是否为苹果手机  .ipad返回是否为ipad
+				//webchat .wechat返回是否在微信中运行
+				if(mui.os.android){
+					console.log(mui.os.version);
+				}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件</title>
+</head>
+<body>
+<!--< % =% >输出数据到模板（输出是转义 HTML 标签-->
+<h1><%= data.age %></h1>
+<!--< % - % > 输出非转义的数据到模板-->
+<p><%-data.job %>-</p>
+<!--< % # % >注释标签，不执行、不输出内容-->
+<p>#<%#data.job%></p>
+<!--< % _ % >删除其前面的空格符-->
+<p>aaa  <%_ %>_</p>
+<!--< % _ % >将结束标签后面的空格符删除-->
+<p>_<% _%>  33</p>
+
+
+<!--< % % 输出字符串 '< %'-->
+<P>输出<%% %></P>
+
+<ul>
+    <!--循环便利data对象中的hobbie数组的每个元素-->
+    <% data.hobbie.forEach(function (t) { %>
+    <li><%= t %></li>
+    <%})%>
+
+</ul>
+<!--共用模板引擎-->
+<%- include('header.ejs') -%>
+
+</body>
+
+</html>

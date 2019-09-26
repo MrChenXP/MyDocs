@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" manifest="imgers/load.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>视频、音频、canvas、缓存、存储</title>
+</head>
+<body>
+<!--video 视频标签-------------------------------------
+    autoplay	如果出现该属性，则视频在就绪后马上播放。
+    controls	如果出现该属性，则向用户显示控件，比如播放按钮。
+    loop	如果出现该属性，则当媒介文件完成播放后再次开始播放。
+    preload    如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 "autoplay"，则忽略该属性。
+    .ogg 支持ff、chrom     mp4 支持ie、chrom、safari
+    把mp4放在最前面是为了兼容老苹果系统，ios4以前只解析一个video元素
+    <video> 与 </video> 之间插入的内容是供不支持 video 元素的浏览器显示的-->
+    <video src="imgers/mov_bbb.ogg" id="vi" width="100" height="200" controls="controls">
+        <source src="imgers/mov_bbb.mp4" type="video/ogg">
+        <source src="imgers/mov_bbb.ogg" type="video/mp4">
+        您的游览器不支持播放当前视频
+    </video>
+<!--audio 音频标签------------------------------------------同上-->
+    <audio src="imgers/song.mp3" controls>
+        <source src="imgers/song.mp3" type="video/mpeg">
+        <source src="imgers/song.ogg" type="video/ogg">
+        您的游览器不支持播放当前音频
+    </audio>
+<script>
+/*Video autio 对象*/
+//属性
+//    height	设置或返回视频的 height 属性的值。
+//    width	设置或返回视频的 width 属性的值。
+//    autoplay	设置或返回是否在就绪（加载完成）后随即播放视频。
+//    controls	设置或返回视频/音频是否应该显示控件（比如播放/暂停等）。  true|false
+//    currentSrc	返回当前视频/音频的 URL。
+//    currentTime	设置或返回视频/音频中的当前播放位置（以秒计）。
+//    defaultMuted	设置或返回视频/音频默认是否静音。  true|false
+//    defaultPlaybackRate	设置或返回视频/音频的默认播放速度。 默认1.0
+//    duration	返回视频/音频的长度（以秒计）。
+//    ended	返回视频/音频的播放是否已结束。       true|false
+//    error	返回表示视频/音频错误状态的 MediaError 对象。
+//    loop	设置或返回视频/音频是否应在结束时再次播放。
+//    muted	设置视频/音频或返回是否关闭声音。
+//    networkState	返回视频/音频的当前网络状态。
+//        0 = NETWORK_EMPTY - 音频/视频尚未初始化
+//        1 = NETWORK_IDLE - 音频/视频是活动的且已选取资源，但并未使用网络
+//        2 = NETWORK_LOADING - 浏览器正在下载数据
+//        3 = NETWORK_NO_SOURCE - 未找到音频/视频来源
+//    paused	设置或返回视频/音频是否暂停。
+//    playbackRate	设置或返回视频/音频播放的速度。
+//    poster	设置或返回视频的 poster 属性的值。 url=""
+//              视频加载时或在用户点击播放按钮前显示的图片。如果不包含该属性，视频的第一帧将被用来代替显示
+//    preload	设置或返回视频/音频的 preload 属性的值。如果使用 autoplay 属性则 preload 属性会被忽略
+//        auto	指示一旦页面加载，则开始加载音频。
+//        metadata	指示当页面加载后仅加载音频的元数据。
+//        none	指示页面加载后不应加载音频。
+//    readyState	返回视频当前的就绪状态。
+//        0 － （未初始化）还没有调用send()方法
+//        1 － （载入）已调用send()方法，正在发送请求
+//        2 － （载入完成）send()方法执行完成，已经接收到全部响应内容
+//        3 － （交互）正在解析响应内容
+//        4 － （完成）响应内容解析完成，可以在客户端调用了
+//    seeking	返回用户当前是否正在视频中进行查找。寻址中（Seeking）指的是用户在音频/视频中移动/跳跃到新的位置。
+//    src	设置或返回视频的 src 属性的值。
+//    volume	设置或返回视频的音量。0.0-1.0
+//方法
+//    canPlayType()	检查浏览器是否能够播放指定的音频/视频类型。
+//      返回值："probably"   浏览器最可能支持该音频/视频类型
+//              "maybe"   浏览器也许支持该音频/视频类型
+//              ""   （空字符串）浏览器不支持该音频/视频类型
+//        规定要检测的音频/视频类型。常用值video/ogg video/mp4 video/webm audio/mpeg audio/ogg audio/mp4
+//            常用值，包括编解码器：video/ogg; codecs="theora, vorbis" video/mp4; codecs="avc1.4D401E, mp4a.40.2"
+//                    video/webm; codecs="vp8.0, vorbis"  audio/ogg; codecs="vorbis" audio/mp4;  codecs="mp4a.40.5"
+//              注释：如果包含编解码器，则只能返回 "probably"。
+//    load()	重新加载视频/音频元素。
+//    play()	开始播放视频/音频。
+//    pause()	暂停当前播放的视频/音频。
+</script>
+<!-- canvas 画布------------------------------------
+    canvas 元素本身是没有绘图能力的。所有的绘制工作必须在js内部完成
+    http://www.w3school.com.cn/tags/html_ref_canvas.asp 画布方法属性网址-->
+<canvas id="ca" width="300" height="300" style="border: 1px solid blue;"></canvas>
+<script>
+    var ca = document.getElementById('ca'); //获取canvas对象
+    var c = ca.getContext("2d");    //创建（转化）为2d对象
+    c.beginPath();//开始画笔
+    c.strokeStyle='blue'; //定义画笔颜色
+    c.lineWidth=3; //定义画笔宽度
+    c.moveTo(10,10); //定义画笔的起始点
+    c.lineTo(50,10); // 定义画笔的结束点
+    c.lineTo(50,50); //从上一个结束开始，重新定义一个结束点
+    c.lineTo(10,50);// 定义画笔的结束点(从上一个结束开始，重新定义一个结束点)
+    c.closePath(); // 闭合， 回到起始点
+    c.stroke();  // 开始画
+// rect() 画矩形 参数： 前面两个 矩形左上角的位置，后面两个矩形的长宽
+//   fill() 方法填充当前的图像（路径）。默认颜色是黑色 改变颜色请用fillStyle
+//	 fillStyle 给对象属性来填充另一种颜色/渐变
+    c.beginPath();
+    c.rect(60,10,50,50);
+    c.fillStyle = "gray";
+    c.fill();
+    c.stroke();
+//arc() 方法创建弧/曲线（用于创建圆或部分圆） 中心点横轴，中心点纵轴，半径，起始角，结束角2=圆 1=半圆
+    c.beginPath();
+    c.arc(60,110,40,0,Math.PI*2);
+    c.fillStyle = "pink";
+    c.fill();
+    c.stroke();
+//quadraticCurveTo()    二次贝塞尔曲线  控制点x 控制点y 结束点x 结束点y
+//bezierCurveTo()       三次贝塞尔曲线  控制点1x 控制点1y 控制点2x 控制点2y 结束点x 结束点y
+//http://www.j--d.com/bezier        在线编辑器
+
+    c.beginPath();
+    c.moveTo(200,200);  //开始点
+    c.quadraticCurveTo(300,100,200,20);
+    c.moveTo(220,250);
+    c.bezierCurveTo(200,50,100,200,250,100)
+    c.stroke();
+</script>
+
+<script>
+    /*--客户端存储数据的新方法：
+    在 HTML5 中，数据不是由每个服务器请求传递的，而是只有在请求时使用数据。 5M
+    对于不同的网站，数据存储于不同的区域，并且一个网站只能访问其自身的数据。
+    localStorage - 没有时间限制的数据存储
+    sessionStorage - 针对一个 session 的数据存储 当用户关闭浏览器窗口后，数据会被删除
+    键/值对通常以字符串存储
+    */
+    localStorage.lastname="Smith";  //key="lastname" value="Smith" 创建localStorage 键/值对。
+    localStorage.setItem('name','Young');// 保存数据 key="name" value="Young" 创建localStorage 键/值对。
+    localStorage.removeItem('name');   //删除指定键值对
+    localStorage.getItem("Smith");  //读取指定键值
+    localStorage.clear();  //删除所有键值对
+    localStorage.key(0);    //得到某个索引的key：
+    document.write(localStorage.name);    //查找指定键值
+    sessionStorage.setItem("name","dfdf");//使用的API都相同，可使用同样方法
+
+    // 判断浏览器是否支持localStorage sessionStorage
+    if (typeof(Storage) !== "undefined") {        localStorage.setItem("lastname", "Gates");    }
+    else {        document.innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";    }
+</script>
+<!-- 应用程序缓存
+可在没有因特网连接时进行访问，已缓存资源加载得更快，浏览器将只从服务器下载更新过或更改过的资源。
+    如需启用应用程序缓存，请在文档的 <html> 标签中包含 manifest 属性
+manifest 文件的建议的文件扩展名是：".appcache"。
+    manifest 文件需要配置正确的 MIME-type，即 "text/cache-manifest"。必须在 web 服务器上进行配置
+manifest 文件可分为三个部分：
+        CACHE MANIFEST - 在此标题下列出的文件将在首次下载后进行缓存
+NETWORK - 在此标题下列出的文件需要与服务器的连接，且不会被缓存
+FALLBACK - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）
+-->
+</body>
+</html>

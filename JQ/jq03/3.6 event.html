@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="height: 3000px;">
+    <div style="width: 100px;height: 100px;background-color: darkcyan;" id="div1"></div>
+    <ul>
+        <li>111111</li>
+        <li>222222</li>
+        <li>333333</li>
+        <li>444444</li>
+        <li>555555</li>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+//            $(document).on("click", function(event){
+//                console.log(event.pageY);           //pageY = clientY + scrollTop 离文档的上边距
+//                console.log(event.clientY);         //离可视区域的上边距
+//            });
+
+//            $("#div1").on("click", function(event){
+//                console.log(event.offsetY);           //离标签节点的上边距
+//                console.log(event.screenY);             //离屏幕的上边距
+//                console.log(event.type);                //事件类型
+//            });
+
+//            $("ul").on("click", "li", function(event){
+//                console.log(this);                  //li
+//                console.log(event.target);          //li 事件源
+//                console.log(event.currentTarget);   //li 事件源
+//
+////                this === event.target === event.currentTarget
+//            });
+
+//            $("ul").on("click", function(event){
+//                console.log(this);                      //ul
+//                console.log(event.target);              //li 事件源
+//                console.log(event.currentTarget);      //ul 事件源
+//            });
+//---------------------------------------------------------------------------------
+//            $(document.body).on("click", function(){
+//                console.log("body");
+//            });
+//
+//            $("#div1").on("click.a", function(event){
+//                console.log("div");
+////                event.stopPropagation();              // 阻止事件往祖先元素冒泡
+////                event.stopImmediatePropagation();   //阻止事件往祖先元素冒泡，还阻止命名空间执行
+//                return false;                     // JS 阻止默认行为    JQ 不但阻止默认行为还阻止冒泡
+//            }).on("click.b", function(){
+//                console.log("div2");
+//            });
+//            --------------------------------------------------------------
+//            $(document).on("contextmenu", function(event){
+//                 event.preventDefault();            //阻止默认行为
+////                 return false;
+//            });
+
+//            $(document).on("keydown", function(event){
+////                console.log(event.keyCode);         //键盘键码
+////                console.log(event.which);         //键盘键码
+//            });
+            $(document).on("mousedown", function(event){
+                console.log(event.which);       //鼠标按钮（左1中2右3）
+            })
+        });
+    </script>
+</body>
+</html>

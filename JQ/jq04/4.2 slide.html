@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>slideDown</button>
+    <button>slideUp</button>
+    <button>slideToggle</button>
+    <div style="width: 200px;background-color: darkcyan;height: 200px;"></div>
+
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            var aBtn = $(":button");
+            aBtn.eq(0).on("click", function(){      //slideToggle(过渡时间，过渡曲线,回调函数)
+                $("div").slideDown(10000,"swing");           // 过渡样式：opacity height padding(top、bottom) margin(top、bottom)
+            });
+            aBtn.eq(1).on("click", function(){
+                $("div").slideUp("slow", "linear");
+            });
+
+            aBtn.eq(2).on("click", function(){
+                $("div").slideToggle(1000);         //滑入滑出效果
+            });
+
+        });
+    </script>
+</body>
+</html>

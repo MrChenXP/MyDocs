@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>前增加</button>
+    <button>后增加</button>
+    <button>上一个同胞</button>
+    <button>下一个同胞</button>
+    <ul></ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            var aBtn = $("button"), count = 0;
+            aBtn.eq(0).click(function(){
+//                $("ul").prepend(`<li>${++count}</li>`);          // 前增加子节点
+                $(`<li>${++count}</li>`).prependTo($("ul"));        //JQ是链式操作
+            });
+            aBtn.eq(1).click(function(){
+//                $("ul").append(`<li>${++count}</li>`);          // 后增加子节点
+                $(`<li>${++count}</li>`).appendTo($("ul"));
+            });
+
+            aBtn.eq(2).click(function(){
+//                $("ul").before(`<h3>${++count}</h3>`);          // 增加上一个同胞节点
+                $(`<h3>${++count}</h3>`).insertBefore($("ul"));
+            });
+            aBtn.eq(3).click(function(){
+//                $("ul").after(`<h3>${++count}</h3>`);          // 增加下一个同胞节点
+                $(`<h3>${++count}</h3>`).insertAfter($("ul"));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS浮动定位</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    /* float：定义元素在哪个方向浮动
+    float:left; 定义元素左浮动 float:right; 定义元素右浮动
+    float:none; 默认值。元素不浮动，并会显示在其在文本中出现的位置*/
+    .div1 {
+      width: 500px;
+    }
+
+    .div1-1, .div1-2 {
+      width: 100px;
+      float: left;
+      background-color: grey;
+    }
+
+    .div1-3, .div1-4 {
+      float: right;
+      width: 100px;
+      background-color: blue;
+    }
+
+    /*  清除浮动
+        1.clear:both；规定元素左右两侧不允许有浮动[left:左侧，right:右侧]
+        2.父元素设置高度(用于小板块，高度可以写死的部分)或绝对定位
+        3.额外标签类法：单独写一个标签放clear属性overflow
+        4.给浮动元素的父元素添加overflow：hidden(内容隐藏后强制拥有高度)。父元素内不能有定位超出的元素，会被隐藏
+        4.after伪元素：zoom:1 ie专用。在此之后after clerar，visbility:hidden属性。         */
+    .div2 {
+      width: 250px;
+      height: 150px;
+      background-color: #54438b;
+      clear: both;
+    }
+
+    .clearfix {
+      zoom: 1;
+    }
+
+    .clearfix:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
+
+    /* 定位属性
+        position：static 默认值，无定位，在html文档流中默认的位置
+        position：absolute 绝对定位[left,right,top,bottom]找其最接近的具有定位属性的祖元素（padding左上角做为起点）进行绝对定位，没有找body
+        position: relative 相对定位[left,right,top,bottom]相对于其原始位置进行定位偏移，不会影响其他元素位置，但会覆盖其他元素
+        position: fixed 固定定位[left,right,top,bottom]相对于浏览器窗口进行定位
+        */
+    .div3 {
+      width: 500px;
+      height: 500px;
+      background: #009c0f;
+      position: absolute;
+      left: 20px;
+    }
+
+    .div3-1 {
+      width: 100px;
+      height: 100px;
+      background: #d89618;
+      position: relative;
+      left: 20px;
+      float: left;
+    }
+
+    .div3-2 {
+      width: 100px;
+      height: 100px;
+      background: #48a8cf;
+      position: fixed;
+      left: 100px;
+    }
+
+    /* z-index 规定元素的堆叠顺序，兄弟元素堆叠的时候值大的覆盖小的(仅能在有定位属性的元素上奏效，)
+        默认0，值有正负*/
+    .div4 {
+      width: 200px;
+      height: 200px;
+      background-color: blueviolet;
+      position: fixed;
+      bottom: 20px;
+    }
+
+    .div4-1 {
+      width: 150px;
+      height: 50px;
+      background-color: #f1ff74;
+      z-index: 11;
+      position: relative;
+    }
+
+    .div4-2 {
+      width: 150px;
+      height: 50px;
+      background-color: #48a8cf;
+      z-index: 10;
+      position: relative;
+      top: -20px;
+    }
+
+    .div5 {
+      width: 300px;
+      height: 160px;
+      background-color: gray;
+      float: right;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .div5-1 {
+      width: 130px;
+      height: 100px;
+      background-color: blue;
+      position: absolute;
+      top: -30px;
+      /*margin-left: 75px;*/
+      left: 75px;
+    }
+  </style>
+</head>
+<body>
+<div class="div1">
+  <div class="div1-1">这是float：left</div>
+  <div class="div1-2">这是float：left</div>
+  <div class="div1-3">这是float：right</div>
+  <div class="div1-4">这是float：right</div>
+</div>
+<div class="div2 clearfix">这里是clear：both</div>
+<div class="div3">
+  <div class="div3-1">这里是相对定位</div>
+  <div class="div3-2">这里是固定定位</div>
+</div>
+<div class="div4">
+  <div class="div4-1">这里是本来要被覆盖的，加了z-index</div>
+  <div class="div4-2">这里堆叠属性低，反而被覆盖</div>
+</div>
+<div class="div5">
+  <div class="div5-1"></div>
+</div>
+</body>
+</html>

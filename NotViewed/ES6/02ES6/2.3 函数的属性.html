@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //length 返回从左往右没有遇到参数有默认值的参数个数（不包含rest参数）
+//        function show(x,y){}            //2
+//        function show1(x,y = 1){}       //1
+//        function show2(x,y = 1,z){}       //1
+//        function show3(x,y,...rest){}       //2
+//        document.writeln(show.length);
+//        document.writeln(show1.length);
+//        document.writeln(show2.length);
+//        document.writeln(show3.length);
+
+        //name 返回函数名
+        document.writeln(function show(){}.name);       //show
+        document.writeln(new Function().name);          //anonymous
+
+        var show = function(){};
+        var show1 = function fn(){};
+
+        document.writeln(show.name);                        //show
+        document.writeln(show1.name);                       //fn
+        document.writeln(show.bind({}).name);               //bound show
+        document.writeln(new Function().bind({}).name);     //bound anonymous
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

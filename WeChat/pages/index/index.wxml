@@ -1,0 +1,17 @@
+<!--index.wxml 
+WXML 语法参考 https://developers.weixin.qq.com/miniprogram/dev/api/wx.openLocation.html
+-->
+<view>
+  <text hidden="{{true}}">循环 判断</text>
+  <text wx:for="{{array}}" wx:key="index" wx:for-index="index" wx:for-item="item" wx:if="{{item !== 1}}">{{item}}</text>
+  <!-- https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html
+    bindtap|catch:绑定触摸(tap)事件 使用catch绑定的事件会阻止冒泡
+    capture-bind:tap 绑定触摸事件的捕获 
+    capture-catch:tap 将中断捕获阶段和取消冒泡阶段
+    事件传值 以data-开头，多个单词由连字符-链接，不能有大写(大写会自动转成小写)如data-element-type，最终在 event.currentTarget.dataset 中会将连字符转成驼峰elementType
+  -->
+  <view bindtap='tapClick' data-aa='ee' >
+    点击触发绑定点击事件 
+  </view>
+ 
+</view>

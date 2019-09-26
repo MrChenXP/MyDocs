@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        ES5方式
+//        function Parent(name, age){
+//            this.name = name;
+//            this.age = age;
+//        }
+//        Parent.prototype.showName = function(){
+//            return this.name;
+//        };
+//        Parent.prototype.showAge = function(){
+//            return this.age;
+//        };
+
+//        const p1 = new Parent("张三", 56);
+//        document.writeln(p1.showName());        //张三
+//        document.writeln(p1.showAge());         //56
+//        ---------------------- ES6方式 -----------------------------
+
+        class Parent{
+            constructor(name, age){         //构造函数不声明时系统会自动增加
+                this.name = name;       //constructor里的this是指向实例对象
+                this.age = age;
+            }
+            showName(){         //类里的方法是不可被枚举的
+                return this.name;
+            }               // 在类里方法与方法之间不要用逗号隔开
+            showAge(){
+                return this.age;        //在非静态方法里的this是指向类的实例对象
+            }
+            static showSex(){       //静态方法  由类本身去调用
+                return "male";      //静态方法里的this是指向类本身，不是指向实例对象
+            }
+        }
+
+        const p1 = new Parent("张三", 44);        //类的实例化必须用new操作符
+
+//        console.log(p1);
+
+//        alert(typeof Parent);       //function
+//        alert(Parent === Parent.prototype.constructor);     //true  类是指向到类原型上的constructor上
+
+//        alert(Parent.prototype.hasOwnProperty("showName"));     //true  说明类里的方法都是加载到类的原型上
+
+//        console.log(p1.name);
+//        console.log(p1.showAge());        //44
+//        alert(p1.showSex());            //不可访问类里的静态方法
+        alert(Parent.showSex());        //male
+
+
+//        for(let key in Parent.prototype){
+//            document.writeln(`key = ${key}<br>`);
+//        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

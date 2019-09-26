@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS盒子模型</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    /*  width:50%;（宽度是父元素宽度的百分之五十）
+        height：auto；等同于高度不写，高度由内容撑
+        min-width min-height max-width max-height 应对可能动态产生元素尺寸变大变小的问题,限制它最大和最小值
+    */
+    div {
+      width: 50%;
+      width: 200px;
+      height: auto;
+      height: 100px;
+    }
+
+    /* border属性 设置边框
+        border:3px; 设置边框大小[thin:定义细的边框,medium:默认定义中等的边框,thick:定义粗的边框]
+        border-style:sold; 设置边框样式[solid	定义实线,dashed虚线,double双线 ]
+        border-color: red; 设置边框颜色
+        border-top-color:red; 定义上边框颜色，[left,right,bottom]
+        border:1px solid #0f0;  复合属性，顺序可乱*/
+    .div1 {
+      background-color: gray;
+      border-width: thick;
+      border-style: solid;
+      border-top-color: red;
+      border: solid black 10px;
+    }
+
+    /* border-imgers 边框图片属性
+        source	用在边框的图片的路径
+        slice	图片边框向内偏移[file(此属性让中间那块不透明)，number，%]。
+        border-imgers-width	图片边框的宽度。
+        border-imgers-outset	边框图像区域超出边框的量。
+        border-imgers-repeat	图像边框是否应平铺(repeat)、铺满(round)或拉伸(stretch)            */
+    .div1-2 {
+      width: 150px;
+      height: 200px;
+      border: 21px solid transparent;
+      border-image-source: url("../../DaiMa/imgers/border.png");
+      border-image-slice: 27;
+      border-image-width: 50px;
+      border-image-outset: 60px;
+      border-image-repeat: round;
+      border-image: url("../../DaiMa/imgers/border.png") 27 repeat;
+    }
+
+    /* padding属性 设置内边距
+       padding-top: 10px; 设置上内边距[left,right,bottom]
+       padding:15px; 设置四边边距。
+       */
+    .div2 {
+      background-color: #ff1122;
+      padding-top: 10px;
+    }
+
+    /* margin属性： 设置外边距
+        margin-top:10px; 设置上外边距(right,bottom,left)
+        margin:10px; 设置四边外边距
+        margin:0 auto; 让一个有宽度，宽度不为100%的块级元素,居中对齐;对行内元素、行内块元素无效，除非转为块元素
+        text-align：center 行内、行内块元素在该元素中居中:给包裹行内元素、行内块元素的元素添加
+       */
+    .div3 {
+      background-color: blue;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* box-sizing:border-box；IE传统盒模型(不撑大盒子)  content-box：默认，W3C标准盒模型
+       resize ：改变元素尺寸大小[none:不能改变元素的宽高（默认）,both:改变元素的宽高,horizontal:改变宽度
+            vertical:改变高度,inherit:继承父元素resize属性 注：使用时需要加上overflow:auto
+       outline ：设置元素的虚似外边框(在盒子外加一个边框，会覆盖旁边的元素)
+            去除虚拟边框[:focus(outline:none;)] 获取焦点时去除
+ */
+    .div4 {
+      background-color: #6699ff;
+      box-sizing: border-box;
+      border: 5px solid;
+      padding: 10px;
+      overflow: auto;
+      resize: both;
+      outline: 3px solid red;
+    }
+
+    /* box-shadow : 盒子增加阴影[x-shadow 必需,阴影水平的,允许负值。y-shadow 必需,阴影垂直的偏移量,允许负值。
+            blur 可选,阴影模糊半径(大于0，0为不模糊）,spread 可选,阴影的扩展半径（正值扩大、负值缩小）
+            color 可选,阴影的颜色。  inset 可选,将外部阴影 (outset) 改为内部阴影*/
+    .div5 {
+      background-color: #8b475d;
+      box-shadow: 10px 10px 5px 5px #6699ff inset;
+    }
+
+    /* border-radius 设置边框的圆角*/
+    .div6 {
+      background-color: yellow;
+      border-radius: 5px 10px 15px 20px;
+      border-top-left-radius: 2em;
+      border-top-left-radius: 2em 3em; /* x轴 y轴*/
+      border-top-right-radius: 2em;
+      border-bottom-right-radius: 2em;
+      border-bottom-left-radius: 2em;
+    }
+
+    /* display:block;   将行内、行内块元素转为块
+        display:inline;   将块元素转为行内（一般不将块元素转为行内元素）
+        display:inline-block;  将块和行内元素转为行内块
+        display:none; 隐藏元素，元素不占位*/
+    .div7 span {
+      display: block;
+      width: 150px;
+      background-color: red;
+    }
+
+    /* 让元素不可见。1.高度为0 2.opacity:0;透明度设为0(IE8不支持),占位置
+       2.filter: alpha(opacity: 0.2);图片滤镜，兼容IE9
+       3.visibility 属性规定元素是否可见 hidden不可见,占位置
+            collapse 隐藏表格行与列，不占位，不是表格则和hidden一样
+       4.display: none; 隐藏，不占位
+   */
+    .div8 {
+      opacity: 0;
+      filter: alpha(opacity:0.2);
+      visibility: hidden;
+      display: none;
+    }
+
+    /* 用border-radius画图
+        100px/50px 前面表示水平半径，后面表示垂直半径
+    */
+    .sx {
+      width: 50px;
+      height: 50px;
+      background-color: #ff1122;
+      border-radius: 0px 50px 0 0;
+    }
+
+    .bty {
+      width: 100px;
+      height: 100px;
+      background-color: #ff1122;
+      border-radius: 0 100px 100px 0/0 50px 50px 0;
+    }
+
+    .sjx {
+      width: 0px;
+      height: 0px;
+      border-bottom: 70px solid red;
+      border-left: 40px solid transparent;
+      border-right: 40px solid transparent;
+    }
+
+    .tx {
+      margin-top: 50px;
+      width: 20px;
+      height: 0px;
+      border-bottom: 50px solid red;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+    }
+
+    .txy {
+      width: 160px;
+      height: 160px;
+      background-color: black;
+      border-radius: 80px;
+      overflow: hidden;
+    }
+
+    .txy2 {
+      margin: 20px auto;
+      width: 120px;
+      height: 120px;
+      background-color: white;
+      border-radius: 60px 60px 60px 60px;
+    }
+  </style>
+</head>
+<body>
+<div class="div1">这里是border属性</div>
+<div class="div1-2">这里是border-image属性</div>
+<div class="div2">这里是padding属性</div>
+<div class="div3"><span>这里是margin属性</span></div>
+<div class="div4">这里是box-sizing,resize,outline属性</div>
+<div class="div5">这里是box-shadow属性</div>
+<div class="div6">这里是border-radius属性</div>
+<div class="div7"><span>这里是display:block属性</span></div>
+<div class="div8" style="width: 300px; height: 300px; background-color: red;">这里是display：none</div>
+<div class="div9">
+  <div class="sx">扇形</div>
+  <div class="bty">半椭圆</div>
+  <div class="sjx">三角形</div>
+  <br/>
+  <div class="tx">梯形</div>
+  同心圆，描边圆
+  <div class="txy">
+
+    <div class="txy2"></div>
+  </div>
+</div>
+
+</body>
+</html>

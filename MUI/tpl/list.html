@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/index.css" />
+	</head>
+
+	<body>
+		
+		<!--banner轮播-->
+			<div class="mui-slider banner">
+			  <div class="mui-slider-group">
+			    <!--第一个内容区容器-->
+			    <div class="mui-slider-item">
+			      <!-- 具体内容 -->
+			      <img src="../img/bannerbg1.jpg">
+			    </div>
+			    <!--第二个内容区-->
+			    <div class="mui-slider-item">
+			      <!-- 具体内容 -->
+			      <img src="../img/bannerbg2.jpg">
+			    </div>
+			    <div class="mui-slider-item">
+			      <!-- 具体内容 -->
+			      <img src="../img/bannerbg3.jpg">
+			    </div>
+			  </div>
+			</div>
+		<!--主体 除顶部导航、底部选项卡两个控件之外 其他控件都要放在mui-content-->
+		<div class="mui-content">
+			<!--列表-->
+		    <ul class="mui-table-view ul" id="news">
+		        <script id="list" type="text/html">
+		        	{{each stories as list}}
+		        	<li class="mui-table-view-cell mui-media " id="{{list.id}}">
+		            <a href="javascript:;">
+		                <img class="mui-media-object mui-pull-right" src='{{list.images[0]}}'>
+		                <div class="mui-media-body">
+		              			{{list.title}}
+		                </div>
+		            </a>
+		        </li>
+		        {{/each}}
+		      </script>
+		    </ul>
+		</div>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				preloadPages:[{//配置预加载页面
+					id:'info',
+					url:'info.html',
+					styles:{},//窗口参数
+		      extras:{},//自定义扩展参数
+		      subpages:[{},{}]//预加载页面的子页面
+				}],
+				preloadLimit:5//预加载窗口数量限制(一旦超出,先进先出)默认不限制
+			});
+			
+			var page = mui.preload({//通过mui.preload()方法预加载 
+				//可立即返回对应webview的引用 一个preload()对应一个加载
+				url:'',
+		    id:'',//默认使用当前页面的url作为id
+		    styles:{},//窗口参数
+		    extras:{}//自定义扩展参数
+			})
+			
+			var detailPage = null;
+			mui('.mui-table-view').on('tap','li',function(e){
+				var id = this.getAttribute('id');//获取当前对象的id属性值
+				//获得详情页面
+				if(!detailPage){
+					detailPage = plus.webview.getWebviewById('info');
+				}
+				//触发详情页面的id事件
+				mui.fire(detailPage,'id',{
+					id:id
+				});
+				//打开详情页
+				mui.openWindow({
+					id:'info'
+				});
+			});
+			
+			//获取知乎日报最新消息
+			mui.plusReady(function(){
+				mui.ajax('https://news-at.zhihu.com/api/4/news/latest',{
+					data:{},
+					dataType:'json',
+					type:'GET',
+					timeout:10000,//请求超时时间,超过出发error
+					async:true,//同异步
+					crossDomain:true,//强制使用5+跨域
+					headers:{'Content-Type':'application/json'},
+					success:function(data,staus,xhr){
+						var html = template('list',data);
+						document.getElementById("news").innerHTML=html;
+					},
+					error:function(xhr,type,errorThrown){
+						alert(errorThrown);
+					}
+				});
+			})
+			
+		</script>
+	</body>
+
+</html>

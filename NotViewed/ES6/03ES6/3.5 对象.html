@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        let obj = new Object();
+//        let obj = {};
+//        let obj = Object.create(null);
+
+//        let obj = {
+//            user: "jj",
+//            age: 12,
+//            sex: "female"
+//        };
+//        Object.defineProperty(obj, "birth",{        //不可被枚举
+//            value: 20
+//        });
+//        for(let key in obj){
+//            document.writeln(`key = ${key}<br>`);
+//        }
+
+//        for(let key of Object.keys(obj)){       //返回可枚举的键名
+//            document.writeln(`key = ${key}<br>`);
+//        }
+//        for(let key of Object.getOwnPropertyNames(obj)){  //返回可枚举和不可枚举的键名
+//            document.writeln(`key = ${key}<br>`);
+//        }
+//       ----------------------------------------------------------------------
+        let names = "java", birth = 30;
+        const obj = {
+            user: "jj",
+            age: 12,
+            sex: "female",
+
+            [names + "script"]: "js",       //键名可以用表达式，须用一对方括号包裹
+
+            birth,                  //相当于 birth: birth      对象属性的简化（当键名和变量名一样时才可简化）
+            showName: function(){
+                return this.user;
+            },
+            showAge(){              //对象方法的简化
+                return this.age;
+            }
+        };
+//        alert(obj.showAge());
+        alert(obj.birth);
+        for(let key in obj){
+            document.writeln(`key = ${key}<br>`);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

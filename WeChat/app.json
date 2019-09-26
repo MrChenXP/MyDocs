@@ -1,0 +1,15 @@
+{
+  "app.json是当前小程序的全局配置 包括了小程序的所有页面路径 界面表现 网络超时时间 底部tab等": "https://developers.weixin.qq.com/miniprogram/dev/framework/config.html",
+  "": "window字段 —— 定义小程序所有页面的顶部背景颜色，文字颜色定义等",
+  "pages": [
+    "pages/index/index",
+    "pages/editor/editor"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "这是小程序名称",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

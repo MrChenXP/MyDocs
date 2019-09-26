@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    <div>this is a div</div>
+    <div>this is a div</div>
+    <p class="p1">this is a p</p>
+    <input type="text" readonly>
+    <ul>
+        <li>1111</li>
+        <li>2222</li>
+        <li>3333</li>
+        <li>4444</li>
+        <li>5555</li>
+        <li>6666</li>
+        <li>7777</li>
+    </ul>
+    <ul>
+        <li>8888</li>
+        <li>9999</li>
+        <li>0000</li>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+//            alert($("div").html());     //读取内容
+//            $("div").html("<span style='color: red;'>这是增加的内容</span>");        //替换内容
+//            $("div").html(function(index, html){        //保留原有的内容     类似于innerHTML
+//                if(index === 0){
+//                    return html + "<span style='color: red;'>这是增加的内容</span>";
+//                }
+//            });
+
+//            $("div").eq(1).text("增加的内容");     //类似于innerText
+
+//            alert($("p").attr("class"));      //读取属性
+//            $("p").attr("class", "cp");       //设置属性
+
+//               $("p").removeAttr("class");      //删除属性
+
+            $("ul li").click(function(){
+//                alert($(this).index());     //返回元素在当前元素集合里的第几个
+                alert($("ul li").index($(this)));
+            });
+        });
+    </script>
+</body>
+</html>

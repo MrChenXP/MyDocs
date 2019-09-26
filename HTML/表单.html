@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>表单</title>
+  <style type="text/css">
+    /*设置table标签的tr标签的td标签的属性*/
+    table tr td {
+      width: 100px;
+      text-align: center;
+      font-size: 14px;
+      /*height: 30px;*/
+    }
+  </style>
+</head>
+<body>
+<!--表格标签,border:边框粗细.cellspacing:控制单元格间距.heght:高度.width:宽度
+    colspan:多列合并(占用x个单元格）.rowspan:多行合并. valign:垂直对其方式.
+    cellpadding:设置文字与四周边框的距离（填充）.bgcolor:设置表格背景色.
+    frame:void不要表格边线，above只要上边线，below要下边线，hsides要上下边线，vsides要左右边线，ihs要左边线，rhs要右边线，box/border要四条线
+    rules:none单元格没有线条，all线条全要，rows只要横行的线条，cols只要列线条。groups列组合水平部分由caption控制-->
+<table border="1" cellspacing="0" align="center" cellpadding="5" bgcolor="#6383cf" rules="groups">
+  <!--表格标题标签 会居中和加粗 algin:top标题在表格上方，bottom标题在表格下方-->
+  <caption>这是表格标题</caption>
+  <!--直列格式化标签,设置整列属性.Firefox,Chrome,Safari仅支持colgroup元素的span,width属性-->
+  <colgroup span="6"></colgroup>
+  <colgroup bgcolor="#cccfcf"></colgroup>
+  <!--表头标签。只能用一次。用th标签，加粗-->
+  <thead>
+  <tr>
+    <th colspan="7">这是表头区域</th>
+  </tr>
+  </thead>
+  <!--表身标签-->
+  <tbody>
+  <tr>
+    <!--nowarp：不换行-->
+    <td nowrap="nowrap">汉族</td>
+    <td>&emsp;</td>
+    <td>政治面貌</td>
+    <td>&emsp;</td>
+    <td>婚姻状况</td>
+    <td>&emsp;</td>
+    <td rowspan="3">&emsp;</td>
+  </tr>
+  <tr>
+    <td>学历</td>
+    <td></td>
+    <td>现所在地</td>
+    <td></td>
+    <td>户籍</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>专业</td>
+    <td colspan="2"></td>
+    <td>毕业学校</td>
+    <td colspan="2"></td>
+  </tr>
+  </tbody>
+  <!--表尾标签，只能用一次-->
+  <tfoot>
+  <tr>
+    <td colspan="7">这是表尾区域</td>
+  </tr>
+  </tfoot>
+
+</table>
+
+<!--表单标签，访问你站点的用户那里获得信息，负责网页数据采集
+    action:传送目标,向何处发送表单数据   naem:元素名,通过name属性来传递值,若没有,则传递不出去
+    method:如何发送表单数据,可以作为URL变量(get,不安全一般用来取数据)或者HTTP post(post)的方式来发送
+-->
+<form action="https://www.baidu.com" method="post">
+  <!--将表单内容的一部分打包，生成一组相关表单的字段-->
+  <fieldset>
+    <!--表单标题-->
+    <legend>表单学习</legend>
+    姓名：
+    <!--readonly:只读。disabled:不可编辑（js里此属性不能触发事件）。autofocus:一开始聚焦在此框。
+        required:不能为空（必填）。tabindex:按tab键无法选择    multiple:多选
+        autocomplete 属性规定 form 或 input 域应该拥有自动完成功能。
+        value：文本框初始值。placeholder:框提示信息。size:文本框长度.maxlength:最多容纳字符-->
+    <input type="text" name="user" value="这是文本框" readonly required>
+    密码：
+    <input type="password" name="pass" value="这是密码框" size="30" disabled>
+    身份证：
+    <input type="text" name="phone" value="" placeholder="请输入身份证" maxlength="12">
+    <br>
+    邮箱框：
+    <input type="email" name="email">
+    网址框：
+    <input type="url" name="url">
+    <!--数字框，只能输入数字。step：一次性改变多少数字。max：最大数。min：最小数-->
+    年龄：
+    <input type="number" name="age" step="5" max="200" min="0">
+    <!--电话框。pattern 属性规定用于验证输入字段的模式-->
+    手机：<input type="tel" name="tel" pattern="\d{11}">
+    <br>
+    滚动条：
+    <input type="range" name="range">
+    搜索
+    <input type="search">
+    <!--拾色器框，可以选择颜色。onchange：在域的内容改变时发生。-->
+    颜色框：
+    <input type="color" onchange="document.body.style.backgroundColor = this.value">
+    文本域：
+    <!--多行文本框标签（文本域）。rows:高。cols:宽。 style="resize:none;"：文本框不能被改变大小-->
+    <textarea rows="10" cols="30" name="introduce" style="resize:none;">这是多行文本框</textarea>
+    <br>
+    时间：
+    date<input type="date">
+    datetime<input type="datetime">
+    datetime-local<input type="datetime-local">
+    month<input type="month">
+    time<input type="time">
+    week<input type="week">
+    <br>
+
+    性别：
+    <!--单选按钮标签。checked:默认选择.通过设置value值来给后台确认你选择的是哪个（因为name一样）
+          给input标签设置id，在用label绑定该标签，则可使选其他地方也能进行选择-->
+    <input type="radio" name="sex" id="male" checked value="male"><label for="male">男</label>
+    <input type="radio" name="sex" id="female" value="female"><label for="female">女</label>
+    <!--复选框-->
+    爱好:
+    <input type="checkbox" name="hobby" value="1">吃鸡
+    <input type="checkbox" name="hobby" value="2">lol
+    <input type="checkbox" name="hobby" value="3">毒奶粉
+    <br>
+    <!--隐藏域.一般用来传id或其他数据.不被用户看到的操作-->
+    <input type="hidden" name="id" value="123">这里有个隐藏域
+    <!--图像域，带提交功能-->
+    <input type="image" src="../../DaiMa/imgers/timg.jpg" width="50" height="20">
+    <!--文件域，选择文件-->
+    附件：
+    <input type="file" name="photo">
+    提交：
+    <input type="submit" value="这是提交注册按钮">
+    <input type="reset" value="这是重置按钮">
+
+    <br>
+    生日:
+    <!--下拉菜单标签。selected：默认显示字段.-->
+    <select name="birth" multiple>
+      <option value="1">2000</option>
+      <option value="2">2001</option>
+      <option value="3" selected>2002</option>
+    </select>
+    出生地
+    <!--分组下拉菜单-->
+    <select>
+      <optgroup label="广东">
+        <option>广州</option>
+        <option>深圳</option>
+        <option>东莞</option>
+      </optgroup>
+      <optgroup label="江西">
+        <option>南昌</option>
+        <option>抚州</option>
+        <option>上饶</option>
+      </optgroup>
+    </select>
+
+  </fieldset>
+</form>
+
+<!--多媒体标签-->
+<embed src="http://player.youku.com/player.php/sid/XMzI0NDYyMzAyOA==/v.swf" width="500"></embed>
+<!--iframe元素会创建包含另外一个文档的内联框架（行内框架）。直接在此网页包含另一个网页-->
+<iframe src="JiBenBiaoQian.html" width="700" height="300"></iframe>
+</body>
+</html>

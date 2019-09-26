@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        console.log(Reflect);
+//        function Parent(user, age){
+//            this.user = user;
+//            this.age = age;
+//            this[Symbol()] = "male";
+//        }
+//        Parent.prototype.showName = function(){
+//            return this.user;
+//        };
+//        Parent.prototype.showAge = function(){
+//            return this.age;
+//        };
+//
+//        function Child(){
+//            Parent.apply(this, arguments);
+//        }
+//        Child.prototype = new Parent();
+//        Child.prototype = Object.create(Parent.prototype);
+//        Child.prototype.constructor = Child;
+
+//        Object.setPrototypeOf(Child.prototype, Parent.prototype);
+//
+//        const c1 = new Child("child", 10);
+//
+//        for(let key in c1){
+//            document.writeln(`key = ${String(key)} <br>`);
+//        }
+//        console.log(c1);
+    </script>
+</head>
+<body>
+    <script>
+        function Parent(user, age){
+            this.user = user;
+            this.age = age;
+            this[Symbol()] = "male";
+        }
+        Parent.prototype.showName = function(){
+            return this.user;
+        };
+        Parent.prototype.showAge = function(){
+            return this.age;
+        };
+
+        function Child(){
+            Reflect.apply(Parent, this, arguments);     //类似于 apply()
+        }
+
+        Reflect.setPrototypeOf(Child.prototype, Parent.prototype);   //类似于 Object.setPrototypeOf()
+
+        const c1 = Reflect.construct(Child, ["child", 10]);         // 类似于 new 操作
+
+//        Reflect.preventExtensions(c1);                      //类似于 Object.preventExtensions()
+
+//        alert(Reflect.isExtensible(c1));        //false     类似于 Object.isExtensible()
+
+        Reflect.defineProperty(c1, "birth", {                   //类似于 Object.defineProperty()
+            value: 20,
+            configurable: true
+        });
+
+//        console.log(Reflect.getOwnPropertyDescriptor(c1, "birth"));     //类似于 Object.getOwnPropertyDescriptor()
+
+//        Reflect.deleteProperty(c1, "birth");                        //类似于 delete
+//        alert(Reflect.has(c1, "showName"));            //   类似于 in 操作 （可以检测对象本身的键名和构造器原型上的键名）
+
+//        console.log(Reflect.getPrototypeOf(c1) === Child.prototype);        //true      Object.getPrototypeOf()
+//
+//        for(let key of Reflect.ownKeys(c1)){        //等效于 Object.getOwnPropertyNames() + Object.getOwnPropertySymbols()
+//            document.writeln(`key = ${String(key)} <br>`);
+//        }
+//        console.log(c1);
+//---------------------------------------------------------------------------------------------
+
+        const obj = {
+            a: 11,
+            b: 12,
+            get sum(){
+                return this.a + this.b;
+            },
+            set changeA(val){
+                this.a = val;
+            }
+        };
+        const oReceiver = {
+            a: 1,
+            b: 2
+        };
+
+//        alert(Reflect.get(obj, "a"));       //11              读取对象的属性        类似于点运算符
+//        alert(Reflect.get(obj, "sum"));       //23            读取对象的方法时须在方法前加 get
+//        alert(Reflect.get(obj, "sum", oReceiver));  //3         读取对象的方法时须在方法前加 get
+
+//        Reflect.set(obj, "changeA", 21);              //类似于赋值运算
+//        Reflect.set(obj, "changeA", 21, oReceiver);
+//        console.log(obj, oReceiver);
+    </script>
+</body>
+</html>

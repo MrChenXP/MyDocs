@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 100px;height: 100px;background-color: darkcyan;"></div>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            $("div").hover(function(){      //相当于鼠标移入移出事件
+                $(this).css({border: "10px solid red"})
+            }, function(){
+                $(this).css({border: ""});
+            });
+        });
+    </script>
+</body>
+</html>

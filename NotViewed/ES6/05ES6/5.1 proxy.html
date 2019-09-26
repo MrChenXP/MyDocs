@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        拦截读取对象的属性
+//        const obj = {
+//            a: 12,
+//            b: 13
+//        };
+
+//        alert(Reflect.get(obj, "a"));       //12
+
+//        const oProxy = new Proxy(obj,{
+//            get: function(obj, propKey){
+//                if(propKey === "a"){
+//                    return undefined;
+//                }else{
+//                    return Reflect.get(obj, propKey);
+//                }
+//            }
+//        });
+//
+//        alert(oProxy.a);            //undefined
+//        alert(oProxy.b);            //13
+
+//        ------------------------------------------------------
+//        拦截对象的属性不存在返回undefined
+
+//        const obj = {
+//            a: 12
+//        };
+//
+////        alert(obj.b);
+//        const oProxy = new Proxy(obj, {
+//            get(obj, propKey){
+//                if(Reflect.has(obj, propKey)){
+//                    return Reflect.get(obj, propKey);
+//                }else{
+//                    throw new ReferenceError(`${propKey} is not define`);
+//                }
+//            }
+//        });
+//
+//        alert(oProxy.b);
+//        --------------------------------------------------------
+//        读取数组的下标为负数（从右往左）
+//        var arr = [12,23,13];
+//        alert(arr[-1]);       //undefined
+
+//        const arr = Array.of(12,23,13);
+
+
+//        function createArray(...rest){
+//            const arr = [];
+//            arr.push(...rest);
+//            const oProxy = new Proxy(arr, {
+//                get(arr, propKey){
+//                    let index = parseInt(propKey);
+//                    if(index < 0){
+//                        return arr[arr.length + index];
+//                    }
+//                    return arr[index];
+//                }
+//            });
+//            return oProxy;
+//        }
+//
+//        const arr = createArray(12, 23, 13);        //[12,23,13]
+//        alert(arr[-2]);
+//        -------------------------------------------------------------
+//        const obj = {
+//            user: "张三",
+//            score: 70        //如果一个属性不可配置（configurable）和不可写（writable），则该属性不能被代理，通过 Proxy 对象访问该属性会报错。
+//        };
+//        obj.score = 120;
+//        console.log(obj.score);   //120
+
+//        const oProxy = new Proxy(obj, {
+//            set(obj, propKey, propVal){
+//                if(propKey === "score"){
+//                    if(propVal <= 100 && propVal >= 0){
+//                        return Reflect.set(obj, "score", propVal);
+//                    }else{
+////                        throw new Error();
+//                        console.warn(`The property must be between 0 and 100`);     //控制台输出警告信息
+//                    }
+//                }
+//            }
+//        });
+//
+//        oProxy.score = 150;
+//        alert(oProxy.score);
+//        alert(oProxy.user);
+
+//        ---------------------------------------------------------------
+//        在代理对象里this的指向问题
+
+        const obj = {
+            show(){
+                console.log(this === obj);
+//                console.log(this === oProxy);
+            }
+        };
+//        obj.show();     //true
+
+        const oProxy = new Proxy(obj, {});      //不设置拦截对象
+        oProxy.show();      //false     代理对象里的this不再指向对象(obj)，而是指向到代理的实例对象上（oProxy）
+    </script>
+</head>
+<body>
+
+</body>
+</html>

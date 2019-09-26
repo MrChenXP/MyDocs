@@ -1,0 +1,76 @@
+------------------------------班级积分网站项目------------------------------
+---------------(接口说明)
+背景:根据每个班的学员的打卡记录来给学员评分, 以班级展示, 可以查看每个学员的记录 ,查看整个班整体积分情况
+以下是接口说明:
+通用:
+所有接口以json格式返回数据,有一个status属性:
+status：200   成功
+status：-500  参数错误
+[status：-501  不存在这样的ID值]
+
+1,获取班级名称:---------------
+  所有班级:
+  classServlet?method=all
+  某一个班级:
+  classServlet?method=single&class_id=3
+  参数: class_id(班级id)
+  返回值
+  status	class_name
+  status	班级名称
+
+2,获取首页（学员信息排名列表）:---------------
+  studentServlet?method=home&class_id=3
+  参数:class_id(班级id)
+  返回值
+  status	stuArray
+  status	数组
+  stuArray(对象数组)
+  score_avg	score_jilv	score_jishu	score_zhiye	stu_id	stu_img	stu_name	stu_no	stu_profession	stu_sex
+
+3,学生信息详情---------------
+  studentServlet?method=info&stu_id=50
+  参数:学生id
+  返回值:
+  status	stuInfo
+  status	学生信息(json格式)
+  stuInfo(json格式)
+  score_avg	score_jilv	score_jishu	score_zhiye	stu_id
+
+  stu_img	stu_name	stu_no	stu_profession	stu_sex
+
+4,积分考核情况列表---------------
+  scoreServlet?method=selectByMonth&class_id=3&type=1
+  参数1:class_id(班级id)
+  参数2:type(type=1  纪律 ;  type=2  技术 ;  type=3  职业技能)
+  返回值:
+  score_contents	score_id	score_type	score_value	stu_name	time
+
+5,查询某个学生的积分情况列表---------------
+  scoreServlet?method=selectByStuId&stu_id=50
+  参数:class_id(学生id)
+  返回值:
+  score_contents	score_id	score_type	score_value	stu_name	time
+
+6,查询某个学生的打卡记录列表
+  状态:
+  0:待处理
+  1:正常
+  -1:异常
+  recordServlet?stu_id=47&currentPage=1&pageSize=10
+
+  参数:stu_id(学生id,currentPage当前页,pageSize显示的数量)
+  返回值:
+  status	stuArray	totalCount
+  status	学生信息(json格式)	总条数
+
+  stuArray
+  date	end_time	start_time	status	stu_id	stu_name
+
+在线服务器项目地址:
+http://182.61.33.130/YunheStuScoresInterface/
+如:http://182.61.33.130/YunheStuScoresInterface/classServlet?method=single&class_id=3
+演示地址:
+http://182.61.33.130/yunhestus/index.html?class_id=3
+1.所有班级的首页()
+2.点击班级名称进入班级首页
+3.点击学生的姓名或者id进入学生详情页

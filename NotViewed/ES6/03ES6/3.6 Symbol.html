@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        let oSym = new Symbol();        //报错  没有constructor属性，故不能使用new操作符
+//        let sb1 = Symbol();
+//        let sb2 = Symbol();
+//        alert(sb1 === sb2);     //false  Symbol函数返回值是唯一的
+
+//        let sb1 = Symbol("sb1");
+//        let sb2 = Symbol("sb2");    //Symbol函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述
+//        console.log(sb1,sb2);     //Symbol(sb1) Symbol(sb2)
+
+//        let sb1 = Symbol();
+//        sb1 += 1;       //报错    不能用于算术运算
+
+//        alert(typeof sb1);      //symbol类型  基本类型，不能增加属性和方法
+
+//        let sb3 = Symbol();
+//        alert(`this is a ${sb3}`);      //报错
+//        alert(`this is a ${sb3.toString()}`);      //this is a Symbol()
+
+        let sb1 = Symbol("sb1");
+        let sb2 = Symbol("sb2");
+        let obj = {
+            user: "jj",
+            age: 12,
+            [sb1]: 10,      //Symbol类型的键名须一对方括号包裹
+            [sb2]: 20 ,
+            [Symbol()]:30,
+            [Symbol()]:40
+        };
+        Object.defineProperty(obj, "sex",{
+            value: "male"
+        });
+
+//        obj.age = 13;
+
+//        alert(obj[sb2]);        //20      正确  Symbol 值作为对象键名时，不能用点运算符
+//        alert(obj.sb2);        //undefined
+//        alert(obj["sb2"]);        //undefined
+
+//        for(let key in obj){        //可枚举的键名和构造器原型上键名
+//            document.writeln(`key = ${key}<br>`);
+//        }
+
+//        for(let key of Object.keys(obj)){       //可枚举的键名
+//            document.writeln(`key = ${key}<br>`);
+//        }
+
+//        for(let key of Object.getOwnPropertyNames(obj)){       //可枚举和不可枚举的键名
+//            document.writeln(`key = ${key}<br>`);
+//        }
+
+//        for(let key of Object.getOwnPropertySymbols(obj)){       //Symbol类型的键名
+//            document.writeln(`key = ${key.toString()}<br>`);
+//        }
+
+        for(let key of Reflect.ownKeys(obj)){               //对象所有的键名
+            document.writeln(`key = ${key.toString()}<br>`);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<button></button>
+<span>&nbsp;&nbsp;&nbsp;post</span>
+<i>&nbsp;&nbsp;&nbsp;getJSON</i>
+<b>&nbsp;&nbsp;&nbsp;$ajax</b>
+<div id="into"></div>
+<script src="jquery-1.12.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready( ()=>{
+//load(url,data,callback) 方法从服务器加载数据，并把返回的数据放入被选元素中
+  //url:待装入 HTML 网页网址。
+  //data:发送至服务器的 key/value 数据。在jQuery 1.3中也可以接受一个字符串了。 传递附加参数时自动转换为 POST 方式
+  //callback:载入成功时回调函数(succese)。
+    $('button').load(//把文件url的内容加载到指定的button元素中 也可使用jq选择器选择特定内容进行加载 ：
+      '../JS/BOM.html #ajax',
+      //responseTxt - 调用成功时的结果内容 xhr - XMLHttpRequest 对象
+      // statusTXT - 调用的状态 "success"、"notmodified"、"error"、"timeout"、"parsererror"
+      function(responseTxt,statusTxt,xhr){
+        if(statusTxt=="success")
+          console.log("外部内容加载成功!");
+        if(statusTxt=="error")
+          console.log("Error: "+xhr.status+": "+xhr.statusText);
+      }
+    );
+//get(URL,data,callback,type)   从指定的资源请求数据  type:返回内容格式
+  $('button').click(()=>{
+    $.get(
+      'http://182.61.33.130/YunheStuScoresInterface/studentServlet',
+      {
+        method:"info",
+        stu_id:50
+      },
+      (data,status)=>{
+        alert("数据: " + data + "\n状态: " + status);
+      },
+      "json"
+    );
+  });
+//post(URL,data,callback,type)   从指定的资源提交要处理的数据
+  $('span').click(()=>{
+    $.post(
+      'http://182.61.33.130/YunheStuScoresInterface/scoreServlet?method=selectByStuId&stu_id=50',
+      {},
+      (data,status)=>{
+        console.log("数据: \n" + data + "\n状态: " + status)
+      },
+      'json'
+    );
+  });
+//getJSON(url,data,success(data,status,xhr))
+  $('i').click(()=>{
+    $.getJSON(
+      'http://182.61.33.130/YunheStuScoresInterface/scoreServlet?method=selectByStuId&stu_id=50',
+      (data,status,xhr) =>{
+        $.each(data, function(i, field){
+          console.log(field + " ");
+        });
+      }
+    );
+  });
+//-----$.ajax()的常规用法-------------------------
+  $('b').click(()=>{
+    $.ajax({//ajax() 方法用于执行 AJAX（异步 HTTP）请求。
+      url:'http://182.61.33.130/YunheStuScoresInterface/scoreServlet',
+      data:{
+        method:'selectByStuId',
+        stu_id:50
+      },
+      type:'get',
+      datatype:'json',
+      beforeSend:()=>{//发送请求前运行的函数
+        console.log('即将请求')
+      },
+      dataFilter:(data,type)=>{ //请求成功之后调用,处理Xhr原始响应数据 data是Ajax返回的原始数据 type是调用$.ajax时提供的dataType参数
+        console.log('Xhr原始响应数据'+data);
+        console.log('dataType参数'+type);
+        return data;
+      },
+      success:(data)=>{ //当请求成功时运行(data,status,xhr)
+        console.log(data);
+      },
+      error: (xhr,status,error )=>{//如果请求失败要运行的函数。(xhr,status,error)
+        if(status === 'error'){
+          console.log('状态：'+status);
+          console.log('错误信息：'+error);
+          if(xhr.status === 404){
+            console.log(404);
+          }
+        }
+      },
+      complete:(xhr,status,options)=>{ //请求完成时运行(event,xhr,options)
+        console.log('++++++xhr+++++：'+xhr);
+        console.log('状态：'+status);
+      },
+    });
+  });
+});
+
+
+</script>
+</body>
+</html>

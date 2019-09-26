@@ -1,0 +1,30 @@
+webpack
+
+安装webpack
+npm i -g webpack
+npm i -g webpack-cli
+
+
+
+1.创建webpack配置文件
+	webpack.config.js
+
+2.内容如下:
+	module.exports = {
+	  entry: './one.js',
+	  output: {
+	    filename: 'bundle.js',
+	    path: __dirname + '/js'
+	  }
+	};
+
+	entry:打包的入口文件
+	output: 打包之后的配置
+		filename:出口文件名称
+		path:出口文件的路径
+
+3.执行打包命令:
+	webpack 
+
+
+

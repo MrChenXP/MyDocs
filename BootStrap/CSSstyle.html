@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--确保适当的绘制和触屏缩放，user-scalable=no 禁用其缩放功能-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>CSS全局样式</title>
+    <link rel="stylesheet" href="CSS/bootstrap.css" type="text/css">
+</head>
+<body>
+<!--Bootstrap 排版、链接样式设置了基本的全局样式。分别是：scaffolding.less找对应源码
+    为 body 元素设置 background-color: #fff;白色
+    使用 @font-family-base、@font-size-base 和 @line-height-base 变量作为排版的基本参数
+    为所有链接设置了基本颜色 @link-color #337ab7蓝色 ，并且当链接处于 :hover 状态时才添加下划线-->
+<!--要为页面内容和栅格系统包裹一个 .container 容器。由于 padding 等属性的原因，这两种 容器类不能互相嵌套。
+    .container          用于固定宽度并支持响应式布局的容器 左右填充15px并居中 屏幕宽768他宽750 992:970 1200:1170
+    .container-fluid    用于 100% 宽度，占据全部视口（viewport）的容器。左右填充15px并居中-->
+<div class="container-fluid">...</div>
+<h4>栅格系统</h4>
+<!-- 通过一系列的行（row）与列（column）的组合来创建页面布局
+        行（row）必须包含在.container或.container-fluid中，以便为其赋予合适的排列（aligment）和内补（padding）
+        内容应当放置于“列（column）”内，并且，只有“列（column）”可以作为行（row）”的直接子元素
+        创建列与列之间的间隔:为列设置padding属性,为.row元素设置负值margin抵消为.container元素设置的padding
+        如果一“行（row）”中包含了的“列（column）”大于 12，包含多余的“列（column）”所在的元素将被作为一个整体另起一行排列
+                                超小屏幕 手机          小屏幕 平板   中等屏幕桌面显示器     大屏幕 大桌面显示器
+                                (<768px)	        (≥768px)	    (≥992px)	    (≥1200px)
+                栅格系统行为	    总是水平排列	        开始是堆叠在一起的，当大于这些阈值时将变为水平排列C
+            .container最大宽度    None自动）	    750px	        970px	        1170px
+                类前缀	        .col-xs-	        .col-sm-	    .col-md-	    .col-lg-
+                列（column）数	12
+            最大列(column)宽	    自动	                ~62px	            ~81px	        ~97px
+                槽（gutter）宽	30px （每列左右均有 15px）
+        某些列出现比别的列高 使用 .clearfix 和 响应式工具类visible-xs-block。
+        列可以嵌套
+        .col-md-x 中大屏幕占据多少列 .col-xs-x 超小屏幕占据多少列 .col-sm-x 小屏幕占据多少列
+        .col-sm-offset-2 .col-md-offset-0 设置此类的元素相对右移对应格数（原理加margin）
+        .col-md-push-* 从左侧往右侧推x列 .col-md-pull-*往左侧拉x列   变列（column）的顺序
+        变量 通过变量来定义列数、槽（gutter）宽、媒体查询阈值（用于确定合适让列浮动）。
+    从堆叠到水平排列 使用单一的.col-md-* 类，在手机和平板设备上一开始是堆叠在一起的，在桌面屏幕设备上变为水平排列
+    将最外面的布局元素 .container 修改为 .container-fluid，就可以将固定宽度的栅格布局转换为 100% 宽度的布局。  -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1 col-xs-1 ">.col-md-11占据1列宽</div>
+        <div class="col-md-1 col-xs-1">.col-md-12</div>
+        <div class="col-md-1 col-xs-1">.col-md-13</div>
+        <div class="col-md-1 col-xs-1">.col-md-14</div>
+        <div class="col-md-1 col-xs-1">.col-md-15</div>
+        <div class="col-md-1 col-xs-1">.col-md-16</div>
+        <div class="col-md-1 col-xs-1">.col-md-17</div>
+        <div class="col-md-1 col-xs-1">.col-md-18</div>
+        <div class="col-md-1 col-xs-1">.col-md-19</div>
+        <div class="col-md-1 col-xs-1">.col-md-110</div>
+        <div class="col-md-1 col-xs-1">.col-md-111</div>
+        <div class="col-md-1 col-xs-1">.col-md-112</div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 col-md-push-3">这是第一列</div>
+        <div class="col-md-3 col-md-pull-9">这是第二列</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1 .col-sm-10">.col-md-4占据4列宽1</div>
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">.col-md-4</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">.col-md-6占据6列宽 1</div>
+        <div class="col-lg-6">.col-md-6占据6列宽 2</div>
+    </div>
+</div> 
+<h4>排版</h4>
+<!--    .h1到.h6 给行内属性的文本拥有标题标签的样式 .small 父元素文本大小的85%。
+    让段落突出显示 .lead  font-weight:300 屏幕大于768font-size21px小于为16
+    文本对其方式   .text-left .text-center .text-right .text-justify .text-nowrap不换行
+    改变大小写    .text-lowercase小写 .text-uppercase大写 .text-capitalize首字母大写
+    缩略语 只用在attr元素，给title加内容 鼠标悬停在缩写和缩写词上时就会显示完整内容 .initialism让字体变小一点并大写
+    引用      <blockquote>里写引用，.pull-right右对其，left左对齐  blockquote-reverse右对齐
+              <small><footer>标识引用的来源  来源的名称包裹进<cite>
+    列表    .dl-horizontal 让<dl>内的短语及其描述排在一行。小屏幕换行
+            .list-inline    内联列表，并添加少量padding，将所有元素放置于同一行。小屏幕也是
+            .list-unstyled 移除默认样式
+   全局font-size为14px line-height为1.428 属性赋予body和所有段落元素。p设置10px底部margin
+    -->
+<div class="container-fluid">
+    <span class="h1">这是span标签<span class="small">这是副标题</span></span>
+    <p class="lead text-nowrap">这是中心内容</p>
+    <del>被删除的文本</del><s>无用文本</s><ins>插入文本</ins><u>带下划线的文本</u><small>小号文本</small>
+    <strong>着重</strong><em>斜体</em>
+    <span class="text-capitalize">Capitalized Text</span>
+    <abbr title="attribute">attr</abbr><abbr title="attribute" class="initialism">pttr</abbr>
+    <blockquote class="blockquote-reverse">
+        <p>
+            这是一个默认的引用实例。没有样式
+        </p>
+        <small>这里是标明引用来源</small>
+        <footer>这里是标明引用来源<cite title="来源的名称可以包裹进 <cite>标签中">来源的名称</cite>
+        </footer>
+    </blockquote>
+    <h4>水平的定义列表</h4>
+    <dl class="dl-horizontal"><dt>Description 1</dt><dd>Item 1</dd><dt>Description 2</dt><dd>Item 2</dd></dl>
+    <h4>内联列表</h4>
+    <ul class="list-inline "><li>Item 1</li><li>Item 2</li><li>Item 3</li><li>Item 4</li></ul>
+</div>
+<h4>代码</h4>
+<!-- <code> 标签包裹行内样式的代码片段 文本为红色
+    <kbd> 标签标记用户通过键盘输入的内容   看起来像个按键
+    <pre> 标签 显示为一个独立的块元素或者代码有多行 背景灰色，有块边框
+    <pre class="pre-scrollable"> 多行代码带有滚动条
+    <samp> 使用 samp 元素包含电脑输出的内容
+    <var>  使用 var 元素表示变量 呈斜体表现-->
+<div class="container-fluid">
+    <p><code>&lt;header&gt;</code> 作为内联元素被包围。</p>
+    <pre class="pre-scrollable">
+    &lt;article&gt;
+        &lt;h1&gt;Article Heading&lt;/h1&gt;
+    &lt;/article&gt;
+    </pre>
+    <kbd>qwer</kbd>
+    <samp>这是电脑输出的内容</samp>
+    <var>x</var> = <var>a</var><var>b</var> + <var>y</var>
+</div>
+<h4>表格</h4>
+<!-- 表格类
+        .table    增加少量padding(四周) 水平方向的分隔线 给<table>标签加的,一定要有tbody标签
+        .table-striped   在<tbody>内添加给表格之内的每一行增加斑马条纹样式,背景白灰相间。:nth-child CSS 选择器实现的ie8不行
+        .table-bordered  类为表格和其中的每个单元格增加边框
+        .table-hover     类可以让 <tbody> 中的每一行对鼠标悬停状态作出响应 背景改为灰色
+        .table-condensed 类可以让表格更加紧凑，单元格中的内补（padding）均会减半
+     状态类
+        .active	    鼠标悬停在行或单元格上时所设置的颜色 同.table-hover
+        .success	标识成功或积极的动作 背景色变青
+        .info	    标识普通的提示信息或动作    表示信息变化的操作 背景变浅蓝
+        .warning	标识警告或需要用户注意   表示一个警告的操作 背景变粉红
+        .danger	    标识危险或潜在的带来负面影响的动作 表示一个危险的操作 背景变灰红
+     响应式表格      将.table包裹在.table-responsive内，创建响应式表格，小屏幕(小于768px)水平滚动。屏幕大于768px，水平滚动条消失。
+            响应式表格使用了overflow-y:hidden，将超出表格底部和顶部的内容截断。也可以截断下拉菜单和其他第三方组件
+            Ff对fieldset元素设置了影响width属性的样式,导致响应式表格出现问题。可以使用针对Firefox的hack代码解决,代码并未集成在Bootstrap中
+                @-moz-document url-prefix() {
+                  fieldset { display: table-cell; }
+                }   -->
+<div class="container-fluid table-responsive">
+    <table class="table table-striped table-bordered table-hover table-condensed">
+        <tbody class="">    <!--表格放在tbody里样式才会生效-->
+            <tr class="active"><td>1</td><td>Anna</td></tr>
+            <tr class="success"><td>2</td><td>Debbie</td></tr>
+            <tr><td>3</td><td>John</td></tr>
+        </tbody>
+    </table>
+</div>
+<h4>表单</h4>
+<!--
+    .form-control 默认设置width:100%    向所有的文本元素<input><textarea><select> 添加
+    .form-group   表单组 margin-bottom:15px
+    .form-inline  内容左对齐 变为行内块 width:auto 为<form>添加 适用于768px及以上，小于会使表单折叠
+    .sr-only      将标签隐藏 隐藏内联表单的标签
+    .form-horizontal    联合使用栅格系统，将<label>和控件组水平布局。改变.form-group的行为,使其表现为栅格系统中的行（row）
+        .form-group-lg 高 .form-group-sm 矮，为.form-horizontal包裹的label元素和表单控件快速设置尺寸。
+    .control-label      用在水平布局下，上下居中，靠右对其
+    .checkbox .radio    单选复选组，上下间隔10px
+    .checkbox-inline 或 .radio-inline  单选复选显示在同一行上
+     .form-control-static 一行纯文本和 label 元素放置于同一行 上下居中
+    .has-warning 警告橙色 .has-error错误红色 .has-success成功绿色 校验状态要添加给父元素
+    添加额外图标https://v3.bootcss.com/css/#forms-controls
+    .input-lg 高 input-sm矮 控件高度 .col-lg-*
+    .input-group-addon
+    .help-block 表单帮助文本 字体小，颜色灰，
+    不要将表单组直接和输入框组混合使用。建议将输入框组嵌套到表单组中使用  -->
+<div class="container-fluid">
+<form class="form-inline">
+    <div class="form-group">
+        <label for="ema" class="sr-only">Email address</label>
+        <input type="email" class="form-control " id="ema" >
+        <span class="help-block">一个较长的帮助文本块</span>
+    </div>
+    <div class="form-group">
+        <label for="exa">File input</label>
+        <input type="file" id="exa">
+        <p class="help-block">Example block-level help text here.</p>
+    </div>
+</form>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="col" class="col-sm-2 control-label">Email address</label>
+        <div class="col-sm-10"><input type="email" class="form-control " id="col" ></div>
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+            <label class="checkbox-inline"><input type="checkbox"></label>
+            <label class="checkbox-inline"><input type="checkbox"></label>
+        </div>
+        <div class="radio">
+            <label class="radio-inline"><input type="radio"></label>
+            <label class="radio-inline"><input type="radio"></label>
+        </div>
+    </div>
+    <div class="form-group has-warning ">
+        <select multiple class="form-control">
+            <option>1</option>
+            <option>2</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10 ">
+            <p class="form-control-static">一行纯文本和 label 元素放置于同一行</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <input class="form-control input-lg" type="text" >
+        <input class="form-control input-sm " type="text" >
+    </div>
+</form>
+</div>
+<h4>按钮</h4>
+<!-- .btn   为按钮添加基本样式 移入变色 圆角边框
+    .btn-default    默认/标准按钮
+    .btn-primary	原始按钮样式（未被操作）深蓝色
+    .btn-success	表示成功的动作	绿色
+    .btn-info	    该样式可用于要弹出信息的按钮  浅蓝色
+    .btn-warning	表示需要谨慎操作的按钮 橙色
+    .btn-danger	    表示一个危险动作的按钮操作   红色
+    .btn-link	    让按钮看起来像个链接 (仍然保留按钮行为)
+    .btn-lg	    制作一个大按钮
+    .btn-sm	    制作一个小按钮
+    .btn-xs	    制作一个超小按钮
+    .btn-block	块级按钮(拉伸至父元素100%的宽度)
+    .active	    按钮被点击   被按压下去（颜色会变淡 50%、边框夜色更深、向内投射阴影）
+    .disabled <a>   disabled="disabled" <button>	禁用按钮
+    如果<a>元素作为按钮使用 在当前页面触发某些功能 而不是用于链接其他页面或链接当前页面中的其他部分，务必为其设置role="button"属性。-->
+<div class="container-fluid">
+    <a class="btn btn-default btn-link btn-block " href="#" role="button">a</a>
+    <button class="btn btn-default btn-danger active btn-lg" type="submit">Button</button>
+    <input class="btn btn-default btn-success btn-xs" type="submit" value="Submit">
+</div>
+<h4>响应式图片</h4>
+<!--.img-responsive 让图片支持响应式布局  原理 max-width:100%; height:auto; display:block;
+    .center-block   让使用了 .img-responsive 类的图片水平居中
+    img-rounded     添加 border-radius:6px 来获得图片圆角。
+    .img-circle     添加 border-radius:50% 来让整个图片变成圆形。
+    .img-thumbnail  添加一些内边距（padding）和一个灰色的边框。
+    IE8-10中，设置为.img-responsive的SVG图像显示出的尺寸不匀称 在出问题的地方添加 width: 100% \9;
+-->
+<div class="container-fluid">
+    <img src="img/banner1.png" class="img-responsive center-block img-thumbnail" >
+</div>
+<h4>辅助类</h4>
+<!--情境文本颜色  可以应用于链接，并且在鼠标经过时颜色可以还可以加深
+        .text-muted	    灰色
+        .text-primary   浅蓝
+        .text-success   绿色
+        .text-info      深蓝
+        .text-warning   橙灰
+        .text-danger    暗红
+情境背景色  如果文本是个链接鼠标移动到文本上会变暗
+    .bg-primary     深蓝
+    .bg-success     灰绿
+    .bg-info        浅蓝
+    .bg-warning     浅粉红
+    .bg-danger      暗红紫
+其他类
+    .pull-left	    元素浮动到左边
+    .pull-right	    元素浮动到右边
+    .center-block	设置元素为 display:block 并居中显示
+    .clearfix	    清除浮动
+    .show	        强制元素显示
+    .hidden	        强制元素隐藏
+    .sr-only	    除了屏幕阅读器外，其他设备上隐藏元素
+    .sr-only-focusable	与 .sr-only 类结合使用，在元素获取焦点时显示(如：键盘操作的用户)
+    .text-hide	    将页面元素所包含的文本内容替换为背景图
+    .close	        显示关闭按钮
+    .caret	        显示下拉式功能(一个插入符)
+-->
+<div class="container-fluid">
+    <p class="text-muted">text-muted</p><p class="text-primary">text-primary</p><p class="text-success">text-success</p>
+    <p class="text-info">text-info</p><p class="text-warning">text-warning</p><p class="text-danger">text-danger</p>
+    <p class="bg-primary">bg-primary</p><p class="bg-success">bg-success</p><p class="bg-info">bg-info</p>
+    <p class="bg-warning">bg-warning</p><p class="bg-danger">bg-danger</p>
+    <button type="button" class="close pull-left">&times;</button>
+    <span class="caret center-block "></span>
+    <h4 class="text-hide">Custom header</h4>
+</div>
+<h4>响应式工具</h4>
+<!--可用的类
+        .visible-xs 	除了超小屏幕手机(<768px)可见，其他都隐藏
+        .visible-sm	    除了小屏幕平板(≥768px)可见，其他都隐藏
+        .visible-md	    除了中等屏幕桌面(≥992px)可见，其他都隐藏
+        .visible-lg	    除了大屏幕桌面(≥1200px)可见，其他都隐藏
+        .hidden-xs	    除了超小屏幕手机(<768px)隐藏，其他都可见
+        .hidden-sm	    除了小屏幕平板(≥768px)隐藏，其他都可见
+        .hidden-md	    除了中等屏幕桌面(≥992px)隐藏，其他都可见
+        .hidden-lg	    除了大屏幕桌面(≥1200px)隐藏，其他都可见
+打印类                             浏览器         打印机
+    .visible-print            隐藏            可见
+    .visible-print-block            隐藏            可见
+    .visible-print-inline           隐藏            可见
+    .visible-print-inline-block	    隐藏            可见
+    .hidden-print	                可见	        隐藏
+-->
+<div class="container-fluid">
+   <span class="visible-lg ">.visible-lg</span>
+    <span class="hidden-lg">.hidden-lg</span>
+    <span class="visible-print">visible-print-block</span>
+    <span class="hidden-print">hidden-print</span>
+    <span class="hidden-print">hidden-print</span>
+</div>
+</body>
+</html>

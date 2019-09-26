@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>布局组件</title>
+    <link rel="stylesheet" type="text/css" href="CSS/bootstrap.css">
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<h4>字体图标</h4>
+<!--    需要fonts文件夹及其文件  原理是用@font-face 应用自定义字体
+        所有图标类名地址    https://v3.bootcss.com/components/#glyphicons-how-to-use
+        为了设置正确的内补（padding），务必在图标和文本之间添加一个空格
+        图标类不能和其它组件在同一个元素上。应创建<span>，将图标类应用到这个 <span> 标签上。
+        图标类只能应用在不包含任何文本内容或子元素的元素上
+        可以把图标应用到按钮、工具条中的按钮组、导航或输入框等地方。
+        避免屏幕识读设备抓取非故意的和可能产生混淆的输出内容(尤其是当图标纯粹作为装饰用途时) 设置aria-hidden="true"属性
+        改变图标尺寸、大小、阴影 font-size color text-shadow
+-->
+<div class="container-fluid">
+    <button type="button" class="btn btn-default" aria-label="Left Align">
+        <span class="glyphicon glyphicon-align-left" style="text-shadow: black 5px 3px 3px;color:red;"></span>
+    </button>
+    <button type="button" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-star" style="font-size: 30px"></span> Star
+    </button>
+</div>
+<h4>下拉菜单</h4>
+<!-- 将下拉菜单触发器和下拉菜单都包裹在.dropdown(.dropup菜单向上弹出)组件里，或者另一个有position:relative;的元素
+    dropdown-toggle 点击聚焦后去除虚拟边框
+    .caret   实现向下的三角形，利用边框实现的
+    data-toggle=”dropdown” 绑定click事件的监听
+    .clearMenu   创建下拉菜单 只会清除data-toggle=”dropdown”的元素
+    dropdown-backdrop   用于移动没有单击事件的处理
+    keydown     当dropdown按钮获取焦点的时候，按下键可以展开，按上键收缩的功能
+    data-target和herf=”#id”  是为了实现单击，展开指定的下拉列表，默认是展开与按钮后面兄弟节点
+    .dropdown-menu-right pull-right(不建议) 右对齐下拉菜单
+    .dropdown-header 下拉菜                                单标题 指明一组动作 字体颜色灰色 字号小一点
+    .divider 分割线
+    .disabled	下拉菜单中的禁用项
+-->
+<div class="container">
+    <div class="dropdown">
+        <button type="button" class="btn dropdown-toggle"  data-toggle="dropdown">
+            下拉 <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li class="disabled"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-header">标题</li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+</body>
+</html>

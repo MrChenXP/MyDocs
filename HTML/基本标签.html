@@ -1,0 +1,109 @@
+<!--声明文档类型，让浏览器（解析器）以什么样的文档类型定义（DTD）来解析文档，documenttype（文档类型） html-->
+<!doctype html>
+<!--页面文档标签,告诉浏览器这是一个HTML文档-->
+<html>
+<!--头部标签，定义文档头部，描述文档各种属性和信息-->
+<head>
+    <!--定义文档标题，浏览器标题栏或状态栏处显示的文字-->
+    <title>基本标签</title>
+    <!--提供有关页面的元信息，对网页进行说明，便于搜索引擎查找。meat属性定义了与文档相关联的名称/值对，
+        charset规定文档字符编码，告诉浏览器以什么样的编码格式解析文档
+        content：提供了名称/值对中的值，要和name或http-equigv属性一起使用(两个属性不能放在同一标签里，不然content只匹配name）
+        name：提供了名称/值对中的名称。把conten关联到一个名称。keywords：为文档定义一组关键字。搜索引擎会根据关键字对文档进行分类,
+                description:设置具体描述内容,如果没有name属性，名称/值对中的名称会采取http-equiv属性的值                -->
+    <meta charset="utf-8" name="keywords"  content="html基本标签" >
+    <!--http-equiv:提供了名称/值对中的名称。把conten关联到一个名称。告诉服务器在发送文档给浏览器前应该先发送此属性定义的名称/值对
+            content-type:text/html; charset=ge2312 必发的一个，告诉浏览器准备接受一个html文档
+            expires：设定网页到期的时间，一旦网页过期，必须到服务器上重新传输。必须使用GMT格式
+            refresh:自动刷新并指向新页面，20指20s
+            Pragma(cache模式):no-cache 设定禁止浏览器从本地机的缓存中调阅页面内容，设定后一旦离开网页就无法从Cache中再调出,访问者将无法脱机浏览
+            set-cookie(cookie设定):cookievalue=xxx;expires=Wednesday, 20-Jun-2007 22:33:00 GMT; path=/   必须使用GMT的时间格式
+            window-target(显示窗口的设定):_top 强制页面在当前窗口以独立页面显示。防止别人在框架里调用自己的页面            -->
+    <meta http-equiv="refresh" content="20; URL=JiBenBiaoQian.html"/>
+    <meta http-equiv="expires" content="Wed, 20 Jun 2018 22:33:00 GMT" />
+    <!--浏览器标签小图标LOGO简单设置
+        1.一个项目的话，直接接把图片像素设置成16x16像素,然后改名favicon.ico放在项目根部目录
+        2.找一个图片把像素设置成16x16像素,然后把图片名字改成favicon.ICO.然后加如下代码
+    -->
+    <!--多数都支持-->
+    <link rel="shortcut icon" href="imgers/favicon.ICO" type="image/vnd.microsoft.icon">
+    <!--当希望为新浏览器提供另一种备用图像（例如动画GIF）时-->
+    <link rel="shortcut icon" href="imgers/favicon.ICO" type="image/x-icon" />
+</head>
+
+<!--定义文档主体，body元素包含文档的所有内容-->
+<body>
+    <!-- 标题标签，有确切语义，请慎重选择标签。h1最大，h6最小  role:增加代码的语义性 告诉浏览器和屏幕阅读器这个元素所扮演的角色-->
+    <!--text-decoration:属性规定添加到文本的修饰。font-weight:定义文本粗细.
+        color:定义字体颜色.font-style:定义字体风格.text-decoration 属性规定添加到文本的修饰-->
+    <h1 id="h1" style="text-decoration: underline; font-weight: 900; color:#71ab9c; font-style: italic;">
+        这是一个一级标题</h1>
+
+    <!--段落标签,p元素会自动在其前后创建一些空白。浏览器会自动添加这些空间，可以在样式表中规定-->
+    <p>块元素:可以设置宽高,独占一行显示,不设置宽度默认显示(可视)区的宽度。
+    行内快元素:可以设置宽高,共享一行,不设置宽高,由内容撑开。
+    行内元素:不可设置宽高,共享一行,由内容来撑开。</p>
+
+    <!--div是个块元素,可以通过样式表来设置四周浮动。里面可以包含其他的html标签，他可以将网页分成几个区块，通常用来排版与布局-->
+    <div style="width: 800px; height: 20px; background-color: rgba(153,144,151,0.67); ">
+        <span>span是一个行内元素，通常可以用来定义一小段文字的样式</span>
+    </div>
+
+    <!--格式化标签(行内元素)-->
+    <b>b定义粗体文本 </b>
+    <strong> strong定义加重语气</strong>
+    <big> big定义大号字</big>
+    <em> em定义着重文字</em>
+    <i> i定义斜体字</i>
+    <br>上面是换行标签，下面是换行标签<hr>
+    <small> small定义小号字</small>
+    <sub> sub定义下标字</sub>
+    <sup> sup定义上标字</sup>
+    <del> del或者s定义删除字</del>
+    <u> u下划线</u>
+    <pre>pre标签会按照源代码的格式输出文字。保留空格和换行符</pre>
+
+    <!--特殊字符-->
+    空格：&nbsp;
+    大于号：&gt;
+    小于号：&lt;
+    引号：&quot;
+    版权符号：&copy;
+    注册商标：&reg;
+
+    <!--img元素从网页上链接图像,创建的是被引用图像的占位空间.img若不设置宽高,那么就无固定位置,会被下一个元素重叠,造成样式混乱
+        存放图片的文件夹不能用中文。...表示向上跳一级。可以连接到某一网站上的某一张图片-->
+    <img src="../../DaiMa/imgers/timg.jpg" width="150" height="100" alt="图片未加载前时的替换文本" title="鼠标焦点再此标签的提示文本"/>
+    <img src="https://www.baidu.com/img/bd_logo1.png" width="150" height="100" >
+
+    <!--定义超链接，用于从一张页面链接到另一张页面。http和https选其一必加，且不可混用，应根据实际网页所采取的协议来写。
+        url可以是网页、文件、邮箱、图片。hreflang="zh";用于指定被链接文档的语言。type="text/html";规定目标文档的mime类型
+        target:规定在何处打开链接文档._blank在新窗口._self默认，在相同框架中打开._parent在父框架集中打开._top在整个窗口打开-->
+    <a href="http://www.w3school.com.cn/" target="_blank">W3School</a>
+    <a href="../../DaiMa/imgers/timg.jpg" download="此属性设定一个值来规定下载文件的名称">点此下载图片，系统自动添加扩展名</a>
+    <a href="#">这是个空链接</a>
+    <a href="#h1">这是个锚链接，连接元素要设置id属性</a>
+
+    <!-- 无序列表，用样式来定义列表的类型 -->
+    <ul>
+        <li>这是无序列表1</li>
+        <li>这是无序列表2</li>
+        <li>这是无序列表3</li>
+    </ul>
+    <!--有序列表。reversed:规定倒序排列.start 属性规定有序列表的开始点.type 属性规定有序列表的项目符号的类型-->
+    <ol reversed start="4" type="I">
+        <li>这是有序列表1</li>
+        <li>这是有序列表2</li>
+        <li>这是有序列表3</li>
+    </ol>
+    <!--自定义列表。dl定义列表，dt定义列表项目，dd描述列表项目-->
+    <dl>
+        <dt>上海</dt>
+        <dd>闽兴趣</dd>
+        <dd>浦东区</dd>
+        <dt>北京</dt>
+        <dd>朝阳区</dd>
+        <dd>海定区</dd>
+    </dl>
+</body>
+</html>

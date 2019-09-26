@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过渡变形(2D3D)</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        /* transition:  过渡属性*/
+        /*  transition-property	指定哪个CSS属性有过渡效果 [none:没样式|all:默认,所有(all有内置支持的样式，不能超出这些) 指定样式]
+            transition-duration	完成过渡所需的时间[默认为0s]
+            transition-timing-function	指定过渡的函数(速度)[ease	:默认快到慢,逐渐变慢. linear:恒速. ease-in:越来越快. ease-out:越来越慢
+                 ease-in-out:先加速，再减速. cubic-bezier(0.25, 0.67, 0.11, 0.55)自定义速度. 跳跃式过渡steps[次数,start开始时跳跃|end结束时跳跃]
+            transition-delay:指定过渡开始出现的延迟时间
+            移入和移出过渡顺序 和样式一样：将过渡属性写在元素本体样式里
+            移入和移出过渡顺序和样式相反：将过渡属性写在元素hover和本体样式里
+            移入有过渡，移出没有过渡：将过渡属性写在元素hover样式里
+            (以hover为例，若在元素非hover态时设置transition，相当于设置的反向状态。而前进和反向是一致的.
+            而如果在元素hover态设置trans ition,则前进状态以hover态设置的为准,而反向状态以非hover态设置的为准)         */
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin: 10px auto;
+        }
+        .div1 {
+            transition-property: width, height, background;
+            transition-duration: 5.5s;
+            transition-timing-function: steps(3, start);
+            transition-delay: 1s, 2s, 3s;
+        }
+        button:hover + .div1 {
+            width: 300px;
+            height: 200px;
+            background: blue;
+            transition: width 1s linear, height 1s ease-out 1s, background-color 1s ease-in 2s;
+        }
+        /* transform：2D变形变换功能   */
+        /*  transform:  属性值 [none	无变换]
+            translate   平移 (长度值或百分数值)	在水平方向、垂直方向或两个方向上平移元素。
+                          translateX  (长度值或百分数值)	translatY(长度值或百分数值)
+            scale() 	尺寸变换 在水平方向、垂直方向或两个方向上缩小放大元素,1不变
+                            scaleX(数值) 水平  scaleY(数值)垂直
+            rotate()	旋转元素
+            skew(角度)	倾斜(拉伸)  在水平方向、垂直方向或两个方向上使元素倾斜一定的角度
+                            skewX(角度)水平 skewY(角度)垂直
+            matrix()      指定自定义变换。  (4~6 数值，逗号隔开)	      */
+        /* transform-origin  2D变形变换起点、设置旋转元素的基点位置
+                [x 轴或 y 轴的起点][length]
+                left center right 指定 x 轴的位置 top center bottom指定 y 轴的位置*/
+        .div2 {
+            /*transform: translate(200px,100px);*/
+            /*transform: translateX(100px);*/
+            /*transform: translateY(100px);*/
+            transform: scale(.4);
+            /*transform: matrix(4,5);*/
+            /*transform-origin: 10% 10%;*/
+            /*transform-origin: 10px 10px;*/
+            transform-origin: left top;
+        }
+        .div3:hover {
+            transform: rotate(350deg);
+            transition: all 2s ease;
+            /*transform: skew(20deg,20deg);*/
+            /*transform: skewX(20deg);*/
+            /*transform: skewX(30deg);*/
+        }
+        .div3 span {
+            display: block;
+        }
+        .div3:hover span {
+            transform: skewX(-30deg);
+        }
+        /* transform: 3d变换*/
+        /* rotate3d(x,y,z,angle)	定义 3D 旋转。
+           rotateX(angle)	元素围绕其 x 轴以给定的度数进行旋转。
+           rotateY(angle)	元素围绕其 Y 轴以给定的度数进行旋转。
+           rotateZ(angle)	元素围绕其 z 轴以给定的度数进行旋转。略像2D旋转rotate()
+           perspective(n)	定义 3D 转换元素的透视视图(视点，在z轴上)。设置元素被查看位置的视图
+           translate3d(x,y,z)	定义 3D 转化
+           translateX(x)	定义3D转化x轴的值。左右移动
+           translateY(y)	定义3D转化y轴的值。上下移动
+           translateZ(z)	定义3D转化Z轴的值。前后移动，参照物是perspective，据其越近感觉越大，超过就看不到到了
+           scale3d(x,y,z)	定义 3D 缩放转换。
+           scaleX(x)	定义3D缩放x轴转换
+           scaleY(y)	定义3D缩放y轴转换
+           scaleZ(z)	定义3D缩放z轴转换,要配合其他属性一起用，其他属性生效时，z轴值会变化
+           backface-visibility  定义元素在不面对屏幕时是否可见 隐藏被旋转的div元素的背面 visible可见 hidden不可见
+           perspective-origin	规定元素的变换起点、设置旋转元素的基点位置
+           transform-style	规定被嵌套元素如何在 3D 空间中显示。flat子元素将不保留其3D位置。preserve-3d子元素将保留其3D位置。
+        */
+        .div4 {
+            transition: transform 3s;
+        }
+        .div4:hover {
+            /*transform: rotateX(180deg);*/
+            /*transform: rotateY(120deg);*/
+            /*transform: rotateZ(120deg);*/
+            /*backface-visibility: hidden;*/
+            /*transform-style: preserve-3d;*/
+            /*transform: translateZ(-30000px);*/
+            /*transform: scaleX(2);*/
+            transform: scaleZ(2) rotateX(45deg);
+        }
+        .div5 {
+            perspective: 300px;
+            background-color: transparent;
+        }
+        /*  @keyframes animation  动画
+            @keyframe                   创建动画，把它绑定到一个选择器，否则动画不会有任何效果
+            animation	                所有动画属性的简写属性，除了 animation-play-state 属性。
+            animation-name	            规定 @keyframes 动画的名称。
+            animation-duration	        规定动画完成一个周期所花费的秒或毫秒。默认是 0。
+            animation-timing-function	规定动画的速度曲线。默认是 "ease"。    cubic-bezier(0.25, 0.67, 0.11, 0.55)自定义速度.
+                    [ease	:默认快到慢,逐渐变慢. linear:恒速. ease-in:越来越快. ease-out:越来越慢 ease-in-out:先加速，再减速.
+            animation-delay	            规定动画何时开始。默认是 0。
+            animation-iteration-count	规定动画被播放的次数。默认是 1。   infinite无限
+            animation-direction	        规定动画是否在下一周期逆向地播放。默认是 "normal"。
+                normal	默认值。动画按正常播放。inherit	从父元素继承该属性。initial	设置该属性为它的默认值。reverse	动画反向播放。
+                alternate	动画在奇数次（1、3、5...）正向播放，在偶数次（2、4、6...）反向播放。
+                alternate-reverse	动画在奇数次（1、3、5...）反向播放，在偶数次（2、4、6...）正向播放。
+            animation-play-state	    规定动画是否正在运行或暂停。默认是 "running"。 paused 暂停
+        */
+        @keyframes myfirs {
+            from{transform: rotate(0deg) translateY(0px);}
+            to{transform: rotate(180deg) translateY(-300px);}
+        }
+        @keyframes myfirs1 {
+            0%{transform: rotate(0deg);}
+            25%{transform: rotate(40deg);}
+            50%{transform: rotate(220deg);}
+            100%{transform: rotate(360deg);}
+
+        }
+        .div6{
+            /*animation: myfirs 5s;*/
+            animation: myfirs1 5s;
+        }
+    </style>
+</head>
+<body>
+<button>此按钮指向div1</button>
+<div class="div1">过渡</div>
+<div class="div2">2D变形</div>
+<div class="div3"><span>元素旋转，字体不动</span></div>
+<div class="div5">
+    <div class="div4">3D变化</div>
+</div>
+<div class="div6">动画div6</div>
+</body>
+</html>

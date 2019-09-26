@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 200px;
+            background-color: darkred;
+        }
+    </style>
+    <script>
+//        window.onload = function(){
+//            var oDiv = document.getElementById("div1");
+//            oDiv.style.backgroundColor = "blue";
+//        };
+//        window.onload = function(){             //同一对象不能加相同事件
+//            var oDiv = document.getElementById("div1");
+//            oDiv.style.width = "200px";
+//        };
+
+//        window.addEventListener("load", function(){
+//            var oDiv = document.getElementById("div1");
+//            oDiv.style.backgroundColor = "blue";
+//        }, false);
+//
+//        window.addEventListener("load", function(){
+//            var oDiv = document.getElementById("div1");
+//            oDiv.style.width = "200px";
+//        }, false);
+    </script>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+//        $(window).load(function(){        //不建议
+//            $("#div1").css("backgroundColor", "blue");
+//        });
+
+        $(document).ready(function(){
+            $("#div1").css("backgroundColor", "blue");
+        });
+
+        $(document).ready(function(){
+            $("#div1").css("width", "200");
+        });
+//        可简写成如下
+//        $(function(){
+//            $("#div1").css("backgroundColor", "blue");
+//        });
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

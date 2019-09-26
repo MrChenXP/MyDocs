@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>fadeIn</button>
+    <button>fadeOut</button>
+    <button>fadeToggle</button>
+    <button>fadeTo</button>
+    <div style="width: 200px;background-color: darkcyan;height: 200px; opacity: 0.8;"></div>
+
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            var aBtn = $(":button");
+            aBtn.eq(0).on("click", function(){      //slideToggle(过渡时间，过渡曲线,回调函数)
+                $("div").fadeIn(10000,"swing");           // 过渡样式：opacity
+            });
+            aBtn.eq(1).on("click", function(){
+                $("div").fadeOut("slow", "linear");
+            });
+
+            aBtn.eq(2).on("click", function(){
+                $("div").fadeToggle(5000);         //滑入滑出效果
+            });
+
+            aBtn.eq(3).on("click", function(){
+                $("div").fadeTo(1000, 1);         //fadeTo(过渡时间，透明度值，过渡曲线,回调函数)
+            });
+
+        });
+    </script>
+</body>
+</html>

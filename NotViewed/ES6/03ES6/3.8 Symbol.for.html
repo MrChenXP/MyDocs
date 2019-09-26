@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        let sb1 = Symbol("sb");
+//        let sb2 = Symbol("sb");
+//        alert(sb1 === sb2);     //false
+
+        let sb1 = Symbol.for("sb");     //创建一个Symbol值
+//        let sb2 = Symbol.for("sb");     //查找"sb"的Symbol值，有则返回该Symbol值
+//        alert(sb1 === sb2);       //true
+//        alert(Symbol.keyFor(sb1));      //sb
+//        alert(typeof sb1);      //symbol
+
+    </script>
+</head>
+<body>
+
+<button>点击</button>
+<input type="file" />
+</body>
+</html>

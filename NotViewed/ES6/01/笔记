@@ -1,0 +1,38 @@
+变量的声明
+    let
+        1、声明的变量是块作用域
+        2、在同一作用域下不能被重复声明
+        3、变量须先声明后使用且不存在提升问题
+        4、函数体内不能声明变量与参数同名，可用大括号区分作用域范围
+        5、在代码块内，使用let命令声明变量之前，该变量都是不可用的，该块作用域不受外部影响
+        6、循环圆括号里和循环体是不同的块作用域
+    const
+        1、满足let的以上特征
+        2、声明的变量时须直接初始化值
+        3、声明的变量的内存地址不能被修改（不能改变栈内存中的任何数据，），基本类型（栈内存中放的是值），
+            引用类型（栈内存放的时引用，不能替换对象但可以修改对象的键值对）
+        4、let和const声明的变量不再是成为window对象的属性
+Math对象
+    Math.trunc()    方法用于去除一个数的小数部分，返回整数部分。（先做类型转换再运算）
+    Math.sign()     方法用来判断一个数到底是正数（1）、负数（-1）还是零（0）、非数字（NaN）（先做类型转换再运算）
+    Math.cbrt()     方法用于计算一个数的立方根
+    Math.hypot()    方法返回所有参数的平方和的平方根。
+Number对象
+    Number.isInteger(新增，判断是否为整数)
+    Number.EPSILON(新增，判断是否可忽略的误差)
+    Number.MAX_SAFE_INTEGER(新增，可以在js中安全且精确地表示的最大整数)
+    Number.MIN_SAFE_INTEGER(新增，可以在js中安全且精确地表示的最小整数)
+    Number.isSafeInteger(新增，表示在js中安全整数范围内，即是在-(2^53 - 1) 到 (2^53 - 1)之间)
+    Number.isNaN(全局方法isNaN移植到Number下),作用不等同于isNaN
+    Number.isFinite(全局方法isFinite移植到Number下，检测一个数是否有限数，可以不在js安全整数范围）,作用不等同于isFinite
+    Number.parseInt(全局方法parseInt移植到Number下)，用法等同于parseInt
+    Number.parseFloat(全局方法parseFloat移植到Number下)，用法等同于parseFloat
+String对象
+    1、字符串模板：使用一对反引号 ` 来创建字符串，此种方法创建的字符串里面可以包含由美元符号加花括号包裹的变量${varible}
+    2、方法
+        includes(子字符串，起始位置)：用来判断是否存在子字符串
+        repeat(count): 返回重复count次子字符串
+        startsWith(子字符串，起始位置): 用来判断某个位置的起始字符是否为指定的字符串
+        endsWith(子字符串，结束位置): 用来判断某个位置的结束字符是否为指定的字符串
+        padStart()：用于在字符串前面补全指定字符串（第一个是补全的长度，第二个是要补充的内容）
+        padEnd()：用于在字符串后面补全指定字符串

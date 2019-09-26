@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 100px;height: 100px;background-color: darkcyan;" id="div1"></div>
+    <ul>
+        <li>11111</li>
+        <li>22222</li>
+        <li>33333</li>
+        <li>44444</li>
+        <li>55555</li>
+        <div>ddd</div>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+//            $("#div1").click(function(){          //给同一对象可以加载同一事件
+//                alert("aaa");
+//            }).click(function(){
+//                alert("bbb");
+//            });
+
+//            $("#div1").on("click", function(){            //类似于 addEventListener
+//                alert("aaa");
+//            }).on("click", function(){
+//                alert("bbb");
+//            });
+//--------------------------------------------------------------------
+//            $("ul").on("click", "li", function(){              //事件委托
+//                $(this).css({backgroundColor: "red"});
+//            });
+//---------------------------------------------------------------------------
+//            $("#div1").mouseover(function(){
+//                $(this).css({border: "10px solid red"});
+//            }).mouseout(function(){
+//                $(this).css({border: ""});
+//            }).mousedown(function(){
+//                $(this).css({borderRadius: "50%"});
+//            }).mouseup(function(){
+//                $(this).css({borderRadius: ""});
+//            });
+
+//            $("#div1").on({                 // 一个对象增加多个事件
+//                mouseover: function(){
+//                    $(this).css({border: "10px solid red"});
+//                },
+//                mouseout: function(){
+//                    $(this).css({border: ""});
+//                },
+//                mousedown: function(){
+//                    $(this).css({borderRadius: "50%"});
+//                },
+//                mouseup: function(){
+//                    $(this).css({borderRadius: ""});
+//                }
+//            });
+//            ------------------------------------------------------------
+//            $("#div1").on("click.a", function(){        //事件的命名空间
+//                alert("aaaa");
+//            }).on("click.b", function(){
+//                alert("bbbb");
+//            });
+
+//            $("#div1").off();                         //清除对象所有的事件
+//            $("#div1").off("mousedown mouseup");        //清除对象指定的部分事件
+
+//            $("#div1").off("click.a");                  //清除对象指定事件里的命名空间
+
+//            --------------------------------------------------------------------
+
+//            $("#div1").on("click", {a: 12, b: 13}, function(event){
+//                console.log(event.data);
+//            });
+
+        });
+    </script>
+</body>
+</html>

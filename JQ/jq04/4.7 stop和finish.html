@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>动画</button>
+    <button>stop()</button>
+    <button>stop(true)</button>
+    <button>stop(false, true)</button>
+    <button>stop(true, true)</button>
+    <button>finish()</button>
+    <div style="width: 200px;background-color: darkcyan;height: 200px; opacity: 0.3;"></div>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            var aBtn = $("button");
+            aBtn.eq(0).on("click", function(){      //stop(停止动画队列（true），当次动画跳到目标点(true)) 参数默认是false
+                $("div").animate({width: 400},1000).animate({height: 400},1000).animate({opacity: 1},1000);
+            });
+            aBtn.eq(1).on("click" , function(){
+                $("div").stop();            //停止当次执行的动画，执行队列的下一次动画
+            });
+            aBtn.eq(2).on("click" , function(){
+                $("div").stop(true);            //停止动画队列
+            });
+            aBtn.eq(3).on("click" , function(){
+                $("div").stop(false,true);            //当次动画跳到目标值，执行队列的下一次动画
+            });
+            aBtn.eq(4).on("click" , function(){
+                $("div").stop(true, true);            //停止动画队列,当次动画跳到目标值
+            });
+
+            aBtn.eq(5).on("click" , function(){
+                $("div").finish();
+            });
+        });
+    </script>
+</body>
+</html>

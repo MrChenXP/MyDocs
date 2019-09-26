@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类型转换</title>
+    <meta charset="utf-8">
+</head>
+<script type="text/javascript">
+    /*数值转成字符串*/
+    /*
+    toString() 将其他类型转换成字符串，ECMAScript 定义所有对象都有 toString() 方法,
+         Number 类型的 toString() 方法有默认模式和基模式。
+            默认模式toString()用相应的字符串输出数字值（无论是整数、浮点数还是科学计数法）且都是数字的十进制表示
+            基模式，可以用不同的基输出数字 它是 toString() 方法的参数
+                如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x” 或 “0X” 开头，将以 16 为基数。
+                如果该参数小于 2 或者大于 36，则 parseInt() 将返回 NaN。
+
+    var a = 0XA, b = 10.0,c = 1e5;
+    document.writeln(typeof  a.toString());     // 10 默认模式 16进制按10进制输出
+    document.writeln(b.toString());     // 10 默认模式，
+    document.writeln(c.toString());     //100000 默认模式
+    var num = 10;
+    alert(num.toString(2));     //基模式 1010
+    */
+    /*字符串转成数字*/
+//        parseInt(),parseFloat()
+//        在判断字符串是否是数字值前，parseInt() 和 parseFloat() 都会仔细分析该字符串。
+//        parseInt() 字符串转成整数，从0处位置开始检查，持续到发现非有效数字的字符为止，此时 parseInt() 将把该字符之前的字符串转换成数字。
+//            空字符串，返回NaN。同样也有默认模式和基模式。不识别小数，因为点是非数字
+//        parseFloat() 字符串转数字，从0处位置开始检查，持续到发现非有效数字的字符为止 将把该字符之前的字符串转换成数字
+//            始终忽略前面的0,不分进制数. 空字符串转换为NaN. 识别小数，点是有效字符
+//        还可以用*1的方式   a = '3' * 1;
+//        document.writeln(parseInt(8.000001));       //8
+//        document.writeln(parseInt(-8.000001));       //-8
+//        document.writeln(parseInt("0.000000007"));    //0
+//        document.writeln(parseInt(0.000000007));    //7
+//        parseInt("010");    //8
+//        parseInt("22.5");    //22
+//        parseInt("");    //NaN
+//        parseInt("12C");    //12
+//        parseInt("G12");    //NaN
+//        parseInt("E",16);    //15 基模式
+//        parseInt("0x32dd");   //13021
+//
+//        parseFloat("12345red");    //返回 12345
+//        parseFloat("0xA");    //返回 NaN ，有些浏览器会返回0
+//        parseFloat("11.2");    //返回 11.2
+//        parseFloat("11.22.33");    //返回 11.22
+//        parseFloat("0102");    //返回 102
+//        parseFloat("red");    //返回 NaN
+//        parseFloat("");    //返回 NaN
+//
+    /*强制类型转换 使用强制类型转换（type casting）来处理转换值的类型*/
+
+//        Boolean(value) - 把给定的值转换成 Boolean 型；
+//            当要转换的值是至少有一个字符的字符串、非 0 数字或非空对象时，Boolean() 函数将返回 true。
+//            如果该值是空字符串、数字 0、undefined 或 null，它将返回 false.
+                //        var b1 = Boolean("");        //false - 空字符串
+                //        var b11 = Boolean(" ");       //true - 空格字符串
+                //        var b2 = Boolean("hello");        //true - 非空字符串
+                //        var b1 = Boolean(50);        //true - 非零数字
+                //        var b1 = Boolean(null);        //false - null
+                //        var b1 = Boolean(0);        //false - 零
+                //        var b11 = Boolear(NaN);     //false - NaN
+//          var b1 = Boolean(new object());    //true - 对象
+//        Number(value) - 把给定的值转换成数字（可以是整数或浮点数）；
+//            它转换的是整个值,而不是部分值.如果字符串值能被完整地转换,Number()将判断是调用parseInt()方法还是parseFloat()方法
+//            1.如果是布尔值，true和false将分别转换为1和0. 2.如果是数字值，只是简单的传入和返回
+//            3.如果是null，返回0  4.如果undefined，返回NaN  
+//  		  5.如果是字符串，遵循下列规则：
+//                a.“11”会变成11，“011”会变成11  b.“1.1”会变成1.1  c.“0xf”会变成相同大小的十进制整数值
+//                d.  如果字符串是空的，则将其转换为0  e.  如果字符串包含除上述格式之外的字符，则将其转换成NaN
+//            属性
+//                constructor	返回对创建此对象的 Number 函数的引用。
+//                MAX_VALUE	可表示的最大的数。
+//                MIN_VALUE	可表示的最小的数。
+//                NaN	非数字值。
+//                NEGATIVE_INFINITY	负无穷大，溢出时返回该值。
+//                POSITIVE_INFINITY	正无穷大，溢出时返回该值。
+//                prototype	使您有能力向对象添加属性和方法。
+//            方法
+//                toString	把数字转换为字符串，使用指定的基数。
+//                toLocaleString	把数字转换为字符串，使用本地数字格式顺序。
+//                toFixed(位数)	把数字转换为字符串，结果的小数点后有指定位数的数字。
+//                toExponential	把对象的值转换为指数计数法。
+//                toPrecision	    把数字格式化为指定的长度。
+//                valueOf	返回一个 Number 对象的基本数字值。
+                //        var a = "12a", b = "3";
+                //        a = Number(a);      //NaN       Number()：用来转换纯数字的字符串，否则返回NaN（Not a Number）
+                //        b = Number(b);      //3
+                //        Number("true");     //1 false:0
+                //        alert(Number("045"));     //45
+//                         (0.12345).toFixed(4);       //0.1235
+//                         (0.0012345).toExponential());       //1.2345e-3
+//                         (1234567).toExponential();       //1.234567e+6
+//                         (12.34567).toPrecision(5);       //12.346
+//                         (1234567).toPrecision(5);       //1.2346e+6
+//        String(value) - 把任何值转换成字符串
+//            调用作为参数传递进来的值的 toString() 方法，null 和 undefined可以生成字符串而不引发错误
+
+            var s1 = String(null),s2 = undefined;    //"null" "undefined"
+            alert(s1+s2);       //null  undefined
+            var oNull = null;
+//            var s2 = oNull.toString();    //会引发错误
+
+</script>
+<body>
+
+</body>
+</html>

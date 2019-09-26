@@ -1,0 +1,10 @@
+CACHE MANIFEST
+/YunH/Demo/HTML/canvas视频音频存储缓存.html
+
+NETWORK:
+login.asp
+# 可以使用*星号来指示所有其他资源/文件都需要因特网连接    #开头注释行
+
+# 下面的 FALLBACK 小节规定如果无法建立因特网连接，则用 "offline.html" 替代 /html5/ 目录中的所有文件：
+FALLBACK:
+/html5/ /404.html

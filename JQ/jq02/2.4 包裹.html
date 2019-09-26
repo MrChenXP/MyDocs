@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>1111</p>
+    <p>2222</p>
+    <p>3333</p>
+    <p>4444</p>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+//            $("p").wrap("<div></div>");       //给每一个节点外部包裹各自包裹一个标签节点（父节点）
+
+//            $("p").wrapAll("<div></div>");      //把所有节点外部用一个标签节点包裹（共同父节点）
+//
+//            $("p").unwrap();                //移除所有节点的父节点
+
+            $("p").wrapInner("<a href='#'></a>");       //将节点里的内部用一个标签节点包裹
+        });
+    </script>
+</body>
+</html>

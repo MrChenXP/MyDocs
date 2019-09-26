@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li>111111</li>
+        <li>222222</li>
+        <li>333333</li>
+        <li class="li4">44444</li>
+        <li>55555</li>
+        <li>66666</li>
+        <li>77777</li>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+//            $(".li4").next().next().css({border: "1px solid red"});     //下一个同胞节点
+//            $(".li4").nextAll().css({border: "1px solid red"});         //后面所有的同胞节点
+//            $(".li4").nextUntil(":last-child").css({border: "1px solid red"});     //后面直到匹配元素为止（不包含匹配元素）
+
+//            $(".li4").prev().css({border: "1px solid red"});          //上一个同胞节点
+//            $(".li4").prevAll().css({border: "1px solid red"});          //上面所有的同胞节点
+//            $(".li4").prevUntil(":first-child").css({border: "1px solid red"});     //上面直到匹配元素为止（不包含匹配元素）
+
+//            $(".li4").siblings().css({border: "1px solid red"});            //所有的同胞节点（不包含自己）
+
+//            $(".li4").parent().css({border: "1px solid red"}).end().attr("title", "attribute");
+
+            $("ul li").each(function(index, element){       //遍历器  类似于map
+//                console.log(index, element);
+                if(index < 5 && index > 1){
+                    $(element).css({border: "1px solid red"});
+                }
+            });
+        });
+    </script>
+</body>
+</html>

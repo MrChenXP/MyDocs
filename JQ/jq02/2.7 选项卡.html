@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+        .controlTab{
+            border: 1px solid #ccc;
+            width: 240px;
+            height: 200px;
+            margin: 50px auto;
+        }
+        .controlTab .control{
+            height: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 15px;
+        }
+        .controlTab .control .active{
+            color: #0c6ad4;
+            font-weight: bold;
+            border-top: 2px solid #0c6ad4;
+        }
+        .controlTab .control li{
+            float: left;
+            width: 60px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            box-sizing: border-box;
+            border-top: 2px solid transparent;
+            margin-top: -1px;
+        }
+        .controlTab .control li a:hover{
+            text-decoration: underline;
+            color: red;
+        }
+        .controlTab .control li:not(:last-child)::after{
+            content: "|";
+            float: right;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .content > li{
+            height: 30px;
+            line-height: 30px;
+            display: none;
+            padding-left: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controlTab">
+        <ul class="control">
+            <li class="active"><a href="#">头条</a></li>
+            <li><a href="#">社会</a></li>
+            <li><a href="#">娱乐</a></li>
+            <li><a href="#">军情</a></li>
+        </ul>
+        <ol class="content">
+            <li style="display: block;">
+                <ul>
+                    <li>法国强塞给中国一地 起大作用</li>
+                    <li>这个美国人将访华 蔡英文急了</li>
+                    <li>中俄联手安倍慌了!日亏458亿</li>
+                    <li>对朝动武明显!美战机亮相关岛</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>女司机醉驾：我是北大不是吓大的</li>
+                    <li>12岁癌症晚期!这些习惯必须要改了</li>
+                    <li>知名火锅店竟用潲水油分店超百家</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>赵丽颖遭炮轰：土得只配代言化肥</li>
+                    <li>宋丹丹三婚嫁百亿富豪 近照吓坏了</li>
+                    <li>马苏这胯也太宽了吧!裙子快撑破了</li>
+                    <li>冯小刚老婆曾被王志文赶出家门</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>法国强塞给中国一地 起大作用</li>
+                    <li>这个美国人将访华 蔡英文急了</li>
+                    <li>中俄联手安倍慌了!日亏458亿</li>
+                    <li>对朝动武明显!美战机亮相关岛</li>
+                    <li>中国最神秘部队 被西方称魔鬼</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <script>
+//        var aControl = document.querySelectorAll(".control li");
+//        var aContent = document.querySelectorAll(".content > li");
+//
+//        for(var i = 0, len = aControl.length; i < len; i++){
+//            aControl[i].index = i;
+//            aControl[i].onmouseover = function(){
+//                for(i = 0; i < len; i++){
+//                    aControl[i].removeAttribute("class");
+//                    aContent[i].style.display = "none";
+//                }
+//                this.className = "active";
+//                aContent[this.index].style.display = "block";
+//            };
+//        }
+    </script>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $(".control > li").mouseover(function(){
+                $(".control > li").removeClass("active").eq($(this).index()).addClass("active");
+                $(".content > li").css("display", "none").eq($(this).index()).css({display: "block"});
+            });
+        });
+    </script>
+</body>
+</html>

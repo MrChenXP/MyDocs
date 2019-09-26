@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+        .position{
+            position: fixed;
+            top: 10px;
+        }
+        ul{
+            list-style: none;
+            position: absolute;
+            top: 40%;
+            right: 100px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        ul li{
+            width: 40px;
+            text-align: center;
+        }
+        ul .active, ul li:hover{
+            color: white;
+            background-color: #f40;
+            font-weight: bold;
+        }
+        ul li a{
+            display: block;
+            padding: 8px 0;
+            width: 30px;
+            margin: 0 auto;
+        }
+        ul li:not(:last-child) a{
+            border-bottom: 1px solid rgba(200,200,200, .4);
+        }
+        div{
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div style="height: 800px;background-color: darkcyan;">爱逛好货</div>
+        <div style="height: 400px;background-color: greenyellow;">好店直播</div>
+        <div style="height: 500px;background-color: seagreen;">品质特色</div>
+        <div style="height: 600px;background-color: yellow;">实惠热卖</div>
+        <div style="height: 1500px;background-color: aquamarine;">猜你喜欢</div>
+    </div>
+
+    <ul>
+        <li class="active"><a href="javascript: void 0;">爱逛好货</a></li>
+        <li><a href="javascript: void 0;">好店直播</a></li>
+        <li><a href="javascript: void 0;">品质特色</a></li>
+        <li><a href="javascript: void 0;">实惠热卖</a></li>
+        <li><a href="javascript: void 0;">猜你喜欢</a></li>
+        <li style="display: none;" id="back"><a href="javascript: void(0);">回到顶部</a></li>
+        <li><a href="javascript: void(0);">暴恐举报</a></li>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            var iTop = $("ul li:first-child").offset().top, aTop = [];
+            $(".content div").each(function(){
+                aTop.push($(this).offset().top);
+            });
+            $(window).scroll(function(){
+                var scrollTop = $(":root").scrollTop();
+                scrollTop > iTop ? $("ul").addClass("position") :  $("ul").removeClass("position");     //ul的位置
+                scrollTop > $(window).height() ? $("#back").css({display: "block"}) : $("#back").css({display: "none"});    //顶部按钮显示隐藏
+
+                $.each(aTop, function(index){           //根据滚动过的距离显示对应li的位置
+                    if(scrollTop >= aTop[index] && index === 4){
+                        $("ul li").removeClass("active").eq(index).addClass("active");
+                    }else if(scrollTop >= aTop[index] && scrollTop < aTop[index + 1]) {
+                        $("ul li").removeClass("active").eq(index).addClass("active");
+                    }
+                });
+            });
+
+            $("ul li:lt(6)").click(function(){      //根据点击的li显示对应的DIV位置
+                if($(this).index() === 5){
+//                    $(":root").scrollTop(0);
+                    $(":root").animate({scrollTop: 0});
+                }else{
+//                    $(":root").scrollTop(aTop[$(this).index()]);
+                    $(":root").animate({scrollTop: aTop[$(this).index()]});
+                }
+            });
+        });
+    </script>
+</body>
+</html>

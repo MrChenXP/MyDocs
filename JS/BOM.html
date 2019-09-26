@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BOM</title>
+  <style type="text/css">
+    div {
+      height: 3000px;
+    }
+  </style>
+</head>
+
+<body>
+<div id="ajax">
+  <p>BOM = window Window对象是BOM的顶层对象，其他对象都是该对象的子对象</p>
+  <p>window = document + framses[] + history + location + navigator + screen </p>
+  <p> document = anchors[] + applets[] + areas[] + embeds[] +
+                 forms[] + images[] + layers[] + links[] </p>
+  <p>DOM = document </p>
+</div>
+<script type="text/javascript">
+  console.log(window.href)
+
+//window表示浏览器窗口 JS全局对象、函数以及变量自动成为window对象的成员 document也是该对象的属性之一
+//获取浏览器窗口的宽度和高度（浏览器的视口）
+  //console.log(window.innerHeight);//IE、Chrome、Ff、Opera Safari
+  //console.log(window.innerWidth);//高浏包括滚动条，不包括工具栏 ie8undefined
+  //console.log(document.documentElement.clientHeight);//ie8
+  //console.log(document.documentElement.clientWidth);//高浏和ie8都表示html文档宽度
+  //console.log(document.body.clientHeight);//ie8
+  //console.log(document.body.clientWidth);//高浏和ie8都表示body的宽度
+  //兼容获取浏览器可视区域宽高
+  //console.log(window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight);
+  //console.log(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
+
+//window对象
+  //打开新窗口(window.open)   let obj = window.open(URL,name,specs,replace)
+      //let obj = window.open('events.html','aaa','_parent','height=500,top=100');
+      //obj 打开的新窗口对象的引用。如果调用失败，返回值会是 null 。
+        //如果父子窗口满足“同源策略”，你可以通过这个引用访问新窗口的属性或方法。
+      //URL	可选。打开指定的页面的URL。可以是图片文件或者其他任何浏览器支持的文件格式.如果没有指定URL，打开一个新的空白窗口
+      //name	可选。指定target属性或窗口的名称。name放在打开方式前才可以一起设置：
+        //_blank - URL加载到一个新的窗口。这是默认
+        //_parent - URL加载到父框架
+        //_self - URL替换当前页面
+        //_top - URL替换任何可加载的框架集
+        //name - 窗口名称  访问name
+            //window.name  当前window的名称
+            //window.parent.name  父window的名称
+            //widnow.top.name 顶层window的名称
+      //specs	可选。一个逗号分隔的项目列表。支持以下值：
+        //channelmode=yes|no|1|0	是否要在影院模式显示 window。默认是没有的。仅限IE浏览器
+        //directories=yes|no|1|0	是否添加目录按钮。默认是肯定的。仅限IE浏览器
+        //fullscreen=yes|no|1|0	浏览器是否显示全屏模式。默认是没有的。在全屏模式下的 window，还必须在影院模式。仅限IE浏览器
+        //height=pixels	窗口的高度。最小.值为100
+        //width=pixels	窗口的宽度.最小.值为100
+        //left=pixels	该窗口的左侧位置
+        //top=pixels	窗口顶部的位置.仅限IE浏览器
+        //location=yes|no|1|0	是否显示地址字段.默认值是yes
+        //menubar=yes|no|1|0	是否显示菜单栏.默认值是yes
+        //resizable=yes|no|1|0	是否可调整窗口大小.默认值是yes
+        //scrollbars=yes|no|1|0	是否显示滚动条.默认值是yes
+        //status=yes|no|1|0	是否要添加一个状态栏.默认值是yes
+        //titlebar=yes|no|1|0	是否显示标题栏.被忽略，除非调用HTML应用程序或一个值得信赖的对话框.默认值是yes
+        //toolbar=yes|no|1|0	是否显示浏览器工具栏.默认值是yes
+      //replace	Optional.Specifies规定了装载到窗口的 URL 是在窗口的浏览历史中创建一个新条目，还是替换浏览历史中的当前条目。支持下面的值：
+        //true - URL 替换浏览历史中的当前条目。
+        //false - URL 在浏览历史中创建新的条目。
+    //window.moveTO('连接','打开方式')  	//移动窗口
+    //window.resizeTO('连接','打开方式')  //调整当前窗口尺寸
+    //window.close(); 								//关闭窗口 有兼容性问题，支持IE
+    //window.alert("提示信息");					//弹出一个具有OK按钮的系统消息框，显示指定的文本
+    //window.confirm("询问信息?");				//弹出一个具有OK和Cancel按钮的询问对话框，返回一个布尔值
+    //window.prompt("提示信息?", "默认值");//提示用户输入信息，文本框中的值作为函数值返回
+    //window.setTimeout("alert('xxx')", 1000);//指定的毫秒数后执行指定的代码
+    //obj.resizeTo() 把窗口大小调整至指定的宽度和高度
+    //obj.resizeBy()	按照指定的像素将窗口的大小进行加减。
+    //obj.moveTo()	    把窗口的左上角移动到一个指定的坐标。
+    //obj.print()	    打印当前窗口的内容。(打印机的那种打印)
+    //obj.close()     关闭浏览器窗口(chrome 直接关闭窗口.IE 弹出一个询问框是否关闭窗口
+            //FF 不能直接关闭窗口(脚本不得关闭非脚本打开的窗口).由open打开的窗口可以直接关闭(所有浏览器行为一致)
+  //window对象事件
+  //onload  加载完页面所有东西以后才执行
+  //load  所有资源加载完毕后触发 只是表明事件方法，但并未执行
+  //resize  浏览器窗口有变化时触发
+  //scroll  浏览器窗口有滚动时触发
+  //window.onscroll = function () { //当该元素滚动时，会执行该函数
+  //  console.log(33);
+  //};
+
+//history 存放浏览器当前窗口的的访问历史
+  //window.history.go(-1); //访问浏览器窗口的历史,负为后退,正为前进,0页面刷新
+                          // 参数对应的history对象里没页面,页面不发生变化
+  //window.history.back(); //同上,前往上一页，无参数
+  //window.history.forward(); //同上，前往下一页,无参数
+  //let whl = window.history.length; //可以查看历史中的页面数（history对象中存储的页面数）
+
+//location 用于获得当前页面的地址 (URL)信息、页面重定向等场景
+  //location.href //当前载入页面的完整URL，如http://www.somewhere.com/pictures/index.htm
+  //location.protocol //URL中使用的协议，即双斜杠之前的部分，如http
+  //location.host //服务器的名字(主机名和当前 URL 的端口号)，如www.wrox.com:8080
+  //location.hostname //通常等于host(但host里面带端口，hostname不带(主机名))
+  //location.port //URL声明的请求的端口，默认情况下，大多数URL没有端口信息，如8080
+  //location.pathname //URL中主机名后的部分，如/pictures/index.htm
+  //location.search //执行GET请求的URL中的问号后的部分，又称查询字符串，如?param=xxxx
+  //location.hash //如果URL包含#（锚），返回该符号之后的内容，如#anchor1
+  //location.assign("http://www.baidu.com"); //同location.href，新地址都会被加到浏览器的历史栈中
+  //location.replace("http://www.baidu.com"); //同assign()，但新地址不会被加到浏览器的历史栈中，不能通过back和forward访问
+  //location.reload(true | false); //重新载入当前页面，为false时从浏览器缓存中重载，为true时从服务器端重载，默认为false
+
+//navigator 存放有关Web浏览器的信息，在检测浏览器及操作系统方面非常有用
+  //navigator.appCodeName //浏览器代码名的字符串表示
+  //navigator.appName //官方浏览器名的字符串表示
+  //navigator.appVersion //浏览器版本信息的字符串表示
+  //navigator.cookieEnabled //如果启用cookie返回true，否则返回false
+  //navigator.javaEnabled //如果配置文件启用了java返回true，否则返回false
+  //navigator.platform //声明了运行浏览器的操作系统和（或）硬件平台==浏览器自己的平台
+  //navigator.plugins //安装在浏览器中的插件数组
+  //navigator.taintEnabled //如果启用了数据污点返回true，否则返回false 
+  	//当允许数据污点的时候，一个窗口中的JS可以观看另一个窗口的属性，而不管另外的窗口是从哪个服务器上装入的
+  //navigator.userAgent //用户代理头的字符串表示
+  //navigator.onLine    用来检测是否在线还是离线状态
+      // Chrome和Safari中,如果浏览器连接不上局域网 (LAN)或者路由器,就是离线状态
+      //在Firefox和Internet Explorer中, 如果浏览器处于"脱机工作"状态,则返回 false
+//screen 存放有关显示浏览器屏幕的信息
+  //screen.availHeight   返回访问者屏幕的高度(浏览器的窗口可以具有的最大化的高度)，以像素计，减去界面特性，比如窗口任务栏。
+  //screen.availWidth  返回访问者屏幕的宽度(同上)，以像素计，减去界面特性，比如窗口任务栏。
+  //screen.height  返回屏幕区域的实际高度 /*跟电脑分辨率一致*/
+  //screen.width   返回屏幕区域的实际宽度屏幕分辨率的宽高 /*跟电脑分辨率一致*/
+
+
+
+
+
+</script>
+
+</body>
+</html>

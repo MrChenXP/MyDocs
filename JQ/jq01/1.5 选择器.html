@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<style>-->
+        <!--li[class][id]{-->
+            <!--background-color: red;-->
+        <!--}-->
+    <!--</style>-->
+</head>
+<body>
+<ul>
+    <li class="div1" id="div2">1111</li>
+    <li class="div1">2222</li>
+    <li>3333</li>
+    <li>4444</li>
+    <li>5555</li>
+</ul>
+<ul>
+    <li>6666</li>
+    <li>7777</li>
+    <li>8888</li>
+    <li>9999</li>
+    <li>0000</li>
+</ul>
+<h1>ddddd</h1>
+<h6>ddddd</h6>
+
+<div>
+    <p>aaaa</p>
+</div>
+<div>
+    dddddd
+</div>
+<ol>
+    <li>aaaa</li>
+    <li>bbbb</li>
+    <li>cccc</li>
+</ol>
+
+<div class="div5">
+    <p style="display: none;">00</p>
+    <p style="visibility: hidden;">01</p>
+    <p style="opacity: 0;">02</p>
+    <p style="height: 0;overflow: hidden;">03</p>
+    <input type="hidden">
+</div>
+<input type="text">
+<input type="text">
+<script src="jquery-1.12.2.min.js"></script>
+<script>
+  $(function () {
+    $("li[class][id]").css({backgroundColor: "blue"});      //多属性选择器
+    $("ul li:first-child").css({backgroundColor: "blue"});  //1 和 6   ul的第一个li
+    $("ul li:first").css({backgroundColor: "blue"});         //1         所有li里的第一个
+    $("ul li:nth-child(odd)").css({backgroundColor: "blue"});
+    $("ul li:odd").css({backgroundColor: "blue"});          // 偶数(0表示第一个)
+    $("ul li:eq(2)").css({backgroundColor: "blue"});        //等于(equal)  第3个(0表示第一个)
+    $("ul li:gt(2)").css({backgroundColor: "blue"});      //大于(greater than)
+    $("ul li:lt(2)").css({backgroundColor: "red"});       //小于(less than)
+
+    $(":header").css({color: "blue"});      //选中所有标题标签（h1-h6）
+    $("div:has(p)").css({color: "red"});        //:has(后代)
+
+    $("ol li:not(:last-child)").css({color: "red"});    //:not(当前)
+    console.log($(".div5 *:hidden"));           //display:none; 和 hidden类型的表单元素
+
+    $("input").focus(function () {
+      $(":focus").css({border: "5px solid red"});
+    });
+  });
+</script>
+</body>
+</html>

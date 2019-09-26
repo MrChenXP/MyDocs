@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date.计数器</title>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+  /*Date（日期）对象  作用: 用于处理日期和时间*/
+//    获取时间
+//      getFullYear()	    从 Date 对象以四位数字返回年份。
+//      getYell()         从 Date 对象以四位数字返回年份，相对于1900年的年份，用处不大
+//      getMonth()	    从 Date 对象返回月份 (0 ~ 11)，0代表1月。
+//      getDate()	        从 Date 对象返回一个月中的某一天 (1 ~ 31)。
+//      getDay()	        从 Date 对象返回一周中的某一天 (0 ~ 6)，0代表星期日。
+//      getHours()	    返回 Date 对象的小时 (0 ~ 23)。时间方法名中都有s
+//      getMinutes()	    返回 Date 对象的分钟 (0 ~ 59)。
+//      getSeconds()	    返回 Date 对象的秒数 (0 ~ 59)。
+//      getMilliseconds()	返回 Date 对象的毫秒(0 ~ 999)。
+//      getTime()	        返回 1970 年 1 月 1 日至今的毫秒数。
+//        var oDate = new Date();  //**没有参数的话，返回当前时间
+//        var iYear = oDate.getYear(),
+//            iYear = oDate.getFullYear(),
+  //            iMonth = oDate.getMonth(),
+  //            iDate = oDate.getDate(),
+//            iDay = oDate.getDay(),
+//            iHours = oDate.getHours(),
+//            iMinutes = oDate.getMinutes(),
+//            iSeconds = oDate.getSeconds(),
+//            iMinllseconds = oDate.getMilliseconds(),
+//            iTime = oDate.getTime();
+//        document.writeln(iYear + "年" + iMonth + "月" + iDate + "日 " + iHours + ":" + iMinutes + ":" + iSeconds + " 星期" + iDay + "<br>");
+//        document.writeln(iHours + "时" + iMinutes + "分" + iSeconds + "秒 " + iMinllseconds + "毫秒" + " 从1970年1月1日至今的毫秒数" +iTime);
+//    设置时间
+//      oDate.setFullYear(2020, 11, 11);        // 年月日
+//      oDate.setMonth(10, 25);                 //月日
+//      oDate.setDate(20);                        //日
+//      oDate.setHours(12,12,12);                //时分秒
+//      oDate.setMinutes(11,10);                //分秒
+//      oDate.setSeconds(15);                //分秒
+//      oDate.setMillseconds(3434343);       //毫秒
+//      oDate.setTime(87878787845);         //以毫秒设置 Date 对象
+//      var oDate = new Date(2020,11,11,12,12,12);      //注意月份(实际显示+1) 年月日时分秒
+//      var oDate = new Date("2020/12/12 14:20:22");
+//      var oDate = new Date("2020/12/12");
+//      var oDate = new Date("2020-12-12 14:20:22");        //IE不支持
+//      document.writeln(oDate.toTimeString());       //14:20:22 GMT+0800 (中国标准时间) 把 Date 对象的时间部分转换为字符串
+//      document.writeln(oDate.toDateString());     //Sat Dec 12 2020 把 Date 对象的日期部分转换为字符串。
+//      document.writeln(oDate.toString());     //Sat Dec 12 2020 14:20:22 GMT+0800 (中国标准时间) 把 Date 对象转换为字符串。
+//      oDate.setFullYear(oDate.getFullYear() + 5);   //时间也可加减
+//    时间换算
+//      var t = 86496111; //毫秒
+//      var day = Math.floor(t/60/60/24/1000);    //天
+//      var hour = Math.floor(t/60/60%24/1000);   //时
+//      var minute = Math.floor(t/1000/60)%60;    //分
+//      var second = Math.floor(t/1000 % 60); //秒
+//      var millseconds = t%1000; //毫秒
+//      document.writeln(day + "天" + hour + "时" + minute + "分" + second + "秒" + millseconds + "毫秒");
+
+  /*定时器*/
+//    setTimeout(函数，延时时间（单位是ms）)    延时型定时器  延时多少毫秒后才执行一次函数（一次）
+//    setInterval(函数，间隔时间（单位是ms）)   间隔型定时器  每间隔多少毫秒执行一次函数（多次）
+//      setTimeout(function () {
+//          document.writeln("这是2s延时定时器")
+//      },2000);
+//      setInterval(function () {
+//          console.log(("这是1s间隔定时器"));
+//      },1000)
+//      var iTimer = setInterval(function () {        // 定时器返回值就是定时器的编号 iTimer=1
+//          document.writeln("今天天气好热");
+//      }, 1000);
+//      var iTimer2 = setTimeout(function () {
+//          document.writeln("今天天气好冷!!!");
+//      }, 2000);
+//      console.log((iTimer + iTimer2));    //1 2
+//      clearInterval(iTimer);// 清除间隔器定时器，需要传递定时器的编号
+//      clearTimeout(iTimer2);      // 清除延时器定时器，需要传递定时器的编号
+//      function print1( para ){
+//          document.writeln("今天天气好热" + para);
+//      }
+//      setInterval(function(){      // 当执行一个外部函数且没有参数时，可以传递外部函数的引用
+//          print1(",是的");
+//      }, 1000);
+  </script>
+</head>
+<body>
+<h3>定时器应用</h3>
+<button id="move">向右</button>
+<button id="pause">暂停</button>
+<input type="text" id="dd" style="position: relative;left: 0;">
+<script type="text/javascript">
+  var oMove = document.getElementById("move"), iTimer = null,
+    oPause = document.getElementById("pause"),
+    oDd = document.getElementById("dd");
+  oMove.onclick = function () {   //给向右按钮设置点击事件
+    iTimer = setInterval(function () {  //给iTimer设置间隔定时器
+      console.log(oDd.style.left);
+      oDd.style.left = parseInt(oDd.style.left) + 2 + "px";   //   给oDd对象的left样式+2px(获取的是0px,要把px去掉)
+    }, 50); //间隔时间为50ms
+  };
+  oPause.onclick = function () {
+    clearInterval(iTimer);
+  }
+</script>
+<h3>倒计时 定时器+Date对象</h3>
+<div style="width: 200px; height: 100px; background-color: deeppink;" id="div1"></div>
+<script type="text/javascript">
+  //设置的时间（毫秒）-现在的时间（毫秒）
+  var oDate2 = new Date("2018/2/17 21:46:00"),   //设置倒计时时间
+    iTimer2 = null,
+    oDiv = document.getElementById("div1");
+  iTimer = setInterval(down, 1000);
+
+  function down() {
+    var oDate = new Date(),
+      a = (oDate2 - oDate) / 1000,     //获取还剩多少秒
+      iDay = Math.floor(a / 60 / 60 / 24),
+      iHour = Math.floor(a / 60 / 60 % 24),
+      iMinute = Math.floor(a / 60 % 60),
+      iSecond = Math.floor(a % 60);
+    if (a < 0) { //不能加=，加(如果网页刚刚是1000ms则会有可能==0)了在==0时不能显示第0秒
+      clearInterval(iTimer2);
+      oDiv.innerText = "活动已结束，敬请期待!";
+    } else {
+      oDiv.innerText = iDay + "天 " + iHour + ":" + iMinute + ":" + iSecond;
+    }
+  }
+
+  down(); //调用一次，为了让网页刚加载完就可以显示，不必再等1s
+
+</script>
+</body>
+</html>

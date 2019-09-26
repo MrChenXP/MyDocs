@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件</title>
+</head>
+<body style="height: 3000px">
+<!--<button>增加节点tr</button>
+<form action="">
+    <table>
+        <tr><td>姓名：</td><td><input type="text" name="user"></td></tr>
+        <tr><td>密码：</td><td><input type="text" name="pwd"></td></tr>
+        <tr>
+            <td>出生时间：</td>
+            <td>
+                <select name="birth">
+                    <option>1990</option><option>1992</option><option value="94" selected>1994</option>
+                </select>
+            </td>
+        </tr>
+        <tr><td>提交：</td><td><input type="submit" name="submit" onclick="alert('测试even对象');"></td> </tr>
+    </table>
+</form>-->
+<script type="text/javascript">
+/*表单对象*/
+//Form 对象代表一个HTML表单 在 HTML文档中<form>每出现一次,Form对象就会被创建。
+//    表单元素可通过name属性的值直接操作，一个时可直接使用，多个时须用下标来访问
+//    onfocus	当元素获得焦点时运行的脚本。
+//    onblur	元素失去焦点时运行的脚本。
+//    onchange	在元素值被改变时(以光标焦点来判断值是否输完，然后在判断有没有改变)运行的脚本。
+//    onselect	在元素中文本被选中后触发。
+//    oninput	当元素获得用户输入新值时就立即运行的脚本。
+//    onsubmit	在提交表单时触发。（用于表单，不要加载到表单元素上）
+//        var oF = document.forms[0];
+//        oF.user.onfocus = function () {this.style.border = "2px solid blue";};
+//        oF.user.onblur = function () {this.style.border ="";    };
+//        oF.birth.onchange = function () {console.log(this.value);};// select元素的value值指选中option的值，有value属性则返回value属性值，没有返回option的文本内容
+//        oF.pwd.onselect = function () {console.log(this.value);};
+//        oF.pwd.oninput = function () {console.log(this.value);};
+//        oF.onsubmit = function () {alert("表单也被提交");return true;};  //true 表示表单可以被提交 false 表示表单不可被提交
+/*事件*/
+//注册事件处理程序
+//    给DOM对象设置属性    a.onclick=function(){}  dom对象有多个事件处理函数，最后那个生效
+//    给HTML标签设置属性   <div onclick="function(){}"></div>
+//    事件委托方式    addEventListener,attachEvent
+//调用顺序
+//    通过设置对象属性或者HTML属性注册的事件处理程序优先调用
+//    使用addEventListener()注册的处理程序按照它们的注册顺序调用。
+//    使用attachEvent()注册的处理程序可能按照任何顺序调用（无规律）
+//给网页加载事件   可加载到html上或document上    window是document父对象
+//    document.body.onclick = function(){ console.log("body"); };   //不推荐body，body尺寸会因为网页内容太少而太小，空白部分不属于body
+//    document.documentElement.onclick = function(){ console.log("body"); };    //html
+//    window.document.onclick = function(){ console.log("document"); }//document
+//事件对象
+//    even 发生一个事件时创建，存储发生事件时的信息。事件的本质就是一个函数,而该函数的形参接收一个event对象.函数执行完后，对象自动消失
+//        var oSub = document.querySelector("input[type='submit']");
+//        document.documentElement.onmousedown = function(ev){    //形参接受even对象(ie8不传递，ie8直接使用window.event)
+//            var oEvent = ev || event;   //如果是高级浏览器就用形参，ie8就直接使用window.event，顺序不能乱原因在下
+//            console.log(ev);        // 以参数方式传入event对象是在高级浏览器
+//            console.log(window.event);      //在火狐下不能直接识别event对象，FireFox无法处理未声明未赋值的变量event
+//            console.log(oEvent.clientX + " " + oEvent.clientY); };    // 返回点击可视区域的坐标
+//事件源   当前操作的那个元素就是事件源，不管有没有绑定事件，只要是该元素触发了事件就是事件源
+//    var otd = document.querySelector("td");
+//    var ota = document.querySelector("table");
+//    otd.onclick = ota.onclick = document.onclick = function(ev){
+//        var oEvent = ev||event;
+//        console.log(oEvent.target);   //高级浏览器 ie8不行
+//        console.log(oEvent.srcElement); //非火狐   ie8行
+//        var oTarget = oEvent.target || oEvent.srcElement;       //获取事件源兼容代码
+//        oTarget.style.backgroundColor = "red"; };
+//事件流
+//   过程：从子节点到父节点，相同事件会被触发，直到window对象上结束
+//   srcObj.tagName : 获取事件源的大写标签名
+//    var otd = document.querySelector("td");
+//    var otr = document.querySelector("tr");
+//    var otable = document.querySelector("table");
+//    otd.onclick = otr.onbdlclick = otable.onclick =document.body.onclick=
+//    document.documentElement.onclick=document.onclick = function(){ console.log(this.className || this.nodeName); };
+//    window.onclick = function(){ console.log("window"); };
+//   阻止冒泡
+//    otd.onclick = function (ev) {
+//        var oEvent = ev || event;
+//        oEvent.stopPropagation(); //高级浏览器
+//        oEvent.cancelBubble = true; //所有浏览器，这个属性不在JS标准中
+//        console.log(this.className || this.nodeName);
+//        oEvent.stopPropagation ? oEvent.stopPropagation() : oEvent.cancelBubble = true; //阻止事件冒泡兼容函数
+//        return false; };  //用于处理使用对象属性注册的事件处理程序
+//阻止默认
+//otd.oncontextmenu = function (ev) {
+//    var oEvent = ev || event;
+//    oEvent.preventDefault();       //高级浏览器
+//    oEvent.returnValue = false;     //IE8能用
+//    return false;                   //所有浏览器
+//    oEvent.preventDefault ? oEvent.preventDefault() : oEvent.returnValue = false; };//阻止事件冒泡兼容函数+return false
+//事件委托
+//  当需要对很多元素添加事件时，可以将事件添加到它们的父节点而将事件委托给父节点来触发处理函数。这得益于事件冒泡机制:
+//  优点   1.管理的函数变少了。不需要为每个元素都添加监听函数。对于同一个父节点下面类似的子元素，可以通过委托给父元素的监听函数来处理事件。
+//        2.可以方便地动态添加和修改元素，不需要因为元素的改动而修改事件绑定。（比如后来添加子元素依然拥有事件）
+//        3.JavaScript和DOM节点之间的关联变少了，这样也就减少了因循环引用而带来的内存泄漏发生的概率。
+    var oBtn = document.querySelector("button");
+//    otable.onclick = function( ev ){    //给父元素加事件
+//        var oEvent = ev || event;
+//        var oTarget = oEvent.target || oEvent.srcElement;   //获取事件源
+//        oTarget.style.backgroundColor = "yellow";}; //给事件源加效果，这样就能不给每个子元素加事件自动触发父元素的事件
+//    oBtn.onclick = function(){
+//        var otr = docum 0ent.createElement("tr");
+//        otr.innerHTML = "<td>11</td><td>22</td>";
+//        otable.appendChild(otr); };
+//事件监听方式
+//  给同一对象加相同事件后者会覆盖前者,给对象增加事件监听器，可以解决
+//  addEventListener()   向指定元素添加事件句柄 高级浏览器  true:事件句柄在捕获阶段执行 false 默认。事件句柄在冒泡阶段执行
+//  attachEvent()        //IE9-10 执行顺序从上而下   IE8执行顺序从下而上
+//    removeEventListener()   //移除监听 不能移除匿名函数的兼听 一定是有名函数
+//    detachEvent()   //移除监听 不能移除匿名函数的兼听 一定是有名函数
+//      let showA = () => console.log("aaaa");
+//      oBtn[0].addEventListener("click", ()=>{console.log("bbb");}, false);
+//      oBtn[0].addEventListener("click", showA, false);
+//      oBtn.removeEventListener("click",showA,false);
+//      oBtn[0].attachEvent("onclick", showA());
+//      oBtn.attachEvent("onclick", ()=>{console.log("bbb");});
+//      oBtn.detachEvent("onclick",showA);
+//  加绑定兼容函数
+//    function bindEvent(obj, eventName, fnEvent){    //创建一个兼容函数(参数：事件对象 事件类型 需处理的函数)
+//        if(obj.addEventListener){   //如果有addEventListener方法就执行下面函数
+//            obj.addEventListener(eventName, fnEvent, false);    //事件类型 需处理的函数 执行阶段
+//        }else{   //如果没有，那就有attachEvent方法就执行下面函数
+//            obj.attachEvent("on" + eventName, fnEvent);} }//增加on  事件类型    事件函数
+//    bindEvent(oBtn, "click", function(){ console.log("aaa"); } );
+//  移除绑定兼容函数
+//    function removeBind(obj, eventName, fnEvent){     //
+//        if(obj.removeEventListener){
+//            obj.removeEventListener(eventName, fnEvent);
+//        }else{
+//            obj.detachEvent("on" + eventName, fnEvent);
+//        }
+//    }
+//    removeBind(oBtn,"click",showa);
+//this指向
+//    设置属性方式、addEventListener   this为注册事件处理程序的dom对象，由调用时决定
+//    attachEvent   this为全局window对象
+//    obj.attachEvent("on" + eventName,function () {
+//        fnEvent.call(obj);   //or fnEvent.apply(obj) 改变attachEvent指向window的问题，参考闭包.htis.html
+//    });
+
+
+
+
+/*鼠标事件、滚动条、窗口事件*/
+//鼠标事件
+//    onmousedown   鼠标按下
+//    onmouseup     鼠标松开
+//    onmouseover   鼠标移入
+//    onmouseout    鼠标移出
+//    event.button  检查按下的鼠标键 0:左键 1:滚轮键 2:右键3:左右键4:中间键5:左键和中间键6:右键和中间键 7:所有的键
+//    event.type    返回事件类型
+//      仅用于onmousedown onmouseup onmousemove 其他事件，不管鼠标状态如何，都返回 0（比如onclick）
+//        var oInp = document.querySelector("input");
+//        oInp.onmouseup = function(){ this.style.backgroundColor = "blue"; };
+//        oInp.onmouseover = function(){ this.style.borderRadius = "50%"; };
+//        oInp.onmouseout = function(){ this.style.borderRadius = ""; };
+//        oInp.onmousedown = function(ev){
+//            var oEvent = ev||event; //鼠标点击顺序：左中右
+//            console.log(oEvent.button); //高级浏览器 0 1 2  IE8-  1 4 2
+//            console.log(oEvent.buttons);     //高级浏览器 1 4 2  IE8-  undefined
+//            console.log(oEvent.which);         //高级浏览器 1 2 3  IE8-  undefined
+//            console.log(oEvent.buttons || oEvent.button); }; //高级浏览器和ie8都是142
+//滚动条事件
+//  window.onscroll = function(){     //滚动条事件(元素滚动条在滚动时触发)直接加载给window监听窗口的滚动条
+//            console.log(document.documentElement.scrollTop);  // 所有浏览器（chrome须63版本以上）
+//            console.log(document.body.scrollTop);        // 旧版chrome
+//            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;      //滚动条的上边距
+//            var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft; };  //滚动条的左边距
+//窗口事件
+//  oEvent.clientY  oEnent.clientX // 返回点击可视区域的坐标Left
+//  oEvent.pageY    //  pageY = clientY + document.documentElement.scrollTop
+//  window.onresize = function(){       //窗口的可视区域发生变化触发
+//    console.log(document.documentElement.clienWidth + " " + document.documentElement.clientHeight);};  //可视区域的宽度和高度
+//键盘事件
+//  onkeydown   有按键被按下时调用 执行顺序优先于keypress
+//  onkeypress  并不是所有按键都能识别
+//  onkeyup     有按键被松开时调用
+//  onkeypress  有按键被按下时调用
+//  键盘键码  字母（65-90）数字（48-57或96-105）箭头键（37-40）退格键（8）回车键（13）Delete(46)
+//  document.onkeydown = function(ev){
+//    var oEvent = ev || event;
+//    console.log(oEvent.keyCode, oEvent.key); };  //keyCode 返回键盘按键的键码   key返回键盘按键的键名
+//  document.onkeyup = function(){ console.log("按键被松开");};
+//  document.onkeypress = function(){ console.log("按键被按下并松开");};
+</script>
+</body>
+</html>

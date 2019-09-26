@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS基础</title>
+    <meta charset="utf-8">
+    <!--
+    IE7和IE8 只支持css1css2、[attr$=val]、[attr^=val]、[attr*=val]
+    （2）:first-child是CSS2选择器
+    （3）:before和:after是CSS2选择器
+    参考 ps://www.cnblogs.com/mengfangui/p/7404250.html
+    -->
+    <!--外部样式-->
+    <link rel="stylesheet" type="text/css" href="CSS/CSSJiChu.css">
+    <!--内部样式-->
+    <style type="text/css">
+    	/* 选择器权重
+            !important > 行间>ID>类、伪类、属性》标签、伪元素》通配、子选择器》继承》浏览器自带*/
+        /* 通配选择器 * 样式应用于所有HTML元素*/
+        *{  margin-top: auto;  }
+        /* 标签(元素)选择器.选择器名字为某个标签，样式应用于标签代表的元素*/
+        p{  font-weight: bolder;  }
+        /* 类选择器 . html元素通过class属性来应用样式，一个类样式可同时应用于多个样式*/
+        .span1{font-size: 10px;}
+        /* ID选择器 # 样式应用于具有相应ID属性值的元素。一个一面只能有一个*/
+        #h31{color: green;}
+        /* 群组选择器 选择器,选择器 多个元素共同用调用一个声明 */
+        p .span2,strong{  color: red;  }
+        /* 层次选择器 选择器一定是标签名或元素名*/
+            /* 子代选择器 选择器>选择器{} 用于指定标签下的第一代所有该子元素*/
+            p>span{  color: pink;  }
+            /* 后代选择器 选择器 选择器{} 用于选择指定标签元素下所有的该后代元素 */
+            ol li{  color: blueviolet;  }
+            /* 相邻兄弟选择器 选择器+选择器 选择紧随目标元素后的第一个元素*/
+            ol+p{color: blue;}
+            /* 普通兄弟选择器 选择器~选择器 选择紧随其后的所有兄弟元素，*/
+            .div1 p~span{color: pink;}
+        /* 层叠性,相同权重下，同一样式中，后面层叠前面*/
+        .span3{color: blueviolet; font-size: small;}
+        .span3{color: green;}
+        /* 继承性,子元素没有定义样式,默认会以父元素的样式来继承 有些元素开发没有定义，但是系统有自定义，所以不继承
+           	 通过继承，无法影响a链接的颜色和下划线,a链接的颜色下划线不能通过继承，要直接作用到a身上*/
+        .span4{line-height: 40px;}
+        
+        /* 伪元素选择器*/
+            /* 匹配文本块首行,匹配的时浏览器首行，会根据浏览器宽度变化而变化*/
+            .p1::first-line{ color: green;}
+            /* 匹配文本块首字母*/
+            .p1::first-letter{ color: blueviolet;}
+            /* 在元素内容前面后面添加内容（相当于行内元素）*/
+            .p1::before{content: "这里前是:before加的内容。";}
+            .p1::after{content:"这里后是：after加的内容。";}
+        /* 动态伪类选择器*/
+            /* link表示连接没有被点击时的样式,以下四条顺序不能乱(lvha)*/
+            a:link{color: aqua;}
+            /* visited表示连接已经被访问时的样式*/
+            a:visited{color: coral;}
+            /* hover表示当鼠标悬浮在连接上面时的样式*/
+            a:hover{color: deeppink;}
+            /* active表示元素被激活（按下左键）时上面的样式*/
+            a:active{color: blue;}
+            /* focus在元素拥有焦点（键盘输入焦点）时上面的样式*/
+            .input1:focus{background-color: greenyellow;}
+        /* UI伪类选择器*/
+            /* :enabled 选择启用状态(可操作)的元素*/
+            .div1 :enabled{background-color: red;}
+            /* :disabled 选择禁用状态的元素(表单的disabled属性)*/
+            :disabled{background-color: yellow;}
+            /* :checked 选择被选中状态的元素(单选或复选框)*/
+            .div2 :checked{width: 50px;}
+        /* 其他伪类选择器*/
+            /* :empty 选择内容为空的元素(元素标签内不能包括任何东西，空标签也不行)*/
+            .ul2 :empty{background-color: #71ab9c;}
+            /* :not(<选择器>) 对括号内的选择器取反*/
+            .ul2 :not(:empty){color: #AB2AAA;}
+            /* :target url 片段表示符指向的元素(某元素对应的目标链接，一般用于锚连接)*/
+            .ul2 :target{font-size: 20px;}
+            /* ::selection 鼠标光标选择元素时显示的样式内容,::-moz-selection兼容firefox,*/
+            .ul2 ::selection{color: red;}
+        /* 结构伪类选择器*/
+            /* :nth-child(n) 父元素下的第n个子元素(要保证子元素是同一种类型的标签)
+                odd:奇数子元素(2n-1),even:偶数子元素(2n)，an+b:公式(格式不能变,n从0开始)*/
+            .JieGou ul li:nth-child(1){ color: blue;}
+            .JieGou ul li:nth-child(odd){ font-size: small;}
+            .JieGou ul li:nth-child(even){ font-size: medium;}
+            .JieGou ul li:nth-child(5n+1){ font-weight: 700;}
+            /* :nth-of-type(n) 父元素下的第n个指定类型元素*/
+            .JieGou ol:nth-of-type(1){ font-size: larger;}
+            /* :nth-last-of-type(n) 父元素下的倒数第N个指定类型的子元素*/
+            .JieGou ol li:nth-last-of-type(2){color: yellow;}
+            /* :nth-last-child(n) 倒数第n个元素*/
+            .JieGou ol li:nth-last-child(1){color: #AB2AAA;}
+            /* :first-child 选择父元素下的第一个该子元素*/
+            .JieGou dt:first-child{ color: #ff1122;}
+            /* :last-child 选择父元素下最后一个该子元素*/
+            .JieGou dt:last-child{ color: #192cff;}
+            /* :only-child 选择父元素下唯一的子元素*/
+            .JieGou b span:only-child{ color: #6699ff;}
+            /* :only-of-type 选择父元素下指定类型的唯一子元素*/
+            .JieGou dl:only-of-type{ font-size: 20px;}
+            /* :root 选择文档的根目录返回html*/
+            :root{background-color: #d7d0d7;}
+        /* 属性选择器*/
+            /* E[attr] 选择拥有attr属性的E标签*/
+            span[name]{font-weight: 900;}
+            /* E[attr ="value"] 选择拥有attr属性且值为value的E标签*/
+            span[name ="span4"]{ font-size:20px;}
+            /* E[attr ~="value"] 选择拥有attr属性且值有一个是value(以空格区分单词)的E标签*/
+            span[name ~="span3"]{ color: #ff1122;}
+            /* E[attr ^="value"] 选择拥有attr属性且值以value开头(以空格区分单词)的E标签*/
+            p[name ^="p3"]{ color: blue;}
+            /* E[attr $="value"] 选择拥有attr属性且值以value结尾(以空格区分单词)的E标签*/
+            p[name $="p2"]{ color: blueviolet;}
+            /* E[attr *="value"] 选择拥有attr属性且值包含value(以空格区分单词)的E标签*/
+            p[name *="p1"]{ color: #009c0f;}
+            /* E[attr |="value"] 选择拥有attr属性且值以value-或value开头(以空格区分单词)的E标签*/
+            p[name |="p"]{ background-color: #6699ff;}
+    </style>
+
+</head>
+<body>
+<!--行间样式,style也是属性，后面跟着值-->
+<div>
+    <div style="width: 100px; height: 100px; background-color: blue"></div>
+    <p>这里用的是标签选择器</p>
+    <span class="span1">这里用的是类选择器</span>
+    <span class="span1">这里用的是同一个类选择器</span>
+    <h3 id="h31">这里用的是ID选择器</h3>
+    <p><span class="span2">这里用的是群组选择器</span><span class="span2">这里是同一个p标签下</span></p>
+</div>
+<!-- 层次选择器-->
+<div>
+    <p><span>这里用的是子代选择器</span><b><span>这里是第二代元素，故没应用样式</span></b><span>这还是第一代元素</span></p>
+    <ol>
+        <li>这里时后代选择器</li>
+        <li>这是第一代元素
+            <ul>
+                <li>这里是第三代元素</li>
+            </ul>
+        </li>
+    </ol>
+    <p>这里是兄弟选择器</p>
+    <span>这是普通兄弟选择器,粉色字体</span>
+    <span>这也是普通兄弟选择器，粉色字体</span>
+</div>
+<!-- 层叠性继承性-->
+<span class="span3">
+    这里说明的CSS的层叠性
+    <span class="span4"><br>这里说明的时继承性</span>
+</span>
+
+<!--  伪元素选择器-->
+<p class="p1">这里是伪元素选择器。这里是绿色字体（::first-line）</p>
+<strong>这里与上一条调用的是同一条css样式</strong>
+<!-- 动态伪类选择器-->
+<a href="#"><br>这里是a标签伪类选择器</a>
+<input type="text" class="input1"><br>
+<!-- UI伪类选择器-->
+<div>
+    <br>
+    <div class="div1"><input type="tel" placeholder="这里时UI伪类选择器:enabled"></div>
+    <div class="div2"><input type="radio"></div>
+    <input class="input2" type="text" disabled placeholder="这里时UI伪类选择器:disabled">
+</div>
+<!-- 其他伪类选择器-->
+<ul class="ul2">
+    <li><input type="text" placeholder="这里是其他伪类选择器:empty"></li>
+    <li>这里时其他伪类选择器:not()</li>
+    <li><a href="#a1" id="a1">这里是伪类选择器：target</a></li>
+    <li>这里是伪类选择器：target"</li>
+</ul>
+<!-- 结构伪类选择器-->
+<div class="JieGou">
+    <ul>
+        <li>这是结构伪类选择器:nth-child(n)</li>
+        <li>这是结构伪类选择器:nth-child(even)</li>
+        <li>这是结构伪类选择器:nth-child(odd)</li>
+        <li>这是结构伪类选择器:nth-child(even)</li>
+        <li>这是结构伪类选择器:nth-child(odd)</li>
+        <li>这是结构伪类选择器:nth-child(even)</li>
+    </ul>
+    <ol>
+        <li>这里是结构伪类选择器:nth-of-type(n)</li>
+        <li>这里是结构伪类选择器:nth-last-of-type(n)</li>
+        <li>这里是结构伪类选择器:nth-last-child(n)</li>
+    </ol>
+    <dl>
+        <dt>这里是结构伪类选择器:first-child</dt>
+        <dt>这里是结构伪类选择器:last-child</dt>
+    </dl>
+<b><span>这里是结构伪类选择器:only-child</span></b>
+</div>
+<!-- 属性选择器-->
+<div>
+    <span name="span4">这里是属性选择器E[attr],E(attr~="value")</span>
+    <span name="this span3">这里是属性选择器E[attr ~="value"]</span>
+    <p name="p3 p">这里是属性选择器 E[attr ^="value"]</p>
+    <p name="p p2">这里是属性选择器 E[attr $="value"]</p>
+    <p name="p-5">这里是属性选择器 E[attr |="value"]</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        let arr = [12,23,45,68,93];
+        //第一种方式
+//        for(var key = 0; key < arr.length; key++){
+//            document.writeln(`key = ${key} val = ${arr[key]} <br/>`);
+//        }
+
+//        第二种方式(不建议)
+//        arr.a = 10;
+//        for(var key in arr){
+//            document.writeln(`key = ${key} val = ${arr[key]} <br/>`);
+//        }
+
+//        第三种方式
+//        for(let val of arr){          // 数组的元素
+//            document.writeln(`val = ${val} <br/>`);
+//        }
+
+//        for(let key of arr.keys()){   //数组的下标
+//            document.writeln(`key = ${key} val = ${arr[key]}<br/>`);
+//        }
+
+//        for(let [key,val] of arr.entries()){      //数组的下标和元素
+//            document.writeln(`key = ${key} val = ${val}<br/>`);
+//        }
+
+//        第四种方式
+//            arr.map(function(val, key, arr){        //数组的方法
+//                document.writeln(`key = ${key} val = ${val}<br/>`)
+//            });
+
+//        arr.forEach(function(val, key, arr){        //可用于数组和伪数组
+//            document.writeln(`key = ${key} val = ${val}<br/>`)
+//        });
+
+    </script>
+</head>
+<body>
+    <ul>
+        <li>11111</li>
+        <li>22222</li>
+        <li>33333</li>
+        <li>44444</li>
+        <li>55555</li>
+    </ul>
+    <script>
+        let aLi = document.querySelectorAll("ul li");
+
+//        aLi.forEach(li => {
+//            li.onclick = () => li.style.backgroundColor = "red";
+//        });
+
+//        [...aLi].map(li => {
+//            li.onclick = () => li.style.backgroundColor = "red";
+//        });
+
+        Array.from(aLi).map(li => li.onclick = () => li.style.backgroundColor = "red");
+    </script>
+</body>
+</html>

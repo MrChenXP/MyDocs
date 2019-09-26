@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 200px;height: 200px;background-color: darkred;" id="div1"></div>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script src="prototype-1.6.0.3.js"></script>
+    <script>
+//        $(function(){
+//            $("#div1").css({backgroundColor: "blue"});
+//        });
+
+//        $("div1").style.backgroundColor = "blue";         //prototype
+
+//        第一种方式
+//        jQuery("#div1").css({backgroundColor: "blue"});
+
+//        第二种方式
+//        let jq = jQuery.noConflict();           //jq放弃对 $ 符号的使用权
+//        jq("#div1").css({backgroundColor: "blue"});
+
+//        第三种方式
+        (function ($){
+            $("#div1").css({backgroundColor: "blue"});      //函数里使用$是jquery
+        })(jQuery);
+
+        $("div1").style.backgroundColor = "green";        //函数外使用$是其他JS文件
+    </script>
+</body>
+</html>

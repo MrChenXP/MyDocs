@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ol,ul{
+            list-style: none;
+            cursor: pointer;
+        }
+        .sort-list{
+            width: 300px;
+            text-align: center;
+            margin: 100px auto;
+            letter-spacing: 5px;
+        }
+        .sort-list > li{
+            border: 1px solid #ccc;
+        }
+        .sort-list h2{
+            height: 30px;
+            line-height: 30px;
+            background-color: orangered;
+            font-size: 18px;
+            position: relative;
+        }
+        .sort-list h2 span{
+            position: absolute;
+            top: 0;
+            width: 110px;
+            right: 0;
+            text-align: left;
+        }
+        .sort-list ol{
+            height: 0;
+            overflow: hidden;
+            transition: height .5s linear;
+        }
+        .sort-list ol li{
+            height: 24px;
+            line-height: 24px;
+        }
+        .sort-list ol li:not(:last-child){
+            border: 1px dashed #ccc;
+        }
+    </style>
+</head>
+<body>
+    <ul class="sort-list">
+        <li>
+            <h2>水果<span>+</span></h2>
+            <ol>
+                <li>香蕉</li>
+                <li>芒果</li>
+                <li>桃子</li>
+                <li>梨子</li>
+            </ol>
+        </li>
+        <li>
+            <h2>蔬菜<span>+</span></h2>
+            <ol>
+                <li>萝卜</li>
+                <li>白菜</li>
+                <li>香菜</li>
+                <li>菠菜</li>
+                <li>芹菜</li>
+            </ol>
+        </li>
+        <li>
+            <h2>肉类<span>+</span></h2>
+            <ol>
+                <li>鸡肉</li>
+                <li>猪肉</li>
+                <li>牛肉</li>
+            </ol>
+        </li>
+        <li>
+            <h2>其他<span>+</span></h2>
+            <ol></ol>
+        </li>
+    </ul>
+    <script>
+//        var aH2 = document.querySelectorAll(".sort-list > li h2");
+//        for(var i = 0, len = aH2.length; i < len; i++){
+//            aH2[i].onclick = function(){
+//                var nextS = this.nextElementSibling || this.nextSibling;
+//                if(nextS.children.length !== 0){
+//                    if(nextS.offsetHeight === 0){
+//                        nextS.style.height = nextS.children[0].offsetHeight * nextS.children.length - 1 + "px";
+//                        this.children[0].innerText = "-";
+//                    }else{
+//                        nextS.style.height = "0";
+//                        this.children[0].innerText = "+";
+//                    }
+//                }
+//            };
+//        }
+    </script>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            $(".sort-list > li h2").click(function(){
+                var oNext = $(this).next();
+                if(oNext.children().length !== 0){
+                    if(oNext.outerHeight() === 0){
+                        oNext.height(oNext.children().first().outerHeight() * oNext.children().length - 1);
+                        $(this).find("span").text("-");
+                    }else{
+                        oNext.height(0);
+                        $(this).find("span").text("+");
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

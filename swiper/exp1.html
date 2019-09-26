@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/swiper-4.2.0.min.css">
+	<style type="text/css">
+		.swiper-container{
+			margin: 0 auto;
+			width: 800px;
+			height: 330px;
+			border: 1px solid blue;
+		}
+
+		.img{
+			width: 100%;
+			height: 328px;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="swiper-container">
+
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide">
+	        	<img src="images/bannerbg1.jpg" class="img">
+	        </div>
+	        <div class="swiper-slide">
+	        	<img src="images/bannerbg2.jpg" class="img">
+	        </div>
+	        <div class="swiper-slide">
+	        	<img src="images/bannerbg3.jpg" class="img">
+	        </div>
+	    </div>
+
+	    <!-- 如果需要分页器 -->
+	    <div class="swiper-pagination"></div>
+	    
+	    <!-- 如果需要导航按钮 -->
+	    <div class="swiper-button-prev"></div>
+	    <div class="swiper-button-next"></div>
+	    
+	</div>
+
+<script type="text/javascript" src="js/swiper-4.2.0.min.js"></script>
+<script type="text/javascript">
+	new Swiper('.swiper-container',{
+		loop: true,
+		navigation:{
+			//配置上一页下一页按钮
+			nextEl: '.swiper-button-next',
+      		prevEl: '.swiper-button-prev',
+		},
+		pagination:{
+			el:'.swiper-pagination',
+			clickable :true,
+		}
+
+	})
+
+</script>
+</body>
+</html>

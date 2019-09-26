@@ -1,0 +1,20 @@
+{
+  "name": "exp",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon servier.js"
+  },
+  "author": "chen",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.9",
+    "express": "^4.16.3",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM</title>
+  <style>
+    .div1{
+      width: 300px;
+      height: 300px;
+      background-color: blue;
+      padding: 20px;
+      border: 5px solid blue;
+      position: relative;
+      left: 20px;
+      top: 200px;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+<ul id="ul1"><li>111</li>    <li>222</li>    <li>333</li>    <li>444</li></ul>
+<div id="div1" name='div1'>    <input type="text">    <input type="text" name="user">   <input type="text" name="user"></div>
+<div class="cDiv">4234234</div>
+<div class="cDiv">333333333</div>
+<div class="cDiv">4555555555</div>
+<div style="width: 200px; height: 100px; background-color: deeppink;" class="div1" id="div2"></div>
+<input type="text" disabled class="input1">
+<script type="text/javascript">
+  /*查找元素*/
+  //    ID 名来选取节点，只能在document下选取,
+  //        如果找到该元素，则该方法将以对象（在 oUl 中）的形式返回该元素。
+  //        如果未找到该元素，则 oUl 将包含 null
+  //        var oLi = document.getElementById("ul1").getElementById("li1"); //报错
+  //        var oUl = document.getElementById("ul1");
+  //     标签名 来选取一组节点(元素集合（伪数组:length属性，通过下标访问）)
+  //        var aLi = document.getElementById("ul1").getElementsByTagName("li");
+  //        console.log(oLi);   //0:li  1:li     2:li    3:li   length:4
+  //     Name 属性来选取一组节点，只能在document下选取（伪数组）
+  //        var aInp = document.getElementsByName("user");
+  //        console.log(aInp);  //0:input  1:input   length:2
+  //     类名 通过类名来选取一组节点，IE 5,6,7,8 中无效
+  //        var aDiv = document.getElementsByClassName("cDiv");
+  //        console.log(aDiv);  //0:div.cDiv  1:div.cDiv     2:div.cDiv   length:3
+  //     选择器  来选取节点     IE8及以上才能用 随着节点操作不会改变原来内容（静态）选择的时候时怎样就是怎样  使用方便
+  //          getElement方式      随着节点操作而改变原来内容（动态）    效率高
+  //        var oUser = document.querySelector("#div1 input[name=user]");   //选取第一个节点
+  //        var aUser = document.querySelectorAll("#div input[name=user]"); //选取所有节点
+  //        console.log(aUser);
+  /*更改HTML元素内容*/
+  //     document.write() 向 HTML 输出流写内容,绝不要使用在文档加载之后使用 这会覆盖该文档
+  //        document.write("向 HTML 输出流写内容");
+  var oDiv = document.querySelector(".div1");
+  var oIpt = document.querySelector(".input1");
+  //     innerHTML  增加标签的内容，可以识别HTML标记语言
+  //        oDiv.innerHTML = "<h1 style='color: blue;'>这是一个标题标签</h1>";
+  //     innerText  增加标签的内容，原字符串输出
+  //        oDiv.innerText = "<h1>这是一个标题标签</h1>";
+  /*改变 HTML 元素属性*/
+  //    obj.属性=新值
+  //    读取标签的属性（以下只能获取行间样式）
+  //        document.writeln(oDiv.style.height);
+  //        document.writeln(oDiv.style["background-color"]);       //deeppink,因为style是个数组对象
+  //        document.writeln(oDiv.style.backgroundColor);       //deeppink
+  //        document.writeln(oDiv.style["backgroundColor"]);       //deeppink
+  //        document.writeln(oDiv.id);         //div2
+  //        document.writeln(oDiv.className);      //div1      class是关键字，获取标签节点的类名应写成className
+  //        document.writeln(oIpt.disabled);       //true 布尔值  类似有 readonly checked selected autofocus required multiple
+  //        document.writeln(oIpt.autofocus);      //false   因为没设置，默认为false
+  //        alert(oDiv.getAttribute("id"));               //  //读取节点属性
+  //        alert(oDiv.getAttribute("class"));      //divClass       获取标签类名
+  //    设置标签属性
+  //        oDiv.style.height = "200px";    //操作行间样式(行间样式优先级最高)
+  //        oDiv.title = "这是个div";
+  //        oDiv.className += " classDiv";      //设置类名要注意加空格  一次操作改变多个样式（优先级问题）
+  //        oIpt.disabled = false;
+  //        oIpt.autofocus = true;
+  //        oIpt.focus();     //聚焦文本
+  //        oDiv.style.cssText +="width:500px;padding: 20px";//重写style行间样式值  一次操作可以改变多个样式（优先级问题）
+  //        oDiv.setAttribute("title", "this is a div2");   //添加到行间
+  //        oDiv.setAttribute("width", "200px");        //节点.setAttribute("属性名","属性值") 添加到行间
+  //        oDiv.setAttribute("style", "width:200px");        //设置节点属性 覆盖添加
+  //        oDiv.removeAttribute("id");     //删除节点属性
+  /*获取最终样式(CSS)内部、外部样式最后的效果*/
+  //    currentStyle 专属IE 对于复合样式，须具体到单一样式且驼峰式写法，只读不可更改
+  //        在谷歌中输出“undefined”，在IE中输出“[object CSSCurrentStyleDeclaration]”;
+  //        alert(oDiv.currentStyle["borderWidth"]);
+  //        alert(oDiv.currentStyle.borderWidth);
+  //     window.getComputedStyle  高级浏览器用法   对于复合样式，须具体到单一样式 只读
+  //        alert(getComputedStyle(oDiv, null)["border-left-color"]);    //false此处随便填
+  //     读取元素的最终样式函数
+  //        function getStyle(elem,attr) {  //传入对象和样式名
+  //            if (window.getComputedStyle){
+  //                return getComputedStyle(elem,null)[attr];   //高级浏览器
+  //            }else {
+  //                return elem.currentStyle[attr]; //IE
+  //            }
+  //        }
+  //        alert(getStyle(oDiv,"backgroundColor"));    //驼峰式|background-color   backgroundcolor报undefined
+  /*classList 高级浏览器和IE10及以上才能用*/
+  //    classList 返回对象存在的可操作的class值：
+  //    add(“类名”):        将给定的字符串添加到class 属性列表, 若已存在，就不添加 ie不支持多个
+  //    length:               返回类名的个数
+  //    contains(“类名”):   判断列表中是否存在该类名
+  //    item(索引值) ：       支持一个参数（类名的索引），返回对应索引的类名 从0开始
+  //    remove(“类名”):     从列表中删除该类名
+  //    toggle(“类名”):     切换class，即：存在时删除，不存在时添加
+  //        alert(oDiv.classList);    //div1
+  //        oDiv.classList.add("border", "padding");   // 一次增加多个
+  //        alert(oDiv.classList.length);               //3 ie:2
+  //        alert(oDiv.classList.contains("radius"));   //布尔值
+  //        alert(oDiv.classList.item(2));  //id:null
+  //        oDiv.classList.remove("padding");
+  //        oDiv.classList.toggle("radius");
+  /*offset 获取最终值  跟样式的引入方式无关*/
+  //        alert(oDiv.style.width);        //200px  单纯的获取元素width 字符串类型
+  //        alert(oDiv.offsetWidth);    //250(200+40+10) number类型  获取最终盒子模型的尺寸（width + padding + border）
+  //        alert(oDiv.offsetHeight);        //150（100+40+10）   number类型   最终盒子模型的尺寸（height + padding + border）
+  //        alert(oDiv.style.left);     //absolute:无    relative:无
+  //        alert(oDiv.offsetLeft);     //absolute: 40   relative:48    offsetLeft = left + margin-left
+  //                                    // 返回盒子距离左侧（如果父系盒子中都没有定位，以body为准）的位置，
+  //        alert(oDiv.offsetTop);     //absolute:220    relative:422    offsetTop = top + margin-top
+  //    offset应用 移动到特定位置
+  //        setInterval(function(){
+  //            if(oDiv.offsetLeft >= 600){
+  //                clearInterval();
+  //            }else{
+  //                oDiv.style.left = oDiv.offsetLeft - 2 + "px";
+  //            }
+  //        }, 30);
+
+</script>
+</body>
+</html>

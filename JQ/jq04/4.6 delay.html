@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>动画</button>
+    <div style="width: 200px;background-color: darkcyan;height: 200px;"></div>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+           $("button").on("click", function(){
+//               $("div").slideUp().delay(1000).slideDown();      //delay 下次动画延时时间
+               $("div").stop(true).slideUp().slideDown();      //delay 下次动画延时时间
+           });
+        });
+    </script>
+</body>
+</html>

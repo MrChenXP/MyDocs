@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 100px;height: 100px;background-color: darkred;">1321312<span>fasdfasd</span></div>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+            $("div").first().click(function(){
+                alert("aaaa");
+            });
+//            var oDiv = $("div").remove();     //删除整个节点
+//            var oDiv = $("div").detach();       //删除整个节点，保留元素的绑定事件、附加的数据
+//            $(document.body).append(oDiv);
+//
+//            $("div").empty();               //清空节点的内容
+
+//            $(document.body).append($("div").first().clone());        //克隆节点（包含后代节点）
+//            $(document.body).append($("div").first().clone(true));      //克隆节点（包含后代节点和节点事件）
+        });
+    </script>
+</body>
+</html>

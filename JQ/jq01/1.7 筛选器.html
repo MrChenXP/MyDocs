@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li>11111</li>
+        <li>22222</li>
+        <li>
+            <ol>
+                <li>33333</li>
+            </ol>
+        </li>
+        <li>44444</li>
+        <li>55555</li>
+        <li>66666</li>
+    </ul>
+    <script src="jquery-1.12.2.min.js"></script>
+    <script>
+        $(function(){
+//            $("ul li:nth-child(even)").css({backgroundColor: "red"});
+//            $("ul li").filter(function(key){      //filter( 选择器或者函数)
+//                return key % 2;
+//            }).css({backgroundColor: "red"});
+
+//            $("ul li").map(function(key){     //map(函数)
+//                if(key % 2){
+//                    return this;
+//                }
+//            }).css({backgroundColor: "red"});
+
+//            $("ul>li").has("ol").css({backgroundColor: "red"});     //has(选择器)：选择后代节点里满足条件的元素
+            $("ul>li").slice(-3, -1).css({backgroundColor: "red"});
+        });
+    </script>
+
+</body>
+</html>
