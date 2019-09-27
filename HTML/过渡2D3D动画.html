@@ -119,6 +119,11 @@
                 alternate	动画在奇数次（1、3、5...）正向播放，在偶数次（2、4、6...）反向播放。
                 alternate-reverse	动画在奇数次（1、3、5...）反向播放，在偶数次（2、4、6...）正向播放。
             animation-play-state	    规定动画是否正在运行或暂停。默认是 "running"。 paused 暂停
+            animation-fill-mode     属性规定动画在播放之前或之后，其动画效果是否可见
+                    none	不改变默认行为。
+                    forwards	当动画完成后，保持最后一个属性值（在最后一个关键帧中定义）。
+                    backwards	在 animation-delay 所指定的一段时间内，在动画显示之前，应用开始属性值（在第一个关键帧中定义）。
+                    both	向前和向后填充模式都被应用。
         */
         @keyframes myfirs {
             from{transform: rotate(0deg) translateY(0px);}

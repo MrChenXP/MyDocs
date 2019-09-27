@@ -29,10 +29,16 @@
     <link rel="shortcut icon" href="imgers/favicon.ICO" type="image/vnd.microsoft.icon">
     <!--当希望为新浏览器提供另一种备用图像（例如动画GIF）时-->
     <link rel="shortcut icon" href="imgers/favicon.ICO" type="image/x-icon" />
+    <!-- 为了保证IE能够使用最新渲染模式而不是兼容模式，在html文档头部应加入以下代码 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 
 <!--定义文档主体，body元素包含文档的所有内容-->
 <body>
+    <!-- 提示IE7及更早版本的用户 -->
+    <!--[if lt IE 9]>
+        <div class="alert alert-danger">您正在使用 <strong>过时的</strong> 浏览器. 是时候 <a href="http://browsehappy.com/">更换一个更好的浏览器</a> 来提升用户体验.</div>
+    <![endif]-->
     <!-- 标题标签，有确切语义，请慎重选择标签。h1最大，h6最小  role:增加代码的语义性 告诉浏览器和屏幕阅读器这个元素所扮演的角色-->
     <!--text-decoration:属性规定添加到文本的修饰。font-weight:定义文本粗细.
         color:定义字体颜色.font-style:定义字体风格.text-decoration 属性规定添加到文本的修饰-->
