@@ -190,7 +190,7 @@
 //                }
 //            }
 //            document.writeln(arr)
-    /*数组去重*/
+/*数组去重*/
 //        第一种方式  arr与aNew比较，aNew全是被遍历出来的与其之前的元素不相等
 //            var arr = [12,32,45,12,45,12,32,41,32], aNew = [arr[0]], bTemp = true;
 //            for(var i = 1, len = arr.length; i < len; i++){     //遍历出数组元素
@@ -270,6 +270,27 @@
     }
     document.writeln(xz(arr));
 
+// 循环递归实现 1!-2!+3!-4!....
+function xunhuan() {
+    var j = 6; // 最大循环值
+    var a = -1;
+    var sum = 0; // sum等于0，就可防止值为0的情况
+    for (var i = 1; i <= j; i++) {
+        a = a * i * (-1); //计算阶乘，并且计算其前面的符号:*（-1） a永远保存了上一个数值阶乘后的值,所以可以直接乘下一个数值
+        sum = sum + a; //阶乘相加
+    }
+    console.log(sum);
+}
+function digui() {
+    function fun(a, i, n) {
+        if (i == n) // 如果到了最大循环值就乘这个最大值,然后退出
+            return a * (-i);
+        a = a * (-i); // a用远保存上一个阶乘值
+        return a + fun(a, ++i, n) // 循环加下一个阶乘值
+    }
+    var p = 6; // 最大循环值
+    console.log(fun(-1, 1, p));
+}
 </script>
 </body>
 </html>

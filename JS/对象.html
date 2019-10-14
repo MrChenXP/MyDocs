@@ -182,7 +182,7 @@
 //    CreateInfor.prototype.showName = function () {        //构造器上的键名不是在实例对象上的 由实例对象使用
 //      return this.name;
 //    };
-//    var obj = new CreateInfor("张三");
+//    var obj = new CreateInfor("张三"); // 使用构造函数的时候,函数内部会obj=New Object() this=new Object() 然后返回 return obj;return this
 //    var obj1 = new CreateInfor("李四");
 //    console.log('obj.name='+obj.name+' obj1.name='+obj1.name);
 //    console.log(obj.showName === obj1.showName);      //true

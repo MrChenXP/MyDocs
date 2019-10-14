@@ -8,7 +8,7 @@
 <script type="text/javascript">
 //RegExp 正则表达式 使用单个字符串来描述,匹配一系列符合某个句法规则的字符串搜索模式
 //  修饰符
-//    i ignoreCase的缩写，表示忽略字母的大小写
+//    i ignoreCase的缩写，忽略字母的大小写
 //    m multiline的缩写，更改^和$的含义，使它们分别在任意一行的行首和行尾匹配 而不仅仅在整个字符串的开头和结尾匹配。
 //      (在此模式下,$的精确含意是:匹配\n之前的位置以及字符串结束前的位置.)
 //    g	global的缩写，进行全局匹配，即对字符串进行全文匹配，直到字符串遍历结束
@@ -65,18 +65,26 @@
 //    \unnnn	匹配Unicode字符，如：\u00A0
 
 // 方法
-//  reg.test(str) 检测一个字符串是否匹配某个模式，如果字符串中含有匹配的文本，则返回 true，否则返回 false。
-//  reg.exec(str) 检索字符串中的正则表达式的匹配。该函数返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。
-//  match	 一个在字符串中执行查找匹配的String方法，它返回一个数组或者在未匹配到时返回null。
-//  search	一个在字符串中测试匹配的String方法，它返回匹配到的位置索引，或者在失败时返回-1。
-//  str.replace(规则，替换文本)	一个在字符串中执行查找匹配的String方法，并且使用替换字符串替换掉匹配到的子字符串。
-//  split	  一个使用正则表达式或者一个固定字符串分隔一个字符串，并将分隔后的子字符串存储到数组中的String方法。
+//     compile	    编译正则表达式。
+//     reg.test(str) 检测一个字符串是否匹配某个模式，如果字符串中含有匹配的文本，则返回 true，否则返回 false。
+//     reg.exec(str) 检索字符串中的正则表达式的匹配。该函数返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。
+//     str.match	 一个在字符串中执行查找匹配的String方法，它返回一个数组或者在未匹配到时返回null。
+//     str.search	 一个在字符串中测试匹配的String方法，它返回匹配到的位置索引，或者在失败时返回-1。
+//     str.replace(规则，替换文本)	一个在字符串中执行查找匹配的String方法，并且使用替换字符串替换掉匹配到的子字符串。
+//     str.split	  一个使用正则表达式或者一个固定字符串分隔一个字符串，并将分隔后的子字符串存储到数组中的String方法。
+
+// 属性
+//     global      RegExp对象是否具有标志g
+//     ignoreCase  RegExp对象是否具有标志i
+//     lastIndex   整数,代表下次匹配将从哪个字符串位置开始,上次匹配完的下一个字符
+//     multiline   RegExp对象是否具有标志m
+//     source      正则表达式的源文本。
 
 // 创建
-//  var str = "Regular Expression";
-//  var reg = new RegExp("G","i");    //i(ignore)忽略大小写      对象方式
-//  var reg = /G/i;      //字面量方式 /元字符+量词/修饰符 == 匹配字符有多少个g+忽略大小写
-//  document.writeln(str.search(reg));  // 多行匹配
+//   var str = "Regular Expression";
+//   var reg = new RegExp("G","i");    //i(ignore)忽略大小写      对象方式
+//   var reg = /G/i;      //字面量方式 /元字符+量词/修饰符 == 匹配字符有多少个g+忽略大小写
+//   document.writeln(str.search(reg));  // 多行匹配
   var str = "date:2018/01/31 time:11:02:25";
   var reg = /\d+/g;               //g(global) 找出所有满足条件的字符串
   document.writeln(str.match(reg));
