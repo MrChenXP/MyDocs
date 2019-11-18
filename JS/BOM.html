@@ -8,12 +8,14 @@
             height: 3000px;
         }
     </style>
+    <script src="../../../纯静态页/大平台/js/main/main2020.js"></script>
 </head>
 
 <body>
     <div id="ajax">
         <p>BOM = window Window对象是BOM的顶层对象，其他对象都是该对象的子对象</p>
-        <p>window = document + framses[] + history + location + navigator + screen </p>
+        <p>window = document(文档对象) + frames[](html子框架) + history(页面的历史记录) +
+            location(当前页面的地址) + navigator(浏览器相关信息) + screen(用户显示屏幕相关属性) </p>
         <p> document = anchors[] + applets[] + areas[] + embeds[] +
             forms[] + images[] + layers[] + links[] </p>
         <p>DOM = document </p>
@@ -21,9 +23,9 @@
     
 <script type="text/javascript">
 // window:表示浏览器窗口(标签页) JS全局对象、函数以及变量自动成为window对象的成员
-//     获取浏览器窗口的宽度和高度（浏览器的视口）
-//         console.log(window.innerHeight);//IE、Chrome、Ff、Opera Safari
-//         console.log(window.innerWidth);//高浏包括滚动条，不包括工具栏 ie8undefined
+//     获取浏览器窗口的宽度和高度(浏览器的视口)
+//         console.log(window.innerHeight); //IE、Chrome、Ff、Opera Safari
+//         console.log(window.innerWidth); //高浏包括滚动条，不包括工具栏 ie8undefined
 //         console.log(document.documentElement.clientHeight);//ie8
 //         console.log(document.documentElement.clientWidth);//高浏和ie8都表示html文档宽度
 //         console.log(document.body.clientHeight);//ie8
@@ -80,14 +82,19 @@
 //         };
 //
 // history 存放浏览器当前窗口的的访问历史
+//     历史记录以栈（FIFO）的形式保存。页面前进则入栈，页面返回则出栈。
+//     它是一个只读对象，为了保护用户的隐私，JavaScript在获取这个对象时会受到限制。
+//          History对象不允许未授权代码访问会话历史(session history)中的其他页面地址，
+//          但可以导航到其他会话历史指向的页面。未授权代码无法清除history,也不能禁止后退/前进功能
 //     window.history.go(-1); //访问浏览器窗口的历史,负为后退,正为前进,0页面刷新
+//         或一个字符串，字符串必须是局部或完整的URL，该函数会去匹配字符串的第一个URL
 //         参数对应的history对象里没页面,页面不发生变化
 //     window.history.back(); //同上,前往上一页，无参数
 //     window.history.forward(); //同上，前往下一页,无参数
 //         let whl = window.history.length; //可以查看历史中的页面数（history对象中存储的页面数）
 //
 // location 用于获得当前页面的地址 (URL)信息、页面重定向等场景
-//     location.href //当前载入页面的完整URL，如http://www.somewhere.com/pictures/index.htm
+//     location.href //设置或读取当前页面的完整URL，如http://www.somewhere.com/pictures/index.htm
 //     location.protocol //URL中使用的协议，即双斜杠之前的部分，如http
 //     location.host //服务器的名字(主机名和当前 URL 的端口号)，如www.wrox.com:8080
 //     location.hostname //通常等于host(但host里面带端口，hostname不带(主机名))
@@ -118,6 +125,19 @@
 //     screen.availWidth  返回访问者屏幕的宽度(同上)，以像素计，减去界面特性，比如窗口任务栏。
 //     screen.height  返回屏幕区域的实际高度 /*跟电脑分辨率一致*/
 //     screen.width   返回屏幕区域的实际宽度屏幕分辨率的宽高 /*跟电脑分辨率一致*/
+/** frames **/
+// frame指HTML子框架，即在浏览器里嵌入另一个窗口。父框架和子框架拥有独立的作用域和上下文
+//     window.frames 返回的是一个类数组的对象,对象的内容是当前页面中的<iframe>元素
+//          window.frames[0].location = "https://www.baidu.com";
+//          frames.length;  //子框架的个数
+//     <frame>元素也是frames的一种,是一种只读元素,但是它无法在HTML5中使用.故不建议使用
+
+/** screen **/
+// 提供了用户显示屏幕的相关属性
+//     screen.width 显示屏的宽度 设备物理宽度
+//     screen.height 显示屏的高度 设备物理高度
+//     screen.availWidth 屏幕的可用宽度 屏幕宽高减去如工具栏的值.
+//     screen.availHeight 屏幕的可用高度 屏幕宽高减去如工具栏的值.
 </script>
 
 </body>
