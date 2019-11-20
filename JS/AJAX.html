@@ -6,9 +6,9 @@
 </head>
 
 <script type="text/javascript">
-// AJAX(Asynchronous JavaScript and XML 异步的JavaScript和XML)。
+/**AJAX(Asynchronous JavaScript and XML 异步的JavaScript和XML)**/
 // AJAX不是新的编程语言,而是一种使用现有标准的新方法 AJAX是与服务器交换数据并更新部分网页的艺术,在不重新加载整个页面的情况下。
-// AJAX的工作原理相当于在用户和服务器之间加了—个中间层(AJAX引擎)，使用户操作与服务器响应异步化
+//     AJAX的工作原理相当于在用户和服务器之间加了—个中间层(AJAX引擎)，使用户操作与服务器响应异步化
 // 创建XMLHttpRequest对象
 let xmlhttp;
 if (window.XMLHttpRequest) {
@@ -42,24 +42,24 @@ if (window.XMLHttpRequest) {
 //   responseXML	响应主体 以XML格式返回响应 如果服务器的响应是XML,而且需要作为XML对象进行解析,请使用responseXML
 //   status       将状态返回为数字（例如，“Not Found”为404，“OK”为200）
 //   statusText   以字符串形式返回状态（例如，“Not Found”或“OK”）
-//  方法
+// 方法
 //   abort()      取消当前请求。
 //   getAllResponseHeaders()          以字符串形式返回完整的HTTP标头集。
 //   getResponseHeader( headerName )  返回指定HTTP标头的值。
 //   void open(请求类型,URL)	          打开指定获取或交的方法和URL的请求。
-//   void open(请求类型,URL,async)	    与上面相同，但指定异步或不。 true异步|false同步
+//   void open(请求类型,URL,async)	  与上面相同，但指定异步或不。 true异步|false同步
 //   void open(请求类型,URL,async,userName,password)  与上面相同，但指定用户名和密码。
-//   void send(content）	            发送获取请求。
+//   void send(content）	          发送获取请求。
 //   setRequestHeader(label,value)    将标签/值对添加到要发送的HTTP标头。
-//  GET                         POST
-//    更简单更快 大部分情况下都能用   可更新服务器上的文件或数据库
-//    请求可被缓存                 可发送大量数据(POST没有数据量限制)
-//    请求保留在浏览器历史记录中     发送包含未知字符的用户输入时，POST比GET更稳定也更可靠
+// GET
+//    更简单更快 大部分情况下都能用
+//    请求可被缓存
+//    请求保留在浏览器历史记录中
 //    请求可被收藏为书签
 //    请求不应在处理敏感数据时使用
 //    请求有长度限制
 //    请求只应当用于取回数据
-//  POST
+// POST
 //    可更新服务器上的文件或数据库
 //    可发送大量数据(POST没有数据量限制)
 //    发送包含未知字符的用户输入时，POST比GET更稳定也更可靠

@@ -22,18 +22,18 @@
     </div>
     
 <script type="text/javascript">
-// window:表示浏览器窗口(标签页) JS全局对象、函数以及变量自动成为window对象的成员
-//     获取浏览器窗口的宽度和高度(浏览器的视口)
+/** window:表示浏览器窗口(标签页) JS全局对象、函数以及变量自动成为window对象的成员 **/
+// 获取浏览器窗口的宽度和高度(浏览器的视口)
 //         console.log(window.innerHeight); //IE、Chrome、Ff、Opera Safari
 //         console.log(window.innerWidth); //高浏包括滚动条，不包括工具栏 ie8undefined
 //         console.log(document.documentElement.clientHeight);//ie8
 //         console.log(document.documentElement.clientWidth);//高浏和ie8都表示html文档宽度
 //         console.log(document.body.clientHeight);//ie8
 //         console.log(document.body.clientWidth);//高浏和ie8都表示body的宽度
-//     兼容获取浏览器可视区域宽高
+// 兼容获取浏览器可视区域宽高
 //         console.log(window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight);
 //         console.log(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
-//     window.open(URL,name,specs,replace)    打开新窗口
+// window.open(URL,name,specs,replace)    打开新窗口
 //         URL:打开指定的页面的URL,可选 可以是图片文件或者其他任何浏览器支持的文件格式.如果没有指定URL，打开一个新的空白窗口
 //         name:指定target属性或窗口的名称,可选name放在打开方式前才可以一起设置：
 //             _blank-URL加载到一个新的窗口。这是默认    _self-URL替换当前页面
@@ -56,23 +56,27 @@
 //         replace:Optional.Specifies规定装载到窗口的URL是在窗口浏览历史中创建一个新条目,或替换浏览历史中的当前条目 true||false
 //         let obj = window.open('events.html','aaa','_parent','height=500,top=100');
 //         obj 打开的新窗口对象的引用.如果调用失败,返回值会是null,如果父子窗口满足“同源策略”,可以用这个引用访问新窗口的属性或方法
-//     window.name    当前window的名称
-//     window.parent.nammoveBye    父window的名称
-//     window.top.name   顶层window的名称
-//     window.moveTO('连接','打开方式')  	//移动窗口 支持IE
-//     window.resizeTO('连接','打开方式')  //调整当前窗口尺寸
-//     window.close(); 								//关闭窗口 有兼容性问题，支持IE
-//     window.alert("提示信息");					//弹出一个具有OK按钮的系统消息框，显示指定的文本
-//     window.confirm("询问信息?");				//弹出一个具有OK和Cancel按钮的询问对话框，返回一个布尔值
-//     window.prompt("提示信息?", "默认值");//提示用户输入信息，文本框中的值作为函数值返回
-//     window.setTimeout("alert('xxx')", 1000);//指定的毫秒数后执行指定的代码
+// window.name    当前window的名称
+// window.parent.nammoveBye    父window的名称
+// window.top.name   顶层window的名称
+// window.moveTO('连接','打开方式')  	//移动窗口 支持IE
+// window.resizeTO('连接','打开方式')  //调整当前窗口尺寸
+// window.close(); 								//关闭窗口 有兼容性问题，支持IE
+// window.alert("提示信息");					//弹出一个具有OK按钮的系统消息框，显示指定的文本
+// window.confirm("询问信息?");				//弹出一个具有OK和Cancel按钮的询问对话框，返回一个布尔值
+// window.prompt("提示信息?", "默认值");//提示用户输入信息，文本框中的值作为函数值返回
+// window.setTimeout("alert('xxx')", 1000);//指定的毫秒数后执行指定的代码
+// window.screenLeft; 返回窗口相对于屏幕的X
+// window.screenTop; 返回窗口相对于屏幕的Y坐标
+// window.screenX; 事件属性可返回事件发生时鼠标指针相对于屏幕的水平坐标
+// window.screenY; 事件属性可返回事件发生时鼠标指针相对于屏幕的纵向坐标
 //     obj.resizeTo() 把窗口大小调整至指定的宽度和高度
 //     obj.resizeBy()	按照指定的像素将窗口的大小进行加减。
 //     obj.moveTo()	    把窗口的左上角移动到一个指定的坐标。
 //     obj.print()	    打印当前窗口的内容。(打印机的那种打印)
 //     obj.close()     关闭浏览器窗口(chrome 直接关闭窗口.IE 弹出一个询问框是否关闭窗口
 //         FF 不能直接关闭窗口(脚本不得关闭非脚本打开的窗口).由open打开的窗口可以直接关闭(所有浏览器行为一致)
-//     window对象事件
+// window对象事件
 //         onload  加载完页面所有东西以后才执行
 //         load  所有资源加载完毕后触发 只是表明事件方法，但并未执行
 //         resize  浏览器窗口有变化时触发
@@ -81,7 +85,7 @@
 //          console.log(33);
 //         };
 //
-// history 存放浏览器当前窗口的的访问历史
+/** history 存放浏览器当前窗口的的访问历史**/
 //     历史记录以栈（FIFO）的形式保存。页面前进则入栈，页面返回则出栈。
 //     它是一个只读对象，为了保护用户的隐私，JavaScript在获取这个对象时会受到限制。
 //          History对象不允许未授权代码访问会话历史(session history)中的其他页面地址，
@@ -93,7 +97,7 @@
 //     window.history.forward(); //同上，前往下一页,无参数
 //         let whl = window.history.length; //可以查看历史中的页面数（history对象中存储的页面数）
 //
-// location 用于获得当前页面的地址 (URL)信息、页面重定向等场景
+/** location 用于获得当前页面的地址 (URL)信息、页面重定向等场景**/
 //     location.href //设置或读取当前页面的完整URL，如http://www.somewhere.com/pictures/index.htm
 //     location.protocol //URL中使用的协议，即双斜杠之前的部分，如http
 //     location.host //服务器的名字(主机名和当前 URL 的端口号)，如www.wrox.com:8080
@@ -106,7 +110,7 @@
 //     location.replace("http://www.baidu.com"); //同assign()，但新地址不会被加到浏览器的历史栈中，不能通过back和forward访问
 //     location.reload(true | false); //重新载入当前页面，为false时从浏览器缓存中重载，为true时从服务器端重载，默认为false
 //
-// navigator 存放有关Web浏览器的信息，在检测浏览器及操作系统方面非常有用
+/** navigator 存放有关Web浏览器的信息，在检测浏览器及操作系统方面非常有用**/
 //     navigator.appCodeName //浏览器代码名的字符串表示
 //     navigator.appName //官方浏览器名的字符串表示
 //     navigator.appVersion //浏览器版本信息的字符串表示
@@ -138,6 +142,9 @@
 //     screen.height 显示屏的高度 设备物理高度
 //     screen.availWidth 屏幕的可用宽度 屏幕宽高减去如工具栏的值.
 //     screen.availHeight 屏幕的可用高度 屏幕宽高减去如工具栏的值.
+//     screen.colorDepth 用于显示一种颜色的比特数(色深) 常见:24bit 36bit 古老:8 14
+//          #rrggbb(rgb)==16,777,216种颜色(24bit)  32bits=4,294,967,296
+//     screen.pixelDepth 属性返回屏幕的像素深度。  对于现代计算机，颜色深度和像素深度是相等的
 </script>
 
 </body>
