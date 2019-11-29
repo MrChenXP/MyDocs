@@ -250,7 +250,7 @@
     }
     function xz(arr){
         let len = arr.length, min, temp;
-        for (i=0; i < len-1; i++){//便利出数组
+        for (i=0; i < len-1; i++){//遍利出数组
             // 将当前位置设为最小值 假设当前最小
             min = i;
             // 检查数组其余部分是否更小 保证min是最小值的下标
@@ -260,7 +260,7 @@
                 }
             }
             // 如果当前位置不是最小值，将其换为最小值
-            if (i != min){
+            if (i !== min){
                 temp = arr[i];
                 arr[i] = arr[min];
                 arr[min] = temp;

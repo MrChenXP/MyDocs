@@ -6,10 +6,26 @@
 <style type="text/css">
   /** 字体重置 解决font-weight在不同浏览器表现不一样 serif有衬线 sans-serif无衬线 **/
   body {
-    font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    font-family:
+      /*在 Mac OS X 和 iOS 上的 Safari 中设置 San Francisco，并在旧版本的 Mac OS X 上设置成 Neue Helvetica
+         和 Lucida Grande。它根据字体大小正确选择 San Francisco Text 和 San Francisco Display。*/
+      -apple-system,
+      /*只针对于 Mac OS X 上的 Chrome*/
+      BlinkMacSystemFont,
+      /*  用于已知的系统 UI 字体
+          Segoe UI 针对 Windows 和 Windows Phone。
+          Roboto 针对 Android 和更高版本的 Chrome 操作系统。故意列出在 Segoe UI 后，
+              因为如果你是 Windows 上的 Android 开发人员，并安装 Roboto，将使用 Segoe UI。
+          Oxygen 针对 KDE，Ubuntu，你可以猜到，Cantarell 针对 GNOME。这一开始感到徒劳，因为一些 Linux 发行版有许多这样的字体。
+          Fira Sans 针对 Firefox OS 系统。
+          Droid Sans 针对旧版本系统的安卓*/
+      "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+      "Fira Sans", "Droid Sans",
+      /*后备字体
+        Helvetica Neue针对旧El Capitan版本的Mac OS X,它被列在接近结尾,因为它是一个流行的字体在其他非El Capitan计算机上
+        sans-serif 默认的是 sans-serif 后备字体。  */
+      "Helvetica Neue",
+      sans-serif;
   }
   /*  pt: 1/72英寸(point) 
   */
@@ -64,7 +80,9 @@
     font-weight: bold;
     font-weight: 900;
   }
-
+  /*-webkit-text-fill-color:transparent;文本填充颜色 一般配合-webkit-background-clip
+          和background-image做渐变色字体
+  */
   /* line-height属性 设置行高(行间距里) 行高等于高可让文字垂直居中*/
   .p1 {
     line-height: 20px;
@@ -204,7 +222,8 @@
 
   /* background-origin：border-box(从border区域开始显示背景)
           padding-box(从padding区域开始显示背景) content-box(从content内容区域开始显示背景)
-      background-clip:border-box,padding-box,content-box 从设置的地方显示背景，其余被裁剪掉  */
+      background-clip:border-box,padding-box,content-box 从设置的地方显示背景，其余被裁剪掉
+      -webkit-background-clip:text; 文字的地方有背景，其他没有*/
   .div3 {
     background-color: rgba(255, 0, 0, 0.5);
     /*解决ie8背景透明 先把a(0.5)/255=127.5 再转为16进制放在1.2位 剩下的rgb转为16禁止放在后面*/
