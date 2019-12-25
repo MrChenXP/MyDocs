@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ch">
 <head>
     <meta charset="UTF-8">
     <title>字符串</title>
@@ -42,8 +42,8 @@ JSON.parse('{"a":"\\u000A"}'); // 不报错
 //   单独使用\uD834和\uDFO6这两个码点是不合法的，或者颠倒顺序也不行，因为\uDF06\uD834并没有对应的字符。
 // ES2019改变了JSON.stringify()的行为。如果遇到0xD800到0xDFFF之间的单个码点，
 //   或者不存在的配对形式，它会返回转义字符串，留给应用自己决定下一步的处理。
-JSON.stringify('\u{D834}') // ""\\uD834""
-JSON.stringify('\uDF06\uD834') // ""\\udf06\\ud834""
+JSON.stringify('\u{D834}'); // ""\\uD834""
+JSON.stringify('\uDF06\uD834'); // ""\\udf06\\ud834""
 
 /** 模板字符串`` **/
 // 增强版字符串,用反引号（`）标识.可以当作普通字符串使用,也可以用来定义多行字符串,或者在字符串中嵌入变量
@@ -53,18 +53,20 @@ JSON.stringify('\uDF06\uD834') // ""\\udf06\\ud834""
             第二行,变量${text}`;
 // 如果需要引用模板字符串本身，在需要时执行，可以写成函数。
 let func = (name) => `Hello ${name}!`;
-func('Jack') // "Hello Jack!"
+func('Jack'); // "Hello Jack!"
 
 /** 标签模板 **/
 // 紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串
-alert`123`; // 等同于 alert(123)
-// 标签模板其实不是模板，而是函数调用的一种特殊形式。“标签”指的就是函数，紧跟在后面的模板字符串就是它的参数
-// 如果模板字符里面有变量，会将模板字符串先处理成多个参数，再调用函数
-let a = 5;
-let b = 10;
-tag`Hello ${ a + b } world ${ a * b }`;
+console.log`标签模板`; // 等同于 alert(123)
+// 标签模板其实不是模板，而是函数调用的一种特殊形式.“标签”指的就是函数,紧跟在后面的模板字符串就是它的参数
+// 如果模板字符里面有变量,会将模板字符串先处理成多个参数,再调用函数
+let q = 5, b = 10;
+tag`Hello ${ q + b } world ${ q * b }`;
 // 等同于
 tag(['Hello ', ' world ', ''], 15, 50);
+function tag(stringArr, value1, value2){}
+// 等同于
+function tag(stringArr, ...values){}
 
 
 

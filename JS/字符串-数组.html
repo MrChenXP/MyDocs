@@ -291,6 +291,42 @@ function digui() {
     var p = 6; // 最大循环值
     console.log(fun(-1, 1, p));
 }
+
+let args = [9,234,4,34,1,34324,24,13];
+// 冒泡排序 依次比较相邻两个数,如大于,就调换顺序
+let mppx = ()=>{
+    // -1是因为到l-1的时候,就能直接与最后一个比较了
+    for(let i = 0; i < args.length-1; i++){
+        // i每循环一次,就有一个冒泡了,就可以且必需少循环i个
+        for(let j = 0; j < args.length-1-i; j++){
+            if(args[j] > args[j+1]){
+                let temp = 0;
+                temp = args[j];
+                args[j] = args[j+1];
+                args[j+1] = temp;
+            }
+        }
+    }
+};
+// 选择排序 依次找到最小的数,和第一个交换位置
+let xzpx = ()=>{
+    // 每循环一次就有一个最小的值放到前面
+    for(let i =0; i < args.length - 1; i++){
+        let min = args[i]; // 将当前位置记录为最小,准备循环
+        // min依次和后面的进行比较
+        for(let j = i+1; j < args.length; j++){
+            if(min > args[j]){
+                let temp = 0;
+                temp = args[j];
+                args[j] = min;
+                min = temp;
+            }
+        }
+        // 循环一次后,将最小的赋给当前的i
+        args[i] = min;
+    }
+};
+xzpx();
 </script>
 </body>
 </html>
