@@ -34,8 +34,10 @@
     <link rel="shortcut icon" href="imgers/favicon.ICO" type="image/vnd.microsoft.icon">
     <!--当希望为新浏览器提供另一种备用图像（例如动画GIF）时-->
     <link rel="shortcut icon" href="imgers/favicon.ICO" type="image/x-icon" />
-    <!-- 为了保证IE能够使用最新渲染模式而不是兼容模式，在html文档头部应加入以下代码 -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 1、如果支持Google Chrome Frame：GCF，则使用GCF渲染；
+         2、如果系统安装ie8或以上版本，则使用最高版本ie渲染；
+         3、否则，这个设定可以忽略。 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 </head>
 
 <!--定义文档主体，body元素包含文档的所有内容-->
