@@ -65,6 +65,9 @@
 
 ## 远程使用Github
    - 1. 生成公钥           `ssh-keygen -t rsa -C 'github上注册的邮箱'` 然后将公钥加入github
+    > - 第一行是填文件保存路径
+	> - 后面的是填用户名邮箱什么的，一路enter下去
+	> - 将id_rsa.pub文件字符复制到github上 settings>ssr and GPG keys
    - 2. 查看是否验证成功   `ssh -T git@github.com`   You've successfully authenticated 成功
    - 3. 添加远程仓库       `git remote add origin git地址`
    - 删除远程仓库          `git remote rm origin(远程名)`
