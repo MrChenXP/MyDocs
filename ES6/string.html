@@ -57,19 +57,21 @@ func('Jack'); // "Hello Jack!"
 
 /** 标签模板 **/
 // 紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串
-console.log`标签模板`; // 等同于 alert(123)
+func`标签模板`; // 等同于 func('标签模板')
 // 标签模板其实不是模板，而是函数调用的一种特殊形式.“标签”指的就是函数,紧跟在后面的模板字符串就是它的参数
 // 如果模板字符里面有变量,会将模板字符串先处理成多个参数,再调用函数
 let q = 5, b = 10;
-tag`Hello ${ q + b } world ${ q * b }`;
-// 等同于
+tag`Hello ${ q + b } world ${ q * b }`;// 以以下形式调用
 tag(['Hello ', ' world ', ''], 15, 50);
-function tag(stringArr, value1, value2){}
-// 等同于
-function tag(stringArr, ...values){}
+function tag(stringArr, value1, value2){} // 等同于以下形式创建
+// function tag(stringArr, ...values){}
 
+/** 模板字符串限制 */
+// 模板字符串默认会将字符串转义,导致无法嵌入其他语言
+// ES2018放松了对标签模板里面的字符串转义的限制.如果遇到不合法的字符串转义,
+//     就返回undefined,而不是报错,并且从raw属性上面可以得到原始字符串
 
-
+/** 新增方法 **/
 </script>
 </body>
 </html>
