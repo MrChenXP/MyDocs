@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
   <meta charset="UTF-8">
-  <title>基础</title>
+  <title>vue基础</title>
   <!-- 开发环境版本，包含了用帮助的命令行警告 -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <!-- 生产环境版本，优化了尺寸和速度 -->
@@ -14,47 +14,48 @@
   {{msg}} {{ true ? msg : false}}
   {{msg.split('')[1]}}
 
-<!-- v-model 单输入和应用状态之间的双向绑定 输入框的value和我们的data做绑定
+<!-- v-model 单输入和应用状态之间的双向绑定 输入框的value和我们的data属性中的变量做绑定
         .trim去除首尾空格 .number输入数据变为数字 .lazy懒加载,input失去焦点时进行改变 -->
   <input type="text" v-model="msg">
 
 <!-- v-bind:指令名字='指令的表达式'  绑定标签的属性,值可以写data中的变量 -->
   <p v-bind:title="msg">v-bind:title</p>
 
-
-<!--v-on  绑定方法 添加一个事件监听器 传$event代表当前事件对象(无参数，默认传)
-  v-on:keyup 按下按键时执行函数
-  v-on:input 向<input>中尝试输入时执行函数(v-model的语法糖)
-	v-on:click.native  使用原生事件
-   事件修饰符  .stop阻止事件冒泡 .prevent阻止默认事件
-   按键修饰符(可联合使用) .enter按下enter键触发函数 .space空格键 .13Enter键(enter键键码为13)
-   系统修饰符(必须联合其他按键一起按才会生效) .shift .meta
--->
-  <a v-on:click.prevent href="https://www.baidu.com">v-on:click.prevent="fun"</a>
-  <button @click.stop="fun(23,$event)">v-on:click="fun(23,$event)"</button>
-  <input type="text" @keyup.enter="keyup">
-  <input type="text" @keyup.esc.space="keyup">
-  <button type="button" @click.meta="keyup">按下win键+鼠标左键才有用</button>
-  <input type="text" :value="msg" @input = 'msg = $event.target.value'>
-<!-- v-html 将数据变成dom节点进行渲染
-     v-once 数据只渲染一次，不会双向绑定
--->
+  
+<!-- v-html 将数据变成dom节点,渲染到该元素
+     v-once 数据只渲染一次，不会双向绑定 -->
   <div v-html = "html"></div>
   <div v-once = "msg">{{msg}}</div>
+
+<!--v-on  绑定方法 添加一个事件监听器 传$event||event代表当前事件对象(无参数，默认传)
+    v-on:dblclick 双击 更多事件名可以查看原生js事件文档
+    v-on:keyup 按下按键时执行函数
+    v-on:input 向<input>中尝试输入时执行函数(v-model的语法糖)
+	  v-on:click.native  使用原生事件
+    事件修饰符  .stop阻止冒泡 .prevent阻止默认 .once只触发一次 更多查看vue官网 
+    按键修饰符(可联合使用) .enter .space .13Enter键(enter键键码为13) .shift .meta 
+    系统修饰符(必须联合其他按键一起按才会生效) -->
+  <a v-on:click.prevent href="https://www.baidu.com">v-on:click.prevent="fun"</a>
+  <button @click.stop="fun(23,$event)">v-on:click="fun(23,$event)"</button>
+  <input type="text" @keyup.enter="keyup" value="按下enter键触发函数">
+  <input type="text" @keyup.esc.space="keyup" value="按下esc&&空格键才触发">
+  <button type="button" @click.meta="keyup">按下win键+鼠标左键才有用</button>
+  <input type="text" :value="msg" @input = 'msg = $event.target.value'>
+
 </div>
 
 <script type="text/javascript">
-
-  //创建Vue实例 实例内
+  // 创建Vue实例 实例内
   let app = new Vue({
     // 实例的挂载点
-    el: "#app", //确定实例对应的元素 id=app 该实例方法只能操作该元素数据
-    // 实例中的数据   在此对象外面可以直接用app.msg
+    el: "#app", // element,实例控制的元素 id=app 该实例的方法只能操作该元素数据,一定是html中的根容器
+    // 实例中的数据   在此实例外可以直接用app.msg来操作该属性,app(实例名)
     data: {
       msg: '这是数据',
       html: "<h1>33</h1>",
     },
-    methods: {    // 实例中的方法 this代表当前vue实例
+    // 实例中的方法,this代表当前vue实例
+    methods: {
       fun: function (data,event) {
         console.log(event);
         this.msg = this.msg.split('').reverse().join('');//逆转信息
