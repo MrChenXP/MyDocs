@@ -14,9 +14,10 @@
   {{msg}} {{ true ? msg : false}}
   {{msg.split('')[1]}}
 
-<!-- v-model 单输入和应用状态之间的双向绑定 输入框的value和我们的data属性中的变量做绑定
-        .trim去除首尾空格 .number输入数据变为数字 .lazy懒加载,input失去焦点时进行改变 -->
-  <input type="text" v-model="msg">
+<!--v-model 单输入和应用状态之间的双向绑定 输入框的value和我们的data属性中的变量做绑定
+        .trim去除首尾空格 .number输入数据变为数字 .lazy懒加载,input失去焦点时进行改变
+    ref:给元素或者子组件注册引用信息,注册在$refs对象上   -->
+  <input type="text" v-model="msg" ref="inputMode">
 
 <!-- v-bind:指令名字='指令的表达式'  绑定标签的属性,值可以写data中的变量 -->
   <p v-bind:title="msg">v-bind:title</p>
@@ -33,11 +34,10 @@
     v-on:input 向<input>中尝试输入时执行函数(v-model的语法糖)
 	  v-on:click.native  使用原生事件
     事件修饰符  .stop阻止冒泡 .prevent阻止默认 .once只触发一次 更多查看vue官网 
-    按键修饰符(可联合使用) .enter .space .13Enter键(enter键键码为13) .shift .meta 
+    按键修饰符(可联合使用) .enter .space .13按键码enter .shift .meta .tab .delete .up .down .left .right
     系统修饰符(必须联合其他按键一起按才会生效) -->
   <a v-on:click.prevent href="https://www.baidu.com">v-on:click.prevent="fun"</a>
   <button @click.stop="fun(23,$event)">v-on:click="fun(23,$event)"</button>
-  <input type="text" @keyup.enter="keyup" value="按下enter键触发函数">
   <input type="text" @keyup.esc.space="keyup" value="按下esc&&空格键才触发">
   <button type="button" @click.meta="keyup">按下win键+鼠标左键才有用</button>
   <input type="text" :value="msg" @input = 'msg = $event.target.value'>
@@ -61,7 +61,8 @@
         this.msg = this.msg.split('').reverse().join('');//逆转信息
       },
       keyup: function (event) {
-          alert('输入了回车键')
+        alert('输入了回车键')
+        console.log(this.$refs('inputMode'))
       }
     }
   })
