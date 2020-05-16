@@ -24,7 +24,7 @@
 </head>
 <body>
 <div id="app">
-  <!-- msg 传入 upperCase运算后 再返回 可用多个筛选器 -->
+  <!-- 过滤器 msg传入upperCase运算后,再返回 可用多个筛选器 -->
   <p>{{ msg | upperCase(true) }}</p>
   <p>{{ msg | upperCase | upperCase(true) }}</p>
 
@@ -67,7 +67,7 @@
         {ifRound:'d',font:'f',width:'w'}
       ]
     },
-    filters:{ //筛选数据 first调用时传入的参数从第二个开始
+    filters:{ // 过滤器 筛选数据,first调用时传入的参数从第二个开始
       upperCase:function (val,ifFirst) {//val默认传进来的值
         val = val.toString();
         if(ifFirst){  //如果有传参数 截取第一个字符大写 + 截取第一个字符后面的所有字符
