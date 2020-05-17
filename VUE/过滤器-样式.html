@@ -28,21 +28,21 @@
   <p>{{ msg | upperCase(true) }}</p>
   <p>{{ msg | upperCase | upperCase(true) }}</p>
 
-  <!-- 绑定内联样式样式 style和v-bind:style样式会融合在一起 -->
+  <!-- 绑定内联样式 style和v-bind:style最终页面上会放在同一个style上 -->
   <div style="height: 200px;width: 200px;" :style="{background:'red',height:'250px'}"></div>
-  <p :style="{color:col}" v-on:click="onchange">动态绑定属性,点击改变</p>
+  <p :style="{color:col}" v-on:click="onchange">动态绑定行内样式,点击改变</p>
   <p :style="oStyle">绑定属性对象</p>
-  <p :style="style2">使用计算属性，可以一个点击事件 改多个元素样式。点击事件激活后col值改变，被监听了，此元素也会动态改变样式</p>
+  <p :style="style2">使用计算属性,可实现一个点击事件,改多个行内样式。点击事件激活后col值改变,被监听了,此元素也会动态改变样式</p>
   <p :style="[style2,style3,{background:'red'}]">绑定两个计算属性和其他属性</p>
 
   <!-- 绑定class -->
   <div v-for="i in changeClass" class="sha"
        :class="{c:i.ifRound,d:!i.ifRound}">
-    通过隐藏或显示某些类来改变
+    通过隐藏或显示某些类来改变,key是类名,value是显示与否
   </div>
   <div v-for="i in chaClass" class="sha"
        :class="[ i.ifRound, i.font?i.font : i.width,{w:i.width}]">
-    通过改变类的值来实现
+    通过改变类的值来实现,每一项数组成员都是一个类名
   </div>
 
 </div>

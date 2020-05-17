@@ -11,41 +11,33 @@
 </head>
 <body>
 <div id="app">
-<!--
-  v-if 条件为true渲染节点(v-else v-else-if), 不是使用hidden,代码中没有其他代码
-  v-show 如v-if，方法为display=none
-  v-cloak 指令保持在元素上直到关联实例结束编译 配合display可以在vue没被加载前使与vue相关的代码隐藏
--->
+<!--v-if 条件为true时渲染节点(v-else v-else-if), 不是使用display,代码中根本不会渲染这个代码
+    v-show 相当于display=none
+    v-cloak 保持在元素上直到关联实例结束编译 配合display可以在vue没被加载前使与vue相关的代码隐藏
+      网速较慢时,vue.js还没加载,vue也没渲染,页面会显示vue源码,此指令可隐藏绑定的元素,
+      使用了路由的项目,每个单页面是空元素,元素内部是通过路由挂载实现的,不用考虑-->
   <div v-if="flag">v-if="flag" 为false时document不会显示代码</div>
-  <div v-else>否则显示这段话，</div>
+  <div v-else>否则显示这段话</div>
   <div v-show="flag">v-show="flag" 为false时document会显示代码 display:none</div>
-  <div v-cloak>v-cloak</div>
-<!--
-  v-for 循环 绑定数组的数据来渲染一个项目列表 浅拷贝,没有双向绑定
-    数组 a:元素  b:索引      	对象 a:属性值   b:键名   c:索引
-    key值用来区分渲染的每个元素 必须不一样
--->
-  <!-- <li v-for="(a,b[,c]') in list"> -->
-  <table>
-    <tr  v-for="y in list" v-bind:key = "y.age">
-      <td>{{y.name}}</td>
-      <td>{{y.age}}</td>
-    </tr>
-  </table>
+  <div v-cloak>v-cloak,请在慢网速下测试</div>
+
+<!--v-for 循环 绑定数组的数据来渲染一个项目列表 浅拷贝,没有双向绑定
+      数组 a:元素  b:索引      	对象 a:属性值   b:键名   c:索引
+      key值用来区分渲染的每个元素,必须不一样
+    <li v-for="(a,b[,c]') in list">
+    <template> vue不会渲染<template>元素,if和for都可用它来避免不必要的元素渲染 -->
+  <button v-on:click="change">更改list变量,因为绑定了,页面也会对应变化</button>
+  <ol>
+    <li v-for="y in list" v-bind:key = "y.age">
+      {{y.name}} - {{y.age}}
+    </li>
+  </ol>
   <ul>
     <li v-for="(n,s) in 3">会把1-3遍历出来{{n}} {{s}}</li>
-    <li v-for="(n,s) in 'chen'">会把chen遍历split出来 {{n}} {{s}}</li>
+    <template v-for="(n,s) in 'chen'">
+      <li>会把chen遍历split出来 {{n}} {{s}}</li>
+    </template>
   </ul>
-  <button v-on:click="change">change</button>
-
-  <input type="password" v-model="msg" v-on:keyup.enter="s">
-
-  <template>
-    <p v-if="len>8"> >8 </p>
-    <p v-else-if="len<=8||len>0"> {{len}} </p>
-    <p v-else="">  null </p>
-  </template>
-
 
 </div>
 
@@ -59,8 +51,8 @@
       len:0,
       list: [
         {name: "chen", age: 21},
-        {name: "chen", age: 22},
-        {name: "chen", age: 23},
+        {name: "chen2", age: 22},
+        {name: "chen3", age: 23},
       ],
       flag: true,
     },
@@ -70,14 +62,9 @@
         Vue.set(this.list,0,{name:'li',age: 30});
         //.push放进行了重写，可以动态添加
         this.list.push({
-          name:'wnag',
+          name:'wnag这是新加的',
           age:33
         })
-      },
-      s:function () {
-        let len = this.msg.split('').length;
-
-        console.log(len)
       }
     }
   })
