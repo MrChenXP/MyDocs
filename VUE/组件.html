@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件component</title>
+</head>
+<body>
+<div id="app">
+  <!-- 渲染组件   -->
+  <cxp_p v-for='(y,i) in list' :canshu="y.age" v-bind:key="i" @bbb="cxp_pZi($event)">
+    <slot><li>组件上的插槽</li></slot>
+    <slot b-slot='chacao'><li>具名插槽，有名字的插槽</li></slot>
+  </cxp_p>
+  <my-components></my-components>
+</div>
+
+<div class="tem">
+  {{msg}}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  // 注册组件(必须要在创建Vue实例之前)
+  // 全局组件(只要在vue实例元素里就能使用,不用再局部注册) [组件名称*(使用时的元素名),组件配置]
+  Vue.component('cxp_p', {
+    props: ['canshu'], // 使用组件时上的元素属性,通过此实现父向子传值 字母不要用大写
+    // 模板 最外层不能存在两个元素 必须有一个根节点
+    //    slot 插槽,父传递给子的内容 无name代表default
+    template: `<ol>
+                <li @click="a">这是组件上的内容{{count}}{{cxp_p_msg}}</li>
+                <li>这是父传给子的内容{{canshu}}</li>
+                <li @click='b'>子传个父一个点击事件,子向父传值</li>
+                <slot></slot>
+                <slot name='chacao'></slot>
+              </ol>`,
+    // data使用函数返回值,运用闭包原理防止组件被多次调用时,改一发而动全身,不要在外面定义一个对象
+    data:function () {
+      return {
+        cxp_p_msg: "这是模板里的数据",
+        count: 0,
+      }
+    },
+    methods:{
+      a(){
+        console.log(this.count++)
+      },
+      // $emit 暴露给父级一个方法名 子级触发了这个函数时,父级使用暴露的方法名来进行监听
+      b(){
+        this.$emit('bbb','第二个参数是子暴露给父的值')
+      }
+    }
+  });
+
+  //创建一个组件需要的对象 局部注册时,组件第二个参数是个对象,可以用这个对象替代它
+  let com = {
+    props: ['canShu'],
+      //模板 最外层不能存在两个元素 必须有个根节点
+      template: `<ul>
+                <li @click="a">这是组件上的内容{{count}}{{cxp_p_msg}}</li>
+                <li>这是组件上的内容{{canShu}}:{{canShu}}</li>
+              </ul>`,
+    //data使用函数返回值 运用闭包原理防止组件被多次调用时 该一发而动全身
+    data:function () {
+    return {
+      cxp_p_msg: "这是模板里的数据",
+      count: 0,
+    }
+  },
+    methods:{
+      a(){
+        console.log(this.count++)
+      }
+    }
+  }
+
+  new Vue({
+    el: '#app',
+    data:{
+      list: [
+        {name: "chen", age: 21},
+        {name: "chen", age: 22},
+        {name: "chen", age: 23},
+      ],
+    },
+    //局部组件 只有在当前vue实例(#app)里才能使用
+    components:{
+      'my-components' : com
+    },
+    methods:{
+      cxp_pZi(e){
+        console.log(e)
+      }
+    },
+  });
+
+  // template模板(不推荐在vue实例中使用) 会把挂载的元素(.tem)关掉显示模板里的东西
+  // el就是告诉template模板覆盖到哪个元素上去，没有el他就不会覆盖(模板内代码不生效)
+  let vTem = new Vue({
+    el: '.tem',
+    data:{
+      msg: 'dd'
+    },
+    template:'<div>{{msg}},已将原来的元素覆盖</div>',
+  })
+</script>
+</body>
+</html>
