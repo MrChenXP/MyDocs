@@ -41,14 +41,13 @@
   <input type="text" @keyup.esc.space="keyup" value="按下esc&&空格键才触发">
   <button type="button" @click.meta="keyup">按下win键+鼠标左键才有用</button>
   <input type="text" :value="msg" @input = 'msg = $event.target.value'>
-
 </div>
 
 <script type="text/javascript">
   // 创建Vue实例 想创建多个vue实例,只要new Vue()多个就行
   let app = new Vue({
     // 实例的挂载点
-    el: "#app", // element,实例控制的元素 id=app 该实例的方法只能操作该元素数据,一定是html中的根容器
+    el: "#app", // 实例控制的元素 该实例的方法只能操作该元素数据,操作的一定是html中的根容器(#app)
     // 实例中的数据   在此实例外可以直接用app.msg来操作该属性,app(实例名)
     data: {
       msg: '这是数据',
