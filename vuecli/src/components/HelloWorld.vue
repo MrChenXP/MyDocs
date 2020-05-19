@@ -21,6 +21,7 @@
 
 <script>
   import Bus from '../assets/bus'
+  // 局部注册,只能在这个页面使用
   import test from './test.vue'
 
   export default {
@@ -31,6 +32,7 @@
         A: this.$route.params.ii
       }
     },
+    // "test":test可以简写为test es6写法
     components: {test},
     methods: {
       link: function () {
@@ -56,7 +58,8 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!--默认按照文档流方式,后引入的css层级高,会出现子覆盖父的样式
+    但增加"scoped"代表只影响这个组件,不会影响他组件,包括子组件(通过标签属性data-v-xxxx唯一标识富来实现) -->
 <style scoped>
   h1, h2 {
     font-weight: normal;

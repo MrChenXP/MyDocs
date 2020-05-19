@@ -2,6 +2,7 @@
   <div id="appp">
     <!--接受其他组件-->
     <router-view/>
+    <div>这是App.vue</div>
   </div>
 </template>
 

@@ -30,14 +30,14 @@
   node_modules -- 依赖
   src -- 源代码
   static -- 项目的静态文件
-  index.html -- 页面模板 入口文件,后面的单页面插入到这个页面
+  index.html -- 页面模板 入口文件,后面的单页面插入到这个页面 #app元素里去
   package-lock.json -- yarn的文件
   src
-    assets --项目的静态文件 (编译后文件会一起打包)
-    components --项目的组件
+    assets -- 项目的静态文件 (编译后文件会一起打包)
+    components -- 项目的单页面组件
     router --前端路由的配置文件
-    App.vue --项目模板
-    main.js --项目的入口
+    App.vue --项目模板 根组件
+    main.js --项目的入口 执行完index.html后执行这个 
   package.json  定义了这个项目所需要的各种模块，以及项目的配置信息（比如名称、版本、许可证等元数据）
     （npm install命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。）
     name // 项目名称
