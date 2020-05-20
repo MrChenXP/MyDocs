@@ -1,8 +1,8 @@
 <template>
   <div id="appp">
-    <!--接受其他组件-->
+    <div class="appp_header">这是App.vue里的内容</div>
+    <!--使用这个标签接受其他组件-->
     <router-view/>
-    <div>这是App.vue</div>
   </div>
 </template>
 
@@ -13,14 +13,27 @@ export default {
 </script>
 
 <style>
+body, h1, h2{
+  padding: 0;
+  margin: 0;
+}
+a {
+  color: #f2be45;
+}
 #appp {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100vh;
 }
+
 .shou{
   cursor: pointer;
+}
+.appp_header{
+  padding: 10px 0;
+  background: #c0ebd7;
 }
 </style>

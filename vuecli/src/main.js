@@ -11,8 +11,8 @@ Vue.use(Vuex);  //安装 Vuex
 Vue.config.productionTip = false;
 
 // 注册为全局组件,这样每个页面都能直接通过<test></test>使用test组件,包扩App.vue
-// import test form './test' // 引入test组件
-// Vue.component("test",test) // (别人调用它时用的名字, 引入的组件名)
+// import test_footer form './test_footer' // 引入test组件
+// Vue.component("test-footer",test_footer) // (别人调用它时用的名字, 引入的组件名)
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // import 'bootstrap/dist/js/bootstrap.min'
 

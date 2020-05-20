@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'  //要先引入组件才能 配置路由
-import a from '@/components/test'   //此刻的a对应下面的component：
+import a from '@/components/test_footer'   //此刻的a对应下面的component：
 import teme from '@/components/teme'
 import temeH from '@/components/temeH'
 import temeStu from '@/components/temeStu'
@@ -16,8 +16,8 @@ export default new Router({ //这里配置路由
       component: HelloWorld
     },
     {
-      path: '/test', //路由
-      name: 'test', //路由名
+      path: '/test_footer', //路由
+      name: 'test_footer', //路由名
       component: a ,//组件文件名
     },
     {//所有班级路由
