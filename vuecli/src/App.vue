@@ -18,7 +18,7 @@ body, h1, h2{
   margin: 0;
 }
 a {
-  color: #f2be45;
+  color: #3b2e7e;
 }
 #appp {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

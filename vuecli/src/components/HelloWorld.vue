@@ -15,8 +15,9 @@
 
     <!--components里用的时驼峰注册,vue-cli可以识别'-'这种命名方式 
         val是子组件的属性,父向子传值。如果传的是引用(Object,Function等),
-          其中一个子组件更改了val值,另一个也会跟着更改val值 -->
-    <test-footer v-bind:val="msg"></test-footer>
+          其中一个子组件更改了val值,另一个也会跟着更改val值
+        testChange是子组件返回的一个事件,$event是子组件返回的值 -->
+    <test-footer v-bind:val="msg" v-on:testChange="testChange($event)"></test-footer>
 
   </div>
 </template>
@@ -55,6 +56,10 @@
         // 如果只提供了事件，则移除该事件所有的监听器；
         // 如果同时提供了事件与回调，则只移除这个回调的监听器。
         Bus.$off('msg')
+      },
+      // 点击test_footer里的事件
+      testChange(e){
+        console.log(e)
       }
     }
   }
