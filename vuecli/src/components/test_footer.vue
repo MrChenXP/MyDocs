@@ -66,6 +66,7 @@ export default {
       this.$emit("testChange","第二个参数是子暴露给父的值");
     }
   }
+  
 }
 </script>
 

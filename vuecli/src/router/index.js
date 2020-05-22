@@ -1,24 +1,26 @@
+// 单独将路放在一个文件,然后让main.js引入这个文件,不要在main.js里写所有的逻辑
+
 import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'  //要先引入组件才能 配置路由
-import a from '@/components/test_footer'   //此刻的a对应下面的component：
+import Router from 'vue-router' // 引入vur-roter模板
+import HelloWorld from '@/components/HelloWorld'  // 要先引入组件才能 配置路由
+import tf from '@/components/test_footer'   // 此刻的a对应下面的component：
 import teme from '@/components/teme'
 import temeH from '@/components/temeH'
 import temeStu from '@/components/temeStu'
 
-Vue.use(Router);
+Vue.use(Router); // 用use这个中间件使用这个路由
 
-export default new Router({ //这里配置路由
+export default new Router({ // 这里配置路由
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/', // 路由地址
+      name: 'HelloWorld', // 路由名
+      component: HelloWorld // 组件文件名,上面引入的时候,自己命名的
     },
     {
-      path: '/test_footer', //路由
-      name: 'test_footer', //路由名
-      component: a ,//组件文件名
+      path: '/test_footer',
+      name: 'test_footer',
+      component: tf ,
     },
     {//所有班级路由
       path:'/teme',

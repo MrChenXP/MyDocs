@@ -1,7 +1,7 @@
 <template>
   <div id="appp">
     <div class="appp_header">这是App.vue里的内容</div>
-    <!--使用这个标签接受其他组件-->
+    <!-- router模板提供的 默认根路由渲染到这个标签-->
     <router-view/>
   </div>
 </template>

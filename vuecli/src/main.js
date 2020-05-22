@@ -22,7 +22,7 @@ Vue.config.productionTip = false;
 // 创建vue实例
 new Vue({ //
   el: '#app', // #app代表的是index.html中的#app 提供一个页面上已存在的DOM元素作为Vue实例挂载目标
-  router,
+  router, // 使用router 路由
   store,//挂载store
   components: { App },  // 创建一个模板 之前已经创建好了App对象
   template: '<App/>',   // 把模板<App />覆盖到#app上 可查看vue-组件文档

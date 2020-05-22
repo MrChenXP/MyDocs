@@ -61,7 +61,32 @@
       testChange(e){
         console.log(e)
       }
-    }
+    },
+    // 生命周期
+    // beforeCreate(){
+    //   alert('Vue实例创建前,vue实例中的el,data,data中的message都为undefined')
+    // },
+    // created(){
+    //   alert("实例创建后,el还是undefined,而数据已经与data中的属性进行绑定")
+    // },
+    // beforeMount(){
+    //   alert("组件挂载前,页面未展示,还只是虚拟dom,完成了data和el数据初始化")
+    // },
+    // mounted(){
+    //   alert("编译完了,挂载完成,这个方法执行后dom树渲染到页面")
+    // },
+    // beforeUpdate(){
+    //   alert("组件更新前,数据有更新被调用")
+    // },
+    // updated(){
+    //   alert("组件更新后,dom也重新render完成")
+    // },
+    // beforeDestroy(){
+    //   alert("销毁之前,还可以访问实例数据")
+    // },
+    // destroyed(){
+    //   alert("销毁之后,Dom元素存在,只是不再受vue控制")
+    // },
   }
 </script>
 
