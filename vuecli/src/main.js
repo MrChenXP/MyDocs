@@ -4,10 +4,12 @@
 import Vue from 'vue' //引入vue
 import App from './App' //引入App.vue组件(浏览器不支持vue后缀，webpack会使用vue-louder把他变成对象)
 import router from './router' //默认index.js
+import VueResource from 'vue-resource' // 引入vue-resource
 
 import Vuex from 'vuex'; //引入vuex插件
 import store from './router/store'
-Vue.use(Vuex);  //安装 Vuex
+Vue.use(Vuex);  //安装 Vuex 这样就能在任意组件使用了,this.xxx就能用了
+Vue.use(VueResource);  //安装 vue-resource
 Vue.config.productionTip = false;
 
 // 注册为全局组件,这样每个页面都能直接通过<test></test>使用test组件,包扩App.vue

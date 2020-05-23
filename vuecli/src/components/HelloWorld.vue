@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <router-link to="/test_footer">标签跳转test_footer</router-link>
-    <button v-on:click="link">方法跳转test_footer</button>
+    <button v-on:click="link">方法跳转httpAjax</button>
 
     <div class="vux-srote">
       <button v-on:click="jian">-</button>
@@ -39,7 +39,7 @@
     components: {testFooter},
     methods: {
       link: function () {
-        this.$router.push({path: '/test_footer'});
+        this.$router.push({path: '/httpAjax'+'?class_id=11'});
       },
       jia: function () {
         this.$store.commit('jia');

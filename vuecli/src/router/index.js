@@ -4,9 +4,7 @@ import Vue from 'vue'
 import Router from 'vue-router' // 引入vur-roter模板
 import HelloWorld from '@/components/HelloWorld'  // 要先引入组件才能 配置路由
 import tf from '@/components/test_footer'   // 此刻的a对应下面的component：
-import teme from '@/components/teme'
-import temeH from '@/components/temeH'
-import temeStu from '@/components/temeStu'
+import httpAjax from '@/components/httpAjax'
 
 Vue.use(Router); // 用use这个中间件使用这个路由
 
@@ -22,21 +20,11 @@ export default new Router({ // 这里配置路由
       name: 'test_footer',
       component: tf ,
     },
-    {//所有班级路由
-      path:'/teme',
-      name:'teme',
-      component:teme
+    {
+      path: '/httpAjax',
+      name: 'httpAjax',
+      component: httpAjax ,
     },
-    {//班级首页路由
-      path:'/temeH',
-      name:'temeH',
-      component:temeH
-    },
-    {//学生首页路由
-      path:'/temeStu',
-      name:'temeStu',
-      component:temeStu
-    }
   ],
   // mode:'history'  //去除路由 # 如果要打包请把这句去掉 不然会路径错误
 //config/ index.js build{ assetsPublicPath: './'}  打包后index.html引用的路径
