@@ -18,11 +18,17 @@ Vue.config.productionTip = false;
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // import 'bootstrap/dist/js/bootstrap.min'
 
-
+// 自定义指令(全局) 局部注册可查看vue自定义指令,一样的
+Vue.directive("cxp",{
+  bind(el,binding,vndoe){
+    el.style = binding.value || "color:red" ;
+    console.log(binding.xsf)
+  }
+})
 
 /* eslint-disable no-new */
 // 创建vue实例
-new Vue({ //
+new Vue({ 
   el: '#app', // #app代表的是index.html中的#app 提供一个页面上已存在的DOM元素作为Vue实例挂载目标
   router, // 使用router 路由
   store,//挂载store
@@ -36,3 +42,4 @@ new Vue({ //
   render:h=>h(App)//或者这样写
   */
 });
+

@@ -10,6 +10,8 @@
     </div>
     <div>这是父传给子组件的值{{val}}</div>
     <button v-on:click="changeVal()">点击实现子向父传值,通过事件方法</button>
+    
+
   </div>
 </template>
 

@@ -6,15 +6,24 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: { // 代理设置 会将127.0.0.1:8081代理到target设置的域名
+      '/api': { // 匹配项 查找接口中是否有'api'字符串 一般后端给的接口没有,要自己加
+        target: ' http://www.ddsjd.com:8080/', // 目标接口域名的域名
+        secure: false,  // 如果是https接口，需要配置这个参数
+        changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
+        pathRewrite: {
+          '^/api': '' // 重写接口 把前端接口中'/api'改成'',不然后端识别不了带api的接口
+        }
+      },
+      '后续可以写多个跟上面一样的匹配规则':{}
+    },
 
     // Various Dev Server settings
-    host: '127.0.0.1', // can be overwritten by process.env.HOST  原来是localhost 改成ip后可用ip访问页面
-    port: 8081, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: '127.0.0.1', // 原来是localhost 改成ip后可用ip访问页面
+    port: 8081, // 端口
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
