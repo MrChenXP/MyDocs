@@ -26,6 +26,11 @@ Vue.directive("cxp",{
   }
 })
 
+// 过滤器(全局) 可查看vue过滤器文档
+Vue.filter("glq",function(value){
+  return value+'glq'
+})
+
 /* eslint-disable no-new */
 // 创建vue实例
 new Vue({ 

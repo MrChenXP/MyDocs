@@ -29,7 +29,7 @@ export default {
     // axios 
     getAxios(){
       let _this = this;
-      axios.get('https://jsonplaceholder.typicode.com/posts?userId=1',{
+      axios.get('/api/posts?userId=1',{ // 这个使用了代理 参考config/index.js
         params:{
           method: 'all'
         }}).then((res) => {
