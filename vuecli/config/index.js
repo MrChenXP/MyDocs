@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/', // 发布路径
     // 代理设置 会将127.0.0.1:8081代理到target设置的域名
     // 前端请求http-proxy-middleware插件开启的中间件(服务器),由中间件进行转发请求
-    proxyTable: { 
+    proxyTable: { // 配置方法可搜索webpack:proxy 或者 http-proxy-middleware
       '/api/*': { // 匹配项 查找接口中是否有'api'字符串 一般后端给的接口没有'api',要自己加
         target: 'https://jsonplaceholder.typicode.com/', // 目标接口域名的域名
         secure: true,  // 如果是https接口,需要配置这个参数为true
