@@ -5,12 +5,12 @@
 
     <div class="vux-srote">
       <button v-on:click="jian">-</button>
-      <span>{{$store.state.count}}调用仓库的值</span>
+      <span>{{$store.state.count}} 这里调用仓库的值</span>
       <button v-on:click="jia">+</button>
     </div>
 
     <div id="emit">
-      <button @click="bus">触发bus</button>
+      <button @click="bus">触发bus,将msg传给兄弟</button>
     </div>
 
     <!--components里用的时驼峰注册,vue-cli可以识别'-'这种命名方式 
@@ -47,14 +47,12 @@
       jian: function () {
         this.$store.commit('jian');
       },
-      // bus事件
+      // bus事件 接受数据的组件是test_fotter 兄弟通过bus传值
       bus() {
-        // 触发bus事件 第2个参数是传给msg事件中回调函数的值 注意生命周期,
+        // 触发bus事件 第2个参数是传给msg事件中回调函数的值(第三个没用) 注意生命周期,
         Bus.$emit('msg', '22222','333')
-        // 移除自定义事件监听器 注意生命周期,
-        // 如果没有提供参数，则移除所有的事件监听器；
-        // 如果只提供了事件，则移除该事件所有的监听器；
-        // 如果同时提供了事件与回调，则只移除这个回调的监听器。
+        // 移除自定义事件监听器 注意生命周期,如果没有提供参数，则移除所有的事件监听器；
+        //   如果只提供了事件,则移除该事件所有的监听器,如果同时提供了事件与回调，则只移除这个回调的监听器。
         Bus.$off('msg')
       },
       // 点击test_footer里的事件

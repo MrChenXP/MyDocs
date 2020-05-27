@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>组件component</title>
+  <title>组件component-混入minxin</title>
 </head>
 <body>
 <div id="app">
@@ -101,7 +101,26 @@
       msg: 'dd'
     },
     template:'<div>{{msg}},已将原来的元素覆盖</div>',
+    xins: [myMixin], // 混入 里面放定义好的名字
   })
+  
+  // 混入 一个混入对象可以包含任意组件选项 
+  //   当组件使用混入对象时,所有混入对象的选项将被“混合”进入该组件本身的选项,
+  //   组件本身定义的选项会与minxin合并,引用类型内部会递归合并,发生冲突时组件数据优先
+  //   同名钩子函数将合并为一个数组,都将被调用,混入对象的钩子将在组件自身钩子之前调用
+  //   全局注册Vue.mixin({data:{}}) 的会影响每个之后创建的Vue实例,即使他们没在选项里写
+  var myMixin = { // 定义一个混入对象
+    created: function () {
+      this.hello()
+    },
+    methods: {
+      hello: function () {
+        console.log('hello from mixin!')
+      }
+    }
+  }
+
+  var component = new Component() // => "hello from mixin!"
 </script>
 </body>
 </html>

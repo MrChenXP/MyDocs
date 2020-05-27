@@ -17,7 +17,7 @@ module.exports = {
         secure: true,  // 如果是https接口,需要配置这个参数为true
         changeOrigin: true, // 设置为true, 代表开启代理
         pathRewrite: {
-          '^/api': '' // 重写接口 把前端接口中'/api'改成'',不然后端识别不了带api的接口
+          '^/api': '' // 重写接口 把前端接口中'/api'改成''然后加上target,不然后端识别不了带api的接口
         }
       },
       '后续可以写多个跟上面一样的匹配规则':{}

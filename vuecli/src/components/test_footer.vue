@@ -48,10 +48,10 @@ export default {
     }
   },
   mounted() {
+    // 兄弟通过bus传值
     let self = this
     // 监听当前实例上的自定义事件,事件可以由$emit触发,回调函数会接收所有传入事件触发函数的额外参数
-    // msg是事件名
-    Bus.$on('msg', (e) => {
+    Bus.$on('msg', (e) => { // msg是事件名
       self.message = e
       console.log(`传来的数据是：${e}`)
     })
