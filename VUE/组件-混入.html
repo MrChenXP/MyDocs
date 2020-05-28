@@ -6,14 +6,21 @@
 </head>
 <body>
 <div id="app">
-  <!-- 渲染组件   -->
+  <!-- 全局组件   -->
   <cxp_p v-for='(y,i) in list' :canshu="y.age" v-bind:key="i" @bbb="cxp_pZi($event)">
     <slot><li>组件上的插槽</li></slot>
     <slot b-slot='chacao'><li>具名插槽，有名字的插槽</li></slot>
   </cxp_p>
+  <!-- 局部组件 -->
   <my-components></my-components>
+  <!-- is  用于动态组件且基于 DOM 内模板的限制来工作-->
+
+  <table>
+    <tr>22</tr>
+  </table>
 </div>
 
+<!-- 全局组件 -->
 <div class="tem">
   {{msg}}
 </div>
@@ -48,7 +55,7 @@
       b(){
         this.$emit('bbb','第二个参数是子暴露给父的值')
       }
-    }
+    },
   });
 
   //创建一个组件需要的对象 局部注册时,组件第二个参数是个对象,可以用这个对象替代它
@@ -61,16 +68,16 @@
               </ul>`,
     //data使用函数返回值 运用闭包原理防止组件被多次调用时 该一发而动全身
     data:function () {
-    return {
-      cxp_p_msg: "这是模板里的数据",
-      count: 0,
-    }
-  },
+      return {
+        cxp_p_msg: "这是模板里的数据",
+        count: 0,
+      }
+    },
     methods:{
       a(){
         console.log(this.count++)
       }
-    }
+    },
   }
 
   new Vue({
@@ -92,6 +99,20 @@
       }
     },
   });
+  
+  // 混入 一个混入对象可以包含任意组件选项 一定要在实例之前定义
+  //   当组件使用混入对象时,所有混入对象的选项将被“混合”进入该组件本身的选项,
+  //   组件本身定义的选项会与minxin合并,引用类型内部会递归合并,发生冲突时组件数据优先
+  //   同名钩子函数将合并为一个数组,都将被调用,混入对象的钩子将在组件自身钩子之前调用
+  //   全局注册Vue.mixin({data:{}}) 的会影响每个之后创建的Vue实例,即使他们没在选项里写
+  var myMixin = { // 定义一个混入对象
+    data: function () {
+      return {
+        foo: '混入里的值',
+        msg:"a"
+      }
+    }
+  }
 
   // template模板(不推荐在vue实例中使用) 会把挂载的元素(.tem)关掉显示模板里的东西
   // el就是告诉template模板覆盖到哪个元素上去，没有el他就不会覆盖(模板内代码不生效)
@@ -100,27 +121,9 @@
     data:{
       msg: 'dd'
     },
-    template:'<div>{{msg}},已将原来的元素覆盖</div>',
-    xins: [myMixin], // 混入 里面放定义好的名字
+    template:'<div>{{msg}}{{foo}},已将原来的元素覆盖</div>',
+    mixins: [myMixin]
   })
-  
-  // 混入 一个混入对象可以包含任意组件选项 
-  //   当组件使用混入对象时,所有混入对象的选项将被“混合”进入该组件本身的选项,
-  //   组件本身定义的选项会与minxin合并,引用类型内部会递归合并,发生冲突时组件数据优先
-  //   同名钩子函数将合并为一个数组,都将被调用,混入对象的钩子将在组件自身钩子之前调用
-  //   全局注册Vue.mixin({data:{}}) 的会影响每个之后创建的Vue实例,即使他们没在选项里写
-  var myMixin = { // 定义一个混入对象
-    created: function () {
-      this.hello()
-    },
-    methods: {
-      hello: function () {
-        console.log('hello from mixin!')
-      }
-    }
-  }
-
-  var component = new Component() // => "hello from mixin!"
 </script>
 </body>
 </html>
