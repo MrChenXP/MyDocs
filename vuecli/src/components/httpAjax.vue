@@ -16,30 +16,42 @@ export default {
   methods:{
     // vue-resource 来请求,推荐用axios 
     getVueResource(){
-      this.$http.get("https://jsonplaceholder.typicode.com/todos/1")
-        .then((data)=>{
-              console.log(data)
-        })
-      // 也可直接请求本地文件,但要放在static下,axios也一样
+      // 也可直接请求本地文件,但要放在static下,axios也一样,正常情况下放接口就行
       this.$http.get("../../static/posts.json")
         .then((data)=>{
-              console.log(data)
+          console.log("vue-resource")
+          console.log(data)
         })
     },
-    // axios 
+    // axios /api/posts?userId=1
     getAxios(){
-      let _this = this;
-      axios.get('/api/posts?userId=1',{ // 这个使用了代理 参考config/index.js
-        params:{
-          method: 'all'
-        }}).then((res) => {
-          console.log(res)
-        }).catch((err) => console.log(err))
+      // 这个使用了代理 参考config/index.js ,{params:{method: ''}}
+      axios.get("https://jsonplaceholder.typicode.com/todos")
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      // axios.post("接口",{key:value}).then(()=>{}))
+    },
+    // fetch es6的一种请求方法
+    getFetch(){
+      // get
+      fetch("https://jsonplaceholder.typicode.com/todos")
+        .then( res =>{ return res.json() })
+        .then(todos =>{
+          console.log('fetch')
+          console.log(todos)
+        });
+      // post
+      // fetch("接口",{method:"POST",body:xxxx,headers:{"Content-type":"application/json"}})
     }
   },
   created(){
     this.getVueResource();
     this.getAxios()
+    this.getFetch()
   }
 }
 </script>

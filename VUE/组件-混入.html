@@ -13,10 +13,15 @@
   </cxp_p>
   <!-- 局部组件 -->
   <my-components></my-components>
-  <!-- is  用于动态组件且基于 DOM 内模板的限制来工作-->
-
+  <!-- is  用于动态组件且基于 DOM 内模板的限制来工作
+       keep-alive 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们 -->
   <table>
-    <tr>22</tr>
+    <!-- cxp_p即使放在table里,也可能无效,会被渲染到table外面 -->
+    <my-components></my-components>
+    <tr is="my-components"></tr>
+    <keep-alive>
+      <li>22</li>
+    </keep-alive>
   </table>
 </div>
 
@@ -34,7 +39,7 @@
     // 模板 最外层不能存在两个元素 必须有一个根节点
     //    slot 插槽,父传递给子的内容 无name代表default
     template: `<ol>
-                <li @click="a">这是组件上的内容{{count}}{{cxp_p_msg}}</li>
+                <li @click="a">这是全局组件上的内容{{count}}{{cxp_p_msg}}</li>
                 <li>这是父传给子的内容{{canshu}}</li>
                 <li @click='b'>子传个父一个点击事件,子向父传值</li>
                 <slot></slot>
@@ -63,7 +68,7 @@
     props: ['canShu'],
       //模板 最外层不能存在两个元素 必须有个根节点
       template: `<ul>
-                <li @click="a">这是组件上的内容{{count}}{{cxp_p_msg}}</li>
+                <li @click="a">这是局部组件上的内容{{count}}{{cxp_p_msg}}</li>
                 <li>这是组件上的内容{{canShu}}:{{canShu}}</li>
               </ul>`,
     //data使用函数返回值 运用闭包原理防止组件被多次调用时 该一发而动全身
@@ -115,7 +120,7 @@
   }
 
   // template模板(不推荐在vue实例中使用) 会把挂载的元素(.tem)关掉显示模板里的东西
-  // el就是告诉template模板覆盖到哪个元素上去，没有el他就不会覆盖(模板内代码不生效)
+  //   el就是告诉template模板覆盖到哪个元素上去，没有el他就不会覆盖(模板内代码不生效)
   let vTem = new Vue({
     el: '.tem',
     data:{
