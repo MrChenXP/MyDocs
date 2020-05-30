@@ -13,16 +13,19 @@
   </cxp_p>
   <!-- 局部组件 -->
   <my-components></my-components>
-  <!-- is  用于动态组件且基于 DOM 内模板的限制来工作
-       keep-alive 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们 -->
+  <!--is  用于动态组件且基于 DOM 内模板的限制来工作
+      component 渲染一个“元组件”为动态组件。依 is 的值，来决定哪个组件被渲染
+      keep-alive 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们
+      -->
   <table>
-    <!-- cxp_p即使放在table里,也可能无效,会被渲染到table外面 -->
-    <my-components></my-components>
+    <!-- my-components即使放在table里,也可能无效,会被渲染到table外面 -->
+    <my-components />
     <tr is="my-components"></tr>
-    <keep-alive>
-      <li>22</li>
-    </keep-alive>
   </table>
+  <keep-alive>
+    <component v-bind:is="dt"></component>
+  </keep-alive>
+
 </div>
 
 <!-- 全局组件 -->
@@ -93,6 +96,7 @@
         {name: "chen", age: 22},
         {name: "chen", age: 23},
       ],
+      dt:"my-components"
     },
     //局部组件 只有在当前vue实例(#app)里才能使用
     components:{

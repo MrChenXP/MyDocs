@@ -13,9 +13,8 @@ Vue.use(VueResource);  //安装 vue-resource
 Vue.config.productionTip = false;
 
 import axios from 'axios'
-axios.defaults.headers.common['token'] = 'token值' // 设置token值
-axios.defaults.headers.post['Content-type'] = 'application/json' // 设置请求头
-axios.defaults.headers.common['token'] = 'token值' // 设置token值
+//axios.defaults.headers.common['token'] = 'token值' // 设置token值
+// axios.defaults.headers.post['Content-type'] = 'application/json' // 设置请求头
 Vue.prototype.$axios = axios // 全局注册axios 组件内通过this.$axios.post("")使用
 
 // 注册为全局组件,这样每个页面都能直接通过<test></test>使用test组件,包扩App.vue

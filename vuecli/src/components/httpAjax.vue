@@ -1,12 +1,11 @@
 <!--template标签 相当于body标签 用来解析html标签-->
 <template>
   <div class="">
-    <div>接口来自jsonplaceholder网站</div>
+    <div>接口来自jsonplaceholder网站会有点慢</div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   data () {
     return {
@@ -23,17 +22,24 @@ export default {
           console.log(data)
         })
     },
-    // axios /api/posts?userId=1
+    // axios
     getAxios(){
       // 这个使用了代理 参考config/index.js ,{params:{method: ''}}
-      axios.get("https://jsonplaceholder.typicode.com/todos")
+      this.$axios.get("/api/todos/1")
         .then(function (response) {
+          console.log('axios get')
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
         });
-      // axios.post("接口",{key:value}).then(()=>{}))
+      this.$axios.post("https://jsonplaceholder.typicode.com/posts",
+        {
+          userId: '1'
+        }).then( (res)=>{
+          console.log('axios post')
+          console.log(res)
+        })
     },
     // fetch es6的一种请求方法
     getFetch(){

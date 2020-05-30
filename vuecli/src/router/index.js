@@ -6,6 +6,7 @@ import HelloWorld from '@/components/HelloWorld'  // 要先引入组件才能 �
 import tf from '@/components/test_footer'   // 此刻的a对应下面的component：
 import httpAjax from '@/components/httpAjax'
 
+
 Vue.use(Router); // 用use这个中间件使用这个路由
 
 export default new Router({ // 这里配置路由
