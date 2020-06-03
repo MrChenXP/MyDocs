@@ -5,7 +5,8 @@
 
     <div class="vux-srote">
       <button v-on:click="jian">-</button>
-      <span>{{$store.state.count}} 这里调用仓库的值</span>
+      <div>{{$store.state.count}}这里调用仓库state的值</div>
+      <div>{{$store.getters.countGetters}}这里调用仓库getters的值</div>
       <button v-on:click="jia">+</button>
     </div>
 
@@ -31,8 +32,8 @@
     name: 'HelloWorld',
     data() {
       return {
-        msg: this.$store.state.count,
-        A: this.$route.params.ii
+        msg: this.$store.state.count, // 拿到vuex的变量
+        A: this.$route.params.ii // 拿到url的参数
       }
     },
     // "test_footer":test_footer可以简写为test es6写法
@@ -42,10 +43,10 @@
         this.$router.push({path: '/httpAjax'+'?class_id=11'});
       },
       jia: function () {
-        this.$store.commit('jia');
+        this.$store.commit('jia'); // 使用vuex的方法
       },
       jian: function () {
-        this.$store.commit('jian');
+        this.$store.commit('jian'); // 使用vuex的方法
       },
       // bus事件 接受数据的组件是test_fotter 兄弟通过bus传值
       bus() {
@@ -64,9 +65,10 @@
     // beforeCreate(){
     //   alert('Vue实例创建前,vue实例中的el,data,data中的message都为undefined')
     // },
-    // created(){
-    //   alert("实例创建后,el还是undefined,而数据已经与data中的属性进行绑定")
-    // },
+    created(){
+      // alert("实例创建后,el还是undefined,而数据已经与data中的属性进行绑定")
+      console.log(process.env.VUE_APP_qjhjbl)
+    },
     // beforeMount(){
     //   alert("组件挂载前,页面未展示,还只是虚拟dom,完成了data和el数据初始化")
     // },

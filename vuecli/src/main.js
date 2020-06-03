@@ -4,10 +4,10 @@
 import Vue from 'vue' //引入vue
 import App from './App' //引入App.vue组件(浏览器不支持vue后缀，webpack会使用vue-louder把他变成对象)
 import router from './router' //默认index.js
-import VueResource from 'vue-resource' // 引入vue-resource
+import VueResource from 'vue-resource' // 引入vue-resource vue的以一种http方法
 
 import Vuex from 'vuex'; //引入vuex插件
-import store from './router/store'
+import store from './router/store' // 引入定义好的变量
 Vue.use(Vuex);  //安装 Vuex 这样就能在任意组件使用了,this.xxx就能用了
 Vue.use(VueResource);  //安装 vue-resource
 Vue.config.productionTip = false;
@@ -41,7 +41,7 @@ Vue.filter("glq",function(value){
 new Vue({ 
   el: '#app', // #app代表的是index.html中的#app 提供一个页面上已存在的DOM元素作为Vue实例挂载目标
   router, // 使用router 路由
-  store,//挂载store
+  store, // 挂载store数据
   components: { App },  // 创建一个模板 之前已经创建好了App对象
   template: '<App/>',   // 把模板<App />覆盖到#app上 可查看vue-组件文档
   //render 是vue模板最底层的，template模板也是调用render来实现的
