@@ -14,7 +14,7 @@
       <button @click="bus">触发bus,将msg传给兄弟</button>
     </div>
 
-    <!--components里用的时驼峰注册,vue-cli可以识别'-'这种命名方式 
+    <!--components里用的时驼峰注册,vue-cli可以识别'-'这种命名方式
         val是子组件的属性,父向子传值。如果传的是引用(Object,Function等),
           其中一个子组件更改了val值,另一个也会跟着更改val值
         testChange是子组件返回的一个事件,$event是子组件返回的值 -->
@@ -25,9 +25,11 @@
 
 <script>
   import Bus from '../assets/bus'
-  // 局部注册,只能在这个页面使用 
+  // 局部注册,只能在这个页面使用
   import testFooter from './test_footer.vue'
 
+  // 引入mapGetters,mapActions 才能在后面映射
+  import {mapGetters,mapActions} from 'vuex'
   export default {
     name: 'HelloWorld',
     data() {
@@ -43,7 +45,8 @@
         this.$router.push({path: '/httpAjax'+'?class_id=11'});
       },
       jia: function () {
-        this.$store.commit('jia'); // 使用vuex的方法
+        this.$store.commit('jia'); // 使用vuex的方法 mutations
+        // this.$store.dispatch('jiaActions') // 使用vuex的方法 actions
       },
       jian: function () {
         this.$store.commit('jian'); // 使用vuex的方法
@@ -60,6 +63,9 @@
       testChange(e){
         console.log(e)
       }
+    },
+    computed:{
+      // ....mapGetters([xxx,xxx]) // 将getters映射到组件 这样就不用$store来获取数据了
     },
     // 生命周期
     // beforeCreate(){
