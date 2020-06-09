@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块</title>
+</head>
+<body>
+<!-- 使用模块 type="module" 要放在服务器环境下-->
+<script type="module">
+    // import会自动提升到顶部,首先执行 所以不能放入某些条件判断语句
+    // import './module.js' // 不能去除'./',相当于引入一个文件
+    // import './module.js' // 哪怕引入多次,也只会导入一次
+
+    import {a as aa, bb} from './module.js' // a和bb是模块导出时定义的key as用来定义别名
+    import * as moduleAll from './module.js' // *引入所有的到moduleAll对象
+    // import defaultAll from './module.js' // 引入默认导出的key不用{}
+    import defaultAll,{c} from './module.js' // 默认导出和普通导出一起引入
+
+    // 动态引入 不会提升引入,所以可以放入条件判断语句
+    import('./module.js') // 返回值是个prommise对象,所以可以用then
+        .then(res=>{
+            console.log(res.d)
+        })
+        .catch(err=>{
+
+        })
+        
+    console.log(aa, bb)
+    console.log(moduleAll.bb)
+    console.log(defaultAll.a,c)
+</script>
+</body>
+</html>

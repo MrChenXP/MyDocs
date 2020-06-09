@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6对象</title>
+</head>
+<body>
+
+<script type="text/javascript">
+/**简介语法**/
+// 1.key,Value名字一样可只写一个
+// 2.函数属性,可以胜率function关键字,不建议使用箭头函数,this会指向定义时的对象
+let name = 'cxp';
+let obj = {
+    name, // 相当于name: name
+    showName(){ // showName: function(){}
+        return this.name;
+    },
+    showName2:()=>{
+        return this.name; // this指向了window
+    }
+}
+
+/**新增方法**/
+// Object.is() 比较两个值是否相等 
+// Object.assing() 合并对象(数组) 浅拷贝
+// Object.keys() 返回自身的键名数组
+// Object.entries() 返回自身的键值数组
+// Object.values() 返回自身的键值对数组
+Object.is(NaN,NaN) // true
+Object.is(+0,-0) // false 
+Object.assign(obj,{age: '2'}) // 会改变obj的值 给obj加新东西
+let obj2= Object.assign({},obj,{name:'xp',age: '2'}) // 新的对象 key相同,后覆盖前 obje2深拷贝
+
+</script>
+</body>
+</html>

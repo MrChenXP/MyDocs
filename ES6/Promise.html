@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+<body>
+<script type="text/javascript">
+/** Promise(承诺、许诺) **/ 
+// 作用:为了解决异步回调问题
+//   传统方式：回调函数、事件驱动
+// Promise.resolve('aa') 将现有的东西转成promise对象，而且是resolve（成功）状态
+// Promise.reject('aa') 将现有的东西转成promise对象，而且是reject（失败）状态
+// Promise.all([],then()) 将多个Promise实例,包装成一个新的Promise实例,必须保证全是resolve状态,否则报错
+// Promise.race([],then()) 将多个Promise实例,包装成一个新的Promise实例,只要有一个resolve状态就返回
+let a = 10
+let promise1 = new Promise(function(resolve,reject){
+    // resolve 成功调用
+    // reject 失败调用 
+    if(a==10){
+        resolve("成功了！")
+    }else{
+        reject("失败了！")
+    }
+})
+promise1.then(res=>{
+    console.log(res) // 成功调用
+},err=>{
+    console.log(err) // 失败调用
+})
+promise1.catch(err=>{ // 专门用来捕获错误的 第二个参数的别名
+    console.log(err)
+})
+
+let p1 = Promise.resolve('aaa'); // 等同于 new Promise(resolve=>{resolve("aaa")})
+let p2 = Promise.reject('aaa'); // 等同于 new Promise(reject=>{reject("aaa")})
+p1.then(res=>{
+    console.log(res)
+})
+
+let p3 = Promise.resolve('3')
+let p4 = Promise.resolve('4')
+Promise.all([p3,p4]).then(res=>{
+    console.log(res)
+})
+
+// 模拟ajax请求
+let status= 1
+let userlogin = (resolve,reject)=>{
+    setTimeout(() => { // 这里模拟ajax
+        if(status == 1){
+            resolve("用户登录成功,进行后续操作")
+        }else{
+            reject("登陆失败")
+        }
+    }, 2000);
+}
+let getUserInfo = (resolve,reject)=>{
+    setTimeout(() => { // 这里模拟ajax
+        if(status == 1){
+            resolve("获取用户信息成功,进行后续操作")
+        }else{
+            reject("获取失败")
+        }
+    }, 2000);
+}
+new Promise(userlogin).then(res=>{ // 这里模拟ajax结束后要进行的操作（回调）
+    console.log(res)
+    return new Promise(getUserInfo)
+}).then(res=>{
+    console.log(res)
+})
+</script>
+</body>
+</html>
