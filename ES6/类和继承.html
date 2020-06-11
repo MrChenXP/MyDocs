@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类和继承</title>
+</head>
+<body>
+    
+<script type="text/javascript">
+/** 类(class) **/
+// class关键字没有提升功能,es5函数方式function有提升功能
+// 类里面方法和属性之间不能加逗号
+// 定义方法不能加function
+// 类里面的this指向的是,当时创建类时的那个类
+let qj = "qjbl"
+class Person{ // typeof === function
+// let Person = class{ 这种也可以
+    constructor(name){ // 构造方法,只要调用new了就自动执行
+        this.name = name // 只能在这里定义类的属性
+        this.showName = this.showName.bind(this) // 给这个方法永久绑定this一直为这个类
+    }   
+    showName(){ 
+        return `名字是${this.name}`
+    }
+    qj(){ 
+        return `与全局变量不产生冲突`
+    }
+    [qj](){ // 这个案例说明了,key可以用表达式 如 qj+'aa'
+        return `这里的 qj 代表了那个全局变量的值,可使用['qj']来破解`
+    }
+    set age(val){ // 存值函数
+        console.log(`你设置了age，val=${val}`)
+    }
+    get age(){ // 取值函数
+        console.log(`你获取了age`)
+    }
+}
+let p1 = new Person("cxp")
+console.log(p1.showName())
+console.log(p1.qjbl()) // 也可这样使用 console.log( p1[qj]() )
+
+let {showName} = p1
+console.log(showName()) // 如果构造方法里面没有绑定this,这里就会显示name undefined
+
+p1.age = 12
+p1.age
+
+</script>
+</body>
+</html>
