@@ -15,8 +15,8 @@
 // 类里面的this指向的是,当时创建类时的那个类
 let qj = "qjbl"
 class Person{ // typeof === function
-// let Person = class{ 这种也可以
-    constructor(name){ // 构造方法,只要调用new了就自动执行
+// let Person = class{ 这种创建方式也可以
+    constructor(name){ // 构造方法,只要调用new了就一定会自动执行构造方法
         this.name = name // 只能在这里定义类的属性
         this.showName = this.showName.bind(this) // 给这个方法永久绑定this一直为这个类
     }   
@@ -29,11 +29,14 @@ class Person{ // typeof === function
     [qj](){ // 这个案例说明了,key可以用表达式 如 qj+'aa'
         return `这里的 qj 代表了那个全局变量的值,可使用['qj']来破解`
     }
-    set age(val){ // 存值函数
-        console.log(`你设置了age，val=${val}`)
+    set age(val){
+        console.log(`存值函数set,${val}`)
     }
-    get age(){ // 取值函数
-        console.log(`你获取了age`)
+    get age(){ 
+        console.log(`取值函数get ,age`)
+    }
+    static jtff(){ // 
+        return `静态方法static,类自己本身可以直接调用`
     }
 }
 let p1 = new Person("cxp")
@@ -42,10 +45,28 @@ console.log(p1.qjbl()) // 也可这样使用 console.log( p1[qj]() )
 
 let {showName} = p1
 console.log(showName()) // 如果构造方法里面没有绑定this,这里就会显示name undefined
+p1.age = 12 // 触发存值函数
+p1.age // 触发取值函数
+console.log(Person.jtff()) // 调用类的静态方法
 
-p1.age = 12
-p1.age
-
+// 继承 extends 
+// 同名key会覆盖父类同名key
+class Student extends Person{
+    constructor(name,avg){ // 子类的构造函数
+        super(name) // 执行父类的构造函数,必须执行这行,不然同名key会覆盖父类
+        this.avg = avg
+    }
+    showAvg(){
+        return `职业为${this.avg}`
+    }
+    showName(){
+        super.showName() // 执行父级的方法,不然同名key会覆盖父类
+        return `子类的showName`
+    }
+}
+let p2 = new Student('kty','idol')
+console.log(p2.showName()) //Student继承了Person,有父类的属性和方法
+console.log(p2.showAvg())
 </script>
 </body>
 </html>
