@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async-await </title>
+</head>
+<body>
+<script type="text/javascript">
+/** async **/
+// async它就是 Generator 函数的语法糖。表示这个函数有异步任务
+// await 表示后面的结果需要等待,可以是promise对象,也可以是其他数据类型
+// async返回的是一个promise对象,故也可以用他两个方法
+// 只要await语句后面promise状态变成reject,那么整个async函数会中断执行
+
+
+function timeout(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+async function asyncPrint(value, ms) {
+  await timeout(ms)
+  console.log(value) // 会等上面的await执行完,在执行这个
+}
+asyncPrint('hello world', 1000);
+
+
+</script>
+</body>
+</html>
