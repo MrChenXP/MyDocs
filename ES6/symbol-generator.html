@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>symbol-generator</title>
+</head>
+<body>
+<script type="text/javascript">
+/** symbol **/
+// 返回的是一个唯一的值 返回的是symbol基本数据类型
+let sym = Symbol('aaa') // 定义一个Symbol,不能加new
+let sym2 = Symbol('aaa')
+console.log(typeof sym) // symbol
+console.log(sym == sym2) // false 即使创建的是一样的,但symbol是唯一值,所以为false
+let obj = { // 可用来当key,防止后面的人改你写的对象时,出现同名key的问题
+    [sym]: "key为symbol类型的键值对1",
+    [sym2]: "key为symbol类型的键值对2",
+    a: 'this is a'
+}
+console.log(obj[sym])
+for(let item in obj){
+    console.log(item) // symbol类型的key,不会遍历出来
+}
+
+/** generator函数 **/
+// 生成器 解决异步,深度嵌套的问题 一般配合promise运用
+// 函数值时一个 generator对象
+// yield 一步语句,可以包含多条语句
+// return 最后一步,返回值
+// next() 执行一步语句 {value:返回值 done:是否执行完函数}
+// for...in...不可以便利generator对象 
+// for...of...可以,但return里的语句不会遍历
+// 解构只解构yield语句的值
+// ...扩展运算符,只扩展yield语句的值
+// Array.from()会将generator对象,yield里的值转换成数组
+function * gen(){
+    yield 'welcome'
+    yield 'to'
+    return 'china'
+}
+let g1 = gen() // 返回generator对象 {}
+let g2 = gen() 
+let g3 = gen() 
+console.log(g1.next()) // 执行第一步 {value:"welcome",done:false }
+console.log(g1.next()) // 执行第二步 {value:"to",done:false }
+console.log(g1.next()) // 执行第三步 {value:"china",done:true }
+console.log(g1.next()) // 没有语句可以执行了 {value:"undefined",done:true }
+
+for(let item in g2){ // for...in...不可以便利generator对象
+    console.log(item) // 进不了循环
+}
+for(let item of g3){ // for...of...可以便利generator对象
+    console.log(item) // 1.welcome 2.to return不会便利
+} 
+
+let [ga,gb] = gen() // ga:welcome gb:to
+console.log(...gen()) // welcome to
+console.log(Array.from(gen())) // ["welcome", "to"]
+</script>
+</body>
+</html>

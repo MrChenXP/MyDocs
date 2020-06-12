@@ -56,14 +56,16 @@
 //                        alert(n);       //虽不会报错，但不建议没声明直接使用
 
         /*数据类型*/
-                 //typeof 运算符有一个参数，即要检查的变量或值,返回对应数据类型的字符串值
-					alert(typeof (null));	//object
+                 //typeof 运算符有一个参数,即要检查的变量或值,返回对应数据类型的字符串值
+					alert(typeof (null));	// 返回object,但其实时null数据类型
 					alert(typeof (undefined));	//undefined
 					alert(typeof (true));	//boolean
 					alert(typeof (3));	//number
 					alert(typeof ('a'));	//string
 					alert(typeof (window));	//object
-					alert(typeof (function(){}));	//function
+					alert(typeof (function(){}));	// 返回function,但其实时Object数据类型\
+					alert(typeof Date);	// 返回function,但其实时Object数据类型
+					alert(typeof Array);	// 返回function,但其实时Object数据类型
 //                  Undefined 类型只有一个值，即 undefined。当声明的变量未初始化时，该变量的默认值是 undefined。
 //                      var m;
 //                      document.writeln(typeof m);         //undefined 未定义类型   没有声明变量、声明了变量但没有赋值、函数无返回值
@@ -94,7 +96,7 @@
 //                      变量与字符串、变量与变量要使用+来连接
 //                      n = "22";
 //                      document.writeln(typeof n);         //string    字符串类型
-//				    Object
+//				    Object (包括Array,Function,Date)
 //						在ECMAScript中其实就是一组数据和功能的集合
 //						var  m = new Object();
 //                  	document.writeln(typeof m);         //object    对象类型(若m=null，返回的也是object)
