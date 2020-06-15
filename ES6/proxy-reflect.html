@@ -8,17 +8,15 @@
 <body>
 <script type="text/javascript">
 /** proxy(代理) **/
-// Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，
+// Proxy 用于修改某些操作的默认行为,等同于在语言层面做出修改，
 //   所以属于一种“元编程”（meta programming），即对编程语言进行编程。
 // new Proxy(target,handler)  (被代理的对象,对代理所进行的操作),返回一个对象
-// get(目标对象,属性名,proxy实例本身) 拦截获取时的操作
+// get(目标对象,属性名,proxy实例本身)         拦截获取时的操作
 // set(目标对象,属性名,属性值, Proxy 实例本身) 拦截设置时的操作
-// deleteProperty(目标对象,属性名) 拦截delete操作
-// apply(目标对象,目标对象的上下文对象（this）,目标对象的参数数组) 拦截函数的调用、call和apply操作
-// has(目标对象,需查询的属性名。) 用来拦截HasProperty操作，即判断对象是否具有某个属性时，这个方法会生效。
+// deleteProperty(目标对象,属性名)            拦截delete操作
+// apply(目标对象,目标对象的上下文对象(this),目标对象的参数数组) 拦截函数的调用、call和apply操作
+// has(目标对象,需查询的属性名)  用来拦截HasProperty操作,即判断对象是否具有某个属性时,这个方法会生效
 // construct(目标对象,构造函数的参数对象,创造实例对象时，new命令作用的构造函数) 用于拦截new命令
-
-
 let obj1 = {
     name: 'kty'
 }
@@ -26,11 +24,43 @@ let obj1 = {
 let obj2 = new Proxy(obj1,{
     get(target, propKey){
         console.log("访问了属性")
-        return target[propKey] // 不给返回值,后面返回的时候,也没值,会undefined
+        return target[propKey] // 不给返回值,后面获取的时候,会没返回值
     },
-    set(){}
+    set(target,propKey,propVal){
+        if(propKey == "age"){
+            if(!Number.isInteger(propVal)){
+                throw new TypeError(`年龄必须整数`)
+            }
+        }
+        target[propKey] = propVal
+    }
 })
 console.log(obj2.name) // 一般把代理后的对象暴露给用户
+// obj2.age = 2.2 // 报错
+ 
+/** Reflect 反射 **/
+// 1.将Object对象的一些明显属于语言内部的方法,放到Reflect对象上
+//   通过Reflect对象可以直接拿到语言内部的属性和方法
+// 2.某些Object方法的返回结果，让其变得更合理
+// 3.让Object操作都变成函数行为
+// 4.Reflect对象的方法与Proxy对象的方法一一对应
+// Reflect.apply(要调用的函数,this指向,参数数组) 用于绑定this对象后执行给定函数
+// Reflect.construct
+// Reflect.get
+// Reflect.set
+// Reflect.defineProperty
+// Reflect.deleteProperty
+// Reflect.has
+
+function fn1(a,b){
+    return a+b
+}
+let fn2 = new Proxy(fn1,{
+    apply(tar,con,args){ // 检测函数调用 tar:fn1 con: args:2,3
+        return Reflect.apply(tar,this,args) + '已被拦截'
+    }
+})
+console.log(fn2(2,3))
 </script>
 </body>
 </html>
