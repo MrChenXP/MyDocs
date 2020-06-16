@@ -8,10 +8,9 @@
 <body>
 <script type="text/javascript">
 /** Promise(承诺、许诺) **/ 
-// 作用:为了解决异步回调问题
-//   传统方式：回调函数、事件驱动
-// Promise.resolve('aa') 将现有的东西转成promise对象，而且是resolve（成功）状态
-// Promise.reject('aa') 将现有的东西转成promise对象，而且是reject（失败）状态
+// 就是一个容器,里面保存着某个未来才会结束的事件
+// Promise.resolve('aa')  将现有的东西转成promise对象，而且是resolve（成功）状态
+// Promise.reject('aa')   将现有的东西转成promise对象，而且是reject（失败）状态
 // Promise.all([],then()) 将多个Promise实例,包装成一个新的Promise实例,必须保证全是resolve状态,否则报错
 // Promise.race([],then()) 将多个Promise实例,包装成一个新的Promise实例,只要有一个resolve状态就返回
 let a = 10

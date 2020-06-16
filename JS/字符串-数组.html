@@ -7,82 +7,82 @@
 </head>
 <body>
 <script type="text/javascript">
-    /*字符串
-    *   用于存储和处理文本,字符串就是用一对两引号或单引号包裹的字符*/
-    //          字符串的索引从 0 开始，这意味着第一个字符索引值为 [0],第二个为 [1], 以此类推。
-    //          ECMAScript中字符串时不可变的，改变某个变量保存的字符串，首先要销毁原来的字符串，然后在用一个包含新值的字符串填充变量
-    //                var str = "ab";     //自面量方式，不能加属性和方法
-    //                var str1 = new String("abcd");      //对象方式，可以给变量加属性和方法
-    //                str.aa = "123";
-    //                str1.aa = "123";
-    //                document.writeln(str.aa);       //undefined     str是变量不是对象，不能增加属性和方法
-    //                document.writeln(str1.aa);      //123
-    //          特殊字符（转义字符）用与js代码中
-    //                \' 单引号     \" 双引号     \\	反斜杠     \n 换行  \r 回车  \t tab(制表符)    \b 	退格符     \f 换页符
-    //                  document.writeln('"这是一个字符串"');      //输出双引号可以用单引号包裹
-    //                  document.writeln("\"这是一个\\字符串\"");    //可用反斜杠转义引号问题
-    //          原始值字符串，如 "John", 没有属性和方法(因为他们不是对象)。
-    //          原始值可以使用 JavaScript 的属性和方法，因为 JavaScript 在执行方法和属性时可以把原始值当作对象。
-    //          只要引用了字符串的属性，Javascript就会将字符串通过调用new String(s)的方式转换成对象，这个对象继承了字符串的方法，
-    //              并被用来处理属性的引用。一旦属性引用结束，这个新建的对象就会销毁。
-    //          属性	            注意
-    //          constructor	    返回创建字符串属性的函数
-    //          length	        返回字符串的长度
-    //          prototype	        允许您向对象添加属性和方法
-    //                document.writeln(str.constructor);      //function String() { [native code] }
-    //                document.writeln(str.length);      //2
-    //                function employee(name)     //创建一个构造函数
-    //                {                    this.name=name;                }
-    //                var bill=new employee("Bill Gates");        //定义一个名为bill的employee对像
-    //                employee.prototype.salary=null;         //给employee添加一个属性初始化为null
-    //                bill.salary=20000;          //给属性赋值
-    //                document.write(bill.salary);        //应用属性
-    //          方法
-    //          charAt(index)	                    返回在指定位置的字符。index从0开始
-    //          substr(起始位置, 截取长度)	        从起始索引号提取字符串中指定数目的字符
-    //          substring(起始位置，结束位置)	    提取字符串中两个指定的索引号之间的字符(包括起始位置，不包括结束位置)初始值不可以为负值
-    //          slice(起始位置，结束位置)	        提取字符串的片断，并在新的字符串中返回被提取的部分,初始值可以为负值。
-    //          concat(子字符串,……)	                连接字符串。类似于用加号
-    //          indexOf(子字符串，起始位置)	        检索字符串。如果存在，返回首字符的位置，否则返回-1
-    //          lastIndexOf(子字符串,起始位置)	    从后向前搜索字符串。
-    //          replace(替换的子字符串，新字符串)	    替换与正则表达式匹配的子串。默认只替换一次
-    //          split(分割符)	                    把字符串分割为字符串数组。不存在分割符就返回原字符串
-    //          toLowerCase()	                    把字符串转换为小写。
-    //          toUpperCase()	                    把字符串转换为大写。
-    //          trim()                              返回去除字符串首尾空格后的字符串
-    //          trimLeft()                          去除字符串首空格
-    //          trimRight                           去除字符串尾空格
-    //          charCodeAt(下标)	                返回指定索引位置字符的 ASCII码
-    //          fromCharCode()	                    将ASCII码转换为字符串
-    //			match()					            找到一个或多个正则表达式的匹配 返回指定的值，而不是字符串的位置
-    //          search()	                        检索与正则表达式相匹配的值,返回第一个与其相匹配的子串的起始位置,否则返回-1，大小写敏感
-    //				var str = "This Is a String type ", str1 = "15:25:30";
-    //				document.writeln(str.length);       //22
-    //                document.writeln(str.charAt(2));        //i
-    //                document.writeln(str[2]);        //i
-    //                document.writeln(str.substr(1,3));        //his
-    //                document.writeln(str.substring(2,6));        //is i
-    //                document.writeln(str.slice(0,2));        //th
-    //                document.writeln(str.slice(10));        //string type     当没有结束位置时，自动截取到最后一个字符
-    //                document.writeln(str.slice(-4));        //type     负数位置从右往左数（从-1开始）
-    //                document.writeln(str.concat("字符串",str1));        //参数可以放多个，变量|字符串
-    //                document.writeln(str.indexOf("a"));        //8
-    //                document.writeln(str.indexOf("a", 9));         //-1
-    //                document.writeln(str.lastIndexOf("type"));         //17
-    //                document.writeln(str.lastIndexOf("type",9));         //-1
-    //                document.writeln(str.replace("type",str1));         //this is a string 15:25:30
-    //                document.writeln(str1.split(":"));         //[15,25,30]
-    //                document.writeln(str.toUpperCase());           //THIS IS A STRING TYPE
-    //                document.writeln(str.toLowerCase());           //this is a string type
-    //                document.writeln(str.trim().length);           //this is a string type 21
-    //                document.writeln('df'.charCodeAt(1));           //f的ascii码为102
-    //                document.writeln(String.fromCharCode(47,56,102));           //this is a string type
-    //                document.writeln(str.match("Stri"));           //Stri
-    //                document.writeln(str.search("String"));           //10
+/* 字符串 
+ * 用于存储和处理文本,字符串就是用一对两引号或单引号包裹的字符 */
+//          字符串的索引从 0 开始，这意味着第一个字符索引值为 [0],第二个为 [1], 以此类推。
+//          ECMAScript中字符串时不可变的，改变某个变量保存的字符串，首先要销毁原来的字符串，然后在用一个包含新值的字符串填充变量
+//                var str = "ab";     //自面量方式，不能加属性和方法
+//                var str1 = new String("abcd");      //对象方式，可以给变量加属性和方法
+//                str.aa = "123";
+//                str1.aa = "123";
+//                document.writeln(str.aa);       //undefined     str是变量不是对象，不能增加属性和方法
+//                document.writeln(str1.aa);      //123
+//          特殊字符（转义字符）用与js代码中
+//                \' 单引号     \" 双引号     \\	反斜杠     \n 换行  \r 回车  \t tab(制表符)    \b 	退格符     \f 换页符
+//                  document.writeln('"这是一个字符串"');      //输出双引号可以用单引号包裹
+//                  document.writeln("\"这是一个\\字符串\"");    //可用反斜杠转义引号问题
+//          原始值字符串，如 "John", 没有属性和方法(因为他们不是对象)。
+//          原始值可以使用 JavaScript 的属性和方法，因为 JavaScript 在执行方法和属性时可以把原始值当作对象。
+//          只要引用了字符串的属性，Javascript就会将字符串通过调用new String(s)的方式转换成对象，这个对象继承了字符串的方法，
+//              并被用来处理属性的引用。一旦属性引用结束，这个新建的对象就会销毁。
+//          属性	            注意
+//          constructor	    返回创建字符串属性的函数
+//          length	        返回字符串的长度
+//          prototype	        允许您向对象添加属性和方法
+//                document.writeln(str.constructor);      //function String() { [native code] }
+//                document.writeln(str.length);      //2
+//                function employee(name)     //创建一个构造函数
+//                {                    this.name=name;                }
+//                var bill=new employee("Bill Gates");        //定义一个名为bill的employee对像
+//                employee.prototype.salary=null;         //给employee添加一个属性初始化为null
+//                bill.salary=20000;          //给属性赋值
+//                document.write(bill.salary);        //应用属性
+//          方法
+//          charAt(index)	                    返回在指定位置的字符。index从0开始
+//          substr(起始位置, 截取长度)	        从起始索引号提取字符串中指定数目的字符
+//          substring(起始位置，结束位置)	    提取字符串中两个指定的索引号之间的字符(包括起始位置，不包括结束位置)初始值不可以为负值
+//          slice(起始位置，结束位置)	        提取字符串的片断，并在新的字符串中返回被提取的部分,初始值可以为负值。
+//          concat(子字符串,……)	                连接字符串。类似于用加号
+//          indexOf(子字符串，起始位置)	        检索字符串。如果存在，返回首字符的位置，否则返回-1
+//          lastIndexOf(子字符串,起始位置)	    从后向前搜索字符串。
+//          replace(替换的子字符串，新字符串)	    替换与正则表达式匹配的子串。默认只替换一次
+//          split(分割符)	                    把字符串分割为字符串数组。不存在分割符就返回原字符串
+//          toLowerCase()	                    把字符串转换为小写。
+//          toUpperCase()	                    把字符串转换为大写。
+//          trim()                              返回去除字符串首尾空格后的字符串
+//          trimLeft()                          去除字符串首空格
+//          trimRight                           去除字符串尾空格
+//          charCodeAt(下标)	                返回指定索引位置字符的 ASCII码
+//          fromCharCode()	                    将ASCII码转换为字符串
+//			match()					            找到一个或多个正则表达式的匹配 返回指定的值，而不是字符串的位置
+//          search()	                        检索与正则表达式相匹配的值,返回第一个与其相匹配的子串的起始位置,否则返回-1，大小写敏感
+//				var str = "This Is a String type ", str1 = "15:25:30";
+//				document.writeln(str.length);       //22
+//                document.writeln(str.charAt(2));        //i
+//                document.writeln(str[2]);        //i
+//                document.writeln(str.substr(1,3));        //his
+//                document.writeln(str.substring(2,6));        //is i
+//                document.writeln(str.slice(0,2));        //th
+//                document.writeln(str.slice(10));        //string type     当没有结束位置时，自动截取到最后一个字符
+//                document.writeln(str.slice(-4));        //type     负数位置从右往左数（从-1开始）
+//                document.writeln(str.concat("字符串",str1));        //参数可以放多个，变量|字符串
+//                document.writeln(str.indexOf("a"));        //8
+//                document.writeln(str.indexOf("a", 9));         //-1
+//                document.writeln(str.lastIndexOf("type"));         //17
+//                document.writeln(str.lastIndexOf("type",9));         //-1
+//                document.writeln(str.replace("type",str1));         //this is a string 15:25:30
+//                document.writeln(str1.split(":"));         //[15,25,30]
+//                document.writeln(str.toUpperCase());           //THIS IS A STRING TYPE
+//                document.writeln(str.toLowerCase());           //this is a string type
+//                document.writeln(str.trim().length);           //this is a string type 21
+//                document.writeln('df'.charCodeAt(1));           //f的ascii码为102
+//                document.writeln(String.fromCharCode(47,56,102));           //this is a string type
+//                document.writeln(str.match("Stri"));           //Stri
+//                document.writeln(str.search("String"));           //10
 
-    /*数组
-    *   使用单独的变量名来存储一系列的值*/
-    //数组的声明
+/*数组
+*   使用单独的变量名来存储一系列的值*/
+//数组的声明
 //        var arr = [12, 33, 55, 32, 1];     // 字面量方式
 //        var arr1 = new Array(33, 33, 1, 36, 8);    //对象方式
 //        var arr2 = new Array(3); // [ , , ]     当参数只有一个且是Number类型数字，声明的是数组的长度，否则是往数组存入此值
@@ -131,7 +131,8 @@
 //                unshift()	    向数组的开头添加一个或更多元素，并返回新的长度。
 //                shift()	    删除并返回数组的第一个元素
 //                reverse()	    颠倒数组中元素的顺序。
-//                splice(起始位置, 删除元素长度，增加元素……)	删除元素，并向数组添加新元素。
+//                splice(起始位置, 删除元素长度，增加元素……)	删除元素，并向数组添加新元素
+//                sort(比较函数)  对数组的元素进行排序,无参数,按编码排序。否则按比较函数排序    返回值,对数组的引用
 //                  document.writeln(arr.push(10) + ' ' +arr.push(arr1));      //7 15
 //                  document.writeln(arr.pop());      //a,b,c 之前把arr1添加进去了
 //                  document.writeln(arr.unshift(arr1));      //8
@@ -146,6 +147,9 @@
 //                slice(起始位置，结束位置)	从某个已有的数组返回选定的元素
 //                indexOf()	                搜索数组中的元素，并返回它所在的位置。
 //                lastIndexOf()         	返回一个指定的字符串值最后出现的位置，在一个字符串中的指定位置从后向前搜索。
+//                arr.reduce(比较函数,初始值) 数组中的每个值(从左到右)开始缩减,最终计算为一个值
+//                  比较函数(初始值,或者计算结束后的返回值 当前元素 当前元素的索引 当前元素所属的数组对象)
+//                arr.map(处理函数) 结果是该数组中的每个元素都调用一次提供的函数后的返回值
 //                  document.writeln('<br>'+arr.concat(arr1),'b');  //10,94,5,87,45,23,12,a,b,cb
 //                  document.writeln(typeof (arr + arr1));       //把数组拼接转换成字符串，不能合并数组
 //                  document.writeln(arr.join(":"));       //10:94:5:87:45:23:12
