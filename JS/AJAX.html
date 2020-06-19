@@ -15,12 +15,10 @@
 //   AJAX的工作原理相当于在用户和服务器之间加了—个中间层(AJAX引擎)，使用户操作与服务器响应异步化
 // 创建XMLHttpRequest对象
   let xmlhttp;
-  if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
+  if (window.XMLHttpRequest) { // 代码适应IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp = new XMLHttpRequest();
   } else {
-    // code for IE6, IE5
-    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); // 代码适应IE6, IE5
   }
 // 属性
 //   onreadystatechange  存储函数(或函数名),每当readyState的属性改变时,就会调用该函数 用此属性实现响应

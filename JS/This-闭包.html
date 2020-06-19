@@ -19,114 +19,112 @@
 
 
 <script type="text/javascript">
-/*闭包
-      闭包的步骤:
-      1、父函数里面嵌套一个子函数        2、子函数里使用父函数的局部变量或者参数
-      3、在父函数里返回子函数的引用        4、在父函数外用一个变量来接收子函数且调用*/
-  //      一般情况下，函数执行完毕后，函数内的局部变量便会被回收。但是在闭包的情况下，函数执行完毕后，闭包会捕捉到局部变量（和参数），继续占用内存
-  //      如果一个函数内部又定义了一个内部函数，并将该函数作为返回值返回或者存储在某个对象的属性里，这时就会有一个外部引用指向这个嵌套的函数。
-  //      闭包的案例（经典面试题）
-  //            function greet(who) {   //外部函数
-  //                var i = 0; //外部函数的局部变量
-  //                return function () {    //返回 内部函数
-  //                    console.log(++i);  //引用外部函数的局部变量
-  //                    return 'Hello ' + who + '!';    //返回 局部变量
-  //                };
-  //            }
-  //            var greeting = greet('World');
-  //            console.log(typeof greeting); //function
-  //            console.log(typeof greeting()); //string  i=1
-  //            console.log(greeting()); //Hello World!  i=2
-  //            console.log(greeting("Universe")); //Hello World!  i=3输出不是 Hello Universe. world 被闭包封闭保存了起来
-  //            console.log(greet()());   //i=4 hello world!
-  //    闭包实现累加（变量驻留内存）
-  //            function showP(){
-  //                var num = 10;
-  //                return function (){
-  //                    num ++;             //被闭包使用的局部变量或参数不被回收,一直驻留在内存中
-  //                    document.writeln(num);
-  //                };
-  //            }
-  //            showP()中的var num=0只执行了一遍，num被返回，驻留在内存中，一直等于上次调用的值，每次执行fn1，num就+1
-  //            var fn1 = showP(), fn2 = showP();      //闭包：局部变量或者参数被函数外的变量使用时，就形成闭包，外部变量之间互不影响
-  //            fn1();      //11
-  //            fn1();      //12
-  //            fn2();      //11
-  //            fn2();      //12
-  //    fn1 = null;     // 把变量赋值为Null时，就不再使用函数的引用（闭包），系统会自动回收使用的局部变量或参数
-  //            fn1();      //报错    Uncaught TypeError: fn1 is not a function
-  //                var array = [];
-  //                function abc() {
-  //                    var foo = function(){}
-  //                    array.push(foo);    //给array添加元素（一个空函数）
-  //                    return foo; //返回foo函数
-  //                }
-  //                for(var i = 0 ; i < 10000; i ++){
-  //                        abc();  //一万次abc()执行所产生的同一个逻辑的闭包的地址并不相同,好处就是可以以工厂模式产生函数以备使用，
-  //                                // 然而如果你的稍有不慎将闭包当做常态逻辑使用，就不可避免的会造成内存垃圾。
-  //                }
-  //                alert(array[0] == array[1]);    //false
+/*闭包*/
+//  闭包的步骤:
+//  1、父函数里面嵌套一个子函数        2、子函数里使用父函数的局部变量或者参数
+//  3、在父函数里返回子函数的引用        4、在父函数外用一个变量来接收子函数且调用
+//    一般情况下，函数执行完毕后，函数内的局部变量便会被回收。但是在闭包的情况下，函数执行完毕后，闭包会捕捉到局部变量（和参数），继续占用内存
+//    如果一个函数内部又定义了一个内部函数，并将该函数作为返回值返回或者存储在某个对象的属性里，这时就会有一个外部引用指向这个嵌套的函数。
+//      闭包的案例（经典面试题）
+//            function greet(who) {   //外部函数
+//                var i = 0; //外部函数的局部变量
+//                return function () {    //返回 内部函数
+//                    console.log(++i);  //引用外部函数的局部变量
+//                    return 'Hello ' + who + '!';    //返回 局部变量
+//                };
+//            }
+//            var greeting = greet('World');
+//            console.log(typeof greeting); //function
+//            console.log(typeof greeting()); //string  i=1
+//            console.log(greeting()); //Hello World!  i=2
+//            console.log(greeting("Universe")); //Hello World!  i=3输出不是 Hello Universe. world 被闭包封闭保存了起来
+//            console.log(greet()());   //i=4 hello world!
+//  闭包实现累加（变量驻留内存）
+//            function showP(){
+//                var num = 10;
+//                return function (){
+//                    num ++;             //被闭包使用的局部变量或参数不被回收,一直驻留在内存中
+//                    document.writeln(num);
+//                };
+//            }
+//            showP()中的var num=0只执行了一遍，num被返回，驻留在内存中，一直等于上次调用的值，每次执行fn1，num就+1
+//            var fn1 = showP(), fn2 = showP();      //闭包：局部变量或者参数被函数外的变量使用时，就形成闭包，外部变量之间互不影响
+//            fn1();      //11
+//            fn1();      //12
+//            fn2();      //11
+//            fn2();      //12
+//            fn1 = null;     // 把变量赋值为Null时，就不再使用函数的引用（闭包），系统会自动回收使用的局部变量或参数
+//            fn1();      //报错    Uncaught TypeError: fn1 is not a function
+//                var array = [];
+//                function abc() {
+//                    var foo = function(){}
+//                    array.push(foo);    //给array添加元素（一个空函数）
+//                    return foo; //返回foo函数
+//                }
+//                for(var i = 0 ; i < 10000; i ++){
+//                        abc();  //一万次abc()执行所产生的同一个逻辑的闭包的地址并不相同,好处就是可以以工厂模式产生函数以备使用，
+//                                // 然而如果你的稍有不慎将闭包当做常态逻辑使用，就不可避免的会造成内存垃圾。
+//                }
+//                alert(array[0] == array[1]);    //false
 
 /*this*/
-  //this 指向
-  //  var oBtn = document.querySelector("button");
-  //  oBtn.onclick = function () {      //事件处理函数赋值给谁this就指向谁
-  //    console.log(this);    //指向oBtn
-  //  };
-  //  function show() {      // 全局函数会转变成window对象的方法
-  //    console.log(this);   //window
-  //  }
-  //  show();
-  //  oBtn.onclick = function () {
-  //    console.log(this);        //指向oBtn
-  //    function sub() {
-  //      console.log(this);    //全局函数 指向window
-  //    }
-  //
-  //    sub();
-  //  };
+//  this的指向
+//  1 普通函数里的this是指向window
+//  1.1 在函数（普通函数、事件处理函数）里嵌套一个子函数，子函数里this指向window
+//  1.2 attachEvent绑定事件处理函数里this是指向window
+//  2 构造函数,this指向新创建的对象
+//  2.1 DOM方式或标签属性方式的事件处理函数里this是指向绑定的对象
+//  2.2 addEventListener绑定事件处理函数里this是指向绑定的对象
+//  3.方法,this指向调用该方法的对象
+//  改变this的指向
+//    函数调用时改变this的指向
+//      函数名.call("函数里this的指向对象", 实参……)
+//      函数名.apply("函数里this的指向对象", [实参……])
+//    函数定义时改变this的指向
+//      函数名.bind("函数里this的指向对象")(实参……)
+//this 指向
+//  var oBtn = document.querySelector("button");
+//  oBtn.onclick = function () {      //事件处理函数赋值给谁this就指向谁
+//    console.log(this);    //指向oBtn
+//  };
+//  function show() {      // 全局函数会转变成window对象的方法
+//    console.log(this);   //window
+//  }
+//  show();
+//  oBtn.onclick = function () {
+//    console.log(this);        //指向oBtn
+//    function sub() {
+//      console.log(this);    //全局函数 指向window
+//    }
+//
+//    sub();
+//  };
 
-  //改变this的指向
-    function show(a, b, c) {
-      console.log("this = " + this + "\na = " + a + "\nb = " + b + "\nc = " + c);
-    }
-  //函数调用时改变this的指向
-  //  函数名.call("函数里this的指向对象", 实参……)  可以传入多个参数 将数组变成一个字符串传入(一次性)
-  //  函数名.apply(同上) 只能传入两个参数,第二个参数常以数组传入  将数组变成一个字符串传入(一次性)
-  //  show.call(document, 1, 2);  // a=1 b=2 c=undefined
-  //  show.apply(document, [1, 2,3]);// a=1 b=2 c=3
-  //  call apply因为接受的参数不同而造成结果不同
-  //    var arr = [12, 2, 3, 6, 8, 9, 4];
-  //    function sum() {
-  //      console.log(arguments);  //12,2,3,6,8,9,4
-  //      var result = 0;
-  //      for (var i = 0, len = arguments.length; i < len; i++) {
-  //        result += arguments[i];
-  //      }
-  //      return result;
-  //    }
-  //    console.log(sum.apply(null, arr)); //44
-  //    console.log(sum.call(null, arr)); //012,2,3,6,8,9,4
-  //函数定义时改变this的指向
-  //  函数名.bind("函数里this的指向对象")(参数) bind()会创建一新的函数,称绑定函数,新函数在this环境下调用
-  //  var show2 = show.bind(document)(1, 2);      //高级浏览器
-
-  //---------------------------总结-------------------------------
-  //        this的指向
-  //        1、全局函数里的this是指向window
-  //        2、DOM方式或标签属性方式的事件处理函数里this是指向绑定的对象
-  //        3、在函数（普通函数、事件处理函数）里嵌套一个子函数，子函数里this指向window
-  //        4、addEventListener绑定事件处理函数里this是指向绑定的对象
-  //        5、attachEvent绑定事件处理函数里this是指向window
-  //        改变this的指向
-  //          函数调用时改变this的指向
-  //              函数名.call("函数里this的指向对象", 实参……)
-  //              函数名.apply("函数里this的指向对象", [实参……])
-  //          函数定义时改变this的指向
-  //              函数名.bind("函数里this的指向对象")(实参……)
+//改变this的指向
+  function show(a, b, c) {
+    console.log("this = " + this + "\na = " + a + "\nb = " + b + "\nc = " + c);
+  }
+//函数调用时改变this的指向
+//  函数名.call("函数里this的指向对象", 实参……)  可以传入多个参数 将数组变成一个字符串传入(一次性)
+//  函数名.apply(同上) 只能传入两个参数,第二个参数常以数组传入  将数组变成一个字符串传入(一次性)
+//  show.call(document, 1, 2);  // a=1 b=2 c=undefined
+//  show.apply(document, [1, 2,3]);// a=1 b=2 c=3
+//  call apply因为接受的参数不同而造成结果不同
+//    var arr = [12, 2, 3, 6, 8, 9, 4];
+//    function sum() {
+//      console.log(arguments);  //12,2,3,6,8,9,4
+//      var result = 0;
+//      for (var i = 0, len = arguments.length; i < len; i++) {
+//        result += arguments[i];
+//      }
+//      return result;
+//    }
+//    console.log(sum.apply(null, arr)); //44
+//    console.log(sum.call(null, arr)); //012,2,3,6,8,9,4
+//函数定义时改变this的指向
+//  函数名.bind("函数里this的指向对象")(参数) bind()会创建一新的函数,称绑定函数,新函数在this环境下调用
+//  var show2 = show.bind(document)(1, 2);      //高级浏览器
 </script>
-
-
 <script>
 //  var aLi = document.getElementsByTagName("li");      //元素集合（伪数组）
 //  for (var i = 0, len = aLi.length; i < len; i++) { //遍历出aLi的属性（键值），即每个li

@@ -81,7 +81,17 @@
 
 /** 作用域 **/
 //作用域就是变量与函数的可访问范围，作用域控制着变量与函数的可见性和生命周期。
-//    用var和function声明的会被提升
+//    用var和function声明的会被提升 函数层级>arguments>var
+//      console.log(a);  // function
+//      function a(){};
+//      var a = 10;
+//      console.log(a); //10
+//      等同于
+//      function a(){}
+//      var a // 与函数生声明重名,被忽略
+//      console.log(a)
+//      a =10
+//      console.log(a)
 //    全局作用域（Global Scope）：在代码中任何地方都能访问到的对象拥有全局作用域
 //        拥有全局作用域的情形
 //          1.最外层函数和在最外层函数外定义的变量拥有全局作用域
@@ -107,7 +117,6 @@
 //                alert(blo);//jessica     全局属性（变量）
 //                alert(aut);//脚本错误
 //          3.所有window对象的属性拥有全局作用域例。如window.name、window.location
-
 //    局部作用域：只在固定的代码片段内可访问到，最常见的的就是在函数内部，可称为函数作用域
 //      函数体内的变量,函数声明（var声明的变量）会提前到函数体顶部,赋为undefined，同时变量初始化还在原来位置
 //      变量取值是就近原则
