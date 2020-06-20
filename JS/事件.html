@@ -188,6 +188,11 @@
 //    console.log(oEvent.keyCode, oEvent.key); };  //keyCode 返回键盘按键的键码   key返回键盘按键的键名
 //  document.onkeyup = function(){ console.log("按键被松开");};
 //  document.onkeypress = function(){ console.log("按键被按下并松开");};
+
+// 浏览器事件
+// onhashchange 监听hash变化的，但可以被利用来做客户端前进和后退事件的监听
+// onpopstate 点击浏览器后退按钮或js调用history.back都会触发,不仅可以支持hash,非hash的同源url也支持
+
 </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ch">
 <head>
     <meta charset="UTF-8">
     <title>BOM</title>
@@ -86,16 +86,18 @@
 //         };
 //
 /** history 存放浏览器当前窗口的的访问历史**/
-//     历史记录以栈（FIFO）的形式保存。页面前进则入栈，页面返回则出栈。
-//     它是一个只读对象，为了保护用户的隐私，JavaScript在获取这个对象时会受到限制。
-//          History对象不允许未授权代码访问会话历史(session history)中的其他页面地址，
-//          但可以导航到其他会话历史指向的页面。未授权代码无法清除history,也不能禁止后退/前进功能
-//     window.history.go(-1); //访问浏览器窗口的历史,负为后退,正为前进,0页面刷新
-//         或一个字符串，字符串必须是局部或完整的URL，该函数会去匹配字符串的第一个URL
-//         参数对应的history对象里没页面,页面不发生变化
-//     window.history.back(); //同上,前往上一页，无参数
-//     window.history.forward(); //同上，前往下一页,无参数
-//         let whl = window.history.length; //可以查看历史中的页面数（history对象中存储的页面数）
+//  历史记录以栈(FIFO)的形式保存.页面前进则入栈,页面返回则出栈。
+//  它是一个只读对象,为了保护用户的隐私,JavaScript在获取这个对象时会受到限制。
+//    History对象不允许未授权代码访问会话历史(session history)中的其他页面地址，
+//    但可以导航到其他会话历史指向的页面。未授权代码无法清除history,也不能禁止后退/前进功能
+//  window.history.go(-1); //访问浏览器窗口的历史,负为后退,正为前进,0页面刷新
+//    数字或一个字符串,字符串必须是局部或完整的URL，该函数会去匹配字符串的第一个URL
+//    参数对应的history对象里没页面,页面不发生变化
+//  window.history.back(); //同上,前往上一页，无参数
+//  window.history.forward(); //同上，前往下一页,无参数
+//    let whl = window.history.length; //可以查看历史中的页面数（history对象中存储的页面数）
+//  pushState() 是往history对象里添加一个新的历史记录，即压栈 HTML5
+//  replaceState() 是替换history对象中的当前历史记录 HTML5
 //
 /** location 用于获得当前页面的地址 (URL)信息、页面重定向等场景**/
 //     location.href //设置或读取当前页面的完整URL，如http://www.somewhere.com/pictures/index.htm

@@ -7,7 +7,7 @@
 	<body>
 <script type="text/javascript">
 // HTTP Cookie 是服务器发送到浏览器并保存在本地的一块数据,它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上    
-//   特征 1、有同源策略（同一协议、同一域名、同一端口）的限制 2、有大小限制（4k左右、20-50条 3、有过期时间限制</p>
+//   特征 1、有同源策略(同一协议、同一域名、同一端口)的限制 2、有大小限制(4k左右、20-50条) 3、有过期时间限制
 //   创建Cookie document.cookie
 //      当服务器收到HTTP请求时,服务器可以在响应头里面添加一个Set-Cookie选项.浏览器收到响应后通常会保存下Cookie,
 //      之后对该服务器每一次请求中都通过Cookie请求头部将Cookie信息发送给服务器.另外,Cookie的过期时间|域|路径|有效期|适用站点都可以根据需要来指定。
@@ -45,7 +45,8 @@
 // 			console.log(localStorage)
 // 			console.log(sessionStorage)
 // 		}
-//	localStorage:存储的数据没有时间限制  sessionStorage:针对一个session的数据存储
+//	localStorage:存储的数据没有时间限制  
+// 	sessionStorage:针对一个session的数据存储,当浏览器窗口关闭后，sessionStorage中的数据被清除
 // 		localStorage/sessionStorage.setItem(key,value)	保存数据
 // 		localStorage/sessionStorage.getItem(key)	读取数据
 // 		localStorage/sessionStorage.removeItem(key)	删除单个数据
@@ -66,6 +67,42 @@
 // 			for(var i = 0, len = localStorage.length; i < len; i++){ // 推荐
 // 				console.log("key =" + localStorage.key(i) + " value = " + localStorage.getItem(localStorage.key(i)));
 // 			}
+
+/** 缓存机制 **/
+// 指通过HTTP协议头(响应体)里的Cache-Control(或Expires)和Last-Modified(或 Etag)等字段来控制文件缓存的机制
+// Cache-Control:用于控制文件在本地缓存有效时长。(从发出请求算起)如果有请求这个资源,
+//   浏览器不会发出 HTTP请求，而是直接使用本地缓存的文件
+//   public 表示响应可以被客户端和代理服务器缓存
+//   private 表示响应只可以被客户端缓存
+//   max-age=30 缓存30秒后就过期,需要重新请求
+//   s-maxage=30 覆盖max-age,作用一样,只在代理服务器中生效
+//   no-store 不缓存任何响应
+//   no-Cache 资源被缓存,但是立即失效,下次会发起请求验证资源是否过期
+//   max-stale-30 30秒内,即使缓存过期,也使用该缓存
+//   min-fresh=30 希望在30秒内获取最新的响应
+// Last-Modified:是标识文件在服务器上的最新更新时间。下次请求时,如果文件缓存过期,浏览器通过
+//   If-Modified-Since字段带上这个时间，发送给服务器，由服务器比较时间戳来判断文件是否有修改。
+//   如果没有修改,服务器返回304告诉浏览器继续使用缓存;如果有修改,则返回200,同时返回最新的文件。
+// Expires:的值一个绝对的时间点,表示在这个时间点之前,缓存都是有效的(Cache-Control 是高优化级的)
+// Etag:取值是一个对文件进行标识的特征字串(跟Last-Modified类似)
+// Response Headers{
+//   Cache-Control: max-age=10, private 
+// }
+// https://www.jianshu.com/p/54cc04190252 资料
+// 手动刷新页面(F5)，浏览器会直接认为缓存已经过期(可能缓存还没有过期)，
+//   在请求中加上字段：Cache-Control:max-age=0，发包向服务器查询是否有文件是否有更新。
+// 强制刷新页面(Ctrl+F5)，浏览器会直接忽略本地的缓存(有缓存也会认为本地没有缓存)，
+//    在请求中加上字段：Cache-Control:no-cache(或 Pragma:no-cache)，发包向服务重新拉取文件。
+
+/** 离线缓存(Application Cache) HTML5 **/
+// 是从浏览器的缓存中分出来的一块缓存区,如果要在这个缓存中保存数据,可以使用一个描述文件
+//   (manifest file),列出要下载和缓存的资源
+// manifest文件是简单的文本文件，它告知浏览器被缓存的内容（以及不缓存的内容）
+//   CACHE MANIFEST - 在此标题下列出的文件将在首次下载后进行缓存
+//   NETWORK - 在此标题下列出的文件需要与服务器的连接，且不会被缓存
+//   FALLBACK - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）
+// https://www.cnblogs.com/lovesong/p/5021992.html
+
 </script>
 	</body>
 </html>
