@@ -11,7 +11,7 @@
 </body>
 <script type="text/javascript">
 /**AJAX (Asynchronous JavaScript and XML 异步的JavaScript和XML)**/
-// AJAX不是新的编程语言,而是一种使用现有标准的新方法 AJAX是与服务器交换数据并更新部分网页的艺术,在不重新加载整个页面的情况下。
+// AJAX不是新的编程语言,而是一种使用现有标准的新方法,AJAX是与服务器交换数据并更新部分网页的艺术,在不重新加载整个页面的情况下。
 //   AJAX的工作原理相当于在用户和服务器之间加了—个中间层(AJAX引擎)，使用户操作与服务器响应异步化
 // 创建XMLHttpRequest对象
   let xmlhttp;
@@ -21,8 +21,8 @@
     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); // 代码适应IE6, IE5
   }
 // 属性
-//   onreadystatechange  存储函数(或函数名),每当readyState的属性改变时,就会调用该函数 用此属性实现响应
-//   readyState	  存有的XMLHttpRequest的状态从0到4发生变化。
+//   .onreadystatechange  存储函数(或函数名),每当readyState的属性改变时,就会调用该函数 用此属性实现响应
+//   xmlhttp.readyState	  存有的XMLHttpRequest的状态从0到4发生变化。
 //     0:请求未初始化   此阶段确认XMLHttpRequest对象是否创建,并为调用open()方法进行未初始化作好准备,
 //        值为0表示对象已经存在,否则浏览器会报错:对象不存在。
 //     1:服务器连接已建立   此阶段对XMLHttpRequest对象进行初始化,即调用open()方法,根据参数(method,url,true)
@@ -39,33 +39,31 @@
 //         2：请求已发送，正在处理中（通常现在可以从响应中获取内容头）。
 //         3：请求在处理中；通常响应中已有部分数据可用了，没有全部完成。
 //         4：响应已完成；您可以获取并使用服务器的响应了。
-//   response     响应主体
-//   responseText	响应主体 以文本形式返回响应 只有readyState==4,responseText才可用,因为这时AJAX请求已结束
-//   responseXML	响应主体 以XML格式返回响应 如果服务器的响应是XML,而且需要作为XML对象进行解析,请使用responseXML
-//   status       将状态返回为数字（例如，“Not Found”为404，“OK”为200）
-//   statusText   以字符串形式返回状态（例如，“Not Found”或“OK”）
+//   xmlhttp.response     响应主体
+//   .responseText	响应主体 以文本形式返回响应 只有readyState==4,responseText才可用,因为这时AJAX请求已结束
+//   .responseXML	响应主体 以XML格式返回响应 如果服务器的响应是XML,而且需要作为XML对象进行解析,请使用responseXML
+//   .status       将状态返回为数字（例如，“Not Found”为404，“OK”为200）
+//   .statusText   以字符串形式返回状态（例如，“Not Found”或“OK”）
 // 方法
-//   abort()      取消当前请求。
-//   getAllResponseHeaders()          以字符串形式返回完整的HTTP标头集。
-//   getResponseHeader( headerName )  返回指定HTTP标头的值。
-//   void open(请求类型,URL)	          打开指定获取或交的方法和URL的请求。
-//   void open(请求类型,URL,async)	  与上面相同，但指定异步或不。 true异步|false同步
-//   void open(请求类型,URL,async,userName,password)  与上面相同，但指定用户名和密码。
-//   void send(content）	            发送获取请求。
-//   setRequestHeader(label,value)    将标签/值对添加到要发送的HTTP标头。
-// GET
-//    更简单更快 大部分情况下都能用
-//    请求可被缓存
-//    请求保留在浏览器历史记录中
-//    请求可被收藏为书签
-//    请求不应在处理敏感数据时使用
-//    请求有长度限制
-//    请求只应当用于取回数据
-// POST
-//    可更新服务器上的文件或数据库
-//    可发送大量数据(POST没有数据量限制)
-//    发送包含未知字符的用户输入时，POST比GET更稳定也更可靠
-  xmlhttp.onreadystatechange = function() { // 当async==false时不要写这个函数,把想执行的代码放到send()后面
+//   xmlhttp.abort()      取消当前请求。
+//   .getAllResponseHeaders()          以字符串形式返回完整的HTTP标头集。
+//   .getResponseHeader( headerName )  返回指定HTTP标头的值。
+//   .open(请求类型,URL)	          打开指定获取或交的方法和URL的请求。
+//   .open(请求类型,URL,async)	  与上面相同，但指定异步或不。 true异步|false同步
+//   .open(请求类型,URL,async,userName,password)  与上面相同，但指定用户名和密码。
+//   .send(content）	            发送获取请求。
+//   .setRequestHeader(label,value)    将标签/值对添加到要发送的HTTP标头。
+//  get对比post
+//    GET 请求可被缓存
+//    GET 请求有长度限制
+//    GET 请求只应当用于取回数据
+//    GET 请求保留在浏览器历史记录中
+//    GET 请求可被收藏为书签
+//    GET 请求不应在处理敏感数据时使用,请求只应当用于取回数据,可更新服务器上的文件或数据库
+//    GET 编码类型:application/x-www-form-urlencoded
+//    POST编码类型:application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码
+//    数据类型的限制:GET只允许ASCII字符,POST无限制。也允许二进制数据
+  xmlhttp.onreadystatechange = function() { // 当async==false为同步,要把想执行的代码放到send()后面
     if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
     {
       console.log(xmlhttp);
@@ -135,26 +133,35 @@ function aJax(url, fnSuccess, fnFailed){
 //    TRACE  回显服务器收到的请求，主要用于测试或诊断。	
 //    OPTIONS	允许客户端查看服务器的性能	  
 //    CONNECT	HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。
-//  get对比post
-//    GET 请求可被缓存
-//    GET 请求有长度限制
-//    GET 请求只应当用于取回数据
-//    GET 编码类型:application/x-www-form-urlencoded
-//    POST编码类型:application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码
-//    数据类型的限制:GET只允许 ASCII 字符,POST限制。也允许二进制数据
+//  请求头信息
+//    Accept 客户端支持的数据类型
+//    Accept-Charset 客户端采用的编码
+//    Accept-Encoding 客户端支持的数据压缩格式
+//    Accept-Language 客户端的语言环境
+//    Cookie 客服端的cookie
+//    Host 请求的服务器地址
+//    Connection 客户端与服务连接类型
+//    If-Modified-Since 上一次请求资源的缓存时间，与Last-Modified对应
+//    If-None-Match 客户段缓存数据的唯一标识，与Etag对应
+//    Referer 发起请求的源地址。
+//    Pragma 是否缓存
 //  响应头信息
 //    Allow 服务器支持哪些请求方法（如GET、POST等）。
-//    Content-Encoding 文档的编码（Encode）方法
-//    Content-Length	表示内容长度。只有当浏览器使用持久HTTP连接时才需要这个数据
-//    Content-Type	表示后面的文档属于什么MIME类型
-//    Date	当前的GMT时间
+//    Content-Encoding 文档的编码（Encode）方法 响应数据的压缩格式
+//    Content-Length	响应数据长度。只有当浏览器使用持久HTTP连接时才需要这个数据
+//    Content-language 语言环境。
+//    Content-Type	响应数据的类型
+//    Date	消息发送的时间
+//    Age 经过的时间
+//    Etag 被请求变量的实体值,用于判断请求的资源是否发生变化
 //    Expires	应该在什么时候认为文档已经过期，从而不再缓存它
 //    Last-Modified	文档的最后改动时间
 //    Location	表示客户应当到哪里去提取文档
 //    Refresh	表示浏览器应该在多少时间之后刷新文档，以秒计
-//    Server	服务器名字
+//    Server	服务器名字 服务器的型号
 //    et-Cookie	设置和页面关联的Cookie
 //    WWW-Authenticate	客户应该在Authorization头中提供什么类型的授权信息
+//    Pragma 是否缓存
 //  URL构成 传输协议://www.[主机名.com:端口(域名)]/路径名?查询条件#hash值
 //  状态码
 //    200	请求成功,一般用于GET和POST方法	      代码描述:OK
@@ -198,7 +205,7 @@ function aJax(url, fnSuccess, fnFailed){
 /** TCP/IP (Transmission Control Protocol/Internet Protocol 传输控制协议/因特网互联协议) **/
 // 三次握手:两次握手是最基本的
 //   1.客户端发了个连接请求消息到服务端，服务端收到信息后知道自己与客户端是可以连接成功的，
-//   2.但此时客户端并不知道服务端是否已经接收到了它的请求，，所以服务端接收到消息后的应答，
+//   2.但此时客户端并不知道服务端是否已经接收到了它的请求，所以服务端接收到消息后的应答，
 //     客户端得到服务端的反馈后，才确定自己与服务端是可以连接上的
 //   3.第三次握手是为了防止已经失效的连接请求报文段突然又传到服务端，因而产生错误。
 // 握手完成后，开始TCP 数据传输

@@ -301,7 +301,6 @@
     console.log(Child.prototype.isPrototypeOf(obj)); //true 判断一个对象的原型
     console.log(c1.constructor);
 
-
 //    深拷贝函数 只拷贝第一层是没用的。子对象也是地址，改了a，b还是会联动被改动。所以要子对象一起深拷贝
 function deepClone(obj){
   let objClone = Array.isArray(obj)?[]:{};
@@ -320,6 +319,21 @@ function deepClone(obj){
   }
   return objClone;
 }
+
+/** new **/
+// new存在的意义在于它实现了javascript中的继承,而不仅仅是实例化了一个对象
+function Animal(name){
+  this.name = name;
+}
+var cat = new Animal("cat")
+// 等同于
+// new Animal("cat") = { // 创建一个Animal的实例
+//   var obj = {};
+//   obj.__proto__ = Animal.prototype; // 实例原型==构造函数的原型对象
+//   var result = Animal.call(obj,"cat"); // 调用Animal函数并传递参数“cat”,绑定this为obj
+//   // 考察第3步返回的返回值,如果无返回值或者返回一个非对象值,则将obj返回作为新对象；
+//   return typeof result === 'object'? result : obj; // 否则会将返回值作为新对象返回
+// }
 </script>
 
 </body>
