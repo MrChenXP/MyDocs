@@ -92,14 +92,16 @@
 //    Object.freeze(obj)
 //    obj.a = 33  //修改
 //    console.log(obj.a)  //12
-//单个键名 Object.defineProperty(对象,键名,{键名的描述符}) ie8只能再dom对象上用，原生上用会报错
-//  查看对象键名的权限设置情况 Object.getOwnPropertyDescriptor(obj, "new") 返回个对象,可用变量接收
-//  数据属性(数据描述)
-//    Value   键值 读取属性值的时候,从这个位置读/写入属性值的时候,把新值保存在这个位置。、
-//              这个特性的默认值为 undefined。此方法保存的值不会被for..in枚举
-//    Writable    表示能否修改(重写)属性的值。包括用defineProperty修改
-//    Configurable  表示能否通过 删除属性或修改键值从而重新定义属性，或者能否把属性修改为访问器属性。
-//    Enumerable  表示能否通过(for...in或Object.keys())循环返回属性。
+//单个键名 
+//  Object.defineProperty(对象,键名,{键名的描述符}) 在一个对象上定义或修改一个属性,并返回此对象
+//    ie8只能再dom对象上用,原生上用会报错
+//    数据属性(键名的描述符)
+//      Value       键值 读取属性值的时候,从这个位置读/写入属性值的时候,把新值保存在这个位置。
+//                   这个特性的默认值为 undefined。此方法保存的值不会被for..in枚举
+//      Writable    表示能否修改(重写)属性的值。包括用defineProperty修改
+//      Configurable  表示能否通过 删除属性或修改键值从而重新定义属性，或者能否把属性修改为访问器属性。
+//      Enumerable  表示能否通过(for...in或Object.keys())循环返回属性。
+//  Object.getOwnPropertyDescriptor(obj, "键名") 返回指定对象上一个自有属性对应的属性描述符,非原型链
 //      Object.defineProperty(obj,"new",{
 //        value: 'this is obj.new', //若键名之前就有 就用之前的值。若新键名就用此值，没写就是undefined
 //        writable: false,          //修改
