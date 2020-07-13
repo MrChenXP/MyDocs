@@ -47,24 +47,4 @@
         return `传进来的参数只能是string`;
     }
 
-/** 接口 */
-    interface Person{ // 创建一个接口 约束key名和value数据类型
-        firstName: string;
-        lastName: string;
-    }
-    function fun2(val: Person){ // 参数注解，按照Person接口来约束
-        return `参数只要符合Person接口就行${val.firstName} ${val.lastName}`;
-    }
-    fun2({firstName: "Jane", lastName: "User" }) //传参的时候,key和value类型要相同
 
-/** 类 */
-// 跟es6相识
-    class Student{
-        funllName: string;
-        // 使用public等于创建了同名的成员变量
-        constructor(public firstName, public mid, public lastName){
-            this.funllName = firstName + mid + lastName;
-        }
-    }
-    let user = new Student("jane","M.","User"); // 新建一个类实例
-    fun2(user); // 类可以和接口一起使用,把实例传到函数,接口会对实例(参数)进行约束
