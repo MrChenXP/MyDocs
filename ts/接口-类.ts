@@ -37,11 +37,19 @@
 /** 类 */
 // 跟es6相识
     class Student{
-        funllName: string;
+        funllName: string; // 定义这个类的变量 
+        mid: string;
         // 使用public等于创建了同名的成员变量
-        constructor(public firstName, public mid, public getName){
-            this.funllName = firstName + mid + getName;
+        constructor(public firstName,mid, public getName){ // 接收传递过来的参数
+            // 对变量进行赋值
+            this.mid = mid; 
+            this.funllName = this.setFunll(); // 这里使用函数返回值进行赋值
         }
+        // 定义方法
+        setFunll():string{
+            return this.firstName + this.mid + this.getName;
+        }
+
     }
     let user = new Student("jane","M.","User"); // 新建一个类实例
     fun2(user); // 类可以和接口一起使用,把实例传到函数,接口会对实例(参数)进行约束
