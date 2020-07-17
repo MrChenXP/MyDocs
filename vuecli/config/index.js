@@ -16,6 +16,7 @@ module.exports = {
         target: 'https://jsonplaceholder.typicode.com/', // 目标接口域名的域名
         secure: true,  // 如果是https接口,需要配置这个参数为true
         changeOrigin: true, // 设置为true, 代表开启代理
+        ws: false,            //如果要代理 websockets，配置这个参数
         pathRewrite: {
           '^/api': '' // 重写接口 把前端接口中'/api'改成''然后加上target,不然后端识别不了带api的接口
         }

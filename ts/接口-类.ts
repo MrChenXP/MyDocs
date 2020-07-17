@@ -117,3 +117,56 @@
     let xsfSl2 = new xsf1son("jin", "20", "002");
 
 /** 静态属性和静态方法 */
+    // js的静态属性和静态方法
+    function Jt(){
+        this.name = "yan"; // 实例属性
+        this.print = function(){}; // 实例方法
+    }
+    Jt.name2 = "zheng"; // 静态属性
+    Jt.print2 = function(){}; // 静态方法
+    Jt.print2(); // 调用静态方法 静态属性调用方式与其一样
+    let jtsl = new Jt();
+    jtsl.print(); // 调用实例方法,得先new一个实例
+    // ts的静态属性和方法
+    class Jt2{
+        name: string; // 实例属性
+        constructor(name: string, age: string, id: string){
+            this.name = name;
+            Jt2.age = age; // 静态属性不能通过this获取,得用类名
+        }
+        getName(){}; // 实例方法
+        static age: string; // 静态属性
+        static showAge(){ // 静态方法
+            return Jt2.age; // 静态属性不能通过this获取,得用类名
+        }
+    }
+    Jt2.age; // 类外部，调用类静态属性 想调用实例方法属性，得new一个实例
+    Jt2.showAge(); // 类外部，调用类静态方法
+// ---------------------------静态属性age，要不要在构造器里赋值
+/** 多态 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
