@@ -15,10 +15,10 @@
 // Promise.race([],then()) 将多个Promise实例,包装成一个新的Promise实例,只要有一个resolve状态就返回
 let a = 10
 let promise1 = new Promise(function(resolve,reject){
-    // resolve 成功调用
+    // resolve 成功调用,将Promise状态改为成功状态,然后后面的实例可以通过resolve方法进行回调操作
     // reject 失败调用 
     if(a==10){
-        resolve("成功了！")
+        resolve("成功了！"); // 里面的值会传给回调
     }else{
         reject("失败了！")
     }
