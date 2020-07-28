@@ -344,7 +344,7 @@ function insertionSort(arr) {
             // j是代表当前有序数组中，最后一个的下标,
             for (let j = i; j >= 0; j--) {
                 
-                
+                // 有序数组 小于 待排序列
                 if (j > 0 && arr[j - 1] < temp) {
                     arr[j] = arr[j - 1];
                 } else {
