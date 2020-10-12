@@ -176,6 +176,25 @@
       background-color: white;
       border-radius: 60px 60px 60px 60px;
     }
+	
+	.top{
+	 position: absolute;
+	}
+	.top:before,.top:after{
+	 position: absolute;
+	 content: '';
+	 border-top: 10px transparent dashed;
+	 border-left: 10px transparent dashed;
+	 border-right: 10px transparent dashed;
+	 border-bottom: 10px #fff solid;
+	}
+	.top:before{
+	 border-bottom: 10px #0099CC solid;
+	}
+	.top:after{
+	 top: 1px; /*覆盖并错开1px*/
+	 border-bottom: 10px #fff solid;
+	}
   </style>
 </head>
 <body>
@@ -196,9 +215,10 @@
   <div class="tx">梯形</div>
   同心圆，描边圆
   <div class="txy">
-
     <div class="txy2"></div>
   </div>
+  箭头
+  <div class="top"></div>
 </div>
 
 </body>
