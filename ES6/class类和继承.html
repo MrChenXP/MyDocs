@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>类和继承</title>
+    <title>class类和继承</title>
 </head>
 <body>
     
@@ -13,15 +13,15 @@
 // 类里面方法和属性之间不能加逗号
 // 定义方法不能加function
 // 类里面的this指向的是,当时创建类时的那个类
+// 类里的方法是不可被枚举的
 let qj = "qjbl"
-class Person{ // typeof === function
-// let Person = class{ 这种创建方式也可以
-    constructor(name){ // 构造方法,只要调用new了就一定会自动执行构造方法
-        this.name = name // 只能在这里定义类的属性
+class Person{ // typeof === function // let Person = class{ 这种创建方式也可以
+    constructor(name){ // 构造方法,只要调用new了就一定会自动执行构造方法.不声明时系统会自动增加,但赋值会没有
+        this.name = name // 只能在这里定义类的属性 constructor里的this是指向实例对象
         this.showName = this.showName.bind(this) // 给这个方法永久绑定this一直为这个类
     }   
     showName(){ 
-        return `名字是${this.name}`
+        return `名字是${this.name}` // 在非静态方法里的this是指向类的实例对象,除非绑定了this为这个类
     }
     qj(){ 
         return `与全局变量不产生冲突`
@@ -36,10 +36,12 @@ class Person{ // typeof === function
         console.log(`取值函数get ,age`)
     }
     static jtff(){ // 
-        return `静态方法static,类自己本身可以直接调用`
+        return `静态方法static,类自己本身可以直接调用,静态方法里的this是指向类本身,不是指向实例对象`
     }
 }
 let p1 = new Person("cxp")
+console.log(Person === Person.prototype.constructor);     //true  类是指向到类原型上的constructor上
+console.log(Person.prototype.hasOwnProperty("showName"));     //true  说明类里的方法都是加载到类的原型上
 console.log(p1.showName())
 console.log(p1.qjbl()) // 也可这样使用 console.log( p1[qj]() )
 
@@ -48,25 +50,29 @@ console.log(showName()) // 如果构造方法里面没有绑定this,这里就会
 p1.age = 12 // 触发存值函数
 p1.age // 触发取值函数
 console.log(Person.jtff()) // 调用类的静态方法
+console.log(p1.jtff()) //报错，实例不能使用类的静态方法
 
 // 继承 extends 
 // 同名key会覆盖父类同名key
 class Student extends Person{
     constructor(name,avg){ // 子类的构造函数
-        super(name) // 执行父类的构造函数,必须执行这行,不然同名key会覆盖父类
+		// this 报错 //子类去继承父类时,调用super()前,子类的constructor是不能使用this
+        super(name) // 执行父类的构造函数,不然因同名key会覆盖父类.子类就拿不到父类的同名函数
         this.avg = avg
     }
     showAvg(){
         return `职业为${this.avg}`
     }
     showName(){
-        super.showName() // 执行父级的方法,不然同名key会覆盖父类
+        console.log(super.showName()) // 执行父级的方法,不然同名key会覆盖父类,父类的同名方法就不会运行
         return `子类的showName`
     }
 }
 let p2 = new Student('kty','idol')
 console.log(p2.showName()) //Student继承了Person,有父类的属性和方法
 console.log(p2.showAvg())
+console.log(Student.prototype.__proto__ === Person.prototype);      //true
+console.log(Student.__proto__ === Person);       //true
 </script>
 </body>
 </html>
