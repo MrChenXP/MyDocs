@@ -61,7 +61,7 @@
    - 给特定版本加上标签    `git tag -a 标签名 版本号`
    - 查看所有标签          `git tag`
    - 指定标签信息命令      `git tag -a <tagname> -m "runoob.com标签"`
-   - PGP签名标签命令       `git tag -s <tagname> -m "runoob.com标签"`
+   - PGP签名标签命令        `git tag -s <tagname> -m "runoob.com标签"`
 
 ## 远程使用Github
    - 1. 生成公钥           `ssh-keygen -t rsa -C 'github上注册的邮箱'` 然后将公钥加入github
@@ -98,6 +98,7 @@
       - `git log --reverse`   逆向显示所有日志
       - `git log --author=Linus`   查找指定用户(Linus)的提交日志
       - `--since --before --until --after`   指定日期
+      - `git log --pretty=oneline` 提交历史的 commit 描述以及校验和 显示在同一行，并且省略默认格式下的其他内容
    4. 打印显示
       - `cat 文件名1 文件名2> 文件名`   将多个文件合并到目标文件中
       - `cat 文件名1 文件名2 >> 文件名`   将几个文件附加到目标文件中
