@@ -30,6 +30,7 @@
 	查看已安装的模块             npm list xxxx       (npm list express)
 	查看已安装的全局模块         npm list -g 或者 npm list -g --depth 0
 	卸载模块                    npm uninstall [-g] express
+  更新模块                    npm update express
 	搜索模块                    npm search express
 	发布模块                    npm publish
 	本地安装
