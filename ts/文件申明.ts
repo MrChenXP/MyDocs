@@ -20,7 +20,6 @@ declare namespace dsxddx {
     function hs1(s: string): string; // 对象内部的函数
     let sx1: number; // 对象内部的属性
 }
-
 // 函数重载
 declare function getWidget(n: number): Widget;
 declare function getWidget(s: string): Widget[];
