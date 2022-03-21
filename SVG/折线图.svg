@@ -1,0 +1,28 @@
+<svg width="640" height="400" xmlns="http://www.w3.org/2000/svg" id="svgColumn">
+
+    <text x="200" y="20" font-size="20">SVG 华东地区手机12个月的数据 柱状图</text>
+    <!-- 线条标签
+        x1 属性在 x 轴定义线条的开始
+        y1 属性在 y 轴定义线条的开始
+        x2 属性在 x 轴定义线条的结束
+        y2 属性在 y 轴定义线条的结束
+     -->
+    <line x1="20" y1="380" x2="620" y2="380" stroke="black" stroke-width="1.5" />
+    <line x1="20" y1="380" x2="20" y2="1" style="stroke: black; stroke-width: 1.5" />
+
+    <!-- 定义路径。
+        M = moveto 移至
+        L = lineto 画线
+        H = horizontal lineto 水平画线
+        V = vertical lineto 垂直化线
+        C = curveto 旋转
+        S = smooth curveto 平滑的旋转
+        Q = quadratic Belzier curve 二次贝塞尔曲线
+        T = smooth quadratic Belzier curveto 光滑的二次贝塞尔曲线
+        A = elliptical Arc 椭圆的弧线
+        Z = closepath 结束绘制路径
+        大写表示绝对定位，小写表示相对定位
+     -->
+    <path d="M600 360 L620 380 L600 400 Z" style="stroke: black; stroke-width: 1" />
+    <path d="M1 20 L20 1 L40 20 Z" style="stroke: black; stroke-width: 1" />
+</svg>

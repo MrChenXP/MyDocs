@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>引入svg</title>
+</head>
+
+<body>
+  <!-- embed  被所有主流的浏览器支持，并允许使用脚本
+    在HTML页面中嵌入SVG时使用<embed>标签是 Adobe SVG Viewer 推荐的方法
+    然而，如果需要创建合法的XHTML，就不能使用<embed>。任何HTML规范中都没有 <embed> 标签
+  -->
+  <embed src="rect.svg" width="300" height="100" type="image/svg+xml"
+    pluginspage="http://www.adobe.com/svg/viewer/install/"></embed>
+
+  <!-- <object> 标签是 HTML 4 的标准标签，被所有较新的浏览器支持。它的缺点是不允许使用脚本。 
+    假如您安装了最新版本的 Adobe SVG Viewer，那么当使用 <object> 标签时 SVG 文件无法工作（至少不能在 IE 中工作）
+  -->
+  <object data="rect.svg" width="300" height="100" type="image/svg+xml"
+    codebase="http://www.adobe.com/svg/viewer/install/"></object>
+
+  <!-- <iframe> 标签可工作在大部分的浏览器中。 -->
+  <iframe src="rect.svg" width="300" height="100">
+  </iframe>
+</body>
+
+</html>

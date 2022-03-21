@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG的Dom操作</title>
+</head>
+
+<body>
+  <div id="svg1">
+    <embed src="./折线图.svg" id="embed" width="640" height="400" type="image/svg+xml">
+  </div>
+
+  <script type="text/javascript">
+    // 如果svg是直接写在html文件中，那么svg和HTML共用一个document，可直接通过document.getElementById(svg的id)就可获得。
+    // getSVGDocument()
+    // setAttribute()设置值
+
+    function drawColumn(data) {
+      var nameSpace = 'http://www.w3.org/2000/svg';
+      var max = Math.max.apply(null, data);
+      var proportion = 350 / max;
+      var interval = 35; //column间隔
+      var columnStyle = 'stroke: blue; fill: orange';
+      var embedSVG = document.getElementById('embed').getSVGDocument().getElementById('svgColumn');
+
+      //关键代码：embedSVG的赋值。最后的 getElementById('svgColumn')，是svg文件中，svg标签的id
+      for (let singleColumn of data) {
+        var rect = document.createElementNS(nameSpace, 'rect');//create新的svg节点，rect。（'命名空间','节点名称'）
+        rect.style = columnStyle; //给rect节点设置style
+        height = singleColumn * proportion;
+        rect.setAttribute('width', '30'); //使用setAttribute来设置rect节点属性
+        rect.setAttribute('height', height);
+        rect.setAttribute('x', interval);
+        rect.setAttribute('y', 380 - height);
+        embedSVG.appendChild(rect); //将这个新的rect节点 添加到svg节点里
+        interval += 45
+      }
+    }
+    drawColumn([20,30,1])
+  </script>
+</body>
+
+</html>
