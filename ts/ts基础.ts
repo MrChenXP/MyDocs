@@ -1,9 +1,11 @@
 // npm install -g typescript下载插件
 // tsc xxx.ts   将ts文件编译为js
 // let const var 区别跟js一样
+// ts js的超集.静态类型编译语言,先编译再执行.
+// npm i -g ts-node 直接执行ts(内部也是先编译再执行) ts-node xxx.ts
 
-/** 数据类型 */ 
-// 基础数据类型 string boolean number 枚举 any void undefined null
+/** ===========数据类型=========== */ 
+// 基础数据类型 string boolean number symbol 枚举 any void undefined null
 // string
     let email: string = "2256@qq.com"; // 字符串
     let msg: string = `my email is ${email}`; // 模板字符串
@@ -13,8 +15,11 @@
     let age: number = 20; // 数字 age="19"会报错，因为之前定义的是数字类型
 // 数组
     let list: number[]=[1,2,3,4]; // 数组 里面的值必须是number类型
-    let list2: any[]=["a","b","c"]; // 数组 里面的值所有类型都可以
+    let list2: any[]=["a",2,true]; // 数组 里面的值所有类型都可以
     let list3: Array<number> = [1,2,3];// 数组泛型方式创建数组
+    let lits4: (string | number) [] = [1,'c']; // 联合类型的数组
+// symbol
+    let sym1: symbol = Symbol();
 // 元祖 表示一个已知元素数量和类型的数组
     let list4:[string,number]=["a",10]; // 第一个是string,第二个是number,数量和类型要已知
     // list4[1].substr(1); 报错,因为第二项是数字,无字符串方法
@@ -60,10 +65,14 @@
 // object 非原始类型
     let ojb1: object = {pro: 0};
 
-// 联合类型
-    let l1:number | string | boolean; // 可以是数字 布尔 字符串
+// 类型别名 type 
+    // 自定义类型,为任意类型起别名
+    type CustomArray = (number | string)[]
+    let ca1: CustomArray = [1,'c']
+// 联合类型 |
+    let l1: number | string | boolean; // 可以是数字 布尔 字符串
 // 类型推论 
-    let l2=3; // l2="a"报错 未定义数据类型,会根据值来自动判断类型,后面赋其他类型会报错
+    let l2 = 3; // 后期l2="a"赋值将报错 未定义数据类型,会根据值来自动判断类型,后面赋其他类型会报错
     let l3; // 未赋值,推论为any类型
 // 类型断言 跟类型转换相似,告诉编译器变量为什么类型
     let l4:number | string | boolean;
