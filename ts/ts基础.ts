@@ -11,7 +11,8 @@
     let msg: string = `my email is ${email}`; // 模板字符串
 // boolean
     let isShow: boolean = false; // 布尔
-// number 都是浮点数,支持十进制,8进制,16进制,以及字面量
+// number
+    // 都是浮点数,支持十进制,8进制,16进制,以及字面量
     let age: number = 20; // 数字 age="19"会报错，因为之前定义的是数字类型
 // 数组
     let list: number[]=[1,2,3,4]; // 数组 里面的值必须是number类型
@@ -20,10 +21,12 @@
     let lits4: (string | number) [] = [1,'c']; // 联合类型的数组
 // symbol
     let sym1: symbol = Symbol();
-// 元祖 表示一个已知元素数量和类型的数组
-    let list4:[string,number]=["a",10]; // 第一个是string,第二个是number,数量和类型要已知
-    // list4[1].substr(1); 报错,因为第二项是数字,无字符串方法
-// 枚举 enum 值必须是列举出来的范围内
+// 元祖
+    //  元祖(Tuple)表示一个已知元素数量和类型的数组
+    let list4: [string, number] = ["a",10]; // 数量和类型要已知
+    // list4[1].substr(1); // 报错,因为第二项是数字,无字符串方法
+// 枚举 
+    // 枚举(enum) 值必须是列举出来的范围内
     enum Weeks{Mon,Tue = 4,Wed}; // enum 枚举名{枚举值...} 可以改变值得下标
     let day:Weeks = Weeks.Mon; // 变量名:枚举名 = 枚举集里的值
     day; // 0 此处返回的是Mon的下标
@@ -72,15 +75,25 @@
 // 联合类型 |
     let l1: number | string | boolean; // 可以是数字 布尔 字符串
 // 类型推论 
-    let l2 = 3; // 后期l2="a"赋值将报错 未定义数据类型,会根据值来自动判断类型,后面赋其他类型会报错
+    // 未定义数据类型,会根据值来自动判断类型,后面赋其他类型会报错
+    let l2 = 3; // 推论为number
     let l3; // 未赋值,推论为any类型
-// 类型断言 跟类型转换相似,告诉编译器变量为什么类型
-    let l4:number | string | boolean;
+    function add(num1: number,num2: number) {
+        // 推断函数返回值为number
+        return num1 + num2;
+    }
+// 类型断言
+    // as 跟类型转换相似,告诉编译器变量为什么类型
+    let l4: number | string | boolean;
     // let strLength:number = l4.length 报错,l4可能是布尔类型,所以可能无length,ts会预判类型
-    let l5:number | string | boolean = "this is a string";
-    let strLen:number = l5.length; // l5已经被赋值成了字符串类型
-    let strLen2:number = (<string>l5).length; // 将l5断言为string类型,
-    let strLen3:number = (l5 as string).length; // 将l5断言为string类型 jsx中,只有这种as写法可以
+    let l5: number | string | boolean = "this is a string";
+    let strLen: number = l5.length; // l5已经被赋值成了字符串类型
+    let strLen2: number = (<string>l5).length; // 将l5断言为string类型,
+    let strLen3: number = (l5 as string).length; // 将l5断言为string类型 jsx中,只有这种as写法可以
+    const aLink = document.getElementById('link')
+    // aLink.href = 'www.baidu.com' // 报错,推断为所有dom公共的属性和方法
+    const aLink2= document.getElementById('link') as HTMLAnchorElement;
+    aLink2.href = 'www.baidu.com' // console.dir()打印dom元素，可知道dom元素的类型
 // 类型注解 为函数或变量添加约束
     function fun1(person: string){
         return `传进来的参数只能是string`;

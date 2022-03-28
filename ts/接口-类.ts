@@ -1,4 +1,4 @@
-/** 接口 interface */
+/** =========接口interface========= */
 // 接口定义 约束key名和value数据类型
 // ? 可选属性
 // readonly 只读属性
