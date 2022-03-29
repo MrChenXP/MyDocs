@@ -27,17 +27,20 @@
     // list4[1].substr(1); // 报错,因为第二项是数字,无字符串方法
 // 枚举 
     // 枚举(enum) 值必须是列举出来的范围内
-    enum Weeks{Mon,Tue = 4,Wed}; // enum 枚举名{枚举值...} 可以改变值得下标
-    let day:Weeks = Weeks.Mon; // 变量名:枚举名 = 枚举集里的值
-    day; // 0 此处返回的是Mon的下标
-    Weeks[0]; // Mon 具体的值
-    Weeks["Mon"]; // 0 下标
-    Weeks["Tue"]; // 4 下标 之前就把下标改了
-    Weeks["Wed"]; // 5 下标 前一个下标被改成了4，故它顺延为5
-    let day2:string = Weeks[4]; // 可以直接用下标赋值
-// any 任何类型都可以
-    let any1:any= 1;
-    let any2:any= true;
+    enum Weeks{ Mon, Tue = 4, Wed, str = 'ts' }; // enum 枚举名{枚举值...} 可以改变值得下标
+    let day: Weeks = Weeks.Mon; // 0 此处返回的是Mon的下标
+    Weeks[0]; // 'Mon' 具体的值
+    Weeks["Mon"]; // 0 下标 不初始化就会从0开始自增长下标
+    Weeks["Tue"]; // 4 下标
+    Weeks.Wed; // 5 下标 自增长为5
+    Weeks.str; // ts 设置了字符串,后面的值没有自增长,且必须设置值
+    let day2:string = Weeks[4]; // 'Tue'
+// any
+    // AnyScript任何类型都可以 失去类型保护机制
+    let any1: any= 1;
+    let any2: any= true;
+    let any3
+    let any4 = (val)=>{}
 // void 无任何类型，一般是函数返回值
     function hello():void{
         // 这个函数就不能再return一个返回值了,因为之前定义了返回值为void
@@ -98,5 +101,14 @@
     function fun1(person: string){
         return `传进来的参数只能是string`;
     }
-
-
+// 字面量类型
+    let str1 = 'hello ts' // string类型 let声明的是一个变量,值可以变化
+    const str2 = 'ts' // 'ts'类型 const是一个常量,值不可变化,类型固定 === str2:'ts' = 'ts'
+    const obj2 = {x: 2} // object等其他类型也可是字面量类型
+// typeof
+    // 可以在类型上下文中引用变量或属性的类型(类型查询)
+    let p = {x: 1, y: 2}
+    function formatPoint(ponit: {x: number; y: number}){}    
+    function formatPoint2(ponit: typeof p){} // 将p作为类型使用
+    let num: typeof p.x // 将p.x作为类型
+    // let t: typeof formatPoint // 报错 无法查询其他形式类型(函数)

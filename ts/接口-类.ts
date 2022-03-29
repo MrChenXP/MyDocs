@@ -41,41 +41,6 @@ function showData(n: Idata) {
     // console.log(n) // name:a age:19
 }
 showData({ name: 'a', age: 19 });
-
-/** 类 */
-// 定义 class
-class Student {
-    funllName: string; // 定义这个类的变量
-    mid: string;
-    // 使用public等于创建了同名的成员变量
-    constructor(public firstName, mid, public getName) {
-        // 接收传递过来的参数
-        // 对变量进行赋值
-        this.mid = mid;
-        this.funllName = this.setFunll(); // 这里使用函数返回值进行赋值
-    }
-    // 定义方法
-    setFunll(): string {
-        return this.firstName + this.mid + this.getName;
-    }
-}
-let stu1 = new Student('jane', 'M.', 'User'); // 新建一个类实例
-fun2(stu1); // 类可以和接口一起使用,把实例传到函数,接口会对实例(参数)进行约束
-// 继承 extends
-class StudentSon extends Student {
-    cardnumber: string;
-    school: string;
-    constructor(cardnumber: string, school: string) {
-        super('jane', 'M.', 'User'); // 构造父类的参数
-        this.cardnumber = cardnumber;
-        this.school = school;
-    }
-    dohomework() {
-        return this.firstName + this.cardnumber;
-    }
-}
-
-let stu2 = new StudentSon('1001', '二中');
 // 接口的继承
 interface jk1 {
     getmsg();
@@ -83,15 +48,55 @@ interface jk1 {
 interface jk1son extends jk1 {
     printing();
 }
+
+/** =========类========= */
+// 定义 class
+    class Student {
+        fullName: string; // 定义这个类的变量
+        mid: string;
+        gender = '男';
+        // 构造函数
+        constructor(public firstName, mid, public getName, gender2) {
+            // 接收传递过来的参数 构造函数不能有返回值
+            // 使用public等于创建了同名的成员变量
+            this.mid = mid; // 对变量进行赋值 
+            this.gender = gender2 // 传过来的gender2赋值class的gender
+            this.fullName = this.setFull(); // 这里使用函数返回值进行赋值
+        }
+        // 定义实例方法
+        setFull(n?: string): string {
+            return this.firstName + this.mid + this.getName + n;
+        }
+    }
+    let stu1 = new Student('jane', 'M.', 'User', 'jack'); // 新建一个类实例
+    stu1.gender // jack
+    stu1.fullName // janeM.User
+    stu1.setFull('Tar') // janeM.UserTar
+    fun2(stu1); // 类可以和接口一起使用,把实例传到函数,接口会对实例(参数)进行约束
+// 继承 extends
+    class StudentSon extends Student {
+        cardnumber: string;
+        school: string;
+        constructor(cardnumber: string, school: string) {
+            super('jane', 'M.', 'User','jack'); // 构造父类的参数
+            this.cardnumber = cardnumber;
+            this.school = school;
+        }
+        dohomework() {
+            return this.firstName + this.cardnumber;
+        }
+    }
+    let stu2 = new StudentSon('1001', '二中');
+
 // class 类名 implements 接口1 接口2{...} 可以用接口来约束类，而且可以同时使用多个接口
-class cl1 implements jk1son {
-    getmsg() {
-        console.log(`this getmsg`);
+    class cl1 implements jk1son {
+        getmsg() {
+            console.log(`this getmsg`);
+        }
+        printing() {
+            console.log(`this printing`);
+        }
     }
-    printing() {
-        console.log(`this printing`);
-    }
-}
 
 /** 访问修饰符 */
 // public 默认,公共
