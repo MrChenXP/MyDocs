@@ -3,6 +3,8 @@
 // ? 可选属性
 // readonly 只读属性
 interface Person {
+    name?: string,
+    readonly age?: string,
     firstName: string; // key一定要是firstName,值一定要是string类型
     getName(msg: string): string; // 一定要有一个方法是getName,参数一定是string,返回值一定是string
 }
@@ -41,13 +43,7 @@ function showData(n: Idata) {
     // console.log(n) // name:a age:19
 }
 showData({ name: 'a', age: 19 });
-// 接口的继承
-interface jk1 {
-    getmsg();
-}
-interface jk1son extends jk1 {
-    printing();
-}
+
 
 /** =========类========= */
 // 定义 class
@@ -73,59 +69,75 @@ interface jk1son extends jk1 {
     stu1.fullName // janeM.User
     stu1.setFull('Tar') // janeM.UserTar
     fun2(stu1); // 类可以和接口一起使用,把实例传到函数,接口会对实例(参数)进行约束
-// 继承 extends
+// 继承 extends 
+    // 继承父类
     class StudentSon extends Student {
-        cardnumber: string;
+        cardNumber: string;
         school: string;
-        constructor(cardnumber: string, school: string) {
+        constructor(cardNumber: string, school: string) {
             super('jane', 'M.', 'User','jack'); // 构造父类的参数
-            this.cardnumber = cardnumber;
+            this.cardNumber = cardNumber;
             this.school = school;
+            this.gender // '男' 继承自父类
         }
-        dohomework() {
-            return this.firstName + this.cardnumber;
+        doHomeWork() {
+            return this.firstName + this.cardNumber;
         }
     }
     let stu2 = new StudentSon('1001', '二中');
-
-// class 类名 implements 接口1 接口2{...} 可以用接口来约束类，而且可以同时使用多个接口
-    class cl1 implements jk1son {
-        getmsg() {
-            console.log(`this getmsg`);
+// 继承 implements
+    interface jk1 {
+        getMsg();
+    }
+    interface jk1son extends jk1 {
+        printing();
+    }
+    interface jk2 {
+        name: string
+    }
+    // 实现接口
+    class cl1 implements jk1son,jk2 {
+        // 可以用接口来约束类，而且可以同时使用多个接口
+        name: string
+        getMsg() {
+            return this.name
         }
         printing() {
-            console.log(`this printing`);
+            return this.name
         }
     }
-
-/** 访问修饰符 */
-// public 默认,公共
-// private 私有的,不能在声明它的类的外部访问
-// protected 受保护的,与private修饰符的行为很相似，protected成员在派生类(子类)中仍然可以访问
-class xsf1 {
-    public name: string;
-    private age: string;
-    protected id: string;
-    constructor(name: string, age: string, id: string) {
-        this.name = name;
-        this.age = age;
-        this.id = id;
+// 访问修饰符
+    class xsf1 {
+        public name: string; // public 默认,公共
+        private age: string; // private 私有的,不能在声明它的类的外部访问
+        protected id: string; // protected 受保护的,在派生类(子类)中仍然可以访问
+        readonly sex: string; // readonly 只读 用来防止在构造函数之外对属性进行赋值,只能修饰属性不能修复方法
+        readonly sex1: string = '女';
+        readonly sex2 = '女'; // 只读 且 是字面量类型
+        constructor(name: string, age: string, id: string) {
+            this.name = name;
+            this.age = age;
+            this.id = id;
+            this.sex = '男'
+            this.sex1 = '男' 
+            // this.sex2 = '男' // 报错 字面量类型不可重新赋值
+        }
+        getAgeId() {
+            // this.sex = '中性' 报错 只读属性
+            return `${this.age}--${this.id}`; // private protected 都可以被类的内部访问
+        }
     }
-    getAgeId() {
-        return `${this.age}--${this.id}`; // private protected都可以类的内部访问
+    let xsfSl = new xsf1('tai', '19', '001');
+    // xsfSl.age // 报错 private 修饰符不允许类外部访问
+    // xsfSl.id // 报错 protected 修饰符不允许类外部访问
+    class xsf1son extends xsf1 {
+        show() {
+            this.name; // public 属于公共的
+            // this.age; // 报错 private 不能在声明它的类的外部访问
+            this.id; // protected 可以在派生类(子类)中访问
+        }
     }
-}
-let xsfSl = new xsf1('tai', '19', '001');
-// xsfSl.age // 报错,private修饰符不允许类外部访问
-// xsfSl.id // 报错,protected修饰符不允许类外部访问
-class xsf1son extends xsf1 {
-    show() {
-        this.name; // public 属于公共的
-        // this.age; // 报错,private不能在声明它的类的外部访问
-        this.id; // protected可以在派生类(子类)中访问
-    }
-}
-let xsfSl2 = new xsf1son('jin', '20', '002');
+    let xsfSl2 = new xsf1son('jin', '20', '002');
 
 /** 静态属性和静态方法 */
 // js的静态属性和静态方法
