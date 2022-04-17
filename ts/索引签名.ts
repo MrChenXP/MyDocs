@@ -13,8 +13,12 @@
     2: 3,
   }
 
-// js中数组是特殊对象,数组的键(索引)是数值类型
-interface MyArray<T> {
-  [n: number]: T
-}
-let arr: MyArray<number> = [1, 2, 3]
+// 数组
+  // js中数组是特殊对象,数组的键(索引)是数值类型
+  // 模拟原生的数组接口,并使用[n: number]来作为索引签名类型
+  // 只要number类型的键(索引)都可以出现在数组中,或者说数组可以有任意多个元素
+  // 同时也符合数组索引时number类型这一前提
+  interface MyArray<T> {
+    [n: number]: T
+  }
+  let arr: MyArray<number> = [1, 2, 3] 
