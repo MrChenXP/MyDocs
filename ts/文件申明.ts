@@ -1,6 +1,9 @@
 // 第三方库如果没自带声明，可以从 DefinitelyTyped 下载声明(自行查询用法)
 // 通过package.json--typings|types:'./index.d.ts'来指定加载的声明文件
 
+import {Props} from './index'
+let a: Props
+
 // 模块
     var x = require("foo");
 // module.d.ts 如果模块不能被调用或构造
