@@ -1,5 +1,5 @@
 // 映射类型
-// 基于旧类型创建新类型(对象类型)
+  // 基于旧类型创建新类型(对象类型)
   // in
   type PropKeys = 'x' | 'y' | 'z'
   type Type2 = { [Key in PropKeys]: number }
@@ -21,3 +21,11 @@
   // ？ 表示将这些属性变为可选 以此来实现Partial的功能
   // : 后面T[P]表示获取T每个键对应的类型（abc）
   // 最终新旧类型结构完全相同 只是变成可选了
+
+// 索引查询(访问)类型
+  // 用来查询属性的类型 像上面的T[P]
+  type Props3 = { a: number; b: string; c: boolean}
+  type TypeA = Props3['a'] // TypeA = number
+  // 同时查询多个
+  type TypeB = Props3['a' | 'b'] // TypeB= number | string
+  type TypeC = Props3[keyof Props3] // TypeC= number|string|boolean

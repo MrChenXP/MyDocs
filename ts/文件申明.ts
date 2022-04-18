@@ -1,4 +1,7 @@
-// 针对模块有三种可用的模块，
+// 第三方库如果没自带声明，可以从 DefinitelyTyped 下载声明(自行查询用法)
+// 通过package.json--typings|types:'./index.d.ts'来指定加载的声明文件
+
+// 模块
     var x = require("foo");
 // module.d.ts 如果模块不能被调用或构造
 // module-class.d.ts 如果模块能够使用new来构造
@@ -8,9 +11,9 @@
     
 
 // 全局变量
-declare var qjbl: number; // 声明变量
-declare const qjbl2: number; // 只读
-declare let qjbl3: number; // 拥有块级作用域
+declare var age: number; // 声明变量
+declare const age2: number; // 只读
+declare let age3: number; // 拥有块级作用域
 
 // 全局函数
 declare function qjhs(greeting: string): void; // 声明函数
