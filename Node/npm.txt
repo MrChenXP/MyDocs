@@ -25,6 +25,7 @@
         npm install express --save      --下载并安装模板并写到packge.json文件中 dependencies节点中
         npm install                     --安装项目中所依赖的模块
         npm install express --save-dev  --开发环境所需要的依赖  devDependencies
+        npm install xxx @x.x.x 下载指定版本
         简写 npm i
 	全局安装(一般安装工具类)     npm i -g <模块名称>
 	查看已安装的模块             npm list xxxx       (npm list express)
