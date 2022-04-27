@@ -1,5 +1,3 @@
-
-
 /** =========类========= */
 // class 定义
   class Student {
@@ -23,7 +21,6 @@
   stu1.fullName // janeM.User
   stu1.setFull('Tar') // janeM.UserTar
   // fun2(stu1); // 类可以和接口一起使用,把实例传到函数,接口会对实例(参数)进行约束
-
 // extends 继承 
   // 继承父类
   class StudentSon extends Student {
@@ -40,7 +37,7 @@
     }
   }
   let stu2 = new StudentSon('1001', '二中');
-  // 继承 implements
+// 继承 implements
   interface jk1 {
     getMsg();
   }
@@ -61,7 +58,6 @@
         return this.name
     }
   }
-
 // 访问修饰符
   class xsf1 {
     public name: string; // public 默认,公共
@@ -95,11 +91,11 @@
   }
   let xsfSl2 = new xsf1son('jin', '20', '002');
 
-/** 静态属性和静态方法 */
+// 静态属性和静态方法
   // js的静态属性和静态方法
   function Jt() {
-  this.name = 'yan'; // 实例属性
-  this.print = function () {}; // 实例方法
+    this.name = 'yan'; // 实例属性
+    this.print = function () {}; // 实例方法
   }
   Jt.name2 = 'zheng'; // 静态属性
   Jt.print2 = function () {}; // 静态方法
@@ -108,53 +104,46 @@
   jtsl.print(); // 调用实例方法,得先new一个实例
   // ts的静态属性和方法
   class Jt2 {
-  name: string; // 实例属性
-  constructor(name: string, age: string, id: string) {
-    this.name = name;
-    Jt2.age = age; // 静态属性不能通过this获取,得用类名
-  }
-  getName() {} // 实例方法
-  static age: string; // 静态属性
-  static showAge() {
-    // 静态方法
-    return Jt2.age; // 静态属性不能通过this获取,得用类名
-  }
+    name: string; // 实例属性
+    getName() {} // 实例方法
+    constructor(name: string, age: string, id: string) {
+      this.name = name;
+      Jt2.age = age; // 静态属性不能通过this获取,得用类名
+    }
+    static age: string; // 静态属性
+    static showAge() { // 静态方法
+      return Jt2.age; // 静态属性不能通过this获取,得用类名
+    }
   }
   Jt2.age; // 类外部，调用类静态属性 想调用实例方法属性，得new一个实例
   Jt2.showAge(); // 类外部，调用类静态方法
-/** 多态 */
+// 多态
   // 父类定义一个方法不去实现，让继承它的子类去实现  每一个子类有不同的表现
   class Animal {
-  eat() {
-    console.log('animal eat');
-  }
+    eat() { console.log('animal eat') }
   }
   class Cat extends Animal {
-  eat() {
-    return `this is cat`;
-  }
+    eat() { return `this is cat`; }
   }
   class Dog extends Animal {
-  eat() {
-    return `this is dog`;
-  }
+    eat() { return `this is dog`; }
   }
   let chi1 = new Cat();
   chi1.eat();
 
-/** 抽象类abstract、抽象方法 */
+// 抽象类abstract、抽象方法
   // 抽象类做为其它派生类的基类(父类)使用,一般不会直接被实例化
   // 抽象方法只能包含再抽象类中,抽象类可包含抽象方法和普通方法
   // 子类继承抽象类,实现抽象方法
   abstract class Cxl {
-  // 抽象类
-  abstract eat(); // 不能实现,因为是抽象方法
-  run() {
-    return `this run`;
-  } // 普通方法
+    // 抽象类
+    abstract eat(); // 不能实现,因为是抽象方法
+    run() {
+      return `this run`;
+    } // 普通方法
   }
   class Cxl2 extends Cxl {
-  eat() {
-    return `this eat`;
-  } // 一定要实现这个方法,因为是抽象方法,除非把这个子类本身也变成抽象类
+    eat() {
+      return `this eat`;
+    } // 一定要实现这个方法,因为是抽象方法,除非把这个子类本身也变成抽象类
   }
