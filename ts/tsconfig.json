@@ -6,6 +6,7 @@
     "strict": false,    
 3). 启动监视任务: 
     终端 -> 运行任务 -> 监视tsconfig.json
+这样就能自动生成js文件,ts文件每次保存都会自动生成一次
 **/
 {
   "compilerOptions": {
