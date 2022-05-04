@@ -1,3 +1,35 @@
+
+/** ===========函数=========== */
+// 定义 实际给函数的参数和返回值加类型
+  function add(x: number, y: number): number {
+    return x + y;
+  }
+// 将函数声明交给变量进行声明
+  let fun4: (x: number, y: string) => number = (x, y) => {
+    return x;
+  };
+// 默认参数 ?可选参数  匿名函数 剩余参数
+  let fun3 = function (x: number = 20, y?: number,...arr:number[]): void {
+    // 一个参数不能同时是默认和可选
+    // 可选参数只能出现在必选参数后面
+    x + y; // 匿名函数 空返回值类型 // 无返回类型,所以不能return
+  };
+// 函数重载
+  // 函数名相同,而形参不同的多个函数
+  function add5 (x: string, y: string): string
+  function add5 (x: number, y: number): number // 会把下面的函数声明ts注释给重载掉
+  function add5(x: string | number, y: string | number): string | number {
+    // 在实现上我们要注意严格判断两个参数的类型是否相等，而不能简单的写一个 x + y
+    if (typeof x === 'string' && typeof y === 'string') {
+      return x + y
+    } else if (typeof x === 'number' && typeof y === 'number') {
+      return x + y
+    }
+  }
+  console.log(add5(1, 2))
+  console.log(add5('a', 'b'))
+  // console.log(add(1, 'a')) // 报错 因为上面定义了,要么xy都为string,要么都为number
+
 /** ===========类型兼容性=========== */ 
 // 两个对象具有相同结构，则认为他们属于同一类型
   class Point {x: number; y: number}
@@ -56,25 +88,3 @@
   // interface B extends A { a: string} 报错 a类型不兼容
   interface B { a: string}
   type C = A & B // 不报错 理解为 C = { a: number | string }
-
-/** ===========函数=========== */
-// 定义 实际给函数的参数和返回值加类型
-  function add(x: number, y: number): number {
-    return x + y;
-  }
-// 默认参数 ?可选参数  匿名函数
-  let add1 = function (x: number = 20, y?: number): void {
-    // 一个参数不能同时是默认和可选
-    // 可选参数只能出现在必选参数后面
-    // 匿名函数 空返回值类型
-    x + y; // 无返回类型,所以不能return
-  };
-// 剩余参数
-  let add2 = function (x: number, ...arr: number[]) {
-    arr; // [2,3,4,5]
-  };
-// 将函数声明交给变量进行声明
-  let add3: (x: number, y: string) => number = (x, y) => {
-    return x;
-  };
-  let sum = add2(1, 2, 3, 4, 5);

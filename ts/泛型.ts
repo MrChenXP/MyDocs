@@ -15,7 +15,6 @@
     }
     printer<number>([1, 2, 3]); // T指定为number,并做为一个参数传给函数
     printer(['1', '2', '3']); // 简化调用泛型函数 利用了类型推论,编译器会根据传入的参数自动地帮助我们确定T的类型
-
 // 泛型约束
     function id<Type>(value: Type): Type {
         // value.length; 报错,Type为任意类型,无法保重拥有length属性
@@ -33,23 +32,20 @@
         // 该约束表示：传入的类型必须具有length属性
         value.length
     }
-
 // 多个泛型变量
-    function getProp<Type, Key extends keyof Type> (obj: Type, key: Key) {
+    function getProp2<Type, Key extends keyof Type> (obj: Type, key: Key) {
         // keyof 接受一个对象类型,生成其键名称的联合类型 'name'|'age'
         // 类型变量Key受Type约束,key只能是Type所有键中的任意一个,或者说只能访问对象中存在的属性
         return obj[key]
     }
-    let person = {name: 'jack', age: 18}
-    getProp(person, 'name')
-    // getProp(person, 'name2') 报错 已经识别为 name|age 并没有name2属性 
-
+    let person2 = {name: 'jack', age: 18}
+    getProp2(person2, 'name')
+    // getProp2(person2, 'name2') 报错 已经识别为 name|age 并没有name2属性 
 // 数组本身就是泛型
     const strS = [1, '34', false]
     strS.forEach((el)=>{
         el // 自动识别 number string boolean
     })
-
 // 泛型类
     class myArrayList<Type> {
         public name: Type;
@@ -58,11 +54,10 @@
             this.list.push(val);
         }
     }
-    let arr = new myArrayList<number>();
-    arr.add(11);
+    let arr6 = new myArrayList<number>();
+    arr6.add(11);
     // arr.add('22'); 报错,指定了number类型
-    console.log(arr.list);
-
+    console.log(arr6.list);
 // 泛型接口
     interface Iadd<T> {
         // name?: T;
@@ -74,8 +69,7 @@
     ad = function (x: number, y: number) {
         return 11;
     };
-
-
+/** ============工具类============ */
 // Partial
   // Partial<Type>用来构造(构建)一个类型,将Type的所有属性设置为可选
   interface Props {

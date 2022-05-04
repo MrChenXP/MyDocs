@@ -16,8 +16,8 @@
 /** =========接口interface========= */
 // 接口定义 约束key名和value数据类型 给对象用的
     interface Person {
-        name?: string, // ? 可选属性
-        readonly age?: string, // readonly 只读属性
+        name?: string; // ? 可选属性
+        readonly age?: string; // readonly 只读属性
         firstName: string; // key一定要是firstName,值一定要是string类型
         getName(msg: string): string; // 一定要有一个方法是getName,参数一定是string,返回值一定是string
         getAge?: ()=>void;

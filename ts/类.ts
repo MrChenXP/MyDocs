@@ -6,7 +6,7 @@
     gender = '男';
     constructor(public firstName, mid, public getName, gender2) { // 构造函数
         // 接收传递过来的参数 构造函数不能有返回值
-        // 使用public等于创建了同名的成员变量
+        // 使用public修饰符等于创建了同名的成员变量,不使用就会报错
         this.mid = mid; // 对变量进行赋值 
         this.gender = gender2 // 传过来的gender2赋值class的gender
         this.fullName = this.setFull(); // 这里使用函数返回值进行赋值
@@ -14,6 +14,13 @@
     // 定义实例方法
     setFull(n?: string): string {
         return this.firstName + this.mid + this.getName + n;
+    }
+    // 存取器 控制对象中成员的访问
+    get sex(){ // 读取器
+      return this.gender
+    }
+    set sex(v){ // 设置器
+      this.gender = '女'
     }
   }
   let stu1 = new Student('jane', 'M.', 'User', 'jack'); // 新建一个类实例
@@ -70,7 +77,7 @@
         this.name = name;
         this.age = age;
         this.id = id;
-        this.sex = '男'
+        this.sex = '男'; // 只读属性可以在构造函数中更改
         this.sex1 = '男' 
         // this.sex2 = '男' // 报错 字面量类型不可重新赋值
     }
@@ -136,8 +143,8 @@
   // 抽象方法只能包含再抽象类中,抽象类可包含抽象方法和普通方法 可以包含成员的实现细节
   // 子类继承抽象类,实现抽象方法
   abstract class Cxl {
-    // 抽象类
-    abstract eat(); // 不能实现,因为是抽象方法  可以包含未实现的抽象方法
+    // 抽象类 可以包含未实现的抽象方法
+    abstract eat(); // 不能有实现方法,否则报错
     run() {
       return `this run`;
     } // 普通方法
