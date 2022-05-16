@@ -1,0 +1,87 @@
+## 安装或者升级    npm install -g @vue/cli
+## 保证vue cli版本在4.5.0以上    vue --version
+## 创建项目     vue create my-project
+  Please pick a preset - 选择 Manually select features    选择预部署：手动选择功能
+  Check the features needed for your project - 选择上 TypeScript ，特别注意点空格是选择，点回车是下一步    检查项目所需的特性
+  Choose a version of Vue.js that you want to start the project with - 选择 3.x (Preview)   选择项目开始时要使用的Vue.js版本  
+  Use class-style component syntax - 直接回车
+  Use Babel alongside TypeScript - 直接回车
+  Pick a linter / formatter config - 直接回车
+  Use history mode for router? - 直接回车
+  Pick a linter / formatter config - 直接回车
+  Pick additional lint features - 直接回车
+  Where do you prefer placing config for Babel, ESLint, etc.? - 直接回车
+  Save this as a preset for future projects? - 直接回车
+======================================================================================================
+创建官方模板项目
+  -- vue init webpack my-project vue项目 webpack打包方式 项目名称
+     Project name  --项目名称
+     Project description --项目描述
+     Author --项目作者
+     Vue build standalone
+     Install vue-router?  --是否安装vue-router
+     Use ESLint to lint your code? --是否使用代码检查工具eslint
+     Set up unit tests --是否启用unit测试
+     Setup e2e tests with Nightwatch? --是否启用e2e测试
+     Should we run `npm install` for you after the project has been created? (reco
+        mended)  --使用npm安装依赖
+
+     license --证书
+     use sass --是否使用sass
+创建自定义模板  vue init github或git目录 my-project
+创建本地模板  vue init 本地目录 my-project
+
+执行完以上,则会创建好项目
+
+
+进去项目文件夹:cd 项目名称
+运行项目: npm run dev 或 npm run satrt
+
+项目结构:
+  build -- 创建项目的配置文件
+  config -- 项目的配置文件
+  node_modules -- 依赖
+  src -- 源代码
+  static -- 项目的静态文件
+  index.html -- 页面模板 入口文件,后面的单页面插入到这个页面 #app元素里去
+  package-lock.json -- yarn的文件
+  src
+    assets -- 项目的静态文件 (编译后文件会一起打包)
+    components -- 项目的单页面组件
+    router --前端路由的配置文件
+    App.vue --项目模板 根组件
+    main.js --项目的入口 执行完index.html后执行这个 
+  package.json  定义了这个项目所需要的各种模块，以及项目的配置信息（比如名称、版本、许可证等元数据）
+    （npm install命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。）
+    name // 项目名称
+    version // 项目版本
+    script 指定了运行脚本命令的npm命令行缩写
+      "start": "npm run dev" // 指定了运行npm run start时，所要执行的命令。
+    dependencies // 项目运行所依赖的模块 由模块名和对应的版本要求组成
+      "aaa":"1.1.1" // 安装时只安装指定版本 遵循“大版本.次要版本.小版本”的格式规定
+      "bbb":"~1.2.2" // 表示安装1.2.x的最新版本（不低于1.2.2）但是不安装1.3.x，也就是说安装时不改变大版本号和次要版本号。
+      "ccc":"ˆ1.2.2" // 表示安装1.x.x的最新版本（不低于1.2.2），但是不安装2.x.x，也就是说安装时不改变大版本号。
+        需要注意的是，如果大版本号为0，则插入号的行为与波浪号相同，这是因为此时处于开发阶段，即使是次要版本号变动，也可能带来程序的不兼容。
+      latest：安装最新版本
+    devDependencies // 项目开发所需要的模块
+    browserslist  //对于浏览器要求
+    peerDependencies // 供插件指定其所需要的主工具的版本
+      {  安装chai-as-promised模块时，主程序chai必须一起安装，而且chai的版本必须是1.x。如果你的项目指定的依赖是chai的2.0版本，就会报错
+        "name": "chai-as-promised",
+        "peerDependencies": {
+          "chai": "1.x"
+        }
+      }
+    "bin": { 指定各个内部命令对应的可执行文件的位置
+      "someTool": "./bin/someTool.js"
+    }  
+    main // 加载的入口文件，require('moduleName')就会加载这个文件。这个字段的默认值是模块根目录下面的index.js
+    config // 字段用于添加命令行的环境变量
+    browser // 指定该模板供浏览器使用的版本。Browserify这样的浏览器打包工具，通过它就知道该打包那个文件
+    engines // 字段指明了该模块运行的平台，比如 Node 的某个版本或者浏览器
+      "node" : ">=0.10.3 <0.12",
+      "npm" : "~1.0.20",
+    man // 用来指定当前模块的man文档的位置。
+    preferGlobal // 值是布尔值，表示当用户不将该模块安装为全局模块时（即不用–global参数），要不要显示警告，表示该模块的本意就是安装为全局模块。
+    style指定供浏览器使用时，样式文件所在的位置。样式文件打包工具parcelify，通过它知道样式文件的打包位置
+  package-lock.json 使npm下载更快 所有依赖都在这(依赖的依赖) 然后地址也写在里面
