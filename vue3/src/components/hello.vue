@@ -3,6 +3,7 @@
   <button @click="updateCount">修改</button>
 
   <div>{{JSON.stringify(state)}}</div>
+  <div>{{JSON.stringify(obj)}}</div>
   <button @click="update">修改</button>
 </template>
 
@@ -30,11 +31,11 @@ export default defineComponent({
     // reactive 定义多个数据的响应式
      // 接收一个普通对象然后返回该普通对象的响应式代理器对象 响应式转换是“深层的”：会影响对象内部所有嵌套的属性
             // 内部基于 ES6 的 Proxy 实现，通过代理对象操作源对象内部数据都是响应式
-    const obj = {name: 'tom',age: 25,wife: {name: 'marry',age: 22},}
+    const obj = {name: 'tom',age: 25,wife: {name: 'marry',age: 22}} // 
     const state = reactive(obj) // state为proxy代理对象
     const update = () => {
-      obj.name = 'jack' // state不会被更改
-      state.name += '--'
+      obj.name = 'jack' // state不会被更改,页面上的obj也不会更改(不是响应式)
+      state.name += '--' // 页面和obj都会被更改
       state.age += 1
       state.wife.name += '++'
       state.wife.age += 2
@@ -48,13 +49,31 @@ export default defineComponent({
       // 属性
       count0,
       count,
+      obj,
       state,
       // 方法
       updateCount,
       update,
     };
-  },
-});
+
+    // 比较Vue2与Vue3的响应式(重要)
+    //   #vue2的响应式
+    //   核心:
+    //      对象: 通过defineProperty对对象的已有属性值的读取和修改进行劫持(监视/拦截)
+    //      数组: 通过重写数组更新数组一系列更新元素的方法来实现元素修改的劫持
+    //   问题
+    //      对象直接新添加的属性或删除已有属性, 界面不会自动更新
+    //      直接通过下标替换元素或更新length, 界面不会自动更新 arr[1] ={}
+    // Vue3的响应式
+    //   核心:
+    //     通过Proxy(代理): 拦截对data任意属性的任意(13种)操作, 包括属性值的读写, 属性的添加, 属性的删除等...
+    //     通过 Reflect(反射): 动态对被代理对象的相应属性进行特定的操作
+    //   文档:
+    //   https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+    //   https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect
+
+    }
+  });
 </script>
 
 <style scoped></style>
