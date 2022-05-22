@@ -15,3 +15,4 @@
 
 // onRenderTracked
 // onRenderTriggered
+// vue3支持vue2的声明周期,但vue3的组合式api比vue2运行的更块更早
