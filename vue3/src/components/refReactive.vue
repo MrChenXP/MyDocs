@@ -1,14 +1,16 @@
 <template>
-  <div>{{ count }}</div>
-  <button @click="updateCount">修改</button>
+  <div>
+    <div>{{ count }}</div>
+    <button @click="updateCount">修改</button>
 
-  <div>{{ JSON.stringify(state) }}</div>
-  <div>{{ JSON.stringify(obj) }}</div>
-  <button @click="update">修改update</button>
-  <div>{{ JSON.stringify(m1) }}</div>
-  <div>{{ JSON.stringify(m2) }}</div>
-  <div>{{ JSON.stringify(m3) }}</div>
-  <button @click="updateM3">修改updateM3</button>
+    <div>{{ JSON.stringify(state) }}</div>
+    <div>{{ JSON.stringify(obj) }}</div>
+    <button @click="update">修改update</button>
+    <div>{{ JSON.stringify(m1) }}</div>
+    <div>{{ JSON.stringify(m2) }}</div>
+    <div>{{ JSON.stringify(m3) }}</div>
+    <button @click="updateM3">修改updateM3</button>
+  </div>
 </template>
 
 <script lang="ts">
