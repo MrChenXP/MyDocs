@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>FefReactive</h1>
     <div>{{ count }}</div>
     <button @click="updateCount">修改</button>
 
@@ -17,7 +18,7 @@
 import { defineComponent, ref, reactive } from "vue";
 
 export default defineComponent({
-  name: "FefReactive",
+  name: "fefReactive",
   props: {},
 
   setup() {
