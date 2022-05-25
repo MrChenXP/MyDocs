@@ -68,31 +68,37 @@
      * --创建&挂载--
      * 1.构造函数生成vue实例 new Vue() 
      * 2.初始化事件&生命周期
-     *   beforeCreate() Vue实例创建前,vue实例中的el,data,data中的message都为undefined
+    beforeCreate() Vue实例创建前,vue实例中的el,data,data中的message都为undefined
      * 3.初始化注入&校验
-     *   created() 实例创建后,el还是undefined，而数据已经与data中的属性进行绑定
+    created() 实例创建后,el还是undefined，而数据已经与data中的属性进行绑定
      * 4.检测是否有el对象 
      *   无el对象,就检测Vm.$mount(el),有没有设置这个el对象,有就挂载他(el)
      *     new Vue().$mount(el) ==> $mount用法
      * 5.检测是否制定template模板
      * 6.有模板:将template编译到render函数
      *   无模板:将el外部的html作为template编译
-     *   beforeMount() 组件挂载前,页面未展示,还只是虚拟dom,完成了data和el数据初始化
+    beforeMount() 组件挂载前,页面未展示,还只是虚拟dom,完成了data和el数据初始化
      * 7.创建Vm.$el并用其替换el
-     *   mounted() 编译完了,挂载完成,用户已经能看到页面了。这个方法执行后dom树渲染到页面(因为可能会在这个函数操纵dom)
+    mounted() 编译完了,挂载完成,用户已经能看到页面了。这个方法执行后dom树渲染到页面(因为可能会在这个函数操纵dom)
      * 8.挂载完成
      * --更新--
      * 1.当date被修改时
-     *   beforeUpdate() 组件更新前,数据有更新被调用,此处更改数据不会触发附加的重渲染过程
+    beforeUpdate() 组件更新前,数据有更新被调用,此处更改数据不会触发附加的重渲染过程
      * 2.虚拟dom重新渲染并应用更新
-     *   updated 组件更新后,dom也重新render完成
+    updated 组件更新后,dom也重新render完成
      * --销毁--
      * 1.调用Vm.$destroy()
-     *   beforeDestroy() 销毁之前,还可以访问实例数据
+    beforeDestroy() 销毁之前,还可以访问实例数据
      * 2.接触绑定,销毁组件以及事件监听器
      * 3.销毁完毕
-     *   destroyed() 销毁之后,Dom元素存在,只是不再受vue控制
+    destroyed() 销毁之后,Dom元素存在,只是不再受vue控制
      * 如果使用构造生成文件(例如构造单文件组件),模板编译将提前执行
+     * 9 错误机制
+     errorCaptured()
+     * 当捕获一个来自子孙组件的错误时被调用。此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串
+     * 10 缓存
+     activated() 被 keep-alive 缓存的组件激活时调用
+     deactivated() 被 keep-alive 缓存的组件停用时调用
     */
   })
 </script>

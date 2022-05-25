@@ -1,4 +1,5 @@
 <template>
+  <h1>看完58</h1>
   <div>vue2中的html模板中必须有一对跟标签,vue3组件的html模板可以没有跟标签</div>
   <!-- 使用子级 -->
    <child :msg="msg" msg2="cba" @emitFun="emitFun"/>
@@ -8,7 +9,7 @@
 // defineComponent函数,目的是定义一个组件,内部可以传入一个配置对象
 import { defineComponent,ref } from "vue";
 // 引入一个子级组件
-import child  from "./components/watchComputed.vue";
+import child  from "./components/hooks/useRequest.vue";
 
 // 暴露出一个定义好的组件
 export default defineComponent({
