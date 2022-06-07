@@ -9,7 +9,7 @@
 // defineComponent函数,目的是定义一个组件,内部可以传入一个配置对象
 import { defineComponent,ref } from "vue";
 // 引入一个子级组件
-import child  from "./components/hooks/useRequest.vue";
+import child  from "./components/refsToRefs.vue";
 
 // 暴露出一个定义好的组件
 export default defineComponent({

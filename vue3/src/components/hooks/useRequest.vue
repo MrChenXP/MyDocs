@@ -24,11 +24,11 @@ import {
 import useRequest from './useRequest' 
 
 // 地址数据接口
-interface AddressResult {
-  id: number;
-  name: string;
-  distance: string;
-}
+// interface AddressResult {
+//   id: number;
+//   name: string;
+//   distance: string;
+// }
 
 // 产品数据接口
 interface ProductResult {
