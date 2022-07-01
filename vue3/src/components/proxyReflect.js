@@ -6,11 +6,17 @@
 //   问题
 //      对象直接新添加的属性或删除已有属性, 界面不会自动更新
 //      直接通过下标替换元素或更新length, 界面不会自动更新 arr[1] ={}
+//  解决
+//   Vue.set(target,key,val) Vue.$set(target,key,val)
   let obj = {};
   Object.defineProperty(obj, "name", {
     get() {},
     set() {},
   });
+  // this.$set(this._data.listData, 'fiscalYear',fiscalYear )
+  // this.$set(this._data.arr, 3, 'arr')
+  // this.$set(this.listData, 'fiscalYear',fiscalYear )
+  // this.$set(this.arr, 3, 'arr')
 // Vue3
 //   核心:
 //     通过Proxy(代理): Proxy 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）
