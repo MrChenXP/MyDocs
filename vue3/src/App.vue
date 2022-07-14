@@ -1,5 +1,5 @@
 <template>
-  <h1>看完59</h1>
+  <h1>看完60</h1>
   <div>vue2中的html模板中必须有一对跟标签,vue3组件的html模板可以没有跟标签</div>
   <!-- 使用子级 -->
    <child :msg="msg" msg2="cba" @emitFun="emitFun"/>

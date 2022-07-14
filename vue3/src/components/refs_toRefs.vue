@@ -8,11 +8,12 @@
     <h3>name: {{ name }}</h3>
     <h3>age: {{ age }}</h3>
 
+    <input type="text" ref="inputRef">
   </div>
 </template>
 
 <script lang="ts">
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, ref, onMounted } from "vue";
 /*
 toRefs:
   将响应式对象中所有属性包装为ref对象, 并返回包含这些ref对象的普通对象
@@ -22,6 +23,7 @@ toRefs:
 export default {
   name: "refs_toRefs",
   setup() {
+  /***=== toRefs ===*/
     // user是响应式,但name、age不是响应式,定时器改变无效
     const user = reactive({
       name: '无敌',
@@ -43,14 +45,21 @@ export default {
       state.bar += "+";
     }, 1000);
     
+    // 返回的state里的属性已经改为响应式了
+    const { foo2, bar2 } = useReatureX();
 
-    const { foo2, bar2 } = useReatureX(); // 返回的state里的属性已经改为响应式了
+  /**=== ref ===*/
+    const inputRef = ref<HTMLElement|null>(null) // 默认一个空 setup中,模板还未生成
+    onMounted(()=>{
+      inputRef.value && inputRef.value.focus() // 有这个元素且聚焦这个元素
+    })
 
     return {
       ...user,
       ...stateAsRefs,
       foo2,
       bar2,
+      inputRef
     };
   },
 };
