@@ -13,6 +13,10 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "SetupTip",
   props: ['msg'],
+  // props: {
+  //     pageData: { type: Object },
+  // },
+  // emits: ['update:loadingShow', 'export'], // 规范 没有代码用处,给开发者查看返回事件
   // 新的option, 所有的组合API函数都在此使用, 只在初始化时执行一次
   // 函数如果返回对象, 对象中的属性或方法, 模板中可以直接使用
   // setup是组合api的入口函数
@@ -43,6 +47,7 @@ export default defineComponent({
       alert(count);
     }
     console.log(props.msg, context.attrs.msg2, context.slots, context.emit)
+    // console.log(props.pageData) // 对象直接使用
     // 分发自定义事件
     function emitP() {
       context.emit('emitFun', '传给父级的值')
@@ -74,7 +79,7 @@ export default defineComponent({
     showMsg2(){
       // 与setup中的方法一起合并到vue对象
       console.log('showMsg2')
-      console.log(this)
+      console.log(this.count)
     }
   }
 

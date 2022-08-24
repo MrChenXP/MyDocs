@@ -27,13 +27,14 @@ export default defineComponent({
       firstName: 'A',
       lastName: 'B'
     })
-    // computed函数: 
+    //------computed函数-------
     //   与computed配置功能一致
     const fullName1 = computed(() => {
       //   只有getter
       console.log('fullName1')
       return user.firstName + '-' + user.lastName
     })
+    console.log(fullName1.value) // 需要.value
     const fullName2 = computed({
       //   有getter和setter
       get () {
@@ -49,12 +50,12 @@ export default defineComponent({
     })
     const fullName3 = ref('')
 
-    // watch函数
+    // --------watch函数--------
     //   与watch配置功能一致
     //   监视指定的一个或多个响应式数据, 一旦数据变化, 就自动执行监视回调
     //   默认初始时不执行回调, 但可以通过配置immediate为true, 来指定初始时立即执行第一次
     //   通过配置deep为true, 来指定深度监视
-    watch(user, 
+    watch(user,
       () => {
         fullName3.value = user.firstName + '-' + user.lastName
       },
@@ -74,8 +75,14 @@ export default defineComponent({
     //   使用数组来指定
     //   如果是ref对象, 直接指定
     //   如果是reactive对象中的属性,  必须通过函数来指定
-    watch([() => user.firstName, () => user.lastName, fullName3], (values) => {
-      console.log('监视多个数据', values)
+    watch([
+        () => user.firstName,
+        () => user.lastName,
+        fullName3
+        // ()=> props.path, 监听props的属性
+      ],
+      (values) => {
+        console.log('监视多个数据', values)
     })
 
     
