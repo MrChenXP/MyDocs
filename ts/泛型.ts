@@ -13,6 +13,7 @@
             console.log(item);
         }
     }
+    
     printer<number>([1, 2, 3]); // T指定为number,并做为一个参数传给函数
     printer(['1', '2', '3']); // 简化调用泛型函数 利用了类型推论,编译器会根据传入的参数自动地帮助我们确定T的类型
 // 泛型约束
@@ -32,6 +33,7 @@
         // 该约束表示：传入的类型必须具有length属性
         value.length
     }
+    function id4<T = number>(val: T) { return val} // 泛型默认值 可变相实现不必填
 // 多个泛型变量
     function getProp2<Type, Key extends keyof Type> (obj: Type, key: Key) {
         // keyof 接受一个对象类型,生成其键名称的联合类型 'name'|'age'
