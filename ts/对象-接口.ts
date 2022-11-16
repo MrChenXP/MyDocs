@@ -1,24 +1,24 @@
 /** =========对象========= */
-    // 描述对象的结构：有什么类型的属性和方法
+// 描述对象的结构：有什么类型的属性和方法
     let person: { name: string } = { name: "jack" };
 // 通过自定义类型 创建一个对象类型
     type objType = {
-    name: string;
-    age?: number; // 可选属性
-    sayHi(): void;
-    greet(name: string): void;
-    sayAge(age: number): number;
-    sayName: () => void;
-    getName: Function;
+        name: string;
+        age?: number; // 可选属性
+        sayHi(): void;
+        greet(name: string): void;
+        sayAge(age: number): number;
+        sayName: () => void;
+        getName: Function;
     };
     let myObj = (config: objType): void => {}; // 将创建好的类型使用在函数定义上
 
 /** =========接口interface========= */
 // 接口定义 约束key名和value数据类型 给对象用的
     interface Person {
+        firstName: string; // key一定要是firstName,值一定要是string类型
         name?: string; // ? 可选属性
         readonly age?: string; // readonly 只读属性
-        firstName: string; // key一定要是firstName,值一定要是string类型
         getName(msg: string): string; // 一定要有一个方法是getName,参数一定是string,返回值一定是string
         getAge?: ()=>void;
         getFirstName?: Function;
@@ -27,12 +27,13 @@
         // 参数注解，按照Person接口来约束
         return `参数只要符合Person接口就行${val.firstName} ${val.getName}`;
     }
+    //传参的时候,要按照约束来
     fun2({
         firstName: 'Jane',
         getName(msg: string) {
             return msg;
         },
-    }); //传参的时候,要按照约束来
+    }); 
 // 对函数进行约束
     interface ImyFunction {
         (a: string, b: number): boolean; // 对参数和返回值约束
