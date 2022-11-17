@@ -82,7 +82,7 @@ export default defineComponent({
         // ()=> props.path, 监听props的属性
       ],
       (values) => {
-        console.log('监视多个数据', values)
+        console.log('监视多个数据', values); // [user.firstName, user.lastName, fullName3] 监听的值数组
     })
 
     

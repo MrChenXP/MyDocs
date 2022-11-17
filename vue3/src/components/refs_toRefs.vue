@@ -50,7 +50,9 @@ export default {
 
   /**=== ref ===*/
     const inputRef = ref<HTMLElement|null>(null) // 默认一个空 setup中,模板还未生成
+    // const inputRef = ref<Vue|null>(null) // 有时候不是dom是个vue对象
     onMounted(()=>{
+      console.log(inputRef)
       inputRef.value && inputRef.value.focus() // 有这个元素且聚焦这个元素
     })
 
