@@ -52,6 +52,16 @@ export default defineComponent({
     function emitP() {
       context.emit('emitFun', '传给父级的值')
     }
+    // 更新props的值
+    // context.emit('update:pageData', )
+    // let pageDataSync: any = computed({
+    //   get() {
+    //     return props.pageData;
+    //   },
+    //   set(value) {
+    //     emit('update:pageData', value);
+    //   },
+    // }); 
      
 
     // 返回的是一个对象
