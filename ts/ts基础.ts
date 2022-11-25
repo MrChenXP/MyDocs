@@ -20,7 +20,7 @@
     let list3: Array<number> = [1,2,3];// 数组泛型方式创建数组
     let lits4: (string | number) [] = [1,'c']; // 联合类型的数组
 // symbol
-    let sym1: symbol = Symbol();
+    // let sym1: symbol = Symbol('hello'); // 需要配置es6
 // 元祖
     //  元祖(Tuple)表示一个已知元素数量和类型的数组
     let list4: [string, number] = ["a",10]; // 数量和类型要已知
@@ -35,6 +35,7 @@
     Weeks.Wed; // 5 下标 自增长为5
     Weeks.str; // ts 设置了字符串,后面的值没有自增长,且必须设置值
     let day2:string = Weeks[4]; // 'Tue'
+    // day = 'ts' // 报错 只能是Weeks里的值 ts并不能识别为Weeks里的值 day=Weeks.str才行
 // any
     // AnyScript任何类型都可以 失去类型保护机制
     let any1: any= 1;
@@ -81,7 +82,7 @@
     // 未定义数据类型,会根据值来自动判断类型,后面赋其他类型会报错
     let l2 = 3; // 推论为number
     let l3; // 未赋值,推论为any类型
-    function add(num1: number,num2: number) {
+    function add2(num1: number,num2: number) {
         // 推断函数返回值为number
         return num1 + num2;
     }
@@ -95,7 +96,7 @@
     let strLen3: number = (l5 as string).length; // 将l5断言为string类型 jsx中,只有这种as写法可以
     const aLink = document.getElementById('link')
     // aLink.href = 'www.baidu.com' // 报错,推断为所有dom公共的属性和方法
-    const aLink2= document.getElementById('link') as HTMLAnchorElement;
+    const aLink2= document.getElementById('link') as HTMLAnchorElement; // 可以单击此处查看已经定义好的公共类型
     aLink2.href = 'www.baidu.com' // console.dir()打印dom元素，可知道dom元素的类型
 // 类型注解 为函数或变量添加约束
     function fun1(person: string){
@@ -104,10 +105,10 @@
 // 字面量类型
     let str1 = 'hello ts' // string类型 let声明的是一个变量,值可以变化
     const str2 = 'ts' // 'ts'类型 const是一个常量,值不可变化,类型固定 === str2:'ts' = 'ts'
-    const obj2 = {x: 2} // object等其他类型也可是字面量类型
+    const obj22 = {x: 2} // object等其他类型也可是字面量类型
 // typeof
     // 可以在类型上下文中引用变量或属性的类型(类型查询)
-    let p = {x: 1, y: 2}
+    let p2 = {x: 1, y: 2}
     function formatPoint(ponit: {x: number; y: number}){}    
     function formatPoint2(ponit: typeof p){} // 将p作为类型使用
     let num: typeof p.x // 将p.x作为类型
