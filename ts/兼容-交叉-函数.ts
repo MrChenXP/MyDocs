@@ -71,14 +71,14 @@
 //  =========交叉类型 & =========
 // 类似接口继承,用于组合多个类型为一个类型(常用于对象类型)
   interface Point2D { x: number; y: number; }
-  interface Person { name: string }
-  type PersonDetail = Person & Point2D
-  let obj: PersonDetail = {
+  interface PersonJX { name: string }
+  type PersonDetail = PersonJX & Point2D
+  let objJX: PersonDetail = {
     x: 2,
     y: 3,
     name: 'jack'
   }
-  let obj2: Person & Point2D = {
+  let obj2: PersonJX & Point2D = {
     x: 2,
     y: 3,
     name: 'jack'
