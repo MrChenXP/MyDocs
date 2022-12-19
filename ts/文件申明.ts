@@ -97,4 +97,4 @@ declare class Greeter {
 // export as namespace UMD 库声明全局变量
 // declare global 扩展全局变量
 // declare module 扩展模块
-/// <reference /> 三斜线指令
+/// <reference /> 三斜线指令 包含单个XML标签的单行注释。 注释的内容会做为编译器指令使用。
