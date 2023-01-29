@@ -1,0 +1,27 @@
+{
+  "name": "mydocs",
+  "version": "1.0.0",
+  "description": "自己学习整理的笔记和文档",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrChenXP/MyDocs.git"
+  },
+  "keywords": [
+    "docs"
+  ],
+  "author": "cxp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrChenXP/MyDocs/issues"
+  },
+  "homepage": "https://github.com/MrChenXP/MyDocs#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "husky": "^8.0.3"
+  }
+}
