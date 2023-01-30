@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "lint": "eslint --fix src",
+    "lint:style": "stylelint --fix ./**/*.{scss,css,vue} --custom-syntax",    
+    "prepare": "husky install",
+    "prettier": "prettier --write --loglevel log src/**/*.{js,json,tsx,css,less,scss,vue,html,md,ts}"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0"
   }
 }
