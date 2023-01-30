@@ -16,7 +16,7 @@ npx husky install // 安装husky 开启git hooks,会创建.husky/_/*文件夹   
 npx husky add .husky/pre-commit "npx --no-install lint-staged"   // 新增hook.  husky add <file> [cmd]
   npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
     npx husky set pre-commit check-file // 设置、修改hook. husky set <file> [cmd]
-  echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+  echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js  // 注意编码问题 utf-8才行
 
 配置好钩子后，再去配置钩子命令里使用到的工具 commitlint.config.js eslint(.eslintrc.js) style-lint(.stylelintrc.js) .prettierrc.js
   
