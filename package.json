@@ -10,7 +10,8 @@
     "eslint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx,.vue src/",
     "stylelint:fix": "stylelint ./src/**/*.{vue,css,scss} --fix",
     "check:tsc": "vue-tsc --noEmit --skipLibCheck",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "cxp": "npm -v"
   },
   "repository": {
     "type": "git",
