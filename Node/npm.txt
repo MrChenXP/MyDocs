@@ -22,6 +22,7 @@
 	局部安装：（只会在当前项目中安装，一般只用来安装所需要的模块）
 	    安装模块的命令  (npm install <模块的名称>)
         npm install express             --下载 express 模块 (有50多个文件，因为express模块还依赖了一些其他模块)
+        npm install xxx xxx             --下载多个模块
         npm install express --save      --下载并安装模板并写到packge.json文件中 dependencies节点中
         npm install                     --安装项目中所依赖的模块
         npm install express --save-dev  --开发环境所需要的依赖  devDependencies
