@@ -1,4 +1,3 @@
- Husky + Commintlint + Lint-staged
 husky：Git Hook管理工具
 将其安装到所在仓库的过程中它会自动在.git/目录下增加相应的钩子实现在pre-commit阶段就执行一系列流程保证每一个commit 的正确性。
 
