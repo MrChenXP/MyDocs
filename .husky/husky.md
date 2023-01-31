@@ -5,13 +5,13 @@ https://www.e-learn.cn/topic/3353970 中
 https://git-scm.com/docs/githooks 英
 
 # 使用流程 
-  npx npm命令,建议v7,不同npm可能命令不同 实在不会就手动复制一份(存疑)
 npm install husky --save-dev 安装
 
 npx husky install // 安装husky 开启git hooks,会创建.husky/_/*文件夹    跟.git同级,core.hooksPath来设置
   npx husky uninstall  // 卸载
   npm set-script prepare "husky install" 手动把命令设置到package
  
+  npx npm命令,建议v7,不同npm可能命令不同 实在不会就手动复制一份
 npx husky add .husky/pre-commit "npx --no-install lint-staged"   // 新增hook.  husky add <file> [cmd]
   npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
     npx husky set pre-commit check-file // 设置、修改hook. husky set <file> [cmd]
