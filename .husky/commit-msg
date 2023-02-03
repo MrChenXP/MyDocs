@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-
+# 如果工具运行时一直找不到配置,可尝试把它放到package.json
 npx --no-install commitlint --edit $1

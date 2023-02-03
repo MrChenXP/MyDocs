@@ -18,6 +18,7 @@ npx husky add .husky/pre-commit "npx --no-install lint-staged"   // 新增hook. 
   echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js  // 注意编码问题 utf-8才行
 
 配置好钩子后，再去配置钩子命令里使用到的工具 commitlint.config.js eslint(.eslintrc.js) style-lint(.stylelintrc.js) .prettierrc.js
+
   
 # 常见报错
 
