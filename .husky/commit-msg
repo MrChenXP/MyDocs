@@ -1,4 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
+
+#这个是采用 依赖包里面的 node_modules
+# ./my-new-app/node_modules/.bin/commitlint --edit
+
 # 如果工具运行时一直找不到配置,可尝试把它放到package.json
 npx --no-install commitlint --edit $1

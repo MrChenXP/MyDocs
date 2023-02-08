@@ -3,6 +3,7 @@
 
 # npx npm自带命令
 # https://juejin.cn/post/7142666525365764104
-# 先找./node_modules/.bin可执行命令 再找全局 不行就临时下载
+# npx先找./node_modules/.bin可执行命令 再找全局 不行就临时下载
 # --no-install 不自动临时下载
+# npm run cxp
 npx --no-install lint-staged
