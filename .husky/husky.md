@@ -1,6 +1,6 @@
 # husky：Git Hook 管理工具
 
-- 将其安装到所在仓库的过程中它会自动在.git/目录下增加相应的钩子实现在 pre-commit 阶段就执行一系列流程保证每一个 commit 的正确性\*
+- 将其安装到所在仓库的过程中它会自动在.git/目录下增加相应的钩子实现在 pre-commit 阶段就执行一系列流程保证每一个 commit 的正确性
   [中](https://www.e-learn.cn/topic/3353970) [英](https://git-scm.com/docs/githooks)
 
 ### 使用流程

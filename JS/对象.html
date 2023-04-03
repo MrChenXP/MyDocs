@@ -21,49 +21,49 @@
 //    console.log("show()=" + show());     //报错 没有show这个方法 show已经被定义成变量  类型错误
 //对象的创建
 //  字面量方式
-//    var obj = {     //  声明且初始化
-//      a: 12,
-//      showA: function () {
-//        return this.a;      //this指向obj
-//      }
-//    };
-//    var obj1 = { };//声明
-//    obj1.b = 13; //增加属性
-//    obj1.c = function () {return this.b} //增加方法
-//    console.log("obj.a=" + obj.showA());  //12 //使用属性和方法时必须清楚是哪个对象的
-//    console.log("obj1.b=" + obj1.b + "obj1.c=" + obj1.c()); //13 13
+     var obj = {     //  声明且初始化
+       a: 12,
+       showA: function () {
+         return this.a;      //this指向obj
+       }
+     };
+     var obj1 = { };//声明
+     obj1.b = 13; //增加属性
+     obj1.c = function () {return this.b} //增加方法
+     console.log("obj.a=" + obj.showA());  //12 //使用属性和方法时必须清楚是哪个对象的
+     console.log("obj1.b=" + obj1.b + "obj1.c=" + obj1.c()); //13 13
 //  对象的方法(new)
 //    new操作符(只能用于函数对象)
 //      1、创建一个空对象
 //      2、把this绑定到空对象上
 //      3、把空对象__proto__属性指向到构造器的原型上 (参考下面原型,原型链)
 //      4、返回空对象
-//    var obj = new Object();
-//    obj.a = 12;         //增加属性
-//    obj.showA = function(){     //增加方法
-//        return this.a;
-//    };
-//    console.log(obj.a);
-//    console.log(obj.showA());
-//    function show(){ console.log(this); }
-//    var obj = new show();       // 在函数调用时使用new会使得 函数里的this 指向到实例对象(函数的返回值)上
-//    console.log(obj);       //obj就称为实例对象
+       var obj2 = new Object();
+       obj2.a = 12;         //增加属性
+       obj2.show2 = function(){     //增加方法
+           return this.a;
+       };
+       console.log(obj2.a);
+       console.log(obj2.show2());
+       function show3(){ console.log(this); }
+       var obj3 = new show3();       // 在函数调用时使用new会使得 函数里的this 指向到实例对象(函数的返回值)上
+       console.log(obj3);       //obj3就称为实例对象
 //  Object.create()
 //    create obj指向的时括号里的构造(参数)，如create(Object.prototype) create(function.prototype) crate(null)
-//      var obj = Object.create(null);    //Object.create({});  //空对象
-//      obj.a = 122;         //增加属性
-//      obj.showA = function(){     //增加方法
-//          return this.a;
-//      };
-//      console.log(obj.a);
-//      console.log(obj.showA());
+       var obj4 = Object.create(null);    //Object.create({});  //空对象
+       obj4.a = 122;         //增加属性
+       obj4.show4 = function(){     //增加方法
+           return this.a;
+       };
+       console.log(obj4.a);
+       console.log(obj4.show4());
 //    Object.create(对象原型链上使用键值对，对象本身使用键值对)
-//      var obj1 = Object.create(obj,{          //obj1.__proto__指向到obj上
-//        b:{
-//          value: 13,
-//          writable: true
-//        }
-//      });
+       var obj5 = Object.create(obj4,{          //obj5.__proto__指向到obj4上
+         b:{
+           value: 13,
+           writable: true
+         }
+       });
 
 /** 设置对象键名的权限 **/
 //所有键名
@@ -148,7 +148,7 @@
 //    console.log(obj.a + ' obj.b='+obj.b)   //33 33
 
 /** 原型 **/
-//  __proto__ 指向对象的原型,对象独有,顶端是null,函数也是对象
+//  __proto__ 指向对象的原型,对象独有,顶端是null,函数也是对象   不是标准属性,标准属性是[[prototype]]
 //  prototype 指向函数的原型对象==实例的原型[构造函数(构造器)构造出来的实例(对象)的原型(__proto__)]
 //  constructor 指向该对象的构造函数 Function的构造函数是自己,所有函数和对象最终都是由Function构造出来的
 //  键名出现的位置
@@ -191,7 +191,7 @@
 //    console.log(obj.showName === obj1.showName);      //true
 
 /*原型链*/
-// 实例对象的原型(__proto__)指向到构造器的原型对象(prototype)
+// 实例对象的原型(__proto__)指向到构造器的原型对象(prototype) 
 //   原型对象(prototype)有construtor指向构造函数
 //   构造函数有prototype指向原型
 //   new 构造器会生成一个实例对象,有一个属性[[prototype]](不可操作)默认指向__proto__，
@@ -297,11 +297,11 @@
 //    Child.prototype = Object.create(Parent.prototype);  //IE9+  通过原型链来继承父类的原型
     Child.prototype = new Parent();
     Child.prototype.constructor = Child; //让子类原型上的constructor指回到子类上
-    var obj = new Child('小陈',33,'boy')
-    console.log(obj instanceof Child); //true 实例对象的构造器
+    var objc = new Child('小陈',33,'boy')
+    console.log(objc instanceof Child); //true 实例对象的构造器
     console.log(Object.getPrototypeOf(obj) === Child.prototype);//true 获取一个对象的原型
-    console.log(Child.prototype.isPrototypeOf(obj)); //true 判断一个对象的原型
-    console.log(c1.constructor);
+    console.log(Child.prototype.isPrototypeOf(objc)); //true 判断一个对象的原型
+    // console.log(c1.constructor);
 
 //    深拷贝函数 只拷贝第一层是没用的。子对象也是地址，改了a，b还是会联动被改动。所以要子对象一起深拷贝
 function deepClone(obj){
