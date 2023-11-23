@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>setup组件</h1>
-    {{count}}
+    {{ count }}
     <h3>{{msg}}</h3>
     <button @click="emitP">分发事件</button>
   </div>
@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+// import { getCurrentInstance } from "vue"; // setup获取vue对象, getCurrentInstance().xxxx
 
 export default defineComponent({
   name: "SetupTip",
