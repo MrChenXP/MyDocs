@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+/** ==========WebSocket========== **/
+// HTML5 开始提供的一种在单个 TCP 连接上进行全双工通讯的协议
+// 创建
+// new WebSocket(url, [protocol] ) (连接的URL, 可选可接受的子协议)
+// 属性
+//  Socket.readyState 只读,表示连接状态 
+//    0 - 表示连接尚未建立。1 - 表示连接已建立，可以进行通信。2 - 表示连接正在进行关闭。3 - 表示连接已经关闭或者连接不能打开。
+//  Socket.bufferedAmount 只读 已被 send() 放入正在队列中等待传输，但是还没有发出的 UTF-8 文本字节数。
+// 事件
+//  Socket.onopen	连接建立时触发
+//  Socket.onmessage	客户端接收服务端数据时触发
+//  Socket.onerror	通信发生错误时触发
+//  Socket.onclose	连接关闭时触发
+// 方法
+//  Socket.send()	使用连接发送数据
+//  Socket.close()	关闭连接
+let ws = new WebSocket('ws://10.88.130.93:8888/cockpit' );
+// let ws = new WebSocket('wss://broadcast.chat.bilibili.com:7826/sub?platform=web' );
+ws.onopen = ()=>{
+  ws.send(JSON.stringify({"command":"5000","subCommand":"5001","deptId":"462b508602eb4091897ed5fef46a8d9d","startTime":"2023-04-01 00:00:00","endTime":"2023-12-01 23:59:59"}));
+  console.log('Web Socket 已连接上，使用 send() 方法发送数据...')
+};
+ws.onmessage = (evt)=>{
+  let received_msg = evt.data;
+  console.log("客户端接收服务端数据时触发...",received_msg);
+};
+ws.onclose = ()=>{
+  console.log("连接关闭时触发...");
+};
+
+/** ==========pywebsocket========== **/
+// 创建一个WebSocket服务器  https://www.runoob.com/html/html5-websocket.html
+// 没看，上面的地址是一个其他人地址，换个网络就不能用
+
+  
+</script>
+  
+</body>
+</html>
