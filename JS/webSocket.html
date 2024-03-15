@@ -18,12 +18,13 @@
 // 事件
 //  Socket.onopen	连接建立时触发
 //  Socket.onmessage	客户端接收服务端数据时触发
-//  Socket.onerror	通信发生错误时触发
+//  Socket.onerror	通信发生错误时触发 且之后会触发close事件 (前后台主动关闭连接,不属于通讯错误,不属于error事件)
 //  Socket.onclose	连接关闭时触发
 // 方法
 //  Socket.send()	使用连接发送数据
 //  Socket.close()	关闭连接
-let ws = new WebSocket('ws://10.88.130.93:8888/cockpit' );
+// let ws = new WebSocket('ws://110.88.130.93:8888/cockpit' );
+let ws = new WebSocket('ws://dev.report.analyse.goldau.cn/websocket?auth=ZjA3YWZjN2JlOWY1NmYzZjFkYzQwMTFlMDk4MWIyMTVfbGVhZGVyY29ja3B0')
 // let ws = new WebSocket('wss://broadcast.chat.bilibili.com:7826/sub?platform=web' );
 ws.onopen = ()=>{
   ws.send(JSON.stringify({"command":"5000","subCommand":"5001","deptId":"462b508602eb4091897ed5fef46a8d9d","startTime":"2023-04-01 00:00:00","endTime":"2023-12-01 23:59:59"}));
@@ -36,7 +37,9 @@ ws.onmessage = (evt)=>{
 ws.onclose = ()=>{
   console.log("连接关闭时触发...");
 };
-
+ws.onerror = ()=>{
+  console.log("通信发生错误时触发...");
+};
 /** ==========pywebsocket========== **/
 // 创建一个WebSocket服务器  https://www.runoob.com/html/html5-websocket.html
 // 没看，上面的地址是一个其他人地址，换个网络就不能用
