@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>友盟</title>
+  </head>
+  <body>
+    <button id="myButton">友盟js自定义事件</button>
+    <script>
+      // 需要用启动个服务器不然跨域，单纯html是请求不到的
+
+      /** 集成友盟web sdk **/
+      (function (w, d, s, q, i) {
+        w[q] = w[q] || [];
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s);
+        j.async = true;
+        j.id = 'beacon-aplus';
+        j.src = 'https://d.alicdn.com/alilog/mlog/aplus/' + i + '.js';
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'aplus_queue', '203467608');
+      console.log(aplus_queue);
+
+      //集成应用的appKey
+      aplus_queue.push({
+        action: 'aplus.setMetaInfo',
+        arguments: ['appKey', '63413ffa88ccdf4b7e42ad28'],
+      });
+
+      //是否开启调试模式
+      aplus_queue.push({
+        action: 'aplus.setMetaInfo',
+        arguments: ['DEBUG', true],
+      });
+
+      let eventCode = 'aaa'; // 事件ID 或 事件编码，字符串类型
+      let eventType = 'CLK'; // 固定值
+      let eventParams = '{abc: 2}'; // 为本次事件中上报的事件参数。其取值为一个JSON对象（平铺的简单对象，不能多层嵌套）
+      // 发送事件日志
+      aplus_queue.push({
+        action: 'aplus.record',
+        arguments: [eventCode, eventType, eventParams],
+      });
+    </script>
+
+    <div id="app">
+      <button @click="test1">test1</button>
+      <button @click="test2">test2</button>
+      <button @click="test3">test3</button>
+    </div>
+
+    <!-- Vue---------------------------------------- -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+
+      createApp({
+        setup() {
+          // aplus_queue是上面注册的，项目中可以搜一个好用的注册整合，改一下放入项目
+          /* 如果使用的是单页面应用，例如：React、Vue、Angular等，则需要添加下面的代码 */
+          /* 关闭自动PV发送，如果不是单页面应用，请删掉下方代码 */
+          aplus_queue.push({
+            action: 'aplus.setMetaInfo',
+            arguments: ['aplus-waiting', 'MAN'],
+          });
+
+          // 若当前项目为单页面应用时，需要在路由跳转的时候手动发送一次PV，使用下方的PV发送事件发送
+          aplus_queue.push({
+            action: 'aplus.sendPV',
+            arguments: [{ is_auto: false }], // 此处上报的数据暂时在后台没有展示
+          });
+
+          // 自定义事件 要先去后台添加事件
+          const test1 = () => {
+            // 上报代码(id,'CLK',参数?object|string)
+            aplus_queue.push({
+              action: 'aplus.record',
+              arguments: ['test1','CLK',{code: 'test1',gold: 0}],
+            });
+          };
+          const test2 = () => {
+            
+          };
+          const test3 = () => {
+            
+          };
+          return {
+            test1,
+            test2,
+            test3,
+          };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
