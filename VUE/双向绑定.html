@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>双向绑定</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>当你在控制台中修改app.$data.message时，页面上的内容会实时更新</p>
+      <p>同时，如果你在输入框中输入内容，app.$data.message也会实时更新。</p>
+
+      <input type="text" v-model="message" />
+    </div>
+  </body>
+  <script type="text/javascript">
+    // 数据劫持：通过Object.defineProperty()拦截对象属性的访问和修改，将属性转化为响应式属性。
+    // 依赖收集：在初始化组件时，Vue解析模板并为每个依赖于响应式属性的地方创建一个Watcher。这些Watcher会被添加到相应属性的Dep中。
+    // 数据变化监听：当数据属性发生变化时，setter方法会被触发，通知对应的Dep对象。
+    // 通知更新：Dep对象调用notify方法遍历所有的Watcher，并触发它们的update方法，从而通知视图进行更新。
+    // 视图更新：Watcher调用update方法后，会根据最新的数据值重新渲染视图，保持视图和数据的一致性。
+    
+    // 简单的发布-订阅系统
+    class Dep {
+      constructor() {
+        this.subs = []; // 存储订阅者的数组
+      }
+
+      // 添加订阅者
+      addSub(sub) {
+        this.subs.push(sub);
+      }
+
+      // 通知所有订阅者
+      notify() {
+        this.subs.forEach((sub) => {
+          sub.update();
+        });
+      }
+    }
+
+    // 订阅者（Watcher）
+    class Watcher {
+      constructor(vm, key, cb) {
+        this.vm = vm;
+        this.key = key;
+        this.cb = cb;
+        this.value = vm[key]; // 初始化值
+
+        // 将Watcher添加到Dep中
+        Dep.target = this;
+        vm[key]; // 触发getter，进行依赖收集
+        Dep.target = null;
+      }
+
+      // 更新方法
+      update() {
+        const newValue = this.vm[this.key];
+        if (newValue !== this.value) {
+          this.value = newValue;
+          this.cb(newValue);
+        }
+      }
+    }
+
+    // 响应式数据处理器
+    function defineReactive(obj, key) {
+      const dep = new Dep();
+
+      let value = obj[key];
+
+      Object.defineProperty(obj, key, {
+        get() {
+          if (Dep.target) {
+            dep.addSub(Dep.target); // 添加当前Watcher到Dep中
+          }
+          return value;
+        },
+        set(newVal) {
+          if (newVal !== value) {
+            value = newVal;
+            dep.notify(); // 通知所有订阅者更新
+          }
+        },
+      });
+    }
+
+    // 创建一个Vue实例的简化版
+    function Vue(options) {
+      this.$data = options.data;
+      this.$el = document.querySelector(options.el);
+
+      // 初始化数据劫持
+      Object.keys(this.$data).forEach((key) => {
+        defineReactive(this.$data, key);
+      });
+
+      // 初始化Watcher
+      new Watcher(this, 'message', (newVal) => {
+        this.$el.innerText = newVal;
+      });
+
+      // 为了实现v-model的双向绑定，我们还需要监听输入框的变化
+      this.$el.addEventListener('input', (e) => {
+        this.$data.message = e.target.value;
+      });
+    }
+
+    // 使用示例
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello, Vue!',
+      },
+    });
+  </script>
+</html>
