@@ -21,6 +21,8 @@ Object.defineProperty(obj, 'name', {
 //   核心:
 //     通过Proxy(代理): Proxy 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）
 //     通过 Reflect(反射): 动态对被代理对象的相应属性进行特定的操作
+//         Reflect将对象的一些明显属于语言内部的方法,放到Reflect对象上。通过Reflect对象可以直接拿到语言内部的属性和方法
+//   
 //   文档:
 //   https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy
 //   https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect
