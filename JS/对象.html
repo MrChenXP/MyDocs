@@ -333,7 +333,7 @@ var cat = new Animal("cat")
 // new Animal("cat") = { // 创建一个Animal的实例
 //   var obj = {};
 //   obj.__proto__ = Animal.prototype; // 实例原型==构造函数的原型对象
-//   var result = Animal.call(obj,"cat"); // 调用Animal函数并传递参数“cat”,绑定this为obj
+//   var result = Animal.call(obj,"cat"); // 调用Animal函数并传递参数“cat”,绑定this为obj （运行了Animal这个构造函数）
 //   // 考察第3步返回的返回值,如果无返回值或者返回一个非对象值,则将obj返回作为新对象；
 //   return typeof result === 'object'? result : obj; // 否则会将返回值作为新对象返回
 // }
