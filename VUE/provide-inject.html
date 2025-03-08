@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>provide-inject 依赖注入</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+<div id="app">
+  <input v-model="msg">
+  <input v-model="config.theme">
+  <cxp_p > </cxp_p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+<script>
+
+  // provide-inject是用于实现跨层级组件通信的API，主要用于祖先组件向后代组件（无论嵌套层级多深）传递数据，避免通过中间组件逐层 props 传递的繁琐
+  //  场景：主题切换，国际化，表单校验规则封装
+
+  Vue.component('cxp_p', {
+    // 注入数据
+    inject: ['appName', 'msg', 'config', 'getMsg'],
+    template: `<div>{{msg}} {{getMsg()}} {{config.theme}}</div>`,
+    data: {
+    },
+    methods:{
+      
+    },
+  });
+
+
+  new Vue({
+    el: '#app',
+    data:{
+      msg: "这是数据",
+      config: {
+        theme: 'dark',
+        layout: 'grid'
+      }
+    },
+    methods:{
+      
+    },
+    // 提供的值默认是 非响应式 的。若祖先组件的数据变化，后代组件不会自动更新
+    provide() {
+      const state = Vue.observable({ count: 0 });
+      return {
+        // 直接提供静态值
+        appName: 'MyApp',
+        // 1 提供动态响应式数据（需处理响应性）
+        msg: this.msg, // 是字符串，非响应式引用。父组件更新 msg 时，后代组件不会同步
+        config: this.config, // 后代组件通过 this.config.theme 访问时，父组件修改 config 的属性会触发响应式更新
+        state, // 后代组件：通过 this.state.count 访问，修改 state.count 会触发响应式更新
+        getMsg: () => this.msg // 通过函数返回最新值 更改msg也会触发响应式（getMsg)
+      };
+    }
+  })
+
+ 
+</script>
+</body>
+</html>
