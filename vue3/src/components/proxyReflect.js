@@ -10,8 +10,8 @@
 //   Vue.set(target,key,val) Vue.$set(target,key,val)
 let obj = {};
 Object.defineProperty(obj, 'name', {
-  // get() {},
-  // set() {},
+  // get() {}, 收集依赖，将观察者存到闭包dep ，
+  // set() {}, 触发更新， 触发更新后通知观察者
 });
 // this.$set(this._data.listData, 'fiscalYear',fiscalYear )
 // this.$set(this._data.arr, 3, 'arr')
