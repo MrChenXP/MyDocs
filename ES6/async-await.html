@@ -6,13 +6,23 @@
     <title>async-await </title>
 </head>
 <body>
+<script type="text/javascript" async >
+// 作用：立即下载 下载后立即执行，阻塞页面渲染，不能保证执行顺序，因为下载时间不一致
+// 适用场景：适用于那些不依赖于其他脚本和文档内容的独立脚本，如第三方广告脚本、统计脚本等
+</script>
+
+<script type="text/javascript" defer >
+// 作用：立即下载，渲染后执行，执行顺序和写法一致
+// 适用场景：适用于那些需要在文档解析完成后执行，并且依赖于文档结构的脚本，如操作 DOM 的脚本。
+</script>
+
+<!--  会停止HTML解析，然后下载并执行脚本，再继续解析。会阻塞页面的渲染， -->
 <script type="text/javascript">
 /** async **/
 // async它就是 Generator 函数的语法糖。表示这个函数有异步任务
 // await 表示后面的结果需要等待,可以是promise对象,也可以是其他数据类型
 // async返回的是一个promise对象,故也可以用他两个方法
 // 只要await语句后面promise状态变成reject,那么整个async函数会中断执行
-
 
 function timeout(ms) {
   return new Promise((resolve) => {
@@ -24,7 +34,6 @@ async function asyncPrint(value, ms) {
   console.log(value) // 会等上面的await执行完,在执行这个
 }
 asyncPrint('hello world', 1000);
-
 
 </script>
 </body>
