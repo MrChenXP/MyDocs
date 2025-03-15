@@ -4,3 +4,9 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+declare module "*.jsx" {
+  import { DefineComponent } from "vue";
+  const component: DefineComponent<any, any, any>;
+  export default component;
+}
